@@ -3,21 +3,17 @@
   home = {
     stateVersion = "23.11";
     packages = with pkgs; [
-      discord
-
-      cmake
       clang
       clang-tools_16
+      cmake
+      discord
+      nil
       ninja
-
-      rustup
-
+      nixpkgs-fmt
       (python3.withPackages (python-pkgs: with python-pkgs; [
         pip
       ]))
-
-      nixpkgs-fmt
-      nil
+      rustup
     ];
     file = {
       "./.config/nvim/" = {
@@ -25,9 +21,9 @@
         recursive = true;
       };
     };
+    username = "sol";
+    homeDirectory = "/Users/sol";
   };
-
-  fonts.fontconfig.enable = true;
 
   programs = {
     fzf = {
