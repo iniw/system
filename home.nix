@@ -22,34 +22,14 @@
         source = ./nvim;
         recursive = true;
       };
-      "./.config/vscode/" = {
-        source = ./vscode;
-        recursive = true;
-      };
     };
   };
 
   fonts.fontconfig.enable = true;
 
   programs = {
-    vscode = {
-      enable = true;
-    };
-    neovim = {
-      enable = true;
-      defaultEditor = true;
-      vimAlias = true;
-      vimdiffAlias = true;
-    };
     gh = {
       enable = true;
-    };
-    home-manager = {
-      enable = true;
-    };
-    htop = {
-      enable = true;
-      settings.show_program_path = true;
     };
     git = {
       enable = true;
@@ -58,6 +38,30 @@
       extraConfig = {
         credential.helper = "oauth";
       };
+    };
+    home-manager = {
+      enable = true;
+    };
+    htop = {
+      enable = true;
+      settings.show_program_path = true;
+    };
+    neovim = {
+      enable = true;
+      defaultEditor = true;
+      vimAlias = true;
+      vimdiffAlias = true;
+    };
+    vscode = {
+      enable = true;
+    };
+    zsh = {
+      enable = true;
+
+      enableAutosuggestions = true;
+      enableCompletion = true;
+
+      oh-my-zsh.enable = true;
     };
   };
 }
