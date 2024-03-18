@@ -41,6 +41,7 @@
         mru-spaces = false;
         orientation = "bottom";
         showhidden = true;
+        tilesize = 32;
       };
       finder = {
         AppleShowAllExtensions = true;
@@ -54,7 +55,7 @@
     };
     keyboard = {
       enableKeyMapping = true;
-      remapCapsLockToControl = true;
+      remapCapsLockToEscape = true;
     };
   };
 }
