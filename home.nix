@@ -28,6 +28,9 @@
   programs = {
     fzf = {
       enable = true;
+      tmux = {
+        enableShellIntegration = true;
+      };
     };
     alacritty = {
       enable = true;
@@ -78,7 +81,10 @@
     };
     tmux = {
       enable = true;
-      shortcut = "q";
+      escapeTime = 0;
+      mouse = true;
+      keyMode = "vi";
+      prefix = "C-p";
     };
     vscode = {
       enable = true;
