@@ -9,11 +9,10 @@
     config.allowUnfree = true;
   };
 
-  system.stateVersion = 4;
-
   programs.zsh.enable = true;
 
   system = {
+    stateVersion = 4;
     activationScripts.postUserActivation.text = ''
       /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
     '';
@@ -25,6 +24,7 @@
         InitialKeyRepeat = 25;
         KeyRepeat = 2;
 
+        AppleShowAllFiles = true;
         NSAutomaticCapitalizationEnabled = false;
         NSAutomaticDashSubstitutionEnabled = false;
         NSAutomaticPeriodSubstitutionEnabled = false;
