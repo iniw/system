@@ -5,8 +5,6 @@
     packages = with pkgs; [
       discord
 
-      inter
-
       cmake
       clang
       clang-tools_16
@@ -61,6 +59,10 @@
       enable = true;
       userName = "iniw";
       userEmail = "andrade.vinicius934@gmail.com";
+      ignores = [
+        ".DS_Store"
+        "**/.DS_Store"
+      ];
       extraConfig = {
         credential.helper = "oauth";
       };
@@ -109,11 +111,10 @@
           deleted = "​";
           stashed = "≡";
         };
-        git_state =
-          {
-            format = "\([$state( $progress_current/$progress_total)]($style)\)";
-            style = "bright-black";
-          };
+        git_state = {
+          format = "\([$state( $progress_current/$progress_total)]($style)\)";
+          style = "bright-black";
+        };
         cmd_duration = {
           format = "[$duration]($style) ";
           style = "yellow";

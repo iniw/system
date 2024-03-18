@@ -8,6 +8,11 @@
     config.allowUnfree = true;
   };
 
+  fonts.fontDir.enable = true;
+  fonts.fonts = with pkgs; [
+    inter
+  ];
+
   programs = {
     zsh = {
       enable = true;
@@ -49,8 +54,10 @@
       };
       finder = {
         AppleShowAllExtensions = true;
-        QuitMenuItem = true;
+        AppleShowAllFiles = true;
         FXEnableExtensionChangeWarning = false;
+        FXPreferredViewStyle = "clmv";
+        QuitMenuItem = true;
       };
       trackpad = {
         Clicking = true;
