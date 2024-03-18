@@ -4,9 +4,11 @@
     stateVersion = "23.11";
     packages = with pkgs; [
       discord
-      python3
       inter
 
+      (python3.withPackages (python-pkgs: with python-pkgs; [
+        pip
+      ]))
       cmake
       clang
       clang-tools_16
@@ -14,19 +16,19 @@
       nixpkgs-fmt
       nil
     ];
+    file = {
+      "./.config/nvim/" = {
+        source = ./nvim;
+        recursive = true;
+      };
+      "./.config/vscode/" = {
+        source = ./vscode;
+        recursive = true;
+      };
+    };
   };
 
   fonts.fontconfig.enable = true;
-
-  home.file."./.config/nvim/" = {
-    source = ./nvim;
-    recursive = true;
-  };
-
-  home.file."./.config/vscode/" = {
-    source = ./vscode;
-    recursive = true;
-  };
 
   programs = {
     vscode = {
@@ -53,13 +55,6 @@
       extraConfig = {
         credential.helper = "oauth";
       };
-    };
-    carapace = {
-      enable = true;
-      enableNushellIntegration = true;
-    };
-    starship = {
-      enable = true;
     };
   };
 }
