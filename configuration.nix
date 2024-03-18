@@ -38,12 +38,11 @@
 
         NSNavPanelExpandedStateForSaveMode = true;
         NSNavPanelExpandedStateForSaveMode2 = true;
-
-        _HIHideMenuBar = true;
       };
       dock = {
         autohide = true;
         mru-spaces = false;
+        show-recents = false;
         orientation = "bottom";
         showhidden = true;
         tilesize = 32;
