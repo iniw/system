@@ -4,15 +4,20 @@
     stateVersion = "23.11";
     packages = with pkgs; [
       discord
+
       inter
+
+      cmake
+      clang
+      clang-tools_16
+      ninja
+
+      rustup
 
       (python3.withPackages (python-pkgs: with python-pkgs; [
         pip
       ]))
-      cmake
-      clang
-      clang-tools_16
-      rustup
+
 
       nixpkgs-fmt
       nil
