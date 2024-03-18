@@ -52,6 +52,8 @@
     };
     git = {
       enable = true;
+      userName = "iniw";
+      userEmail = "andrade.vinicius934@gmail.com";
       extraConfig = {
         credential.helper = "oauth";
       };
