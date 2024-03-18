@@ -28,6 +28,26 @@
   fonts.fontconfig.enable = true;
 
   programs = {
+    alacritty = {
+      enable = true;
+      settings = {
+        env = {
+          "TERM" = "xterm-256color";
+        };
+        font = {
+          size = 18.0;
+
+          normal.family = "Berkeley Mono";
+          bold.family = "Berkeley Mono";
+          italic.family = "Berkeley Mono";
+        };
+        window = {
+          padding.x = 0;
+          padding.y = 0;
+          decorations = "buttonless";
+        };
+      };
+    };
     gh = {
       enable = true;
     };
@@ -51,6 +71,10 @@
       defaultEditor = true;
       vimAlias = true;
       vimdiffAlias = true;
+    };
+    tmux = {
+      enable = true;
+      shortcut = "q";
     };
     vscode = {
       enable = true;

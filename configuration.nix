@@ -10,6 +10,7 @@
   };
 
   programs.zsh.enable = true;
+  users.users.sol.shell = pkgs.zsh;
 
   system = {
     stateVersion = 4;
