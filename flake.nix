@@ -15,6 +15,7 @@
 
   outputs = inputs@{ self, nix-darwin, nixpkgs, home-manager, mac-app-util }: {
     darwinConfigurations."mac" = nix-darwin.lib.darwinSystem {
+      system = "x86_64-darwin";
       modules = [
         ./configuration.nix
         mac-app-util.darwinModules.default

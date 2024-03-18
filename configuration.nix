@@ -13,12 +13,7 @@
     inter
   ];
 
-  programs = {
-    zsh = {
-      enable = true;
-    };
-  };
-
+  programs.zsh.enable = true;
   users.users.sol.shell = pkgs.zsh;
 
   system = {
