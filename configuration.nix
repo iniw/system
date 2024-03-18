@@ -3,14 +3,15 @@
   services.nix-daemon.enable = true;
 
   nix.package = pkgs.nix;
-  nix.settings.experimental-features = "nix-command flakes";
 
-  programs.zsh.enable = true;
-
-  nixpkgs.hostPlatform = "x86_64-darwin";
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs = {
+    hostPlatform = "x86_64-darwin";
+    config.allowUnfree = true;
+  };
 
   system.stateVersion = 4;
+
+  programs.zsh.enable = true;
 
   system = {
     activationScripts.postUserActivation.text = ''
