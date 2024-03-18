@@ -3,13 +3,17 @@
   services.nix-daemon.enable = true;
 
   nix.package = pkgs.nix;
-
   nixpkgs = {
     hostPlatform = "x86_64-darwin";
     config.allowUnfree = true;
   };
 
-  programs.zsh.enable = true;
+  programs = {
+    zsh = {
+      enable = true;
+    };
+  };
+
   users.users.sol.shell = pkgs.zsh;
 
   system = {
