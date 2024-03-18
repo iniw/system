@@ -12,6 +12,7 @@
       cmake
       clang
       clang-tools_16
+      rustup
 
       nixpkgs-fmt
       nil
