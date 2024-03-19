@@ -11,4 +11,3 @@ vim.g.vindent_object_XX_ii = 'ii'
 vim.g.vindent_object_XX_ai = 'ai'
 vim.g.vindent_object_XX_aI = 'aI'
 vim.g.vindent_jumps = 1
-

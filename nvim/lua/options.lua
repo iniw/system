@@ -10,6 +10,6 @@ autocmd TextYankPost * silent! lua vim.highlight.on_yank {higroup=(vim.fn['hlexi
 ]])
 
 if not vim.g.vscode then
-	-- this breaks in vscode for some reason
-	vim.opt.inccommand = "nosplit"
+    -- this breaks in vscode for some reason
+    vim.opt.inccommand = "nosplit"
 end
