@@ -1,5 +1,5 @@
 {
-  description = "sol flake";
+  description = "system flake";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-23.11-darwin";
@@ -18,18 +18,24 @@
       system = "x86_64-darwin";
       modules = [
         ./configuration.nix
+
         mac-app-util.darwinModules.default
+
         home-manager.darwinModules.home-manager
         {
+          users.users.sol.name = "sol";
+          users.users.sol.home = "/Users/sol/";
+
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;
+
             users.sol.imports = [
               ./home.nix
+
               mac-app-util.homeManagerModules.default
             ];
           };
-          users.users.sol.home = "/Users/sol/";
         }
       ];
     };
