@@ -128,6 +128,17 @@
       enableCompletion = true;
       syntaxHighlighting.enable = true;
 
+      shellAliases = {
+        gs = "git status";
+        glo = "git log --oneline";
+        gap = "git add -p";
+        gca = "git commit --amend";
+        gpr = "git pull --rebase";
+        gpfwl = "git push --force-with-lease";
+
+        et = "eza -T \"$@\"";
+      };
+
       oh-my-zsh = {
         enable = true;
         plugins = [ "sudo" ];
