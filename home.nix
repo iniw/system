@@ -129,12 +129,13 @@
       syntaxHighlighting.enable = true;
 
       shellAliases = {
-        gs = "git status";
+        gs = "git status \"$@\"";
+        gd = "git diff \"$@\"";
         glo = "git log --oneline";
         gap = "git add -p";
         gca = "git commit --amend";
         gpr = "git pull --rebase";
-        gpfwl = "git push --force-with-lease";
+        gpf = "git push --force-with-lease";
 
         et = "eza -T \"$@\"";
       };
