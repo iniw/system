@@ -51,6 +51,9 @@
         };
       };
     };
+    eza = {
+      enable = true;
+    };
     gh = {
       enable = true;
     };
@@ -69,9 +72,11 @@
     home-manager = {
       enable = true;
     };
-    htop = {
+    btop = {
       enable = true;
-      settings.show_program_path = true;
+      settings = {
+        vim_keys = true;
+      };
     };
     neovim = {
       enable = true;
@@ -127,18 +132,17 @@
       enable = true;
       enableAutosuggestions = true;
       enableCompletion = true;
+      syntaxHighlighting.enable = true;
+      oh-my-zsh = {
+        enable = true;
+        plugins = [ "sudo" ];
+      };
+      # fix for slow copy-paste
       initExtra = ''
         autoload -Uz bracketed-paste-magic
         zle -N bracketed-paste bracketed-paste-magic
         zstyle ':bracketed-paste-magic' active-widgets '.self-*'
       '';
-      syntaxHighlighting = {
-        enable = true;
-      };
-      oh-my-zsh = {
-        enable = true;
-        plugins = [ "git" "sudo" ];
-      };
     };
   };
 }
