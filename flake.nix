@@ -29,7 +29,7 @@
               mac-app-util.homeManagerModules.default
             ];
           };
-          users.users.sol.home = "/Users/sol";
+          users.users.sol.home = "/Users/sol/";
         }
       ];
     };
