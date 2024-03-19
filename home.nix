@@ -62,9 +62,9 @@
         ".DS_Store"
         "**/.DS_Store"
       ];
-      extraConfig = {
-        credential.helper = "oauth";
-      };
+    };
+    git-credential-oauth = {
+      enable = true;
     };
     home-manager = {
       enable = true;
