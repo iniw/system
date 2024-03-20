@@ -39,11 +39,6 @@
   };
 
   programs = {
-    fzf = {
-      enable = true;
-      tmux.enableShellIntegration = true;
-    };
-
     alacritty = {
       enable = true;
 
@@ -63,8 +58,21 @@
       };
     };
 
+    btop = {
+      enable = true;
+      settings = {
+        color_theme = "TTY";
+        vim_keys = true;
+      };
+    };
+
     eza = {
       enable = true;
+    };
+
+    fzf = {
+      enable = true;
+      tmux.enableShellIntegration = true;
     };
 
     gh = {
@@ -91,11 +99,6 @@
       enable = true;
     };
 
-    btop = {
-      enable = true;
-      settings.vim_keys = true;
-    };
-
     neovim = {
       enable = true;
 
@@ -103,6 +106,10 @@
 
       vimAlias = true;
       vimdiffAlias = true;
+    };
+
+    starship = {
+      enable = true;
     };
 
     tmux = {
@@ -114,10 +121,6 @@
     };
 
     vscode = {
-      enable = true;
-    };
-
-    starship = {
       enable = true;
     };
 
