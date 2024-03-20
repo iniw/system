@@ -141,6 +141,10 @@
         gpf = "git push --force-with-lease";
 
         et = "eza -T \"$@\"";
+
+        cfg = "cd ~/.config/system";
+        src = "cd ~/src";
+        puc = "cd ~/puc";
       };
 
       oh-my-zsh = {
