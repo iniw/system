@@ -13,34 +13,42 @@
     mac-app-util.url = "github:hraban/mac-app-util";
   };
 
-  outputs = inputs@{ self, nix-darwin, nixpkgs, home-manager, mac-app-util }: {
-    darwinConfigurations."mac" = nix-darwin.lib.darwinSystem {
-      system = "x86_64-darwin";
-      modules = [
-        ./configuration.nix
+  outputs = inputs@{ self, nix-darwin, nixpkgs, home-manager, mac-app-util }:
+    let
+      user = "sol";
+      host = "mac";
+    in
+    {
+      darwinConfigurations.${host} = nix-darwin.lib.darwinSystem {
+        system = "x86_64-darwin";
+        specialArgs = { inherit user; };
+        modules = [
+          ./configuration.nix
 
-        mac-app-util.darwinModules.default
+          mac-app-util.darwinModules.default
 
-        home-manager.darwinModules.home-manager
-        {
-          users.users.sol.name = "sol";
-          users.users.sol.home = "/Users/sol/";
+          home-manager.darwinModules.home-manager
+          {
+            users.users.${user} = {
+              name = user;
+              home = "/Users/${user}/";
+            };
 
-          home-manager = {
-            useGlobalPkgs = true;
-            useUserPackages = true;
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
 
-            users.sol.imports = [
-              ./home.nix
+              users.${user}.imports = [
+                ./home.nix
 
-              mac-app-util.homeManagerModules.default
-            ];
-          };
-        }
-      ];
+                mac-app-util.homeManagerModules.default
+              ];
+            };
+          }
+        ];
+      };
+
+      # Expose the package set, including overlays, for convenience.
+      darwinPackages = self.darwinConfigurations.${host}.pkgs;
     };
-
-    # Expose the package set, including overlays, for convenience.
-    darwinPackages = self.darwinConfigurations."mac".pkgs;
-  };
 }
