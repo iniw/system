@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, user, ... }:
 {
   services.nix-daemon.enable = true;
 
@@ -8,7 +8,7 @@
   };
 
   programs.zsh.enable = true;
-  users.users.sol.shell = pkgs.zsh;
+  users.users.${user}.shell = pkgs.zsh;
 
   system = {
     activationScripts.postUserActivation.text = ''
