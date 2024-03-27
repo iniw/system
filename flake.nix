@@ -35,6 +35,8 @@
             };
 
             home-manager = {
+              extraSpecialArgs = { inherit user; };
+
               useGlobalPkgs = true;
               useUserPackages = true;
 

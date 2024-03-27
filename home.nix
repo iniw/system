@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, user, ... }:
 {
   fonts.fontconfig.enable = true;
 
@@ -7,6 +7,10 @@
       "./.config/nvim/" = {
         source = ./nvim;
         recursive = true;
+      };
+
+      "./config/nvim/lazy-lock.json" = {
+        source = config.lib.file.mkOutOfStoreSymlink ./nvim/lazy-lock/lazy-lock.json;
       };
 
       "./.config/starship.toml" = {
@@ -36,7 +40,27 @@
     ];
 
     stateVersion = "23.11";
+    activation.neovim = lib.hm.dag.entryAfter ["linkGeneration"] ''
+      #! /bin/bash
+      NVIM_WRAPPER=/etc/profiles/per-user/${user}/bin/nvim
+      STATE_DIR=~/.local/state/nix/
+      STATE_FILE=$STATE_DIR/lazy-lock-checksum
+      LOCK_FILE=~/.config/nvim/lazy-lock.json
+      HASH=$(nix-hash --flat $LOCK_FILE)
+
+      [ ! -d $STATE_DIR ] && mkdir -p $STATE_DIR
+      [ ! -f $STATE_FILE ] && touch $STATE_FILE
+
+      if [ "$(cat $STATE_FILE)" != "$HASH" ]; then
+        echo "Syncing neovim plugins"
+        PATH="$PATH:${pkgs.git}/bin" $DRY_RUN_CMD $NVIM_WRAPPER --headless "+Lazy! restore" +qa
+        $DRY_RUN_CMD echo $HASH >$STATE_FILE
+      else
+        $VERBOSE_ECHO "Neovim plugins already synced, skipping"
+      fi
+    '';
   };
+
 
   programs = {
     alacritty = {

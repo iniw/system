@@ -7,5 +7,6 @@
   "nvim-various-textobjs": { "branch": "main", "commit": "ae4b101b8293174f78f7253cbd8195ce212a37d2" },
   "targets.vim": { "branch": "master", "commit": "642d3a4ce306264b05ea3219920b13ea80931767" },
   "vim-repeat": { "branch": "master", "commit": "24afe922e6a05891756ecf331f39a1f6743d3d5a" },
-  "vindent.vim": { "branch": "main", "commit": "3f81a2db9303ba3bd858d64a4dda719fadc14615" }
+  "vindent.vim": { "branch": "main", "commit": "3f81a2db9303ba3bd858d64a4dda719fadc14615" },
+  "vscode-multi-cursor.nvim": { "branch": "main", "commit": "67e101404db09a26acdfccb3a0fdbcc49768b834" }
 }
