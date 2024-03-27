@@ -2,6 +2,7 @@ vim.keymap.set('n', '<C-j>', '<C-e>')
 vim.keymap.set('n', '<C-k>', '<C-y>')
 -- how is this not the default
 vim.keymap.set('i', '<C-o>', '<Left><C-o>')
+vim.keymap.set('n', 'U', '<C-r>')
 
 if vim.g.vscode then
     vim.keymap.set('n', 'gd', '<Cmd>call VSCodeNotify(\'editor.action.revealDefinition\')<CR>')
