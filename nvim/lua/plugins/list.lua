@@ -7,7 +7,6 @@ return {
     "projekt0n/github-nvim-theme",
     {
         "folke/flash.nvim",
-        event = "VeryLazy",
         keys = {
             { "<CR>", mode = { "n", "o" }, function()
                 require("flash").jump({
@@ -19,7 +18,6 @@ return {
     },
     { 
         'vscode-neovim/vscode-multi-cursor.nvim',
-        event = 'VeryLazy',
         cond = not not vim.g.vscode,
         opts = {},
     }
