@@ -8,8 +8,11 @@ if vim.g.vscode then
     vim.keymap.set('n', 'gd', '<Cmd>call VSCodeNotify(\'editor.action.revealDefinition\')<CR>')
     vim.keymap.set('n', 'gD', '<Cmd>call VSCodeNotify(\'editor.action.peekDefinition\')<CR>')
 
-    vim.keymap.set('n', 'gt', '<Cmd>call VSCodeNotify(\'editor.action.revealDeclaration\')<CR>')
-    vim.keymap.set('n', 'gT', '<Cmd>call VSCodeNotify(\'editor.action.peekDeclaration\')<CR>')
+    vim.keymap.set('n', 'gc', '<Cmd>call VSCodeNotify(\'editor.action.revealDeclaration\')<CR>')
+    vim.keymap.set('n', 'gC', '<Cmd>call VSCodeNotify(\'editor.action.peekDeclaration\')<CR>')
+
+    vim.keymap.set('n', 'gt', '<Cmd>call VSCodeNotify(\'editor.action.goToTypeDefinition\')<CR>')
+    vim.keymap.set('n', 'gT', '<Cmd>call VSCodeNotify(\'editor.action.peekTypeDefinition\')<CR>')
 
     vim.keymap.set('n', 'gf', '<Cmd>call VSCodeNotify(\'editor.action.goToReferences\')<CR>')
     vim.keymap.set('n', 'gF', '<Cmd>call VSCodeNotify(\'references-view.findReferences\')<CR>')
