@@ -18,7 +18,6 @@
       };
     };
 
-
     packages = with pkgs; [
       # dev
       clang
@@ -31,6 +30,7 @@
         pip
       ]))
       rustup
+      nodejs_21
 
       # apps
       discord
@@ -39,7 +39,6 @@
       inter
     ];
 
-    stateVersion = "23.11";
     activation.neovim = lib.hm.dag.entryAfter ["linkGeneration"] ''
       #! /bin/bash
       NVIM_WRAPPER=/etc/profiles/per-user/${user}/bin/nvim
@@ -59,6 +58,12 @@
         $VERBOSE_ECHO "Neovim plugins already synced, skipping"
       fi
     '';
+
+    sessionVariables = {
+      ANDROID_HOME = "$HOME/Library/Android/sdk";
+    };
+
+    stateVersion = "23.11";
   };
 
 
@@ -90,6 +95,10 @@
       };
     };
 
+    direnv = {
+      enable = true;
+    };
+
     eza = {
       enable = true;
     };
@@ -117,6 +126,11 @@
 
     git-credential-oauth = {
       enable = true;
+    };
+
+    java = {
+      enable = true;
+      package = pkgs.jre;
     };
 
     home-manager = {
@@ -166,6 +180,7 @@
         gpf = "git push --force-with-lease";
 
         et = "eza -T \"$@\"";
+        tree = "eza -T -L1 \"$@\"";
 
         cfg = "cd ~/.config/system";
         src = "cd ~/src";
