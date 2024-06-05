@@ -19,17 +19,23 @@
     };
 
     packages = with pkgs; [
-      # dev
+      # cpp
       clang
       clang-tools_16
       cmake
-      nil
       ninja
-      nixpkgs-fmt
+
+      # python
       (python3.withPackages (python-modules: with python-modules; [
         pip
       ]))
+      ruff
+      poetry
+
+      # rust
       rustup
+
+      # js
       nodejs_21
 
       # apps
@@ -197,6 +203,10 @@
         autoload -Uz bracketed-paste-magic
         zle -N bracketed-paste bracketed-paste-magic
         zstyle ':bracketed-paste-magic' active-widgets '.self-*'
+      '';
+
+      envExtra = ''
+        export PATH=$PATH:/usr/local/mysql/bin/
       '';
     };
   };
