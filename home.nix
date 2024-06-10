@@ -24,6 +24,9 @@
       clang-tools_18
       cmake
       ninja
+      bazel_7
+      bazelisk
+      bazel-buildtools
 
       # python
       (python3.withPackages (python-modules: with python-modules; [
@@ -43,6 +46,10 @@
 
       # fonts
       inter
+
+      # general
+      coreutils
+      zlib
     ];
 
     activation.neovim = lib.hm.dag.entryAfter ["linkGeneration"] ''
@@ -89,6 +96,7 @@
         window = {
           padding.x = 0;
           padding.y = 0;
+          option_as_alt = "OnlyLeft";
         };
       };
     };
@@ -111,7 +119,6 @@
 
     fzf = {
       enable = true;
-      tmux.enableShellIntegration = true;
     };
 
     gh = {
@@ -157,12 +164,9 @@
       enable = true;
     };
 
-    tmux = {
+    zellij = {
       enable = true;
-      escapeTime = 0;
-      mouse = true;
-      keyMode = "vi";
-      prefix = "C-p";
+      enableZshIntegration = true;
     };
 
     vscode = {
@@ -177,16 +181,16 @@
       syntaxHighlighting.enable = true;
 
       shellAliases = {
-        gs = "git status \"$@\"";
-        gd = "git diff \"$@\"";
+        gs = "git status";
+        gd = "git diff";
         glo = "git log --oneline";
         gap = "git add -p";
         gca = "git commit --amend";
         gpr = "git pull --rebase";
         gpf = "git push --force-with-lease";
 
-        et = "eza -T \"$@\"";
-        tree = "eza -T -L1 \"$@\"";
+        et = "eza -T";
+        et1 = "eza -T -L1";
 
         cfg = "cd ~/.config/system";
         src = "cd ~/src";
@@ -203,6 +207,9 @@
         autoload -Uz bracketed-paste-magic
         zle -N bracketed-paste bracketed-paste-magic
         zstyle ':bracketed-paste-magic' active-widgets '.self-*'
+
+        bindkey -r '^T'
+        bindkey '^F' fzf-file-widget
       '';
 
       envExtra = ''
