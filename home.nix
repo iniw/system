@@ -20,8 +20,8 @@
 
     packages = with pkgs; [
       # cpp
-      clang
-      clang-tools_16
+      clang_18
+      clang-tools_18
       cmake
       ninja
 
@@ -36,7 +36,7 @@
       rustup
 
       # js
-      nodejs_21
+      nodejs_22
 
       # apps
       discord
@@ -69,7 +69,7 @@
       ANDROID_HOME = "$HOME/Library/Android/sdk";
     };
 
-    stateVersion = "23.11";
+    stateVersion = "24.05";
   };
 
 
@@ -172,8 +172,8 @@
     zsh = {
       enable = true;
 
-      enableAutosuggestions = true;
       enableCompletion = true;
+      autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
 
       shellAliases = {
