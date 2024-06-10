@@ -167,6 +167,10 @@
     zellij = {
       enable = true;
       enableZshIntegration = true;
+      settings = {
+        theme = "catppuccin-frappe";
+        default_layout = "compact";
+      };
     };
 
     vscode = {
