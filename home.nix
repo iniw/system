@@ -170,6 +170,7 @@
       settings = {
         theme = "catppuccin-frappe";
         default_layout = "compact";
+        pane_frames = false;
       };
     };
 
