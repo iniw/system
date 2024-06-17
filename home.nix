@@ -128,7 +128,7 @@
     git = {
       enable = true;
 
-      userName = "iniw";
+      userName = "vini";
       userEmail = "andrade.vinicius934@gmail.com";
 
       ignores = [
@@ -143,7 +143,7 @@
 
     java = {
       enable = true;
-      package = pkgs.jre;
+      package = pkgs.jdk17; # pinned to jdk 17 because of gradle
     };
 
     home-manager = {
@@ -190,10 +190,13 @@
         gd = "git diff";
         glo = "git log --oneline";
         gap = "git add -p";
+        gaa = "git add --all";
+        gc = "git commit";
         gca = "git commit --amend";
         gpr = "git pull --rebase";
         gpf = "git push --force-with-lease";
 
+        el = "eza -L";
         et = "eza -T";
         et1 = "eza -T -L1";
 
@@ -207,7 +210,7 @@
         plugins = [ "sudo" ];
       };
 
-      # fix for slow copy-paste
+      # fix for slow copy-paste and also rebind fzf-file-widget because zellij steals ctrl+t
       initExtra = ''
         autoload -Uz bracketed-paste-magic
         zle -N bracketed-paste bracketed-paste-magic
