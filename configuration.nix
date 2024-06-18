@@ -7,6 +7,8 @@
     config.allowUnfree = true;
   };
 
+  nix.package = pkgs.nix;
+
   programs.zsh.enable = true;
   users.users.${user}.shell = pkgs.zsh;
 
