@@ -1,12 +1,11 @@
 {
-  "fast-cursor-move.nvim": { "branch": "main", "commit": "8d24c11fc87b055e5526ade64ed0c100cebc92cb" },
-  "flash.nvim": { "branch": "main", "commit": "48817af25f51c0590653bbc290866e4890fe1cbe" },
-  "github-nvim-theme": { "branch": "main", "commit": "48f95f763e1a98e508260a20e448c3ff2d91213a" },
-  "lazy.nvim": { "branch": "main", "commit": "96584866b9c5e998cbae300594d0ccfd0c464627" },
-  "nvim-surround": { "branch": "main", "commit": "0855a89e00a5822c3a482a82e5223fcf2e9ede13" },
-  "nvim-various-textobjs": { "branch": "main", "commit": "ae4b101b8293174f78f7253cbd8195ce212a37d2" },
+  "flash.nvim": { "branch": "main", "commit": "43f67935d388fbb540f8b40e8cbfd80de54f978a" },
+  "github-nvim-theme": { "branch": "main", "commit": "d832925e77cef27b16011a8dfd8835f49bdcd055" },
+  "lazy.nvim": { "branch": "main", "commit": "cd6a8293430a7fadf6a093dfdfbdb1ddbaf8ae7d" },
+  "nvim-surround": { "branch": "main", "commit": "b36bf49d097a09781ad6ac0cfea28b40b74570a3" },
+  "nvim-various-textobjs": { "branch": "main", "commit": "0fecc1c60edd0e5d4d23a357450b80a373156799" },
   "targets.vim": { "branch": "master", "commit": "642d3a4ce306264b05ea3219920b13ea80931767" },
   "vim-repeat": { "branch": "master", "commit": "24afe922e6a05891756ecf331f39a1f6743d3d5a" },
-  "vindent.vim": { "branch": "main", "commit": "3f81a2db9303ba3bd858d64a4dda719fadc14615" },
-  "vscode-multi-cursor.nvim": { "branch": "main", "commit": "67e101404db09a26acdfccb3a0fdbcc49768b834" }
+  "vindent.vim": { "branch": "main", "commit": "f8433c1ab0852943f0dfcb0c500b6fb06ac13ad1" },
+  "vscode-multi-cursor.nvim": { "branch": "main", "commit": "a0af78cf5e5a6f2d55e37e7907a3d1b096bbaa4d" }
 }
