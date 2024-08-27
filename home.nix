@@ -201,6 +201,55 @@
         theme = "catppuccin-mocha";
         default_layout = "compact";
         pane_frames = false;
+        keybinds = {
+          normal = {
+            _props = {
+              clear-defaults = true;
+            };
+
+            "bind \"Ctrl t\"" = {
+              SwitchToMode = "Tmux";
+            };
+          };
+
+          tmux = {
+            _props = {
+              clear-defaults = true;
+            };
+
+            "bind \"Esc\"" = {
+              SwitchToMode = "Normal";
+            };
+
+            "bind \"g\"" = {
+              SwitchToMode = "Locked";
+            };
+
+            "bind \"p\"" = {
+              SwitchToMode = "Pane";
+            };
+
+            "bind \"t\"" = {
+              SwitchToMode = "Tab";
+            };
+
+            "bind \"n\"" = {
+              SwitchToMode = "Resize";
+            };
+
+            "bind \"h\"" = {
+              SwitchToMode = "Move";
+            };
+
+            "bind \"s\"" = {
+              SwitchToMode = "Scroll";
+            };
+
+            "bind \"o\"" = {
+              SwitchToMode = "Session";
+            };
+          };
+        };
       };
     };
 
