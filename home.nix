@@ -272,6 +272,10 @@
       };
     };
 
+    zoxide = {
+      enable = true;
+    };
+
     zsh = {
       enable = true;
 
@@ -293,10 +297,6 @@
         el = "eza -L";
         et = "eza -T";
         et1 = "eza -T -L1";
-
-        cfg = "cd ~/.config/system";
-        src = "cd ~/src";
-        puc = "cd ~/puc";
       };
 
       oh-my-zsh = {
