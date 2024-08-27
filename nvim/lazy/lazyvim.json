@@ -1,6 +1,5 @@
 {
   "extras": [
-    "lazyvim.plugins.extras.editor.inc-rename",
     "lazyvim.plugins.extras.formatting.prettier",
     "lazyvim.plugins.extras.lang.clangd",
     "lazyvim.plugins.extras.lang.java",
