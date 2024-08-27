@@ -1,8 +1,8 @@
 -- Keymaps are automatically loaded on the VeryLazy event
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
-vim.keymap.set("i", "<C-o>", "<Left><C-o>")
 
+-- Open definition in new window
 vim.keymap.set("n", "gad", function()
   require("telescope.builtin").lsp_definitions({
     jump_type = "vsplit",
@@ -18,3 +18,5 @@ for i = 1, 6 do
   vim.keymap.set("n", "<leader>" .. i, i .. "<C-w>w", { desc = "Move to window " .. i })
   vim.keymap.set("n", "<leader><tab>" .. i, i .. "gt", { desc = "Move to tab " .. i })
 end
+
+vim.keymap.set("i", "<C-o>", "<Left><C-o>")
