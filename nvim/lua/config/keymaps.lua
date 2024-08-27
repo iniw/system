@@ -7,7 +7,7 @@ vim.keymap.set("n", "gad", function()
   require("telescope.builtin").lsp_definitions({
     jump_type = "vsplit",
     attach_mappings = function(_, map)
-      map({ "i", "n" }, "<CR>", require("telescope.actions").select_vertical)
+      map({ "n", "i" }, "<CR>", require("telescope.actions").select_vertical)
       return true
     end,
   })
@@ -15,7 +15,6 @@ end, { noremap = true, silent = true, desc = "Go to definition in a new window" 
 
 -- Quick jump to the Nth window/tab
 for i = 1, 6 do
-  local m = { "n", "i" }
-  vim.keymap.set(m, "<leader>" .. i, i .. "<C-w>w", { desc = "Move to window " .. i })
-  vim.keymap.set(m, "<leader><tab>" .. i, i .. "gt", { desc = "Move to tab " .. i })
+  vim.keymap.set({ "n", "i" }, "<leader>" .. i, i .. "<C-w>w", { desc = "Move to window " .. i })
+  vim.keymap.set({ "n", "i" }, "<leader><tab>" .. i, i .. "gt", { desc = "Move to tab " .. i })
 end
