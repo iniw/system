@@ -194,10 +194,6 @@
       enable = true;
     };
 
-    vscode = {
-      enable = false;
-    };
-
     zellij = {
       enable = true;
       enableZshIntegration = true;
