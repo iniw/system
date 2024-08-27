@@ -1,4 +1,9 @@
-{ pkgs, lib, user, ... }:
+{
+  pkgs,
+  lib,
+  user,
+  ...
+}:
 {
   services.nix-daemon.enable = true;
 
@@ -25,7 +30,6 @@
 
         InitialKeyRepeat = 25;
         KeyRepeat = 2;
-
 
         NSAutomaticCapitalizationEnabled = false;
         NSAutomaticDashSubstitutionEnabled = false;

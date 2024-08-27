@@ -1,4 +1,4 @@
-{ config, pkgs, lib, user, ... }:
+{ pkgs, pkgs-unstable, ... }:
 {
   fonts.fontconfig.enable = true;
 
@@ -9,13 +9,10 @@
         recursive = true;
       };
 
-      "./config/nvim/lazy-lock.json" = {
-        source = config.lib.file.mkOutOfStoreSymlink ./nvim/lazy-lock/lazy-lock.json;
-      };
-
       "./.config/starship.toml" = {
         source = ./starship/starship.toml;
       };
+
     };
 
     packages = with pkgs; [
@@ -24,16 +21,10 @@
       clang-tools_18
       cmake
       ninja
-      bazel_7
-      bazelisk
-      bazel-buildtools
 
       # python
-      (python3.withPackages (python-modules: with python-modules; [
-        pip
-      ]))
-      ruff
-      poetry
+      (python3.withPackages (python-modules: with python-modules; [ pip ]))
+      pkgs-unstable.uv
 
       # rust
       rustup
@@ -44,33 +35,31 @@
       # apps
       discord
 
-      # fonts
-      inter
-
       # general
       coreutils
       zlib
+      cloc
+      wget
+
+      # fp
+      ocaml
+      coq
+
+      # java
+      jdt-language-server
+
+      # lua
+      luajit
+      luajitPackages.luarocks
+
+      # fonts
+      inter
+
+      # other
+      ast-grep
+      nixfmt-rfc-style
+      nodePackages.prettier
     ];
-
-    activation.neovim = lib.hm.dag.entryAfter ["linkGeneration"] ''
-      #! /bin/bash
-      NVIM_WRAPPER=/etc/profiles/per-user/${user}/bin/nvim
-      STATE_DIR=~/.local/state/nix/
-      STATE_FILE=$STATE_DIR/lazy-lock-checksum
-      LOCK_FILE=~/.config/nvim/lazy-lock.json
-      HASH=$(nix-hash --flat $LOCK_FILE)
-
-      [ ! -d $STATE_DIR ] && mkdir -p $STATE_DIR
-      [ ! -f $STATE_FILE ] && touch $STATE_FILE
-
-      if [ "$(cat $STATE_FILE)" != "$HASH" ]; then
-        echo "Syncing neovim plugins"
-        PATH="$PATH:${pkgs.git}/bin" $DRY_RUN_CMD $NVIM_WRAPPER --headless "+Lazy! restore" +qa
-        $DRY_RUN_CMD echo $HASH >$STATE_FILE
-      else
-        $VERBOSE_ECHO "Neovim plugins already synced, skipping"
-      fi
-    '';
 
     sessionVariables = {
       ANDROID_HOME = "$HOME/Library/Android/sdk";
@@ -79,23 +68,20 @@
     stateVersion = "24.05";
   };
 
-
   programs = {
     alacritty = {
       enable = true;
 
       settings = {
         font = {
-          size = 18.0;
+          size = 15.0;
 
-          normal.family = "Berkeley Mono";
-          bold.family = "Berkeley Mono";
-          italic.family = "Berkeley Mono";
+          normal.family = "BerkeleyMono Nerd Font Mono";
+          bold.family = "BerkeleyMono Nerd Font Mono";
+          italic.family = "BerkeleyMono Nerd Font Mono";
         };
 
         window = {
-          padding.x = 0;
-          padding.y = 0;
           option_as_alt = "OnlyLeft";
         };
       };
@@ -117,6 +103,10 @@
       enable = true;
     };
 
+    fd = {
+      enable = true;
+    };
+
     fzf = {
       enable = true;
     };
@@ -134,10 +124,19 @@
       ignores = [
         ".DS_Store"
         "**/.DS_Store"
+        ".nvim/"
       ];
     };
 
     git-credential-oauth = {
+      enable = true;
+    };
+
+    gradle = {
+      enable = true;
+    };
+
+    home-manager = {
       enable = true;
     };
 
@@ -146,11 +145,13 @@
       package = pkgs.jdk17; # pinned to jdk 17 because of gradle
     };
 
-    home-manager = {
+    lazygit = {
       enable = true;
     };
 
     neovim = {
+      package = pkgs-unstable.neovim-unwrapped;
+
       enable = true;
 
       defaultEditor = true;
@@ -160,22 +161,34 @@
       vimdiffAlias = true;
     };
 
+    ripgrep = {
+      enable = true;
+    };
+
+    ruff = {
+      enable = true;
+      package = pkgs-unstable.ruff;
+      settings = {
+        lint.preview = true;
+      };
+    };
+
     starship = {
       enable = true;
+    };
+
+    vscode = {
+      enable = false;
     };
 
     zellij = {
       enable = true;
       enableZshIntegration = true;
       settings = {
-        theme = "catppuccin-frappe";
+        theme = "catppuccin-mocha";
         default_layout = "compact";
         pane_frames = false;
       };
-    };
-
-    vscode = {
-      enable = true;
     };
 
     zsh = {
@@ -207,7 +220,6 @@
 
       oh-my-zsh = {
         enable = true;
-        plugins = [ "sudo" ];
       };
 
       # fix for slow copy-paste and also rebind fzf-file-widget because zellij steals ctrl+t
@@ -222,6 +234,7 @@
 
       envExtra = ''
         export PATH=$PATH:/usr/local/mysql/bin/
+        export LIBRARY_PATH=$LIBRARY_PATH:$(brew --prefix)/lib:$(brew --prefix libiconv)/lib
       '';
     };
   };

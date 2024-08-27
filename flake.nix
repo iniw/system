@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-24.05-darwin";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
     nix-darwin.url = "github:LnL7/nix-darwin";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
@@ -13,15 +14,25 @@
     mac-app-util.url = "github:hraban/mac-app-util";
   };
 
-  outputs = inputs@{ self, nix-darwin, nixpkgs, home-manager, mac-app-util }:
+  outputs =
+    {
+      self,
+      nix-darwin,
+      nixpkgs,
+      nixpkgs-unstable,
+      home-manager,
+      mac-app-util,
+    }:
     let
       user = "sol";
       host = "mac";
     in
     {
-      darwinConfigurations.${host} = nix-darwin.lib.darwinSystem {
+      darwinConfigurations.${host} = nix-darwin.lib.darwinSystem rec {
         system = "x86_64-darwin";
-        specialArgs = { inherit user; };
+        specialArgs = {
+          inherit user;
+        };
         modules = [
           ./configuration.nix
 
@@ -35,7 +46,10 @@
             };
 
             home-manager = {
-              extraSpecialArgs = { inherit user; };
+              extraSpecialArgs = {
+                pkgs-unstable = import nixpkgs-unstable { inherit system; };
+                inherit user;
+              };
 
               useGlobalPkgs = true;
               useUserPackages = true;
