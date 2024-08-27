@@ -1,27 +1,2 @@
--- lazy init
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
-	vim.fn.system({
-		"git",
-		"clone",
-		"--filter=blob:none",
-		"https://github.com/folke/lazy.nvim.git",
-		"--branch=stable",
-		lazypath,
-	})
-end
-vim.opt.rtp:prepend(lazypath)
-
-vim.g.mapleader = "\\"
-
--- plugins
-require("plugins.preload")
-require("lazy").setup(require("plugins.list"))
-require("plugins.setup")
-
--- color
-vim.cmd.colorscheme('github_dark')
-
-require("options")
-
-require("keymaps")
+-- bootstrap lazy.nvim, LazyVim and your plugins
+require("config.lazy")
