@@ -66,16 +66,18 @@
       nodePackages.prettier
     ];
 
-    activation.neovim = lib.hm.dag.entryAfter ["writeBoundary"] ''
-        if [ ! -f ~/.config/nvim/lazy-lock.json ]; then
-          cp ~/.config/nvim/lazy/lazy-lock.json ~/.config/nvim/lazy-lock.json
-          echo "Synced lazy-lock"
-        fi
+    activation.neovim = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      if [ ! -f ~/.config/nvim/lazy-lock.json ]; then
+        cp ~/.config/nvim/lazy/lazy-lock.json ~/.config/nvim/lazy-lock.json
+        chmod 644 ~/.config/nvim/lazy-lock.json
+        echo "Synced lazy-lock"
+      fi
 
-        if [ ! -f ~/.config/nvim/lazyvim.json ]; then
-          cp ~/.config/nvim/lazy/lazyvim.json ~/.config/nvim/lazyvim.json
-          echo "Synced lazyvim"
-        fi
+      if [ ! -f ~/.config/nvim/lazyvim.json ]; then
+        cp ~/.config/nvim/lazy/lazyvim.json ~/.config/nvim/lazyvim.json
+        chmod 644 ~/.config/nvim/lazyvim.json
+        echo "Synced lazyvim"
+      fi
     '';
 
     sessionVariables = {
