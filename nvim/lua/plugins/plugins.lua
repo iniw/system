@@ -34,13 +34,15 @@ return {
   },
 
   {
-    "akinsho/bufferline.nvim",
-    enabled = false,
-  },
-
-  {
-    "echasnovski/mini.pairs",
-    enabled = false,
+    "hrsh7th/nvim-cmp",
+    opts = {
+      completion = {
+        autocomplete = false,
+      },
+      mapping = {
+        ["<C-Space>"] = require("cmp").mapping.complete(),
+      },
+    },
   },
 
   {
