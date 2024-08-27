@@ -1,9 +1,4 @@
-{
-  pkgs,
-  lib,
-  user,
-  ...
-}:
+{ pkgs, user, ... }:
 {
   services.nix-daemon.enable = true;
 

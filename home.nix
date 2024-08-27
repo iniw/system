@@ -66,7 +66,13 @@
       nodePackages.prettier
     ];
 
+    # Copy over `lazy{-lock,vim}.json` to the nvim's config folder, if they don't exist.
+    # This guarantees version stability when installing the flake on fresh systems while also leaving the version management itself to lazy, 
+    # since the file is not a read-only link to the nix-store.
+    # This, paired with the pre-commit hook in this repo, gives us effective and simple two-way synchronization between lazy and nix.
     activation.neovim = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      # `--no-preserve=all` makes the output files writeable.
+
       if [ ! -f ~/.config/nvim/lazy-lock.json ]; then
         cp --no-preserve=all ~/.config/nvim/lazy/lazy-lock.json ~/.config/nvim/lazy-lock.json
         echo "Placed lazy-lock"
@@ -79,6 +85,7 @@
     '';
 
     sessionVariables = {
+      # The android SDK should be manually installed here using Android Studio (or QTCreator).
       ANDROID_HOME = "$HOME/Library/Android/sdk";
     };
 
@@ -93,6 +100,7 @@
         font = {
           size = 15.0;
 
+          # TODO: install this font with the flake.
           normal.family = "BerkeleyMono Nerd Font Mono";
           bold.family = "BerkeleyMono Nerd Font Mono";
           italic.family = "BerkeleyMono Nerd Font Mono";
@@ -141,6 +149,8 @@
       ignores = [
         ".DS_Store"
         "**/.DS_Store"
+        # Our `nvim-config-local` config is setup to use ".nvim/local.lua" as the per-project local config path,
+        # adding the entire folder here to the global .gitignore prevents us from polluting project-specific .gitignore's with our own configs.
         ".nvim/"
       ];
     };
@@ -159,7 +169,8 @@
 
     java = {
       enable = true;
-      package = pkgs.jdk17; # pinned to jdk 17 because of gradle
+      # Compiling android code with gradle fails when JDK > 17.
+      package = pkgs.jdk17;
     };
 
     lazygit = {
@@ -167,6 +178,7 @@
     };
 
     neovim = {
+      # Stable neovim is still at 0.9 and a lot of our plugins require 0.10, so fetch it from unstable.
       package = pkgs-unstable.neovim-unwrapped;
 
       enable = true;
@@ -186,6 +198,7 @@
       enable = true;
       package = pkgs-unstable.ruff;
       settings = {
+        # The newest ruff versions require this flag to be launched with conform/mason.
         lint.preview = true;
       };
     };
@@ -197,16 +210,22 @@
     zellij = {
       enable = true;
       enableZshIntegration = true;
+
       settings = {
         theme = "catppuccin-mocha";
         default_layout = "compact";
         pane_frames = false;
+
+        # Can't setup these binds with normal nix fields + `_args` because it doesn't allow duplicate keys.
+        # See: https://www.reddit.com/r/NixOS/comments/1ealycu/can_home_managers_tokdl_implementation_handle/
         keybinds = {
           normal = {
             _props = {
               clear-defaults = true;
             };
 
+            # Setting up all the binds in Tmux mode allows for simultaneous zellij + neovim use without worrying about collisions.
+            # Inspired by: https://shoukoo.github.io/blog/zellij-love-neovim/
             "bind \"Ctrl t\"" = {
               SwitchToMode = "Tmux";
             };
@@ -284,18 +303,25 @@
         enable = true;
       };
 
-      # fix for slow copy-paste and also rebind fzf-file-widget because zellij steals ctrl+t
       initExtra = ''
+        # Fixes slow zsh copy-paste.
+        # From: https://github.com/zsh-users/zsh-autosuggestions/issues/102#issuecomment-183770990
         autoload -Uz bracketed-paste-magic
         zle -N bracketed-paste bracketed-paste-magic
         zstyle ':bracketed-paste-magic' active-widgets '.self-*'
 
+        # Our zellij setup uses <C-t> for entering Tmux mode, so make fzf use <C-f> instead.
         bindkey -r '^T'
         bindkey '^F' fzf-file-widget
       '';
 
       envExtra = ''
+        # I manually install mysql version 8.0.23 because it is the last version to support my old MacOS, 
+        # meaning it has be manually added to $PATH.
         export PATH=$PATH:/usr/local/mysql/bin/
+
+        # Fix for libioconv linker errors when compiling rust code.
+        # TODO: Manage brew with nix-darwin.
         export LIBRARY_PATH=$LIBRARY_PATH:$(brew --prefix)/lib:$(brew --prefix libiconv)/lib
       '';
     };
