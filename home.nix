@@ -1,4 +1,9 @@
-{ pkgs, pkgs-unstable, ... }:
+{
+  lib,
+  pkgs,
+  pkgs-unstable,
+  ...
+}:
 {
   fonts.fontconfig.enable = true;
 
@@ -60,6 +65,18 @@
       nixfmt-rfc-style
       nodePackages.prettier
     ];
+
+    activation.neovim = lib.hm.dag.entryAfter ["writeBoundary"] ''
+        if [ ! -f ~/.config/nvim/lazy-lock.json ]; then
+          cp ~/.config/nvim/lazy/lazy-lock.json ~/.config/nvim/lazy-lock.json
+          echo "Synced lazy-lock"
+        fi
+
+        if [ ! -f ~/.config/nvim/lazyvim.json ]; then
+          cp ~/.config/nvim/lazy/lazyvim.json ~/.config/nvim/lazyvim.json
+          echo "Synced lazyvim"
+        fi
+    '';
 
     sessionVariables = {
       ANDROID_HOME = "$HOME/Library/Android/sdk";
