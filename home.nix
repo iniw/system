@@ -134,6 +134,11 @@
 
     fzf = {
       enable = true;
+
+      # Use fd instead of find. Way faster.
+      changeDirWidgetCommand = "fd --type d";
+      defaultCommand = "fd --type f";
+      fileWidgetCommand = "fd --type f";
     };
 
     gh = {
@@ -209,7 +214,6 @@
 
     zellij = {
       enable = true;
-      enableZshIntegration = true;
 
       settings = {
         theme = "catppuccin-mocha";
@@ -280,6 +284,7 @@
       enable = true;
 
       enableCompletion = true;
+      enableVteIntegration = true;
       autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
 
@@ -296,7 +301,7 @@
 
         el = "eza -L";
         et = "eza -T";
-        et1 = "eza -T -L1";
+        tree = "eza -T -L1";
       };
 
       oh-my-zsh = {
@@ -313,6 +318,11 @@
         # Our zellij setup uses <C-t> for entering Tmux mode, so make fzf use <C-f> instead.
         bindkey -r '^T'
         bindkey '^F' fzf-file-widget
+      '';
+
+      loginExtra = ''
+        # Join our zellij session
+        zellij attach --create ':3'
       '';
 
       envExtra = ''
