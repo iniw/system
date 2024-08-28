@@ -212,68 +212,15 @@
       enable = true;
     };
 
-    zellij = {
+    tmux = {
       enable = true;
 
-      settings = {
-        theme = "catppuccin-mocha";
-        default_layout = "compact";
-        pane_frames = false;
-
-        # Can't setup these binds with normal nix fields + `_args` because it doesn't allow duplicate keys.
-        # See: https://www.reddit.com/r/NixOS/comments/1ealycu/can_home_managers_tokdl_implementation_handle/
-        keybinds = {
-          normal = {
-            _props = {
-              clear-defaults = true;
-            };
-
-            # Setting up all the binds in Tmux mode allows for simultaneous zellij + neovim use without worrying about collisions.
-            # Inspired by: https://shoukoo.github.io/blog/zellij-love-neovim/
-            "bind \"Ctrl t\"" = {
-              SwitchToMode = "Tmux";
-            };
-          };
-
-          tmux = {
-            _props = {
-              clear-defaults = true;
-            };
-
-            "bind \"Esc\"" = {
-              SwitchToMode = "Normal";
-            };
-
-            "bind \"g\"" = {
-              SwitchToMode = "Locked";
-            };
-
-            "bind \"p\"" = {
-              SwitchToMode = "Pane";
-            };
-
-            "bind \"t\"" = {
-              SwitchToMode = "Tab";
-            };
-
-            "bind \"n\"" = {
-              SwitchToMode = "Resize";
-            };
-
-            "bind \"h\"" = {
-              SwitchToMode = "Move";
-            };
-
-            "bind \"s\"" = {
-              SwitchToMode = "Scroll";
-            };
-
-            "bind \"o\"" = {
-              SwitchToMode = "Session";
-            };
-          };
-        };
-      };
+      baseIndex = 1;
+      disableConfirmationPrompt = true;
+      escapeTime = 0;
+      keyMode = "vi";
+      terminal = "screen-256color";
+      shortcut = "t";
     };
 
     zoxide = {
@@ -315,14 +262,16 @@
         zle -N bracketed-paste bracketed-paste-magic
         zstyle ':bracketed-paste-magic' active-widgets '.self-*'
 
-        # Our zellij setup uses <C-t> for entering Tmux mode, so make fzf use <C-f> instead.
+        # Our tmux setup uses <C-t> as the prefix, so make fzf use <C-f> instead.
         bindkey -r '^T'
         bindkey '^F' fzf-file-widget
       '';
 
+      # Only create a tmux session on the login shell, this avoids it popping up on ephemeral ones like in vscode's or lazyvim's terminal.
       loginExtra = ''
-        # Join our zellij session
-        zellij attach --create ':3'
+        if [ -n "$PS1" ] && [[ "$TERM" != "screen-256color" ]]; then
+            exec tmux new-session -A -s ">_<"
+        fi
       '';
 
       envExtra = ''
