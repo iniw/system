@@ -212,21 +212,6 @@
       enable = true;
     };
 
-    tmux = {
-      enable = true;
-
-      baseIndex = 1;
-      disableConfirmationPrompt = true;
-      escapeTime = 0;
-      keyMode = "vi";
-      terminal = "screen-256color";
-      shortcut = "t";
-      extraConfig = ''
-        set -g default-command "''${SHELL}"
-      '';
-
-    };
-
     zoxide = {
       enable = true;
     };
@@ -266,14 +251,9 @@
         zle -N bracketed-paste bracketed-paste-magic
         zstyle ':bracketed-paste-magic' active-widgets '.self-*'
 
-        # Our tmux setup uses <C-t> as the prefix, so make fzf use <C-f> instead.
+        # I prefer <C-f> over <C-t>.
         bindkey -r '^T'
         bindkey '^F' fzf-file-widget
-      '';
-
-      # Only create a tmux session on the login shell, this avoids it popping up on ephemeral ones like in vscode's or lazyvim's terminal.
-      loginExtra = ''
-        exec tmux new-session -A -s ">_<"
       '';
 
       envExtra = ''
