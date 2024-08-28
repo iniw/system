@@ -221,6 +221,10 @@
       keyMode = "vi";
       terminal = "screen-256color";
       shortcut = "t";
+      extraConfig = ''
+        set -g default-command "''${SHELL}"
+      '';
+
     };
 
     zoxide = {
@@ -269,9 +273,7 @@
 
       # Only create a tmux session on the login shell, this avoids it popping up on ephemeral ones like in vscode's or lazyvim's terminal.
       loginExtra = ''
-        if [ -n "$PS1" ] && [[ "$TERM" != "screen-256color" ]]; then
-            exec tmux new-session -A -s ">_<"
-        fi
+        exec tmux new-session -A -s ">_<"
       '';
 
       envExtra = ''
