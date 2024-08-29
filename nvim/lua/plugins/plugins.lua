@@ -54,9 +54,7 @@ return {
 
   {
     "jesseleite/nvim-noirbuddy",
-    dependencies = {
-      { "tjdevries/colorbuddy.nvim" },
-    },
+    dependencies = { { "tjdevries/colorbuddy.nvim" } },
     lazy = false,
   },
 
@@ -69,10 +67,19 @@ return {
       servers = {
         clangd = {
           keys = {
-            { "<leader>ch", "<cmd>ClangdSwitchSourceHeader<cr>", desc = "Switch Source/Header (C/C++)" },
+            {
+              "<leader>ch",
+              "<cmd>ClangdSwitchSourceHeader<cr>",
+              desc = "Switch Source/Header (C/C++)",
+            },
           },
         },
       },
+    },
+    setup = {
+      clangd = function(_, opts)
+        opts.capabilities.offsetEncoding = { "utf-16" }
+      end,
     },
   },
 
@@ -110,11 +117,6 @@ return {
   },
 
   {
-    "kylechui/nvim-surround",
-    opts = {},
-  },
-
-  {
     "chrisgrieser/nvim-various-textobjs",
     opts = {
       useDefaultKeymaps = true,
@@ -123,5 +125,20 @@ return {
 
   "mg979/vim-visual-multi",
 
-  "echasnovski/mini.ai",
+  {
+    "echasnovski/mini.ai",
+    config = true,
+  },
+
+  {
+    "echasnovski/mini.jump",
+    config = true,
+  },
+
+  {
+    "echasnovski/mini.surround",
+    opts = {
+      silent = true,
+    },
+  },
 }
