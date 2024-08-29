@@ -110,6 +110,17 @@ return {
   },
 
   {
+    "folke/noice.nvim",
+    opts = {
+      lsp = {
+        progress = {
+          enabled = false,
+        },
+      },
+    },
+  },
+
+  {
     "klen/nvim-config-local",
     opts = {
       config_files = { ".nvim/local.lua" },
