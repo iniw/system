@@ -69,7 +69,7 @@
     # Copy over `lazy{-lock,vim}.json` to the nvim's config folder, if they don't exist.
     # This guarantees version stability when installing the flake on fresh systems while also leaving the version management itself to lazy, 
     # since the file is not a read-only link to the nix-store.
-    # This, paired with the pre-commit hook in this repo, gives us effective and simple two-way synchronization between lazy and nix.
+    # This, paired with the post-commit hook in the git repo, gives us effective and simple two-way synchronization between lazy and nix.
     activation.neovim = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       # `--no-preserve=all` makes the output files writeable.
 

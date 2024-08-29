@@ -28,6 +28,7 @@ return {
 
         Group.new("@operator", colors.primary)
         Group.new("@punctuation.bracket", colors.bracket)
+        -- "`noir_0` is light for dark themes, and dark for light themes".
         Group.new("@lsp.type.method", colors.noir_0)
       end,
     },
@@ -48,6 +49,7 @@ return {
   {
     "williamboman/mason.nvim",
     opts = {
+      -- Prefer to use the native tools if they're installed.
       PATH = "append",
     },
   },
@@ -78,6 +80,7 @@ return {
     },
     setup = {
       clangd = function(_, opts)
+        -- Fixes some offset-related warnings when opening some c++ files
         opts.capabilities.offsetEncoding = { "utf-16" }
       end,
     },
@@ -91,11 +94,12 @@ return {
       },
       modes = {
         char = {
+          -- mini.jump is used for this instead.
           enabled = false,
         },
       },
     },
-    -- Override LazyVim's  default flash keymaps
+    -- Override LazyVim's default keymaps.
     keys = function()
       return {
         {
@@ -114,6 +118,9 @@ return {
     opts = {
       routes = {
         {
+          -- jdtls' progress notifications are *extremely* spammy, the two "Validate" and "Publish" mentioned in this function in particular
+          -- happen about twice for every character typed!
+          -- I couldn't figure out a way to filter the lsp events themselves so this just filters the actual rendering of the notifications.
           filter = {
             event = "lsp",
             kind = "progress",
@@ -153,16 +160,20 @@ return {
 
   {
     "echasnovski/mini.ai",
-    config = true,
+    opts = {},
   },
 
   {
     "echasnovski/mini.jump",
-    config = true,
+    opts = {},
   },
 
   {
     "echasnovski/mini.surround",
+    init = function()
+      -- https://github.com/echasnovski/mini.nvim/blob/57e47cf7a2923684e7413989ab267ed9730e7d03/doc/mini-surround.txt#L570
+      vim.keymap.set({ "n", "v" }, "s", "<Nop>")
+    end,
     opts = {
       silent = true,
     },
