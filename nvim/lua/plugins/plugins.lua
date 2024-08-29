@@ -115,6 +115,9 @@ return {
 
   {
     "folke/noice.nvim",
+    -- FIXME(zellij_flicker): Remove once https://github.com/folke/noice.nvim/commit/1698725a663aca56bcd07a0e405bc441a5f6613b is reverted/fixed.
+    -- Context: https://github.com/folke/noice.nvim/issues/923
+    version = "4.4.7",
     opts = {
       routes = {
         {

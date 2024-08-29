@@ -14,6 +14,12 @@
         recursive = true;
       };
 
+      # FIXME(zellij_flicker): zellij is currently being manually built/installed from source until https://github.com/zellij-org/zellij/issues/3208 ships.
+      "./.config/zellij/" = {
+        source = ./zellij;
+        recursive = true;
+      };
+
       "./.config/starship.toml" = {
         source = ./starship/starship.toml;
       };
@@ -251,15 +257,23 @@
         zle -N bracketed-paste bracketed-paste-magic
         zstyle ':bracketed-paste-magic' active-widgets '.self-*'
 
-        # I prefer <C-f> over <C-t>.
+        # Our zellij setup uses <C-t> for entering Tmux mode, so make fzf use <C-f> instead.
         bindkey -r '^T'
         bindkey '^F' fzf-file-widget
+      '';
+
+      loginExtra = ''
+        # Join our zellij session
+        exec zellij attach --create ':3'
       '';
 
       envExtra = ''
         # I manually install mysql version 8.0.23 because it is the last version to support my old MacOS, 
         # meaning it has be manually added to $PATH.
         export PATH=$PATH:/usr/local/mysql/bin/
+
+        # FIXME(zellij_flicker): Remove once a new zellij version is shipped
+        export PATH=$PATH:~/.cargo/bin/
 
         # Fix for libioconv linker errors when compiling rust code.
         # TODO: Manage brew with nix-darwin.
