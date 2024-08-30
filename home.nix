@@ -2,12 +2,31 @@
   lib,
   pkgs,
   pkgs-unstable,
+  config,
   ...
 }:
 {
   fonts.fontconfig.enable = true;
 
   home = {
+    # Copy over `lazy{-lock,vim}.json` to the nvim's config folder, if they don't exist.
+    # This guarantees version stability when installing the flake on fresh systems while also leaving the version management itself to lazy, 
+    # since the file is not a read-only link to the nix-store.
+    # This, paired with the post-commit hook in the git repo, gives us effective and simple two-way synchronization between lazy and nix.
+    activation.neovim = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      # `--no-preserve=all` makes the output files writeable.
+
+      if [ ! -f ~/.config/nvim/lazy-lock.json ]; then
+        cp --no-preserve=all ~/.config/nvim/lazy/lazy-lock.json ~/.config/nvim/lazy-lock.json
+        echo "Placed lazy-lock"
+      fi
+
+      if [ ! -f ~/.config/nvim/lazyvim.json ]; then
+        cp --no-preserve=all ~/.config/nvim/lazy/lazyvim.json ~/.config/nvim/lazyvim.json
+        echo "Placed lazyvim"
+      fi
+    '';
+
     file = {
       "./.config/nvim/" = {
         source = ./nvim;
@@ -23,7 +42,6 @@
       "./.config/starship.toml" = {
         source = ./starship/starship.toml;
       };
-
     };
 
     packages = with pkgs; [
@@ -70,29 +88,41 @@
       ast-grep
       nixfmt-rfc-style
       nodePackages.prettier
+      swiProlog
     ];
 
-    # Copy over `lazy{-lock,vim}.json` to the nvim's config folder, if they don't exist.
-    # This guarantees version stability when installing the flake on fresh systems while also leaving the version management itself to lazy, 
-    # since the file is not a read-only link to the nix-store.
-    # This, paired with the post-commit hook in the git repo, gives us effective and simple two-way synchronization between lazy and nix.
-    activation.neovim = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-      # `--no-preserve=all` makes the output files writeable.
+    sessionPath = [
+      # I manually install mysql version 8.0.23 because it is the last version to support my old MacOS, 
+      # meaning it has be manually added to $PATH.
+      "/usr/local/mysql/bin/"
 
-      if [ ! -f ~/.config/nvim/lazy-lock.json ]; then
-        cp --no-preserve=all ~/.config/nvim/lazy/lazy-lock.json ~/.config/nvim/lazy-lock.json
-        echo "Placed lazy-lock"
-      fi
-
-      if [ ! -f ~/.config/nvim/lazyvim.json ]; then
-        cp --no-preserve=all ~/.config/nvim/lazy/lazyvim.json ~/.config/nvim/lazyvim.json
-        echo "Placed lazyvim"
-      fi
-    '';
+      # FIXME(zellij_flicker): Remove once a new zellij version is shipped
+      "${config.home.homeDirectory}/.cargo/bin/"
+    ];
 
     sessionVariables = {
       # The android SDK should be manually installed here using Android Studio (or QTCreator).
       ANDROID_HOME = "$HOME/Library/Android/sdk";
+
+      # Fix for libioconv linker errors when compiling rust code.
+      # TODO: Manage brew with nix-darwin.
+      LIBRARY_PATH = "$LIBRARY_PATH:$(brew --prefix)/lib:$(brew --prefix libiconv)/lib";
+    };
+
+    shellAliases = {
+      gs = "git status";
+      gd = "git diff";
+      glo = "git log --oneline";
+      gap = "git add -p";
+      gaa = "git add --all";
+      gc = "git commit";
+      gca = "git commit --amend";
+      gpr = "git pull --rebase";
+      gpf = "git push --force-with-lease";
+
+      el = "eza -L";
+      et = "eza -T";
+      tree = "eza -T -L1";
     };
 
     stateVersion = "24.05";
@@ -227,28 +257,10 @@
 
       enableCompletion = true;
       enableVteIntegration = true;
+
       autosuggestion.enable = true;
+      oh-my-zsh.enable = true;
       syntaxHighlighting.enable = true;
-
-      shellAliases = {
-        gs = "git status";
-        gd = "git diff";
-        glo = "git log --oneline";
-        gap = "git add -p";
-        gaa = "git add --all";
-        gc = "git commit";
-        gca = "git commit --amend";
-        gpr = "git pull --rebase";
-        gpf = "git push --force-with-lease";
-
-        el = "eza -L";
-        et = "eza -T";
-        tree = "eza -T -L1";
-      };
-
-      oh-my-zsh = {
-        enable = true;
-      };
 
       initExtra = ''
         # Fixes slow zsh copy-paste.
@@ -264,20 +276,8 @@
 
       loginExtra = ''
         # Join our zellij session
+        # FIXME(zellij_flicker): Remove the carge prefix once zellij is managed by home-manager again.
         exec zellij attach --create ':3'
-      '';
-
-      envExtra = ''
-        # I manually install mysql version 8.0.23 because it is the last version to support my old MacOS, 
-        # meaning it has be manually added to $PATH.
-        export PATH=$PATH:/usr/local/mysql/bin/
-
-        # FIXME(zellij_flicker): Remove once a new zellij version is shipped
-        export PATH=$PATH:~/.cargo/bin/
-
-        # Fix for libioconv linker errors when compiling rust code.
-        # TODO: Manage brew with nix-darwin.
-        export LIBRARY_PATH=$LIBRARY_PATH:$(brew --prefix)/lib:$(brew --prefix libiconv)/lib
       '';
     };
   };

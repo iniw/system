@@ -23,6 +23,7 @@
       home-manager,
       mac-app-util,
     }:
+
     let
       user = "sol";
       host = "mac";
@@ -30,9 +31,11 @@
     {
       darwinConfigurations.${host} = nix-darwin.lib.darwinSystem rec {
         system = "x86_64-darwin";
+
         specialArgs = {
           inherit user;
         };
+
         modules = [
           ./configuration.nix
 
@@ -42,7 +45,7 @@
           {
             users.users.${user} = {
               name = user;
-              home = "/Users/${user}/";
+              home = "/Users/${user}";
             };
 
             home-manager = {
