@@ -3,3 +3,6 @@
 -- Add any additional options here
 vim.opt.shiftwidth = 4
 vim.opt.tabstop = 4
+
+-- Disable root detection
+vim.g.root_spec = { "cwd" }
