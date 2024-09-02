@@ -160,10 +160,13 @@ return {
       useDefaultKeymaps = true,
     },
   },
-
   {
     "echasnovski/mini.ai",
-    opts = {},
+    opts = {
+      custom_textobjects = {
+        a = require("mini.ai").gen_spec.treesitter({ a = "@parameter.outer", i = "@parameter.inner" }),
+      },
+    },
   },
 
   {
