@@ -68,6 +68,15 @@ return {
       },
       servers = {
         clangd = {
+          cmd = {
+            "clangd",
+            "--query-driver=" .. vim.env.HOME .. "/.platformio/packages/**/bin/*",
+            "--header-insertion=never",
+            "--completion-style=detailed",
+            "--function-arg-placeholders",
+            "--clang-tidy",
+            "--background-index",
+          },
           keys = {
             {
               "<leader>ch",
