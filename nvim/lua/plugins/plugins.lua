@@ -70,7 +70,6 @@ return {
         clangd = {
           cmd = {
             "clangd",
-            "--query-driver=" .. vim.env.HOME .. "/.platformio/packages/**/bin/*",
             "--header-insertion=never",
             "--completion-style=detailed",
             "--function-arg-placeholders",
@@ -86,15 +85,41 @@ return {
           },
         },
       },
-    },
-    setup = {
-      clangd = function(_, opts)
-        -- Fixes some offset-related warnings when opening some c++ files
-        opts.capabilities.offsetEncoding = { "utf-16" }
-      end,
+      setup = {
+        clangd = function(_, opts)
+          -- Fixes offset-related warnings when opening some c++ files
+          opts.capabilities.offsetEncoding = { "utf-16" }
+        end,
+
+        -- rustaceanvim takes care of rust-analyzer
+        rust_analyzer = function()
+          return true
+        end,
+      },
     },
   },
 
+  {
+    "mrcjkb/rustaceanvim",
+    init = function()
+      vim.g.rustaceanvim = {
+        server = {
+          default_settings = {
+            ["rust-analyzer"] = {
+              files = {
+                excludeDirs = {
+                  -- Exclude these directories otherwise ra gets utterly demolished attempting to analyze the entirety of nixpkgs.
+                  ".direnv/",
+                  ".git/",
+                  ".github/",
+                },
+              },
+            },
+          },
+        },
+      }
+    end,
+  },
   {
     "folke/flash.nvim",
     opts = {
