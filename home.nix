@@ -45,50 +45,22 @@
     };
 
     packages = with pkgs; [
-      # cpp
-      clang_18
-      clang-tools_18
-      cmake
-      ninja
-
-      # python
-      (python3.withPackages (python-modules: with python-modules; [ pip ]))
-      pkgs-unstable.uv
-
-      # rust
-      rustup
-
-      # js
-      nodejs_22
-
       # apps
       discord
 
-      # general
+      # tools
       coreutils
       zlib
       cloc
       wget
-
-      # fp
-      ocaml
-      coq
-
-      # java
-      jdt-language-server
-
-      # lua
-      luajit
-      luajitPackages.luarocks
+      ast-grep
 
       # fonts
       inter
 
       # other
-      ast-grep
       nixfmt-rfc-style
-      nodePackages.prettier
-      swiProlog
+      nodejs_22
     ];
 
     sessionPath = [
@@ -158,6 +130,7 @@
 
     direnv = {
       enable = true;
+      nix-direnv.enable = true;
     };
 
     eza = {
@@ -193,14 +166,14 @@
         # Our `nvim-config-local` config is setup to use ".nvim/local.lua" as the per-project local config path,
         # adding the entire folder here to the global .gitignore prevents us from polluting project-specific .gitignore's with our own configs.
         ".nvim/"
+
+        # direnv stuff
+        ".envrc"
+        ".direnv/"
       ];
     };
 
     git-credential-oauth = {
-      enable = true;
-    };
-
-    gradle = {
       enable = true;
     };
 
@@ -233,15 +206,6 @@
 
     ripgrep = {
       enable = true;
-    };
-
-    ruff = {
-      enable = true;
-      package = pkgs-unstable.ruff;
-      settings = {
-        # The newest ruff versions require this flag to be launched with conform/mason.
-        lint.preview = true;
-      };
     };
 
     starship = {
