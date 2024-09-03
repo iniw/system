@@ -73,9 +73,6 @@
     ];
 
     sessionVariables = {
-      # The android SDK should be manually installed here using Android Studio (or QTCreator).
-      ANDROID_HOME = "$HOME/Library/Android/sdk";
-
       # Fix for libioconv linker errors when compiling rust code.
       # TODO: Manage brew with nix-darwin.
       LIBRARY_PATH = "$LIBRARY_PATH:$(brew --prefix)/lib:$(brew --prefix libiconv)/lib";
@@ -179,12 +176,6 @@
 
     home-manager = {
       enable = true;
-    };
-
-    java = {
-      enable = true;
-      # Compiling android code with gradle fails when JDK > 17.
-      package = pkgs.jdk17;
     };
 
     lazygit = {
