@@ -89,9 +89,8 @@
       gpr = "git pull --rebase";
       gpf = "git push --force-with-lease";
 
-      el = "eza -L";
-      et = "eza -T";
-      tree = "eza -T -L1";
+      tree = "eza -T --icons=always";
+      ls = "eza -1 --icons=always";
     };
 
     stateVersion = "24.05";
@@ -107,12 +106,16 @@
 
           # TODO: install this font with the flake.
           normal.family = "BerkeleyMono Nerd Font Mono";
-          bold.family = "BerkeleyMono Nerd Font Mono";
-          italic.family = "BerkeleyMono Nerd Font Mono";
         };
 
         window = {
           option_as_alt = "OnlyLeft";
+        };
+
+        colors = {
+          primary = {
+            background = "#121212";
+          };
         };
       };
     };
