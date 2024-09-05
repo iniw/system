@@ -38,10 +38,6 @@
         source = ./zellij;
         recursive = true;
       };
-
-      "./.config/starship.toml" = {
-        source = ./starship/starship.toml;
-      };
     };
 
     packages = with pkgs; [
@@ -202,10 +198,6 @@
       enable = true;
     };
 
-    starship = {
-      enable = true;
-    };
-
     zoxide = {
       enable = true;
     };
@@ -222,14 +214,26 @@
 
       initExtra = ''
         # Fixes slow zsh copy-paste.
-        # From: https://github.com/zsh-users/zsh-autosuggestions/issues/102#issuecomment-183770990
-        autoload -Uz bracketed-paste-magic
-        zle -N bracketed-paste bracketed-paste-magic
-        zstyle ':bracketed-paste-magic' active-widgets '.self-*'
+        # From: https://github.com/zsh-users/zsh-autosuggestions/issues/238#issuecomment-389324292
+        pasteinit() {
+            OLD_SELF_INSERT=''\${''\${(s.:.)widgets[self-insert]}[2,3]}
+            zle -N self-insert url-quote-magic # I wonder if you'd need `.url-quote-magic`?
+        }
+
+        pastefinish() {
+            zle -N self-insert $OLD_SELF_INSERT
+        }
+
+        zstyle :bracketed-paste-magic paste-init pasteinit
+        zstyle :bracketed-paste-magic paste-finish pastefinish
 
         # Our zellij setup uses <C-t> for entering Tmux mode, so make fzf use <C-f> instead.
         bindkey -r '^T'
         bindkey '^F' fzf-file-widget
+
+        # Enable pure promt
+        autoload -U promptinit; promptinit
+        prompt pure
       '';
 
       loginExtra = ''
@@ -237,6 +241,13 @@
         # FIXME(zellij_flicker): Remove the carge prefix once zellij is managed by home-manager again.
         exec zellij attach --create ':3'
       '';
+
+      plugins = [
+        {
+          name = "pure";
+          src = "${pkgs.pure-prompt}/share/zsh/site-functions";
+        }
+      ];
     };
   };
 }
