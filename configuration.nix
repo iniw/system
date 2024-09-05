@@ -23,7 +23,7 @@
         ApplePressAndHoldEnabled = false;
         AppleShowAllFiles = true;
 
-        InitialKeyRepeat = 25;
+        InitialKeyRepeat = 12;
         KeyRepeat = 2;
 
         NSAutomaticCapitalizationEnabled = false;
