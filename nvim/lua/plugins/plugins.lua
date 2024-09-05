@@ -120,6 +120,7 @@ return {
       }
     end,
   },
+
   {
     "folke/flash.nvim",
     vscode = true,
