@@ -1,4 +1,4 @@
-theme "catppuccin-mocha"
+theme "wvw"
 default_layout "compact"
 pane_frames false
 
@@ -35,4 +35,22 @@ keybinds {
             SwitchToMode "Session"
         }
     }
+}
+
+themes {
+    wvw {
+        // Slightly modified cappuccin-mocha
+        // https://github.com/zellij-org/zellij/blob/489c4da5ffaf38526b76bad4ce09da63ae99331e/zellij-utils/assets/themes/catppuccin.kdl#L47
+        bg "#121212"
+        fg "#cdd6f4"
+        red "#f38ba8"
+        green "#a6e3a1"
+        blue "#89b4fa"
+        yellow "#f9e2af"
+        magenta "#f5c2e7"
+        orange "#fab387"
+        cyan "#89dceb"
+        black "#121212"
+        white "#d5d5d5"
+  }
 }
