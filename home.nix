@@ -54,8 +54,10 @@
       # fonts
       inter
 
-      # other
+      # nix
       nixfmt-rfc-style
+      nil
+
       nodejs_22
     ];
 
@@ -85,8 +87,8 @@
       gpr = "git pull --rebase";
       gpf = "git push --force-with-lease";
 
-      tree = "eza -T --icons=always";
       ls = "eza -1 --icons=always";
+      la = "ls -a";
     };
 
     stateVersion = "24.05";
