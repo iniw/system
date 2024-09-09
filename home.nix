@@ -38,6 +38,10 @@
         source = ./zellij;
         recursive = true;
       };
+
+      "./.config/starship.toml" = {
+        source = ./starship/starship.toml;
+      };
     };
 
     packages = with pkgs; [
@@ -200,6 +204,10 @@
       enable = true;
     };
 
+    starship = {
+      enable = true;
+    };
+
     zoxide = {
       enable = true;
     };
@@ -232,10 +240,6 @@
         # Our zellij setup uses <C-t> for entering Tmux mode, so make fzf use <C-f> instead.
         bindkey -r '^T'
         bindkey '^F' fzf-file-widget
-
-        # Enable pure promt
-        autoload -U promptinit; promptinit
-        prompt pure
       '';
 
       loginExtra = ''
@@ -243,13 +247,6 @@
         # FIXME(zellij_flicker): Remove the carge prefix once zellij is managed by home-manager again.
         exec zellij attach --create ':3'
       '';
-
-      plugins = [
-        {
-          name = "pure";
-          src = "${pkgs.pure-prompt}/share/zsh/site-functions";
-        }
-      ];
     };
   };
 }
