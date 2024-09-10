@@ -17,10 +17,8 @@
 
     mac-app-util.url = "github:hraban/mac-app-util";
 
-    # provides the latest build of Zellij until a release truly
-    # fixes https://github.com/zellij-org/zellij/issues/3208
-    zellij = {
-      url = "github:a-kenji/zellij-nix";
+    minimal-tmux = {
+      url = "github:niksingh710/minimal-tmux-status";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -33,20 +31,12 @@
       nixpkgs-unstable,
       home-manager,
       mac-app-util,
-      zellij,
+      minimal-tmux,
     }:
 
     let
       user = "sol";
       host = "mac";
-
-      overlay = final: prev: { zellij-latest = zellij.packages."${prev.system}".zellij; };
-      overlayModule = (
-        { ... }:
-        {
-          nixpkgs.overlays = [ overlay ];
-        }
-      );
     in
     {
       darwinConfigurations.${host} = nix-darwin.lib.darwinSystem rec {
@@ -57,8 +47,6 @@
         };
 
         modules = [
-          overlayModule
-
           ./configuration.nix
 
           mac-app-util.darwinModules.default
@@ -74,6 +62,7 @@
               extraSpecialArgs = {
                 pkgs-unstable = import nixpkgs-unstable { inherit system; };
                 inherit user;
+                inherit minimal-tmux;
               };
 
               useGlobalPkgs = true;

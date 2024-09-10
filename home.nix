@@ -2,6 +2,7 @@
   lib,
   pkgs,
   pkgs-unstable,
+  minimal-tmux,
   ...
 }:
 {
@@ -29,11 +30,6 @@
     file = {
       "./.config/nvim/" = {
         source = ./nvim;
-        recursive = true;
-      };
-
-      "./.config/zellij/" = {
-        source = ./zellij;
         recursive = true;
       };
 
@@ -203,9 +199,29 @@
       enable = true;
     };
 
-    zellij = {
+    tmux = {
       enable = true;
-      package = pkgs.zellij-latest;
+
+      baseIndex = 1;
+      disableConfirmationPrompt = true;
+      escapeTime = 0;
+      keyMode = "vi";
+      terminal = "screen-256color";
+      shortcut = "t";
+
+      extraConfig = ''
+        # Don't enter a login shell on new panes/windows.
+        set -g default-command "''${SHELL}" 
+      '';
+
+      plugins = [
+        {
+          plugin = minimal-tmux.packages.${pkgs.system}.default;
+          extraConfig = ''
+            set -g @minimal-tmux-bg "#ff265c"
+          '';
+        }
+      ];
     };
 
     zoxide = {
@@ -237,14 +253,13 @@
         zstyle :bracketed-paste-magic paste-init pasteinit
         zstyle :bracketed-paste-magic paste-finish pastefinish
 
-        # Our zellij setup uses <C-t> for entering Tmux mode, so make fzf use <C-f> instead.
+        # Tmux uses <C-t> so make fzf use <C-f> instead.
         bindkey -r '^T'
         bindkey '^F' fzf-file-widget
       '';
 
       loginExtra = ''
-        # Join our zellij session
-        exec zellij attach --create ':3'
+        exec tmux new-session -A -s ">_<" 
       '';
     };
   };
