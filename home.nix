@@ -2,7 +2,6 @@
   lib,
   pkgs,
   pkgs-unstable,
-  config,
   ...
 }:
 {
@@ -33,7 +32,6 @@
         recursive = true;
       };
 
-      # FIXME(zellij_flicker): zellij is currently being manually built/installed from source until https://github.com/zellij-org/zellij/issues/3208 ships.
       "./.config/zellij/" = {
         source = ./zellij;
         recursive = true;
@@ -69,9 +67,6 @@
       # I manually install mysql version 8.0.23 because it is the last version to support my old MacOS, 
       # meaning it has be manually added to $PATH.
       "/usr/local/mysql/bin/"
-
-      # FIXME(zellij_flicker): Remove once a new zellij version is shipped
-      "${config.home.homeDirectory}/.cargo/bin/"
     ];
 
     sessionVariables = {
@@ -208,6 +203,11 @@
       enable = true;
     };
 
+    zellij = {
+      enable = true;
+      package = pkgs.zellij-latest;
+    };
+
     zoxide = {
       enable = true;
     };
@@ -244,7 +244,6 @@
 
       loginExtra = ''
         # Join our zellij session
-        # FIXME(zellij_flicker): Remove the carge prefix once zellij is managed by home-manager again.
         exec zellij attach --create ':3'
       '';
     };

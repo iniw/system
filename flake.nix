@@ -16,6 +16,13 @@
     };
 
     mac-app-util.url = "github:hraban/mac-app-util";
+
+    # provides the latest build of Zellij until a release truly
+    # fixes https://github.com/zellij-org/zellij/issues/3208
+    zellij = {
+      url = "github:a-kenji/zellij-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -26,11 +33,20 @@
       nixpkgs-unstable,
       home-manager,
       mac-app-util,
+      zellij,
     }:
 
     let
       user = "sol";
       host = "mac";
+
+      overlay = final: prev: { zellij-latest = zellij.packages."${prev.system}".zellij; };
+      overlayModule = (
+        { ... }:
+        {
+          nixpkgs.overlays = [ overlay ];
+        }
+      );
     in
     {
       darwinConfigurations.${host} = nix-darwin.lib.darwinSystem rec {
@@ -41,6 +57,8 @@
         };
 
         modules = [
+          overlayModule
+
           ./configuration.nix
 
           mac-app-util.darwinModules.default
