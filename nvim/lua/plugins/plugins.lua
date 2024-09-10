@@ -96,18 +96,6 @@ return {
               cond = function() return package.loaded["noice"] and require("noice").api.status.mode.has() end,
               color = function() return LazyVim.ui.fg("Constant") end,
             },
-            -- stylua: ignore
-            {
-              function() return "  " .. require("dap").status() end,
-              cond = function() return package.loaded["dap"] and require("dap").status() ~= "" end,
-              color = function() return LazyVim.ui.fg("Debug") end,
-            },
-            -- stylua: ignore
-            {
-              require("lazy.status").updates,
-              cond = require("lazy.status").has_updates,
-              color = function() return LazyVim.ui.fg("Special") end,
-            },
           },
           lualine_y = {
             { "progress", separator = " ", padding = { left = 1, right = 0 } },
@@ -119,7 +107,7 @@ return {
             end,
           },
         },
-        extensions = { "neo-tree", "lazy" },
+        extensions = { "neo-tree" },
       }
 
       return opts
