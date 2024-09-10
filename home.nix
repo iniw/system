@@ -160,9 +160,9 @@
       ignores = [
         ".DS_Store"
         "**/.DS_Store"
-        # Our `nvim-config-local` config is setup to use ".nvim/local.lua" as the per-project local config path,
-        # adding the entire folder here to the global .gitignore prevents us from polluting project-specific .gitignore's with our own configs.
-        ".nvim/"
+
+        # Project-specific lazyvim config
+        ".lazy.lua"
 
         # direnv stuff
         ".envrc"

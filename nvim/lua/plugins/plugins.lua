@@ -250,13 +250,6 @@ return {
   },
 
   {
-    "klen/nvim-config-local",
-    opts = {
-      config_files = { ".nvim/local.lua" },
-    },
-  },
-
-  {
     "chrisgrieser/nvim-various-textobjs",
     vscode = true,
     opts = {
