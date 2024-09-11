@@ -212,6 +212,7 @@
       extraConfig = ''
         # Don't enter a login shell on new panes/windows.
         set -g default-command "''${SHELL}" 
+        set-option -a terminal-features 'xterm-256color:RGB'
       '';
 
       plugins = [
