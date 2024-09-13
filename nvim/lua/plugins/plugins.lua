@@ -4,14 +4,13 @@
 -- * add extra plugins
 -- * disable/enabled LazyVim plugins
 -- * override the configuration of LazyVim plugins
+local primary = "#ff265c"
+local secondary = "#ffdbe8"
 return {
   {
     "LazyVim/LazyVim",
     opts = {
       colorscheme = function()
-        local primary = "#ff265c"
-        local secondary = "#ffdbe8"
-
         require("noirbuddy").setup({
           colors = {
             primary = primary,
@@ -268,6 +267,31 @@ return {
 
   {
     "nvim-telescope/telescope.nvim",
+    keys = {
+      {
+        "gad",
+        function()
+          require("telescope.builtin").lsp_definitions({
+            jump_type = "vsplit",
+            attach_mappings = function(_, map)
+              map({ "n", "i" }, "<CR>", require("telescope.actions").select_vertical)
+              return true
+            end,
+          })
+        end,
+        desc = "Go to definition in a new window",
+      },
+    },
+  },
+
+  {
+    "ibhagwan/fzf-lua",
+    opts = {
+      fzf_colors = {
+        ["hl"] = primary,
+        ["hl+"] = secondary,
+      },
+    },
     keys = {
       { "<leader><space>", LazyVim.pick("files", { root = false }), desc = "Find Files (cwd)" },
       { "<leader>ff", LazyVim.pick("files", { root = false }), desc = "Find Files (cwd)" },
