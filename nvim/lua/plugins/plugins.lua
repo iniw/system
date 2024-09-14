@@ -306,5 +306,12 @@ return {
     end,
   },
 
+  {
+    "nvim-neo-tree/neo-tree.nvim",
+    opts = {
+      window = { position = "right" },
+    },
+  },
+
   "tpope/vim-sleuth",
 }
