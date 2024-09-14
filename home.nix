@@ -160,9 +160,12 @@
         # Project-specific lazyvim config
         ".lazy.lua"
 
-        # direnv stuff
+        # direnv
         ".envrc"
         ".direnv/"
+
+        # fd's ignore list 
+        ".ignore"
       ];
     };
 
@@ -215,11 +218,22 @@
         set-option -a terminal-features 'xterm-256color:RGB'
       '';
 
-      plugins = [
+      plugins = with pkgs; [
         {
           plugin = minimal-tmux.packages.${pkgs.system}.default;
           extraConfig = ''
             set -g @minimal-tmux-bg "#ff265c"
+          '';
+        }
+        {
+          plugin = tmuxPlugins.resurrect;
+          extraConfig = "set -g @resurrect-strategy-nvim 'session'";
+        }
+        {
+          plugin = tmuxPlugins.continuum;
+          extraConfig = ''
+            set -g @continuum-restore 'on'
+            set -g @continuum-save-interval '60'
           '';
         }
       ];
