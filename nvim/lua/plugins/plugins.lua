@@ -82,7 +82,8 @@ return {
             LazyVim.lualine.root_dir(),
             { LazyVim.lualine.pretty_path() },
           },
-          lualine_x = {
+          lualine_x = {},
+          lualine_y = {
             -- stylua: ignore
             {
               function() return require("noice").api.status.command.get() end,
@@ -96,14 +97,9 @@ return {
               color = function() return LazyVim.ui.fg("Constant") end,
             },
           },
-          lualine_y = {
+          lualine_z = {
             { "progress", separator = " ", padding = { left = 1, right = 0 } },
             { "location", padding = { left = 0, right = 1 } },
-          },
-          lualine_z = {
-            function()
-              return " " .. os.date("%R")
-            end,
           },
         },
         extensions = { "neo-tree" },
