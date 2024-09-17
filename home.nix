@@ -223,6 +223,7 @@
           plugin = minimal-tmux.packages.${pkgs.system}.default;
           extraConfig = ''
             set -g @minimal-tmux-bg "#ff265c"
+            set -g @minimal-tmux-status-right-extra " %H:%M"
           '';
         }
         {
