@@ -19,3 +19,13 @@ vim.keymap.set("n", "<A-Up>", "<cmd>resize +2<cr>", { desc = "Increase Window He
 vim.keymap.set("n", "<A-Down>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" })
 vim.keymap.set("n", "<A-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease Window Width" })
 vim.keymap.set("n", "<A-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window Width" })
+
+require("lazyvim.util").toggle.map("<leader>ua", {
+  name = "Autocomplete",
+  get = function()
+    return vim.g.autocomplete_enabled
+  end,
+  set = function(state)
+    vim.g.autocomplete_enabled = state
+  end,
+})
