@@ -35,13 +35,13 @@ return {
 
   {
     "hrsh7th/nvim-cmp",
+    init = function()
+      vim.g.autocomplete_enabled = false
+    end,
     opts = {
-      completion = {
-        autocomplete = false,
-      },
-      mapping = {
-        ["<C-Space>"] = require("cmp").mapping.complete(),
-      },
+      enabled = function()
+        return vim.g.autocomplete_enabled
+      end,
     },
   },
 
