@@ -1,7 +1,6 @@
 {
   lib,
   pkgs,
-  pkgs-unstable,
   minimal-tmux,
   ...
 }:
@@ -86,7 +85,7 @@
       la = "ls -a";
     };
 
-    stateVersion = "24.05";
+    stateVersion = "24.11";
   };
 
   programs = {
@@ -182,9 +181,6 @@
     };
 
     neovim = {
-      # Stable neovim is still at 0.9 and a lot of our plugins require 0.10, so fetch it from unstable.
-      package = pkgs-unstable.neovim-unwrapped;
-
       enable = true;
 
       defaultEditor = true;
@@ -277,10 +273,6 @@
         # Tmux uses <C-t> so make fzf use <C-f> instead.
         bindkey -r '^T'
         bindkey '^F' fzf-file-widget
-      '';
-
-      loginExtra = ''
-        exec tmux new-session -A -s ">_<" 
       '';
     };
   };
