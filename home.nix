@@ -38,15 +38,14 @@
     };
 
     packages = with pkgs; [
-      # apps
-      discord
-
       # tools
       coreutils
+      moreutils
       zlib
       cloc
       wget
       ast-grep
+      tldr
 
       # fonts
       inter
@@ -83,6 +82,8 @@
 
       ls = "eza -1 --icons=always";
       la = "ls -a";
+
+      bat = "bat --number --color=always --wrap=never";
     };
 
     stateVersion = "24.11";
@@ -110,6 +111,10 @@
           };
         };
       };
+    };
+
+    bat = {
+      enable = true;
     };
 
     btop = {
@@ -152,6 +157,14 @@
       userName = "vini";
       userEmail = "andrade.vinicius934@gmail.com";
 
+      delta = {
+        enable = true;
+        options = {
+          navigate = true;
+          line-numbers = true;
+        };
+      };
+
       ignores = [
         ".DS_Store"
         "**/.DS_Store"
@@ -173,6 +186,10 @@
     };
 
     home-manager = {
+      enable = true;
+    };
+
+    jq = {
       enable = true;
     };
 

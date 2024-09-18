@@ -1,13 +1,17 @@
 { pkgs, user, ... }:
 {
   services.nix-daemon.enable = true;
+  nix = {
+    extraOptions = ''
+      keep-outputs = false
+      keep-derivations = false
+      experimental-features = nix-command flakes
+    '';
+  };
 
   nixpkgs = {
     hostPlatform = "x86_64-darwin";
-    config.allowUnfree = true;
   };
-
-  nix.package = pkgs.nix;
 
   programs.zsh.enable = true;
   users.users.${user}.shell = pkgs.zsh;
