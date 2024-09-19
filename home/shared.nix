@@ -142,10 +142,6 @@
       fileWidgetCommand = "fd --type f";
     };
 
-    gh = {
-      enable = true;
-    };
-
     git = {
       enable = true;
 
