@@ -1,21 +1,12 @@
-{ pkgs, user, ... }:
+{ ... }:
 {
-  services.nix-daemon.enable = true;
+  imports = [ ./shared.nix ];
 
-  nix = {
-    extraOptions = ''
-      keep-outputs = false
-      keep-derivations = false
-      experimental-features = nix-command flakes
-    '';
-  };
+  services.nix-daemon.enable = true;
 
   nixpkgs = {
     hostPlatform = "x86_64-darwin";
   };
-
-  programs.zsh.enable = true;
-  users.users.${user}.shell = pkgs.zsh;
 
   system = {
     activationScripts.postUserActivation.text = ''

@@ -3,10 +3,6 @@
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
 {
-  config,
-  lib,
-  pkgs,
-  user,
   ...
 }:
 
@@ -14,19 +10,12 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    ./../shared.nix
   ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-
-  nix = {
-    extraOptions = ''
-      keep-outputs = false
-      keep-derivations = false
-      experimental-features = nix-command flakes
-    '';
-  };
 
   # networking.hostName = "nixos"; # Define your hostname.
   # Pick only one of the below networking options.
@@ -35,9 +24,6 @@
 
   # Set your time zone.
   time.timeZone = "America/Sao_Paulo";
-
-  programs.zsh.enable = true;
-  users.users.${user}.shell = pkgs.zsh;
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
