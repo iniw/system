@@ -1,8 +1,8 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Define source and destination directories
 SRC_DIR="$HOME/.config/nvim"
-DST_DIR="$(git rev-parse --show-toplevel)/nvim/lazy"
+DST_DIR="$(git rev-parse --show-toplevel)/home/nvim/lazy"
 
 # Copy the files
 cp "$SRC_DIR/lazy-lock.json" "$DST_DIR/lazy-lock.json"

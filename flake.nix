@@ -34,10 +34,9 @@
 
     let
       user = "sol";
-      host = "mac";
     in
     {
-      darwinConfigurations.${host} = nix-darwin.lib.darwinSystem rec {
+      darwinConfigurations.mac = nix-darwin.lib.darwinSystem rec {
         system = "x86_64-darwin";
 
         specialArgs = {
@@ -45,7 +44,7 @@
         };
 
         modules = [
-          ./configuration.nix
+          ./configuration/darwin.nix
 
           mac-app-util.darwinModules.default
 
@@ -66,8 +65,7 @@
               useUserPackages = true;
 
               users.${user}.imports = [
-                ./home.nix
-
+                ./home/darwin.nix
                 mac-app-util.homeManagerModules.default
               ];
             };
@@ -76,6 +74,40 @@
       };
 
       # Expose the package set, including overlays, for convenience.
-      darwinPackages = self.darwinConfigurations.${host}.pkgs;
+      darwinPackages = self.darwinConfigurations.mac.pkgs;
+
+      nixosConfigurations.nixos = nixpkgs.lib.nixosSystem rec {
+        system = "x86_64-linux";
+
+        specialArgs = {
+          inherit user;
+        };
+
+        modules = [
+          ./configuration/nixos
+
+          home-manager.nixosModules.home-manager
+
+          {
+            users.users.${user} = {
+              name = user;
+              home = "/home/${user}";
+              isNormalUser = true;
+              extraGroups = [ "wheel" ];
+            };
+
+            home-manager = {
+              extraSpecialArgs = {
+                inherit user;
+                inherit minimal-tmux;
+              };
+
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              users.${user}.imports = [ ./home/nixos.nix ];
+            };
+          }
+        ];
+      };
     };
 }
