@@ -2,6 +2,11 @@ return {
   {
     "folke/noice.nvim",
     opts = {
+      views = {
+        notify = {
+          position = "left",
+        },
+      },
       routes = {
         {
           -- jdtls' progress notifications are *extremely* spammy, the two "Validate" and "Publish" mentioned in this function in particular
