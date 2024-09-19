@@ -1,6 +1,7 @@
 { pkgs, user, ... }:
 {
   services.nix-daemon.enable = true;
+
   nix = {
     extraOptions = ''
       keep-outputs = false
