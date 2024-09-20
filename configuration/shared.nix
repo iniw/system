@@ -1,4 +1,9 @@
-{ pkgs, user, ... }:
+{
+  pkgs,
+  user,
+  minimal-tmux,
+  ...
+}:
 {
   nix = {
     extraOptions = ''
@@ -9,5 +14,19 @@
   };
 
   programs.zsh.enable = true;
-  users.users.${user}.shell = pkgs.zsh;
+
+  users.users.${user} = {
+    name = user;
+    shell = pkgs.zsh;
+  };
+
+  home-manager = {
+    extraSpecialArgs = {
+      inherit user;
+      inherit minimal-tmux;
+    };
+
+    useGlobalPkgs = true;
+    useUserPackages = true;
+  };
 }

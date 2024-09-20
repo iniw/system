@@ -3,6 +3,7 @@
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
 {
+  user,
   ...
 }:
 
@@ -12,6 +13,18 @@
     ./hardware-configuration.nix
     ./../shared.nix
   ];
+
+  users.users.${user} = {
+    home = "/home/${user}";
+    extraGroups = [ "wheel" ];
+    isNormalUser = true;
+  };
+
+  home-manager = {
+    users.${user}.imports = [
+      ./../home/nixos.nix
+    ];
+  };
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
