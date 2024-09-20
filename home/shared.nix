@@ -97,7 +97,6 @@
 
         window = {
           option_as_alt = "OnlyLeft";
-          decorations = "None";
         };
 
         colors = {
@@ -145,7 +144,7 @@
     git = {
       enable = true;
 
-      userName = "vini";
+      userName = "Vinicius Deolindo";
       userEmail = "andrade.vinicius934@gmail.com";
 
       delta = {
@@ -220,6 +219,7 @@
         # Don't enter a login shell on new panes/windows.
         set -g default-command "''${SHELL}" 
         set-option -a terminal-features 'alacritty:RGB'
+        set-option -a terminal-features 'xterm-256color:RGB'
       '';
 
       plugins = with pkgs; [
@@ -281,10 +281,6 @@
         # Tmux uses <C-t> so make fzf use <C-f> instead.
         bindkey -r '^T'
         bindkey '^F' fzf-file-widget
-
-        if [ -z $TMUX ]; then
-          export $TERM=alacritty
-        fi
       '';
     };
   };
