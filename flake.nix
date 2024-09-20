@@ -36,77 +36,33 @@
       user = "sol";
     in
     {
-      darwinConfigurations.mac = nix-darwin.lib.darwinSystem rec {
+      darwinConfigurations.mac = nix-darwin.lib.darwinSystem {
         system = "x86_64-darwin";
 
         specialArgs = {
           inherit user;
+          inherit minimal-tmux;
+          inherit mac-app-util;
         };
 
         modules = [
           ./configuration/darwin.nix
-
-          mac-app-util.darwinModules.default
-
           home-manager.darwinModules.home-manager
-          {
-            users.users.${user} = {
-              name = user;
-              home = "/Users/${user}";
-            };
-
-            home-manager = {
-              extraSpecialArgs = {
-                inherit user;
-                inherit minimal-tmux;
-              };
-
-              useGlobalPkgs = true;
-              useUserPackages = true;
-
-              users.${user}.imports = [
-                ./home/darwin.nix
-                mac-app-util.homeManagerModules.default
-              ];
-            };
-          }
+          mac-app-util.darwinModules.default
         ];
       };
 
-      # Expose the package set, including overlays, for convenience.
-      darwinPackages = self.darwinConfigurations.mac.pkgs;
-
-      nixosConfigurations.nixos = nixpkgs.lib.nixosSystem rec {
+      nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
 
         specialArgs = {
           inherit user;
+          inherit minimal-tmux;
         };
 
         modules = [
           ./configuration/nixos
-
           home-manager.nixosModules.home-manager
-
-          {
-            users.users.${user} = {
-              name = user;
-              home = "/home/${user}";
-              isNormalUser = true;
-              extraGroups = [ "wheel" ];
-            };
-
-            home-manager = {
-              extraSpecialArgs = {
-                inherit user;
-                inherit minimal-tmux;
-              };
-
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              users.${user}.imports = [ ./home/nixos.nix ];
-            };
-          }
         ];
       };
     };

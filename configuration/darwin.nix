@@ -1,6 +1,17 @@
-{ ... }:
+{ user, mac-app-util, ... }:
 {
   imports = [ ./shared.nix ];
+
+  users.users.${user} = {
+    home = "/Users/${user}";
+  };
+
+  home-manager = {
+    users.${user}.imports = [
+      ./../home/darwin.nix
+      mac-app-util.homeManagerModules.default
+    ];
+  };
 
   services.nix-daemon.enable = true;
 
