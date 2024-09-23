@@ -5,7 +5,9 @@ return {
       inlay_hints = {
         enabled = false,
       },
+
       servers = {
+        jdtls = {},
         clangd = {
           cmd = {
             "clangd",
@@ -16,23 +18,17 @@ return {
             "--clang-tidy",
             "--background-index",
           },
-          keys = {
-            {
-              "<leader>ch",
-              "<cmd>ClangdSwitchSourceHeader<cr>",
-              desc = "Switch Source/Header (C/C++)",
-            },
-          },
         },
       },
-      setup = {
-        clangd = function(_, opts)
-          -- Fixes offset-related warnings when opening some c++ files
-          opts.capabilities.offsetEncoding = { "utf-16" }
-        end,
 
+      setup = {
         -- rustaceanvim takes care of rust-analyzer
         rust_analyzer = function()
+          return true
+        end,
+
+        -- nvim-jdtls takes care of jdtls
+        jdtls = function()
           return true
         end,
       },
