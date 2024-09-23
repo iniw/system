@@ -212,14 +212,18 @@
       disableConfirmationPrompt = true;
       escapeTime = 0;
       keyMode = "vi";
-      terminal = "screen-256color";
+      terminal = "tmux-256color";
       shortcut = "t";
 
       extraConfig = ''
         # Don't enter a login shell on new panes/windows.
         set -g default-command "''${SHELL}" 
-        set-option -a terminal-features 'alacritty:RGB'
-        set-option -a terminal-features 'xterm-256color:RGB'
+
+        # Support full RGB rendering
+        set -as terminal-features ",alacritty:RGB"
+
+        # Automatically renumber windows when closing them to avoid gaps
+        set -g renumber-windows on
       '';
 
       plugins = with pkgs; [
@@ -281,6 +285,11 @@
         # Tmux uses <C-t> so make fzf use <C-f> instead.
         bindkey -r '^T'
         bindkey '^F' fzf-file-widget
+
+        if [[ -z "$TMUX" ]]; then
+          export TERM="alacritty"
+          exec tmux new-session -A -s ">_<"
+        fi
       '';
     };
   };
