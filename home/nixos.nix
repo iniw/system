@@ -25,7 +25,7 @@
           ])
         ];
         xkb-options = [
-          "caps:swapescape"
+          "caps:escape"
         ];
       };
     };
