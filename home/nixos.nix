@@ -24,9 +24,14 @@
             "br"
           ])
         ];
+
         xkb-options = [
           "caps:escape"
         ];
+      };
+
+      "org/gnome/desktop/interface" = {
+        color-scheme = "prefer-dark";
       };
     };
   };
