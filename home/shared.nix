@@ -104,6 +104,20 @@
             background = "#121212";
           };
         };
+
+        shell = {
+          program = "zsh";
+          args = [
+            "-i" # Interactive shell (to source `.zshrc`)
+            "-l" # Login shell (to source `.zshlogin`)
+            "-c" # Execute the passed command (tmux)
+            "tmux new-session -A -s '>_<'"
+          ];
+        };
+
+        env = {
+          TERM = "alacritty";
+        };
       };
     };
 
@@ -285,11 +299,6 @@
         # Tmux uses <C-t> so make fzf use <C-f> instead.
         bindkey -r '^T'
         bindkey '^F' fzf-file-widget
-
-        if [[ -z "$TMUX" ]]; then
-          export TERM="alacritty"
-          exec tmux new-session -A -s ">_<"
-        fi
       '';
     };
   };
