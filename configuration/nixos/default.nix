@@ -22,7 +22,7 @@
 
   home-manager = {
     users.${user}.imports = [
-      ./../home/nixos.nix
+      ./../../home/nixos.nix
     ];
   };
 
