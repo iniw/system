@@ -156,6 +156,10 @@
       fileWidgetCommand = "fd --type f";
     };
 
+    gh = {
+      enable = true;
+    };
+
     git = {
       enable = true;
 
@@ -184,10 +188,6 @@
         # fd's ignore list 
         ".ignore"
       ];
-    };
-
-    git-credential-oauth = {
-      enable = true;
     };
 
     home-manager = {
