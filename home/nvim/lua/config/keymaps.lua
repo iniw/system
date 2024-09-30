@@ -20,6 +20,10 @@ vim.keymap.set("n", "<A-Down>", "<cmd>resize -2<cr>", { desc = "Decrease Window 
 vim.keymap.set("n", "<A-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease Window Width" })
 vim.keymap.set("n", "<A-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window Width" })
 
+vim.keymap.set("n", "D", "dd")
+vim.keymap.set("n", "Y", "yy")
+vim.keymap.set("n", "C", "cc")
+
 require("lazyvim.util").toggle.map("<leader>ua", {
   name = "Autocomplete",
   get = function()
