@@ -14,6 +14,12 @@
     ];
   };
 
+  programs = {
+    wezterm = {
+      enable = true;
+    };
+  };
+
   dconf = {
     enable = true;
     settings = {
@@ -32,6 +38,39 @@
 
       "org/gnome/desktop/interface" = {
         color-scheme = "prefer-dark";
+      };
+
+      # Remove conflicting shortcuts
+      "org/gnome/shell/keybindings" = {
+        # <Super>s
+        toggle-quick-settings = [ ];
+        # <Super>v
+        toggle-message-tray = [ ];
+        # <Super>[0..=9]
+        switch-to-application-1 = [ ];
+        switch-to-application-2 = [ ];
+        switch-to-application-3 = [ ];
+        switch-to-application-4 = [ ];
+        switch-to-application-5 = [ ];
+        switch-to-application-6 = [ ];
+        switch-to-application-7 = [ ];
+        switch-to-application-8 = [ ];
+        switch-to-application-9 = [ ];
+      };
+
+      "org/gnome/desktop/wm/keybindings" = {
+        # <Super>h
+        minimize = [ ];
+      };
+
+      "org/gnome/settings-daemon/plugins/media-keys" = {
+        # <Super>l
+        screensaver = [ ];
+      };
+
+      "org/gnome/mutter/keybindings" = {
+        # <Super>p
+        switch-monitor = [ ];
       };
     };
   };

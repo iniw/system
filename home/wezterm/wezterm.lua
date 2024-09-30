@@ -128,8 +128,18 @@ local keys = {
     action = act.CopyTo("Clipboard"),
   },
   {
+    key = "c",
+    mods = "CTRL|SHIFT",
+    action = act.CopyTo("Clipboard"),
+  },
+  {
     key = "v",
     mods = "CMD",
+    action = act.PasteFrom("Clipboard"),
+  },
+  {
+    key = "v",
+    mods = "CTRL|SHIFT",
     action = act.PasteFrom("Clipboard"),
   },
   {
@@ -144,6 +154,8 @@ for i = 1, 9 do
 end
 
 return {
+  front_end = "WebGpu",
+
   -- Font
   font = wezterm.font("BerkeleyMono Nerd Font Mono"),
   font_size = 15.0,
