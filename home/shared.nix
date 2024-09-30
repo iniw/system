@@ -35,6 +35,11 @@
       "./.config/starship.toml" = {
         source = ./starship/starship.toml;
       };
+
+      "./.config/wezterm/" = {
+        source = ./wezterm;
+        recursive = true;
+      };
     };
 
     packages = with pkgs; [
