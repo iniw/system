@@ -46,6 +46,7 @@
       wget
       ast-grep
       tldr
+      radare2
 
       # fonts
       inter
