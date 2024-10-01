@@ -11,7 +11,7 @@ return {
         clangd = {
           cmd = {
             "clangd",
-            "--query-driver=**",
+            "--query-driver=/**/*",
             "--header-insertion=never",
             "--completion-style=detailed",
             "--function-arg-placeholders",
