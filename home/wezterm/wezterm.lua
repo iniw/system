@@ -5,7 +5,7 @@ local mux = wezterm.mux
 -- Colors
 local background = "#121212"
 local foreground = "#d5d5d5"
-local highlight = "#ff265c"
+local highlight = "#73b3e7"
 
 -- -- Center tab bar
 wezterm.on("update-status", function(window)
