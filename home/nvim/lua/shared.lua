@@ -1,6 +1,6 @@
 return {
   colors = {
-    primary = "#ff265c",
-    secondary = "#ffdbe8",
+    primary = "#73b3e7",
+    secondary = "#c5d8e8",
   },
 }

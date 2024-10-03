@@ -70,15 +70,18 @@
     ];
 
     shellAliases = {
+      # Git stuff
       gs = "git status";
       gd = "git diff";
-      glo = "git log --oneline";
+      gc = "git commit";
       gap = "git add -p";
       gaa = "git add --all";
-      gc = "git commit";
       gca = "git commit --amend";
+      glo = "git log --oneline";
       gpr = "git pull --rebase";
       gpf = "git push --force-with-lease";
+      grp = "git restore -p";
+      gaac = "git add --all && git commit -m";
 
       ls = "eza -1 --icons=always";
       la = "ls -a";
