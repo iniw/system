@@ -4,7 +4,8 @@ $cmd_duration\
 $status\
 $nix_shell\
 $line_break\
-$character"""
+$character\
+"""
 
 [directory]
 style = "blue"

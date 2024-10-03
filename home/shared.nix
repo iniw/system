@@ -90,43 +90,6 @@
   };
 
   programs = {
-    alacritty = {
-      enable = true;
-
-      settings = {
-        font = {
-          size = 15.0;
-
-          # TODO: install this font with the flake.
-          normal.family = "BerkeleyMono Nerd Font Mono";
-        };
-
-        window = {
-          option_as_alt = "OnlyLeft";
-        };
-
-        colors = {
-          primary = {
-            background = "#121212";
-          };
-        };
-
-        shell = {
-          program = "zsh";
-          args = [
-            "-i" # Interactive shell (to source `.zshrc`)
-            "-l" # Login shell (to source `.zshlogin`)
-            "-c" # Execute the passed command (tmux)
-            "tmux new-session -A -s '>_<'"
-          ];
-        };
-
-        env = {
-          TERM = "alacritty";
-        };
-      };
-    };
-
     bat = {
       enable = true;
     };
@@ -227,49 +190,6 @@
 
     starship = {
       enable = true;
-    };
-
-    tmux = {
-      enable = true;
-
-      baseIndex = 1;
-      disableConfirmationPrompt = true;
-      escapeTime = 0;
-      keyMode = "vi";
-      terminal = "tmux-256color";
-      shortcut = "t";
-
-      extraConfig = ''
-        # Don't enter a login shell on new panes/windows.
-        set -g default-command "''${SHELL}" 
-
-        # Support full RGB rendering
-        set -as terminal-features ",alacritty:RGB"
-
-        # Automatically renumber windows when closing them to avoid gaps
-        set -g renumber-windows on
-      '';
-
-      plugins = with pkgs; [
-        {
-          plugin = minimal-tmux.packages.${pkgs.system}.default;
-          extraConfig = ''
-            set -g @minimal-tmux-bg "#ff265c"
-            set -g @minimal-tmux-status-right-extra " %H:%M"
-          '';
-        }
-        {
-          plugin = tmuxPlugins.resurrect;
-          extraConfig = "set -g @resurrect-strategy-nvim 'session'";
-        }
-        {
-          plugin = tmuxPlugins.continuum;
-          extraConfig = ''
-            set -g @continuum-restore 'on'
-            set -g @continuum-save-interval '60'
-          '';
-        }
-      ];
     };
 
     yazi = {
