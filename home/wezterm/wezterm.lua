@@ -4,6 +4,7 @@ local mux = wezterm.mux
 
 -- Colors
 local background = "#121212"
+local foreground = "#d5d5d5"
 local highlight = "#ff265c"
 
 -- -- Center tab bar
@@ -22,6 +23,7 @@ wezterm.on("update-status", function(window)
 
   local date = wezterm.strftime("%H:%M")
   window:set_right_status(wezterm.format({
+    { Foreground = { Color = foreground } },
     { Text = " " .. date },
   }))
 end)
@@ -52,105 +54,108 @@ wezterm.on("gui-startup", function()
   tester_pane:split({ cwd = wezterm.home_dir .. "/src/lucas_tester" })
   tester_tab:set_title("tester")
 
-  local sys_tab, sys_pane, _ = window:spawn_tab({ cwd = wezterm.home_dir .. "/.config/system" })
-  sys_pane:split({ cwd = wezterm.home_dir .. "/.config/wezterm" })
+  local sys_tab, _, _ = window:spawn_tab({ cwd = wezterm.home_dir .. "/.config/system" })
   sys_tab:set_title("sys")
 
   local puc_tab, _, _ = window:spawn_tab({ cwd = wezterm.home_dir .. "/puc" })
   puc_tab:set_title("puc")
 end)
 
-local keys = {
-  {
-    key = "w",
-    mods = "CMD",
-    action = act.CloseCurrentPane({ confirm = true }),
-  },
-  {
-    key = "s",
-    mods = "CMD",
-    action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }),
-  },
-  {
-    key = "S",
-    mods = "CMD",
-    action = act.SplitVertical({ domain = "CurrentPaneDomain" }),
-  },
-  {
-    key = "h",
-    mods = "CMD",
-    action = act.ActivatePaneDirection("Left"),
-  },
-  {
-    key = "k",
-    mods = "CMD",
-    action = act.ActivatePaneDirection("Up"),
-  },
-  {
-    key = "l",
-    mods = "CMD",
-    action = act.ActivatePaneDirection("Right"),
-  },
-  {
-    key = "j",
-    mods = "CMD",
-    action = act.ActivatePaneDirection("Down"),
-  },
-  {
-    key = "H",
-    mods = "CMD",
-    action = act.ActivateTabRelative(-1),
-  },
-  {
-    key = "L",
-    mods = "CMD",
-    action = act.ActivateTabRelative(1),
-  },
-  {
-    key = "p",
-    mods = "CMD",
-    action = act.ActivateCommandPalette,
-  },
-  {
-    key = "z",
-    mods = "CMD",
-    action = act.TogglePaneZoomState,
-  },
+local function keybinds()
+  local keys = {
+    {
+      key = "w",
+      mods = "CMD",
+      action = act.CloseCurrentPane({ confirm = true }),
+    },
+    {
+      key = "s",
+      mods = "CMD",
+      action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }),
+    },
+    {
+      key = "S",
+      mods = "CMD",
+      action = act.SplitVertical({ domain = "CurrentPaneDomain" }),
+    },
+    {
+      key = "h",
+      mods = "CMD",
+      action = act.ActivatePaneDirection("Left"),
+    },
+    {
+      key = "k",
+      mods = "CMD",
+      action = act.ActivatePaneDirection("Up"),
+    },
+    {
+      key = "l",
+      mods = "CMD",
+      action = act.ActivatePaneDirection("Right"),
+    },
+    {
+      key = "j",
+      mods = "CMD",
+      action = act.ActivatePaneDirection("Down"),
+    },
+    {
+      key = "H",
+      mods = "CMD",
+      action = act.ActivateTabRelative(-1),
+    },
+    {
+      key = "L",
+      mods = "CMD",
+      action = act.ActivateTabRelative(1),
+    },
+    {
+      key = "p",
+      mods = "CMD",
+      action = act.ActivateCommandPalette,
+    },
+    {
+      key = "z",
+      mods = "CMD",
+      action = act.TogglePaneZoomState,
+    },
 
-  {
-    key = "t",
-    mods = "CMD",
-    action = act.SpawnTab("CurrentPaneDomain"),
-  },
-  {
-    key = "c",
-    mods = "CMD",
-    action = act.CopyTo("Clipboard"),
-  },
-  {
-    key = "c",
-    mods = "CTRL|SHIFT",
-    action = act.CopyTo("Clipboard"),
-  },
-  {
-    key = "v",
-    mods = "CMD",
-    action = act.PasteFrom("Clipboard"),
-  },
-  {
-    key = "v",
-    mods = "CTRL|SHIFT",
-    action = act.PasteFrom("Clipboard"),
-  },
-  {
-    key = "X",
-    mods = "CMD",
-    action = act.ActivateCopyMode,
-  },
-}
+    {
+      key = "t",
+      mods = "CMD",
+      action = act.SpawnTab("CurrentPaneDomain"),
+    },
+    {
+      key = "c",
+      mods = "CMD",
+      action = act.CopyTo("Clipboard"),
+    },
+    {
+      key = "c",
+      mods = "CTRL|SHIFT",
+      action = act.CopyTo("Clipboard"),
+    },
+    {
+      key = "v",
+      mods = "CMD",
+      action = act.PasteFrom("Clipboard"),
+    },
+    {
+      key = "v",
+      mods = "CTRL|SHIFT",
+      action = act.PasteFrom("Clipboard"),
+    },
+    {
+      key = "X",
+      mods = "CMD",
+      action = act.ActivateCopyMode,
+    },
+  }
 
-for i = 1, 9 do
-  table.insert(keys, { key = tostring(i), mods = "CMD", action = act.ActivateTab(i - 1) })
+  for i = 1, 9 do
+    table.insert(keys, { key = tostring(i), mods = "CMD", action = act.ActivateTab(i - 1) })
+  end
+
+  return keys
 end
 
 return {
@@ -175,7 +180,36 @@ return {
 
   -- Colors
   colors = {
+    foreground = foreground,
     background = background,
+    cursor_bg = foreground,
+    cursor_fg = background,
+    cursor_border = foreground,
+
+    selection_bg = "#3e4249",
+    selection_fg = foreground,
+
+    ansi = {
+      background,
+      "#e77171",
+      "#a1bf78",
+      "#dbb774",
+      "#73b3e7",
+      "#d390e7",
+      "#5ebaa5",
+      "#3e4249",
+    },
+    brights = {
+      "#88909f",
+      "#e77171",
+      foreground,
+      "#dbb774",
+      "#73b3e7",
+      "#d390e7",
+      "#5ebaa5",
+      foreground,
+    },
+
     tab_bar = {
       background = background,
       active_tab = {
@@ -184,14 +218,14 @@ return {
       },
       inactive_tab = {
         bg_color = background,
-        fg_color = "c0c0c0",
+        fg_color = foreground,
       },
     },
   },
 
   -- Keys
   disable_default_key_bindings = true,
-  keys = keys,
+  keys = keybinds(),
 
   -- Misc
   force_reverse_video_cursor = true,
