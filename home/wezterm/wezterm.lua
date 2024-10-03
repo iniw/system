@@ -64,19 +64,24 @@ end)
 local function keybinds()
   local keys = {
     {
-      key = "w",
+      key = "d",
       mods = "CMD",
       action = act.CloseCurrentPane({ confirm = true }),
     },
     {
-      key = "s",
+      key = "n",
       mods = "CMD",
-      action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }),
+      action = act.SpawnTab("CurrentPaneDomain"),
     },
     {
-      key = "S",
+      key = "s",
       mods = "CMD",
       action = act.SplitVertical({ domain = "CurrentPaneDomain" }),
+    },
+    {
+      key = "v",
+      mods = "CMD",
+      action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }),
     },
     {
       key = "h",
@@ -118,12 +123,6 @@ local function keybinds()
       mods = "CMD",
       action = act.TogglePaneZoomState,
     },
-
-    {
-      key = "t",
-      mods = "CMD",
-      action = act.SpawnTab("CurrentPaneDomain"),
-    },
     {
       key = "c",
       mods = "CMD",
@@ -133,11 +132,6 @@ local function keybinds()
       key = "c",
       mods = "CTRL|SHIFT",
       action = act.CopyTo("Clipboard"),
-    },
-    {
-      key = "v",
-      mods = "CMD",
-      action = act.PasteFrom("Clipboard"),
     },
     {
       key = "v",
