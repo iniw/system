@@ -13,17 +13,39 @@
     # since the file is not a read-only link to the nix-store.
     # This, paired with the post-commit hook in the git repo, gives us effective and simple two-way synchronization between lazy and nix.
     activation.neovim = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-      # `--no-preserve=all` makes the output files writeable.
+      # Paths to the source files (in nvim/lazy) and destination (nvim config folder)
+      src_dir="$HOME/.config/nvim/lazy"
+      dst_dir="$HOME/.config/nvim"
 
-      if [ ! -f ~/.config/nvim/lazy-lock.json ]; then
-        cp --no-preserve=all ~/.config/nvim/lazy/lazy-lock.json ~/.config/nvim/lazy-lock.json
-        echo "Placed lazy-lock"
-      fi
+      files=("lazy-lock.json" "lazyvim.json")
 
-      if [ ! -f ~/.config/nvim/lazyvim.json ]; then
-        cp --no-preserve=all ~/.config/nvim/lazy/lazyvim.json ~/.config/nvim/lazyvim.json
-        echo "Placed lazyvim"
-      fi
+      # Function to compute the nix hash of a file
+      compute_hash() {
+        nix hash file "$1" | cut -d' ' -f3
+      }
+
+      # Loop over files to copy or check differences
+      for file in "''${files[@]}"; do
+        src_file="$src_dir/$file"
+        dst_file="$dst_dir/$file"
+
+        if [ ! -f "$dst_file" ]; then
+          # If file doesn't exist in the destination, copy it over
+          # `--no-preserve=all` makes the output files writeable.
+          cp --no-preserve=all "$src_file" "$dst_file"
+          echo "neovim: Placed $file"
+        else
+          # If file exists, compare hashes
+          src_hash=$(compute_hash "$src_file")
+          dst_hash=$(compute_hash "$dst_file")
+
+          if [[ "$src_hash" != "$dst_hash" ]]; then
+            echo -e "\033[35mwarning:\033[0m $file in $dst_dir is different from the version in $src_dir."
+            echo "You can check the differences using the following command:"
+            echo "delta \"$src_file\" \"$dst_file\""
+          fi
+        fi
+      done
     '';
 
     file = {
