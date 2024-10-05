@@ -46,12 +46,12 @@ wezterm.on("augment-command-palette", function()
 end)
 
 wezterm.on("gui-startup", function()
-  local lucas_tab, lucas_pane, window = mux.spawn_window({ cwd = wezterm.home_dir .. "/src/lucas-firmware-dlc32" })
-  lucas_pane:split({ cwd = wezterm.home_dir .. "/src/lucas-firmware" })
+  local lucas_tab, lucas_pane, window = mux.spawn_window({ cwd = wezterm.home_dir .. "/work/lucas-firmware-dlc32" })
+  lucas_pane:split({ cwd = wezterm.home_dir .. "/work/lucas-firmware" })
   lucas_tab:set_title("lucas")
 
-  local tester_tab, tester_pane, _ = window:spawn_tab({ cwd = wezterm.home_dir .. "/src/lucas-tester-pwa" })
-  tester_pane:split({ cwd = wezterm.home_dir .. "/src/lucas_tester" })
+  local tester_tab, tester_pane, _ = window:spawn_tab({ cwd = wezterm.home_dir .. "/work/lucas-tester-pwa" })
+  tester_pane:split({ cwd = wezterm.home_dir .. "/work/lucas_tester" })
   tester_tab:set_title("tester")
 
   local sys_tab, _, _ = window:spawn_tab({ cwd = wezterm.home_dir .. "/.config/system" })
