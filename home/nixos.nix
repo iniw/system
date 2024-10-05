@@ -56,6 +56,8 @@
         switch-to-application-7 = [ ];
         switch-to-application-8 = [ ];
         switch-to-application-9 = [ ];
+        # <Super>n
+        focus-active-notification = [ ];
       };
 
       "org/gnome/desktop/wm/keybindings" = {
