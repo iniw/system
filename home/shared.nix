@@ -1,7 +1,6 @@
 {
   lib,
   pkgs,
-  minimal-tmux,
   ...
 }:
 {
@@ -54,13 +53,13 @@
         recursive = true;
       };
 
-      "./.config/starship.toml" = {
-        source = ./starship/starship.toml;
-      };
-
       "./.config/wezterm/" = {
         source = ./wezterm;
         recursive = true;
+      };
+
+      "./.config/starship.toml" = {
+        source = ./starship/starship.toml;
       };
     };
 
