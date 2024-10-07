@@ -1,7 +1,6 @@
 {
   pkgs,
   user,
-  minimal-tmux,
   ...
 }:
 {
@@ -23,7 +22,6 @@
   home-manager = {
     extraSpecialArgs = {
       inherit user;
-      inherit minimal-tmux;
     };
 
     useGlobalPkgs = true;

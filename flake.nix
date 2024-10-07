@@ -15,11 +15,6 @@
     };
 
     mac-app-util.url = "github:hraban/mac-app-util";
-
-    minimal-tmux = {
-      url = "github:niksingh710/minimal-tmux-status";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs =
@@ -29,7 +24,6 @@
       nixpkgs,
       home-manager,
       mac-app-util,
-      minimal-tmux,
     }:
 
     let
@@ -41,7 +35,6 @@
 
         specialArgs = {
           inherit user;
-          inherit minimal-tmux;
           inherit mac-app-util;
         };
 
@@ -57,7 +50,6 @@
 
         specialArgs = {
           inherit user;
-          inherit minimal-tmux;
         };
 
         modules = [

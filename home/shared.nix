@@ -86,8 +86,6 @@
       luajitPackages.luarocks
       lua-language-server
       stylua
-
-      nodejs_22
     ];
 
     shellAliases = {
@@ -249,10 +247,6 @@
 
         zstyle :bracketed-paste-magic paste-init pasteinit
         zstyle :bracketed-paste-magic paste-finish pastefinish
-
-        # Tmux uses <C-t> so make fzf use <C-f> instead.
-        bindkey -r '^T'
-        bindkey '^F' fzf-file-widget
       '';
     };
   };
