@@ -1,6 +1,7 @@
 {
   pkgs,
   user,
+  self,
   ...
 }:
 {
@@ -22,6 +23,7 @@
   home-manager = {
     extraSpecialArgs = {
       inherit user;
+      inherit self;
     };
 
     useGlobalPkgs = true;

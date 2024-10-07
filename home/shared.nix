@@ -1,4 +1,5 @@
 {
+  self,
   lib,
   pkgs,
   ...
@@ -7,21 +8,13 @@
   fonts.fontconfig.enable = true;
 
   home = {
-    # Copy over `lazy{-lock,vim}.json` to the nvim's config folder, if they don't exist.
-    # This guarantees version stability when installing the flake on fresh systems while also leaving the version management itself to lazy, 
-    # since the file is not a read-only link to the nix-store.
-    # This, paired with the post-commit hook in the git repo, gives us effective and simple two-way synchronization between lazy and nix.
+    # Warn the user when neovim's lazy{vim,-lock}.json files differ from the ones in the repo.
     activation.neovim = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       # Paths to the source files (in nvim/lazy) and destination (nvim config folder)
-      src_dir="$HOME/.config/nvim/lazy"
-      dst_dir="$HOME/.config/nvim"
+      src_dir="${self}/home/nvim/lazy"
+      dst_dir=".config/nvim"
 
       files=("lazy-lock.json" "lazyvim.json")
-
-      # Function to compute the nix hash of a file
-      compute_hash() {
-        nix hash file "$1" | cut -d' ' -f3
-      }
 
       # Loop over files to copy or check differences
       for file in "''${files[@]}"; do
@@ -30,18 +23,14 @@
 
         if [ ! -f "$dst_file" ]; then
           # If file doesn't exist in the destination, copy it over
-          # `--no-preserve=all` makes the output files writeable.
-          cp --no-preserve=all "$src_file" "$dst_file"
-          echo "neovim: Placed $file"
+          run cp $VERBOSE_ARG -no-preserve=all "$src_file" "$dst_file"
+          run echo "Placed $file"
         else
           # If file exists, compare hashes
-          src_hash=$(compute_hash "$src_file")
-          dst_hash=$(compute_hash "$dst_file")
-
+          src_hash=$(nix hash file "$src_file")
+          dst_hash=$(nix hash file "$dst_file")
           if [[ "$src_hash" != "$dst_hash" ]]; then
-            echo -e "\033[35mwarning:\033[0m $file in $dst_dir is different from the version in $src_dir."
-            echo "You can check the differences using the following command:"
-            echo "delta \"$src_file\" \"$dst_file\""
+            run echo -e "\033[35mwarning:\033[0m $file differs from the version in the nix store, please sync them using the 'sync-lazy' script."
           fi
         fi
       done

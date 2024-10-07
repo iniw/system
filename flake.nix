@@ -34,6 +34,7 @@
         system = "x86_64-darwin";
 
         specialArgs = {
+          inherit self;
           inherit user;
           inherit mac-app-util;
         };
@@ -49,6 +50,7 @@
         system = "x86_64-linux";
 
         specialArgs = {
+          inherit self;
           inherit user;
         };
 
