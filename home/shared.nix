@@ -104,8 +104,6 @@
 
       ls = "eza -1 --icons=always";
       la = "ls -a";
-
-      bat = "bat --number --color=always --wrap=never";
     };
 
     stateVersion = "24.11";
@@ -141,9 +139,9 @@
       enable = true;
 
       # Use fd instead of find. Way faster.
-      changeDirWidgetCommand = "fd --type d";
-      defaultCommand = "fd --type f";
-      fileWidgetCommand = "fd --type f";
+      changeDirWidgetCommand = ''fd --type d --hidden --follow --exclude ".git"'';
+      defaultCommand = ''fd --hidden --follow --exclude ".git"'';
+      fileWidgetCommand = ''fd --hidden --follow --exclude ".git"'';
     };
 
     gh = {
@@ -232,6 +230,14 @@
       autosuggestion.enable = true;
       oh-my-zsh.enable = true;
       syntaxHighlighting.enable = true;
+
+      initExtraBeforeCompInit = ''
+        # Use fd for listing path candidates.
+        _fzf_compgen_path() { fd --hidden --follow --exclude ".git" . "$1" }
+
+        # Use fd to generate the list for directory completion
+        _fzf_compgen_dir() { fd --type d --hidden --follow --exclude ".git" . "$1" }
+      '';
 
       initExtra = ''
         # Fixes slow zsh copy-paste.
