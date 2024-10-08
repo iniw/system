@@ -62,6 +62,7 @@
       ast-grep
       tldr
       radare2
+      just
 
       # fonts
       inter
@@ -169,6 +170,9 @@
 
         # fd's ignore list 
         ".ignore"
+
+        # just's recipe list
+        ".justfile"
       ];
     };
 
