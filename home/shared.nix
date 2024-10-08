@@ -90,8 +90,9 @@
       gpr = "git pull --rebase";
       gpf = "git push --force-with-lease";
       grp = "git restore -p";
-      gaac = "git add --all && git commit -m";
+      gaac = "git add --all && git commit";
       gaaca = "git add --all && git commit --amend";
+      lg = "lazygit";
 
       ls = "eza -1 --icons=always";
       la = "ls -a";
