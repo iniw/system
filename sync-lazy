@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 NVIM_DIR="$HOME/.config/nvim"
-NIX_DIR="$(git rev-parse --show-toplevel)/home/nvim/lazy"
+NIX_DIR="home/nvim/lazy"
 
 no_commit=false
 direction=""
