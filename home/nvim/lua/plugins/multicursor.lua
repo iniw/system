@@ -1,7 +1,7 @@
 return {
   {
     "jake-stewart/multicursor.nvim",
-    event = "VeryLazy",
+    lazy = true,
     config = function()
       require("multicursor-nvim").setup()
 
