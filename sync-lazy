@@ -1,10 +1,8 @@
 #!/usr/bin/env bash
 
-# Define source and destination directories
 NVIM_DIR="$HOME/.config/nvim"
 NIX_DIR="$(git rev-parse --show-toplevel)/home/nvim/lazy"
 
-# Initialize variables for flags
 no_commit=false
 direction=""
 
@@ -35,7 +33,6 @@ while [[ "$#" -gt 0 ]]; do
     shift
 done
 
-# Check if direction was provided
 if [[ -z "$direction" ]]; then
     echo "Usage: $0 [--no-commit] {nix|nvim|diff}"
     exit 1
@@ -49,7 +46,6 @@ elif [[ "$direction" == "nvim" ]]; then
     SRC_DIR="$NIX_DIR"
     DST_DIR="$NVIM_DIR"
 elif [[ "$direction" == "diff" ]]; then
-    # Show diff for both files and exit
     git diff --no-index "$NIX_DIR/lazy-lock.json" "$NVIM_DIR/lazy-lock.json"
     git diff --no-index "$NIX_DIR/lazyvim.json" "$NVIM_DIR/lazyvim.json"
     exit 0
@@ -58,17 +54,15 @@ else
     exit 1
 fi
 
-# Copy the files if direction is not 'diff'
 cp --no-preserve=all "$SRC_DIR/lazy-lock.json" "$DST_DIR/lazy-lock.json"
 cp --no-preserve=all "$SRC_DIR/lazyvim.json" "$DST_DIR/lazyvim.json"
 echo "Files copied from $SRC_DIR to $DST_DIR."
 
-# If syncing from nvim to nix and no-commit is false, check for changes and commit
 if [[ "$direction" == "nix" && "$no_commit" == false ]]; then
     if git diff --quiet "$NIX_DIR"; then
         echo "No changes to sync."
     else
-        git commit "$NIX_DIR" -m "sync lazy"
+        git commit "$NIX_DIR" -m "nvim: sync lazy"
         echo "Changes committed to git."
     fi
 fi
