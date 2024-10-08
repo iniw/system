@@ -143,6 +143,36 @@ local function keybinds()
       mods = "CMD",
       action = act.ActivateCopyMode,
     },
+    {
+      key = "u",
+      mods = "CMD",
+      action = act.ScrollByPage(-1),
+    },
+    {
+      key = "s",
+      mods = "CMD",
+      action = act.ScrollByPage(1),
+    },
+    {
+      key = "y",
+      mods = "CMD",
+      action = act.ScrollByLine(-1),
+    },
+    {
+      key = "e",
+      mods = "CMD",
+      action = act.ScrollByLine(1),
+    },
+    {
+      key = "g",
+      mods = "CMD|SHIFT",
+      action = act.ScrollToTop,
+    },
+    {
+      key = "g",
+      mods = "CMD",
+      action = act.ScrollToBottom,
+    },
   }
 
   for i = 1, 9 do
