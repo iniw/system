@@ -62,7 +62,7 @@ if [[ "$direction" == "nix" && "$no_commit" == false ]]; then
     if git diff --quiet "$NIX_DIR"; then
         echo "No changes to sync."
     else
-        git commit "$NIX_DIR" -m "nvim: sync lazy"
+        git commit "$NIX_DIR" -m "nvim: update lockfile"
         echo "Changes committed to git."
     fi
 fi
