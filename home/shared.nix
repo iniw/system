@@ -90,6 +90,7 @@
       gpf = "git push --force-with-lease";
       grp = "git restore -p";
       gaac = "git add --all && git commit -m";
+      gaaca = "git add --all && git commit --amend";
 
       ls = "eza -1 --icons=always";
       la = "ls -a";
