@@ -10,11 +10,6 @@ end
 
 vim.keymap.set("i", "<C-o>", "<Left><C-o>")
 
-vim.keymap.del("n", "<C-Up>")
-vim.keymap.del("n", "<C-Down>")
-vim.keymap.del("n", "<C-Left>")
-vim.keymap.del("n", "<C-Right>")
-
 vim.keymap.set("n", "<A-Up>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
 vim.keymap.set("n", "<A-Down>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" })
 vim.keymap.set("n", "<A-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease Window Width" })
