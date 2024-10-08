@@ -57,7 +57,7 @@
       coreutils
       moreutils
       zlib
-      cloc
+      scc
       wget
       ast-grep
       tldr
