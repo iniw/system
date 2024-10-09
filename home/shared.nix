@@ -63,6 +63,7 @@
       tldr
       radare2
       just
+      klip
 
       # fonts
       inter

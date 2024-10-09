@@ -18,6 +18,11 @@
       url = "github:hraban/mac-app-util";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    klip = {
+      url = "github:iniw/klip";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -27,10 +32,14 @@
       nixpkgs,
       home-manager,
       mac-app-util,
+      klip,
     }:
 
     let
       user = "sol";
+      overlay = final: prev: {
+        klip = klip.packages."${prev.system}".klip;
+      };
     in
     {
       darwinConfigurations.mac = nix-darwin.lib.darwinSystem {
@@ -40,6 +49,7 @@
           inherit self;
           inherit user;
           inherit mac-app-util;
+          inherit overlay;
         };
 
         modules = [
@@ -55,6 +65,7 @@
         specialArgs = {
           inherit self;
           inherit user;
+          inherit overlay;
         };
 
         modules = [
