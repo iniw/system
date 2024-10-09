@@ -2,6 +2,7 @@
   pkgs,
   user,
   self,
+  overlay,
   ...
 }:
 {
@@ -12,6 +13,8 @@
       experimental-features = nix-command flakes
     '';
   };
+
+  nixpkgs.overlays = [ overlay ];
 
   programs.zsh.enable = true;
 
