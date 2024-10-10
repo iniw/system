@@ -1,5 +1,11 @@
+rebuild-cmd := if os() == 'linux' {
+  "nixos-rebuild"
+} else {
+  "darwin-rebuild"
+}
+
 @switch:
-  darwin-rebuild switch --flake .
+  sudo {{rebuild-cmd}} switch --flake .
 
 @gc:
   sudo nix-collect-garbage --delete-old
