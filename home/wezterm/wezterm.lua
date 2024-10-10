@@ -144,34 +144,41 @@ local function keybinds()
       action = act.ActivateCopyMode,
     },
     {
-      key = "u",
-      mods = "CMD",
+      key = "UpArrow",
+      mods = "CMD|SHIFT",
       action = act.ScrollByPage(-1),
     },
     {
-      key = "s",
-      mods = "CMD",
+      key = "DownArrow",
+      mods = "CMD|SHIFT",
       action = act.ScrollByPage(1),
     },
     {
-      key = "y",
+      key = "UpArrow",
       mods = "CMD",
       action = act.ScrollByLine(-1),
     },
     {
-      key = "e",
+      key = "DownArrow",
       mods = "CMD",
       action = act.ScrollByLine(1),
     },
     {
-      key = "g",
-      mods = "CMD|SHIFT",
+      key = "UpArrow",
+      mods = "CMD|ALT",
       action = act.ScrollToTop,
     },
     {
-      key = "g",
-      mods = "CMD",
+      key = "DownArrow",
+      mods = "CMD|ALT",
       action = act.ScrollToBottom,
+    },
+    {
+      key = "x",
+      mods = "CMD",
+      action = act.PaneSelect({
+        mode = "SwapWithActiveKeepFocus",
+      }),
     },
   }
 
