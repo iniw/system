@@ -135,7 +135,7 @@
     fzf = {
       enable = true;
 
-      # Use fd instead of find. Way faster.
+      # Use fd instead of find.
       changeDirWidgetCommand = ''fd --type d --hidden --follow --exclude ".git"'';
       defaultCommand = ''fd --hidden --follow --exclude ".git"'';
       fileWidgetCommand = ''fd --hidden --follow --exclude ".git"'';
@@ -231,29 +231,48 @@
       oh-my-zsh.enable = true;
       syntaxHighlighting.enable = true;
 
-      initExtraBeforeCompInit = ''
-        # Use fd for listing path candidates.
-        _fzf_compgen_path() { fd --hidden --follow --exclude ".git" . "$1" }
+      initExtraBeforeCompInit =
+        # Using fd for fzf completion lists.
+        # From: https://ivergara.github.io/Supercharging-shell.html
+        ''
+          _fzf_compgen_path() { fd --hidden --follow --exclude ".git" . "$1" }
+          _fzf_compgen_dir() { fd --type d --hidden --follow --exclude ".git" . "$1" }
+        '';
 
-        # Use fd to generate the list for directory completion
-        _fzf_compgen_dir() { fd --type d --hidden --follow --exclude ".git" . "$1" }
-      '';
-
-      initExtra = ''
+      initExtra =
         # Fixes slow zsh copy-paste.
         # From: https://github.com/zsh-users/zsh-autosuggestions/issues/238#issuecomment-389324292
-        pasteinit() {
-            OLD_SELF_INSERT=''\${''\${(s.:.)widgets[self-insert]}[2,3]}
-            zle -N self-insert url-quote-magic # I wonder if you'd need `.url-quote-magic`?
-        }
+        ''
+          pasteinit() {
+              OLD_SELF_INSERT=''\${''\${(s.:.)widgets[self-insert]}[2,3]}
+              zle -N self-insert url-quote-magic # I wonder if you'd need `.url-quote-magic`?
+          }
 
-        pastefinish() {
-            zle -N self-insert $OLD_SELF_INSERT
-        }
+          pastefinish() {
+              zle -N self-insert $OLD_SELF_INSERT
+          }
 
-        zstyle :bracketed-paste-magic paste-init pasteinit
-        zstyle :bracketed-paste-magic paste-finish pastefinish
-      '';
+          zstyle :bracketed-paste-magic paste-init pasteinit
+          zstyle :bracketed-paste-magic paste-finish pastefinish
+        ''
+        # Binding <Ctrl>z to `fg`.
+        # Inspired by: https://www.reddit.com/r/vim/comments/9bm3x0/ctrlz_binding/
+        #              https://sheerun.net/2014/03/21/how-to-boost-your-vim-productivity/
+        + ''
+          function togglefg {
+            if [[ $#BUFFER -eq 0 ]]; then
+              # No need to consume a line when the buffer is empty
+              fg
+            else
+              fg
+              zle push-input
+              BUFFER=""
+              zle accept-line
+            fi
+          }
+          zle -N togglefg
+          bindkey "^Z" togglefg
+        '';
     };
   };
 }
