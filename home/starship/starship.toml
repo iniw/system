@@ -2,6 +2,7 @@ format = """
 $directory\
 $cmd_duration\
 $status\
+$git_branch\
 $nix_shell\
 $line_break\
 $character\
@@ -13,15 +14,19 @@ truncate_to_repo = false
 read_only = "[RO]"
 
 [character]
-success_symbol = "[❯](white)"
+success_symbol = "[❯](bright-white)"
 error_symbol = "[❯](red)"
 vimcmd_symbol = "[❮](green)"
 
 [cmd_duration]
 format = "[$duration]($style) "
 
+[git_branch]
+format = "[\\[$branch(:$remote_branch)\\]]($style) "
+style = "purple"
+
 [nix_shell]
-format = "[\\[$name\\]]($style)"
+format = "[\\[$name\\]]($style) "
 style = "bright-black"
 
 [status]
