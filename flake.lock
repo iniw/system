@@ -96,11 +96,11 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1728435039,
-        "narHash": "sha256-E0FzxhY0sLTo4g00a3++En+taymMGgAE1WctOP5YbJ8=",
+        "lastModified": 1728568503,
+        "narHash": "sha256-dZwuy8AAf1B4Dg6zceXjx3h1p2qpvlGZF6g3H/kkZ3A=",
         "owner": "iniw",
         "repo": "klip",
-        "rev": "e19734e494bb0c117508c0a7cd647f32a1991bfc",
+        "rev": "c6eec78305ab68b55412e05c28ed3dff51bb51a0",
         "type": "github"
       },
       "original": {
