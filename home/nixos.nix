@@ -58,11 +58,23 @@
         switch-to-application-9 = [ ];
         # <Super>n
         focus-active-notification = [ ];
+        # <Super><Alt>Up
+        shift-overview-up = [ ];
+        # <Super><Alt>Down
+        shift-overview-down = [ ];
       };
 
       "org/gnome/desktop/wm/keybindings" = {
         # <Super>h
         minimize = [ ];
+        # <Super>Up
+        maximize = [ ];
+        # <Super>Down
+        unmaximize = [ ];
+        # <Super><Shift>Up
+        move-to-monitor-up = [ ];
+        # <Super><Shift>Down
+        move-to-monitor-down = [ ];
       };
 
       "org/gnome/settings-daemon/plugins/media-keys" = {
