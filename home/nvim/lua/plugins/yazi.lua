@@ -21,7 +21,6 @@ return {
     },
 
     opts = {
-      open_for_directories = true,
       integrations = {
         resolve_relative_path_application = "realpath",
       },
