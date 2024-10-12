@@ -69,6 +69,11 @@ local function keybinds()
       action = act.CloseCurrentPane({ confirm = true }),
     },
     {
+      key = "d",
+      mods = "CMD|SHIFT",
+      action = act.CloseCurrentTab({ confirm = true }),
+    },
+    {
       key = "n",
       mods = "CMD",
       action = act.SpawnTab("CurrentPaneDomain"),
