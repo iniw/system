@@ -10,3 +10,5 @@ vim.opt.ttimeout = false
 
 -- Disable root detection
 vim.g.root_spec = { "cwd" }
+
+vim.lsp.set_log_level("off")
