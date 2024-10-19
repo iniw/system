@@ -3,4 +3,5 @@ return {
   { "echasnovski/mini.pairs", enabled = false },
   { "williamboman/mason-lspconfig.nvim", enabled = false },
   { "williamboman/mason.nvim", enabled = false },
+  { "windwp/nvim-ts-autotag", enabled = false },
 }
