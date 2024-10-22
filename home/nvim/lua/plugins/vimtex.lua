@@ -1,0 +1,5 @@
+return {
+  {
+    "lervag/vimtex",
+  },
+}
