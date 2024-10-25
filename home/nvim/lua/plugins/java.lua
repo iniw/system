@@ -21,6 +21,12 @@ return {
     ft = { "java" },
     opts = function()
       return {
+        jdtls = {
+          handlers = {
+            ["$/progress"] = function() end,
+          },
+        },
+
         -- How to find the root dir for a given filename. The default comes from
         -- lspconfig which provides a function specifically for java projects.
         root_dir = require("lspconfig.configs.jdtls").default_config.root_dir,
@@ -97,7 +103,7 @@ return {
       -- depending on filetype, so this autocmd doesn't run for the first file.
       -- For that, we call directly below.
       vim.api.nvim_create_autocmd("FileType", {
-        pattern = java_filetypes,
+        pattern = { "java" },
         callback = attach_jdtls,
       })
 
