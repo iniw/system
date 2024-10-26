@@ -64,6 +64,7 @@
       radare2
       just
       klip
+      hyperfine
 
       # fonts
       inter
