@@ -22,11 +22,6 @@ return {
       },
 
       setup = {
-        -- rustaceanvim takes care of rust-analyzer
-        rust_analyzer = function()
-          return true
-        end,
-
         -- nvim-jdtls takes care of jdtls
         jdtls = function()
           return true
