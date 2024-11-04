@@ -9,26 +9,26 @@ direction=""
 # Parse arguments
 while [[ "$#" -gt 0 ]]; do
     case $1 in
-        --no-commit) no_commit=true ;;
-        nix|nvim|diff) direction="$1" ;;
-        --help)
-            echo "Usage: $0 [--no-commit] {nix|nvim|diff}"
-            echo
-            echo "This script syncs configuration files for LazyVim between your Neovim config directory and a nix store directory."
-            echo
-            echo "Options:"
-            echo "  nix              Syncs from the Neovim config to the nix store and optionally commits."
-            echo "  nvim             Syncs from the nix store to the Neovim config directory."
-            echo "  diff             Displays differences between files in the Neovim config and the nix store."
-            echo "  --no-commit      Copy files without creating a git commit."
-            echo "  --help           Display this help message."
-            exit 0
-            ;;
-        *)
-            echo "Unknown option: $1"
-            echo "Usage: $0 [--no-commit] {nix|nvim|diff}"
-            exit 1
-            ;;
+    --no-commit) no_commit=true ;;
+    nix | nvim | diff) direction="$1" ;;
+    --help)
+        echo "Usage: $0 [--no-commit] {nix|nvim|diff}"
+        echo
+        echo "This script syncs configuration files for LazyVim between your Neovim config directory and a nix store directory."
+        echo
+        echo "Options:"
+        echo "  nix              Syncs from the Neovim config to the nix store and optionally commits."
+        echo "  nvim             Syncs from the nix store to the Neovim config directory."
+        echo "  diff             Displays differences between files in the Neovim config and the nix store."
+        echo "  --no-commit      Copy files without creating a git commit."
+        echo "  --help           Display this help message."
+        exit 0
+        ;;
+    *)
+        echo "Unknown option: $1"
+        echo "Usage: $0 [--no-commit] {nix|nvim|diff}"
+        exit 1
+        ;;
     esac
     shift
 done

@@ -52,33 +52,48 @@
       };
     };
 
-    packages = with pkgs; [
-      # tools
-      coreutils
-      moreutils
-      zlib
-      scc
-      wget
-      ast-grep
-      tldr
-      radare2
-      just
-      klip
-      hyperfine
+    packages =
+      with pkgs;
+      with nodePackages;
+      [
+        # tools
+        ast-grep
+        coreutils
+        hyperfine
+        just
+        klip
+        moreutils
+        radare2
+        scc
+        tldr
+        wget
+        zlib
 
-      # fonts
-      inter
+        # fonts
+        inter
 
-      # nix
-      nixfmt-rfc-style
-      nil
+        # languages
+        luajit
 
-      # lua
-      luajit
-      luajitPackages.luarocks
-      lua-language-server
-      stylua
-    ];
+        # lsp
+        bash-language-server
+        lua-language-server
+        marksman
+        nil
+        taplo
+        texlab
+        vscode-langservers-extracted
+        yaml-language-server
+
+        # formatters/linters
+        eslint
+        markdownlint-cli2
+        nixfmt-rfc-style
+        prettier
+        shellcheck
+        shfmt
+        stylua
+      ];
 
     shellAliases = {
       # Git stuff
