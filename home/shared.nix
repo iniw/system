@@ -71,6 +71,7 @@
         tldr
         wget
         zlib
+        binwalk
 
         # fonts
         inter
