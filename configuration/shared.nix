@@ -14,7 +14,10 @@
     '';
   };
 
-  nixpkgs.overlays = [ overlay ];
+  nixpkgs = {
+    overlays = [ overlay ];
+    config.allowUnfree = true;
+  };
 
   programs.zsh.enable = true;
 

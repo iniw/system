@@ -8,8 +8,10 @@
 
   home = {
     packages = with pkgs; [
-      xclip
       firefox
+      # For the neovim system clipboard
+      xclip
+      # For treesitter
       gcc14
     ];
   };

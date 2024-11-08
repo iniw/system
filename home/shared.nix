@@ -56,6 +56,9 @@
       with pkgs;
       with nodePackages;
       [
+        # apps
+        discord
+
         # tools
         ast-grep
         coreutils
