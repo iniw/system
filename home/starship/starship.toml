@@ -1,35 +1,32 @@
-format = """
-$directory\
-$cmd_duration\
-$status\
-$git_branch\
-$nix_shell\
-$line_break\
-$character\
-"""
+format = '''
+┌$time$directory$cmd_duration$status$git_branch$nix_shell
+└❯'''
+
+[time]
+format = '\[[$time]($style)\]'
+time_format = "%H:%M"
+style = "cyan"
+disabled = false
 
 [directory]
+format = '─\[[$path]($style)[$read_only]($read_only_style)\]'
 style = "blue"
 truncate_to_repo = false
 read_only = "[RO]"
 
-[character]
-success_symbol = "[❯](bright-white)"
-error_symbol = "[❯](red)"
-vimcmd_symbol = "[❮](green)"
-
 [cmd_duration]
-format = "[$duration]($style) "
+format = '─\[[$duration]($style)\]'
+style = "yellow"
+
+[status]
+format = '─\[[$status]($style)\]'
+disabled = false
+map_symbol = true
 
 [git_branch]
-format = "[\\[$branch(:$remote_branch)\\]]($style) "
+format = '─\[[$branch(:$remote_branch)]($style)\]'
 style = "purple"
 
 [nix_shell]
-format = "[\\[$name\\]]($style) "
+format = '─\[[$name]($style)\]'
 style = "bright-black"
-
-[status]
-format = "[$status]($style) "
-disabled = false
-map_symbol = true
