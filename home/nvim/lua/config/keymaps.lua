@@ -19,12 +19,14 @@ vim.keymap.set("n", "D", "dd")
 vim.keymap.set("n", "Y", "yy")
 vim.keymap.set("n", "C", "cc")
 
-require("lazyvim.util").toggle.map("<leader>ua", {
-  name = "Autocomplete",
-  get = function()
-    return vim.g.autocomplete_enabled
-  end,
-  set = function(state)
-    vim.g.autocomplete_enabled = state
-  end,
-})
+Snacks.toggle
+  .new({
+    name = "Autocomplete",
+    get = function()
+      return vim.g.autocomplete_enabled
+    end,
+    set = function(state)
+      vim.g.autocomplete_enabled = state
+    end,
+  })
+  :map("<leader>ua")
