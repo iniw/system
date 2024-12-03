@@ -1,5 +1,5 @@
 format = '''
-┌$time$directory$cmd_duration$status$git_branch$nix_shell
+┌$time$directory$git_branch$nix_shell$cmd_duration$status
 └❯'''
 
 [time]
