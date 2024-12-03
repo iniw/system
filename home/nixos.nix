@@ -20,6 +20,10 @@
     wezterm = {
       enable = true;
     };
+
+    obs-studio = {
+      enable = true;
+    };
   };
 
   dconf = {
