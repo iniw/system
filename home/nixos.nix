@@ -9,6 +9,8 @@
   home = {
     packages = with pkgs; [
       firefox
+      gnome-tweaks
+
       # For the neovim system clipboard
       xclip
       # For treesitter
