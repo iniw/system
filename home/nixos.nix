@@ -10,6 +10,8 @@
     packages = with pkgs; [
       firefox
       gnome-tweaks
+      spotify
+      cmusfm
 
       # For the neovim system clipboard
       xclip
@@ -19,11 +21,15 @@
   };
 
   programs = {
-    wezterm = {
+    cmus = {
       enable = true;
     };
 
     obs-studio = {
+      enable = true;
+    };
+
+    wezterm = {
       enable = true;
     };
   };
