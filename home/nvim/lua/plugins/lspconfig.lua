@@ -5,9 +5,7 @@ return {
       inlay_hints = {
         enabled = false,
       },
-
       servers = {
-        jdtls = {},
         clangd = {
           cmd = {
             "clangd",
@@ -19,13 +17,6 @@ return {
             "--background-index",
           },
         },
-      },
-
-      setup = {
-        -- nvim-jdtls takes care of jdtls
-        jdtls = function()
-          return true
-        end,
       },
     },
   },
