@@ -12,3 +12,6 @@ vim.opt.ttimeout = false
 vim.g.root_spec = { "cwd" }
 
 vim.lsp.set_log_level("off")
+
+-- Disable snacks animations
+vim.g.snacks_animate = false

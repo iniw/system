@@ -3,6 +3,7 @@ local shared = require("shared")
 return {
   {
     "LazyVim/LazyVim",
+    version = false,
     opts = {
       colorscheme = function()
         require("noirbuddy").setup({
