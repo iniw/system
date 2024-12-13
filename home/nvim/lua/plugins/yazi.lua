@@ -6,20 +6,19 @@ return {
       {
         "<leader>yy",
         "<cmd>Yazi<cr>",
-        desc = "Open yazi at the current file",
+        desc = "Open yazi (Directory of Current File)",
       },
       {
-        "<leader>yw",
+        "<leader>yY",
         "<cmd>Yazi cwd<cr>",
-        desc = "Open the file manager in nvim's working directory",
+        desc = "Open yazi (cwd)",
       },
       {
         "<leader>yR",
         "<cmd>Yazi toggle<cr>",
-        desc = "Resume the last yazi session",
+        desc = "Resume",
       },
     },
-
     opts = {
       integrations = {
         resolve_relative_path_application = "realpath",
