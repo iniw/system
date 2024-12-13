@@ -6,8 +6,12 @@ return {
     end,
     opts = {
       enabled = function()
-        return vim.g.autocomplete_enabled
+        return vim.bo.buftype ~= "prompt" and vim.g.autocomplete_enabled
       end,
+      keymap = {
+        ["<C-j>"] = { "select_next", "fallback" },
+        ["<C-k>"] = { "select_prev", "fallback" },
+      },
       sources = {
         providers = {
           buffer = {
