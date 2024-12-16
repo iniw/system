@@ -22,6 +22,8 @@ return {
     opts = {
       integrations = {
         resolve_relative_path_application = "realpath",
+        grep_in_selected_files = "fzf-lua",
+        grep_in_directory = "fzf-lua",
       },
     },
   },
