@@ -245,6 +245,14 @@ return {
   disable_default_key_bindings = true,
   keys = keybinds(),
 
+  -- Multiplexing
+  unix_domains = {
+    {
+      name = "unix",
+    },
+  },
+  default_gui_startup_args = { "connect", "unix" },
+
   -- Misc
   front_end = "WebGpu",
   force_reverse_video_cursor = true,

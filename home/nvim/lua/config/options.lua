@@ -1,8 +1,7 @@
 vim.opt.shiftwidth = 4
 vim.opt.tabstop = 4
 
--- ttimeout is really annoying when paired with tmux
-vim.opt.ttimeout = false
+vim.opt.ttimeoutlen = 35
 
 vim.lsp.set_log_level("off")
 
