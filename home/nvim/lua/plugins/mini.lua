@@ -2,7 +2,9 @@ return {
   {
     "echasnovski/mini.ai",
     vscode = true,
-    opts = {},
+    opts = {
+      search_method = "cover",
+    },
   },
 
   {
