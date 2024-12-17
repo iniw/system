@@ -1,6 +1,4 @@
 local wezterm = require("wezterm")
-local act = wezterm.action
-local mux = wezterm.mux
 
 -- Colors
 local background = "#121212"
@@ -21,10 +19,9 @@ wezterm.on("update-status", function(window)
 
   window:set_left_status(wezterm.pad_left(" ", max_left))
 
-  local date = wezterm.strftime("%H:%M")
   window:set_right_status(wezterm.format({
     { Foreground = { Color = foreground } },
-    { Text = " " .. date },
+    { Text = " " .. wezterm.strftime("%H:%M") },
   }))
 end)
 
@@ -45,23 +42,9 @@ wezterm.on("augment-command-palette", function()
   }
 end)
 
-wezterm.on("gui-startup", function()
-  local lucas_tab, lucas_pane, window = mux.spawn_window({ cwd = wezterm.home_dir .. "/work/lucas-firmware-dlc32" })
-  lucas_pane:split({ cwd = wezterm.home_dir .. "/work/lucas-firmware" })
-  lucas_tab:set_title("lucas")
-
-  local tester_tab, tester_pane, _ = window:spawn_tab({ cwd = wezterm.home_dir .. "/work/lucas-tester-pwa" })
-  tester_pane:split({ cwd = wezterm.home_dir .. "/work/lucas_tester" })
-  tester_tab:set_title("tester")
-
-  local sys_tab, _, _ = window:spawn_tab({ cwd = wezterm.home_dir .. "/.config/system" })
-  sys_tab:set_title("sys")
-
-  local puc_tab, _, _ = window:spawn_tab({ cwd = wezterm.home_dir .. "/puc" })
-  puc_tab:set_title("puc")
-end)
-
 local function keybinds()
+  local act = wezterm.action
+
   local keys = {
     {
       key = "d",
@@ -195,8 +178,6 @@ local function keybinds()
 end
 
 return {
-  front_end = "WebGpu",
-
   -- Font
   font = wezterm.font("BerkeleyMono Nerd Font Mono"),
   font_size = 15.0,
@@ -218,6 +199,7 @@ return {
   colors = {
     foreground = foreground,
     background = background,
+
     cursor_bg = foreground,
     cursor_fg = background,
     cursor_border = foreground,
@@ -264,7 +246,7 @@ return {
   keys = keybinds(),
 
   -- Misc
+  front_end = "WebGpu",
   force_reverse_video_cursor = true,
-
   term = "wezterm",
 }
