@@ -12,7 +12,7 @@ disabled = false
 format = '─\[[$path]($style)[$read_only]($read_only_style)\]'
 style = "blue"
 truncate_to_repo = false
-read_only = "[RO]"
+read_only = "*"
 
 [cmd_duration]
 format = '─\[[$duration]($style)\]'
