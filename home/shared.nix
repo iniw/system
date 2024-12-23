@@ -177,7 +177,7 @@
         ".envrc"
         ".direnv/"
 
-        # fd's ignore list 
+        # fd's ignore list
         ".ignore"
 
         # just's recipe list
