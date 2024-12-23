@@ -61,7 +61,9 @@
 
         # tools
         ast-grep
+        binwalk
         coreutils
+        exiftool
         hyperfine
         just
         klip
@@ -71,7 +73,6 @@
         tldr
         wget
         zlib
-        binwalk
 
         # fonts
         inter
