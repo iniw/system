@@ -23,6 +23,11 @@
       url = "github:iniw/klip";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    ghostty = {
+      url = "github:ghostty-org/ghostty";
+      inputs.nixpkgs-unstable.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -33,12 +38,14 @@
       home-manager,
       mac-app-util,
       klip,
+      ghostty,
     }:
 
     let
       user = "sol";
       overlay = final: prev: {
         klip = klip.packages."${prev.system}".klip;
+        ghostty = ghostty.packages."${prev.system}".ghostty;
       };
     in
     {

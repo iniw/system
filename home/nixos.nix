@@ -9,6 +9,7 @@
   home = {
     packages = with pkgs; [
       firefox
+      ghostty
       gnome-tweaks
       spotify
       cmusfm
@@ -18,6 +19,13 @@
       # For treesitter
       gcc14
     ];
+
+    file = {
+      "./.config/ghostty/" = {
+        source = ./ghostty;
+        recursive = true;
+      };
+    };
   };
 
   programs = {
