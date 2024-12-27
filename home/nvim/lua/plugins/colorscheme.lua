@@ -1,6 +1,6 @@
 local palette = {
   primary = "#73b3e7",
-  secondary = "#c5d8e8",
+  primary_light = "#c5d8e8",
 }
 
 return {
@@ -22,16 +22,12 @@ return {
 
         local cb = require("colorbuddy")
 
-        local Group = cb.Group
-        local Color = cb.Color
-        local colors = cb.colors
+        cb.Color.new("primary_light", palette.primary_light)
 
-        Color.new("bracket", palette.secondary)
-
-        Group.new("@operator", colors.primary)
-        Group.new("@punctuation.bracket", colors.bracket)
-        -- "`noir_0` is light for dark themes, and dark for light themes".
-        Group.new("@lsp.type.method", colors.noir_0)
+        cb.Group.new("Normal", cb.colors.secondary)
+        cb.Group.new("@operator", cb.colors.primary)
+        cb.Group.new("@lsp.type.method", cb.colors.noir_0)
+        cb.Group.new("@punctuation.bracket", cb.colors.primary_light)
       end,
     },
   },
@@ -48,7 +44,7 @@ return {
     opts = {
       fzf_colors = {
         ["hl"] = palette.primary,
-        ["hl+"] = palette.secondary,
+        ["hl+"] = palette.primary_light,
       },
     },
   },
