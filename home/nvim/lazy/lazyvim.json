@@ -5,6 +5,7 @@
     "lazyvim.plugins.extras.editor.mini-move",
     "lazyvim.plugins.extras.formatting.prettier",
     "lazyvim.plugins.extras.lang.clangd",
+    "lazyvim.plugins.extras.lang.cmake",
     "lazyvim.plugins.extras.lang.git",
     "lazyvim.plugins.extras.lang.haskell",
     "lazyvim.plugins.extras.lang.java",
