@@ -1,7 +1,3 @@
-# Edit this configuration file to define what should be installed on
-# your system. Help is available in the configuration.nix(5) man page, on
-# https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
-
 {
   user,
   config,
@@ -45,25 +41,12 @@
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
-  console = {
-    useXkbConfig = true; # use xkb.options in tty.
-  };
 
   services.xserver = {
     enable = true;
 
     displayManager.gdm.enable = true;
     desktopManager.gnome.enable = true;
-
-    xkb = {
-      options = "caps:swapescape";
-      layout = "br";
-      model = "abnt2";
-      variant = "abnt2";
-    };
-
-    autoRepeatDelay = 12;
-    autoRepeatInterval = 2;
   };
 
   hardware.graphics = {
