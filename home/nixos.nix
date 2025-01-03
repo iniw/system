@@ -10,7 +10,6 @@
     packages = with pkgs; [
       firefox
       ghostty
-      gnome-tweaks
       spotify
       cmusfm
 
@@ -44,6 +43,7 @@
 
   dconf = {
     enable = true;
+
     settings = {
       "org/gnome/desktop/input-sources" = {
         sources = [
@@ -58,11 +58,35 @@
         ];
       };
 
-      "org/gnome/desktop/interface" = {
-        color-scheme = "prefer-dark";
+      "org/gnome/desktop/peripherals/mouse" = {
+        speed = -0.45;
       };
 
-      # Remove conflicting shortcuts
+      "org/gnome/desktop/interface" = {
+        color-scheme = "prefer-dark";
+
+        font-name = "Inter Variable 11";
+        document-font-name = "Inter Variable 11";
+        monospace-font-name = "Berkeley Mono 10";
+
+        font-hinting = "full";
+        font-antialiasing = "rgba";
+      };
+
+      "org/gnome/desktop/session" = {
+        idle-delay = 0;
+      };
+
+      "org/gnome/shell" = {
+        favorite-apps = [
+          "firefox.desktop"
+          "com.mitchellh.ghostty.desktop"
+          "discord.desktop"
+          "spotify.desktop"
+        ];
+      };
+
+      # Remove conflicting shortcuts with the terminal emulator
       "org/gnome/shell/keybindings" = {
         # <Super>s
         toggle-quick-settings = [ ];
