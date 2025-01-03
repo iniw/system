@@ -52,15 +52,14 @@ keybind = super+l=goto_split:right
 keybind = super+z=toggle_split_zoom
 
 # keybinds.scroll
-keybind = super+up=scroll_page_lines:1
-keybind = super+down=scroll_page_lines:-1
+keybind = super+up=scroll_page_lines:-1
+keybind = super+down=scroll_page_lines:1
 keybind = super+shift+up=scroll_page_up
 keybind = super+shift+down=scroll_page_down
 keybind = super+alt+up=scroll_to_top
 keybind = super+alt+down=scroll_to_bottom
 
 # keybinds.clipboard
-keybind = super+c=copy_to_clipboard
 keybind = ctrl+shift+c=copy_to_clipboard
 keybind = ctrl+shift+v=paste_from_clipboard
 
