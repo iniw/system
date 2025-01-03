@@ -8,8 +8,6 @@
 
   home = {
     packages = with pkgs; [
-      firefox
-      ghostty
       spotify
       cmusfm
 
@@ -30,6 +28,15 @@
   programs = {
     cmus = {
       enable = true;
+    };
+
+    firefox = {
+      enable = true;
+    };
+
+    ghostty = {
+      enable = true;
+      package = pkgs.ghostty;
     };
 
     obs-studio = {
