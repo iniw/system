@@ -65,8 +65,13 @@
         ];
       };
 
+      "org/gnome/desktop/peripherals/keyboard" = {
+        delay = lib.hm.gvariant.mkUint32 200;
+        repeat = lib.hm.gvariant.mkUint32 20;
+      };
+
       "org/gnome/desktop/peripherals/mouse" = {
-        speed = -0.45;
+        speed = -0.35;
       };
 
       "org/gnome/desktop/interface" = {
@@ -81,7 +86,7 @@
       };
 
       "org/gnome/desktop/session" = {
-        idle-delay = 0;
+        idle-delay = lib.hm.gvariant.mkUint32 0;
       };
 
       "org/gnome/shell" = {
