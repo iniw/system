@@ -82,7 +82,6 @@
 
         # lsp
         bash-language-server
-        neocmakelsp
         lua-language-server
         marksman
         nil
@@ -92,7 +91,6 @@
         yaml-language-server
 
         # formatters/linters
-        cmake-lint
         eslint
         markdownlint-cli2
         nixfmt-rfc-style
