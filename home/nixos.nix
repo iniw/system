@@ -25,6 +25,10 @@
     };
   };
 
+  xdg = {
+    enable = true;
+  };
+
   programs = {
     cmus = {
       enable = true;
