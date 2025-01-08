@@ -26,3 +26,10 @@ Snacks.toggle
     end,
   })
   :map("<leader>ua")
+
+vim.keymap.set("n", "<leader>cy", function()
+  local file = vim.fn.expand("%")
+  local line = vim.fn.line(".")
+  local result = file .. ":" .. line
+  vim.fn.setreg("+", result)
+end, { noremap = true, silent = true })
