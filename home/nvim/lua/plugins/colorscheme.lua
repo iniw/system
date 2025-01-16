@@ -25,6 +25,7 @@ return {
         cb.Color.new("primary_light", palette.primary_light)
 
         cb.Group.new("Normal", cb.colors.secondary)
+        cb.Group.new("NormalFloat", cb.colors.secondary)
         cb.Group.new("SnacksPickerMatch", cb.colors.primary)
         cb.Group.new("@operator", cb.colors.primary)
         cb.Group.new("@lsp.type.method", cb.colors.noir_0)
