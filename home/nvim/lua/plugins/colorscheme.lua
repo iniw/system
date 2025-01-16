@@ -25,6 +25,7 @@ return {
         cb.Color.new("primary_light", palette.primary_light)
 
         cb.Group.new("Normal", cb.colors.secondary)
+        cb.Group.new("SnacksPickerMatch", cb.colors.primary)
         cb.Group.new("@operator", cb.colors.primary)
         cb.Group.new("@lsp.type.method", cb.colors.noir_0)
         cb.Group.new("@punctuation.bracket", cb.colors.primary_light)
@@ -37,15 +38,5 @@ return {
     opts = function(_, opts)
       opts.options.theme = require("noirbuddy.plugins.lualine").theme
     end,
-  },
-
-  {
-    "ibhagwan/fzf-lua",
-    opts = {
-      fzf_colors = {
-        ["hl"] = palette.primary,
-        ["hl+"] = palette.primary_light,
-      },
-    },
   },
 }
