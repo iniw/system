@@ -7,16 +7,19 @@ return {
         "<leader>yy",
         "<cmd>Yazi<cr>",
         desc = "Open yazi (Directory of Current File)",
+        mode = { "n", "v" },
       },
       {
         "<leader>yY",
         "<cmd>Yazi cwd<cr>",
         desc = "Open yazi (cwd)",
+        mode = { "n", "v" },
       },
       {
         "<leader>yR",
         "<cmd>Yazi toggle<cr>",
         desc = "Resume",
+        mode = { "n", "v" },
       },
     },
     opts = {
