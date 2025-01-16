@@ -273,6 +273,11 @@
           }
           zle -N togglefg
           bindkey "^Z" togglefg
+        ''
+        # Don't select on paste
+        # From: https://github.com/ohmyzsh/ohmyzsh/issues/5459#issuecomment-2106102549
+        + ''
+          zle_highlight=('paste:none')
         '';
     };
   };
