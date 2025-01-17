@@ -2,6 +2,7 @@ return {
   {
     "mikavilpas/yazi.nvim",
     lazy = true,
+    version = "*",
     keys = {
       {
         "<leader>yy",
