@@ -112,10 +112,15 @@
   programs = {
     bat = {
       enable = true;
+
+      config = {
+        theme = "ansi";
+      };
     };
 
     btop = {
       enable = true;
+
       settings = {
         color_theme = "TTY";
         vim_keys = true;
