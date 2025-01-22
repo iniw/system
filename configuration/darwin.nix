@@ -1,9 +1,18 @@
-{ user, mac-app-util, ... }:
+{
+  user,
+  mac-app-util,
+  ...
+}:
 {
   imports = [ ./shared.nix ];
 
-  users.users.${user} = {
-    home = "/Users/${user}";
+  users = {
+    knownUsers = [ user ];
+
+    users.${user} = {
+      home = "/Users/${user}";
+      uid = 501;
+    };
   };
 
   home-manager = {

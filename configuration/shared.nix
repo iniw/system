@@ -1,8 +1,8 @@
 {
-  pkgs,
   user,
   self,
   overlay,
+  pkgs,
   ...
 }:
 {
@@ -19,7 +19,13 @@
     config.allowUnfree = true;
   };
 
+  # Set zsh as the default/login shell to avoid problems when using a non-posix compliant (nu) shell.
+  # See: https://nixos.wiki/wiki/Fish#Setting_fish_as_your_shell
+  #      https://wiki.archlinux.org/title/Fish#System_integration
+  #      https://wiki.gentoo.org/wiki/Fish#Caveats
   programs.zsh.enable = true;
+
+  environment.shells = [ pkgs.zsh ];
 
   users.users.${user} = {
     name = user;
@@ -34,5 +40,7 @@
 
     useGlobalPkgs = true;
     useUserPackages = true;
+
+    backupFileExtension = "hm-backup";
   };
 }

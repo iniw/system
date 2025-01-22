@@ -2,6 +2,7 @@
   self,
   lib,
   pkgs,
+  config,
   ...
 }:
 {
@@ -52,6 +53,10 @@
       };
     };
 
+    shellAliases = {
+      lg = "lazygit";
+    };
+
     packages =
       with pkgs;
       with nodePackages;
@@ -67,11 +72,8 @@
         hyperfine
         just
         klip
-        moreutils
         radare2
         scc
-        tldr
-        wget
         zlib
 
         # fonts
@@ -100,12 +102,6 @@
         stylua
       ];
 
-    shellAliases = {
-      lg = "lazygit";
-      ls = "eza -1 --icons=always";
-      la = "ls -a";
-    };
-
     stateVersion = "24.11";
   };
 
@@ -133,10 +129,6 @@
     direnv = {
       enable = true;
       nix-direnv.enable = true;
-    };
-
-    eza = {
-      enable = true;
     };
 
     fd = {
@@ -193,20 +185,29 @@
       enable = true;
     };
 
-    jq = {
-      enable = true;
-    };
-
     lazygit = {
       enable = true;
     };
 
     neovim = {
       enable = true;
+
       defaultEditor = true;
+
       plugins = with pkgs.vimPlugins; [
         nvim-treesitter.withAllGrammars
       ];
+    };
+
+    nushell = {
+      enable = true;
+
+      configFile.source = ./nushell/config.nu;
+      envFile.source = ./nushell/env.nu;
+
+      # See: https://github.com/nix-community/home-manager/issues/4313
+      shellAliases = config.home.shellAliases;
+      environmentVariables = config.home.sessionVariables;
     };
 
     ripgrep = {
@@ -219,7 +220,6 @@
 
     yazi = {
       enable = true;
-      enableZshIntegration = true;
     };
 
     zoxide = {
@@ -228,61 +228,21 @@
 
     zsh = {
       enable = true;
-
-      enableCompletion = true;
-      enableVteIntegration = true;
-
-      autosuggestion.enable = true;
-      oh-my-zsh.enable = true;
-      syntaxHighlighting.enable = true;
-
-      initExtraBeforeCompInit =
-        # Using fd for fzf completion lists.
-        # From: https://ivergara.github.io/Supercharging-shell.html
-        ''
-          _fzf_compgen_path() { fd --hidden --follow --exclude ".git" . "$1" }
-          _fzf_compgen_dir() { fd --type d --hidden --follow --exclude ".git" . "$1" }
-        '';
-
-      initExtra =
-        # Fixes slow zsh copy-paste.
-        # From: https://github.com/zsh-users/zsh-autosuggestions/issues/238#issuecomment-389324292
-        ''
-          pasteinit() {
-              OLD_SELF_INSERT=''\${''\${(s.:.)widgets[self-insert]}[2,3]}
-              zle -N self-insert url-quote-magic # I wonder if you'd need `.url-quote-magic`?
-          }
-
-          pastefinish() {
-              zle -N self-insert $OLD_SELF_INSERT
-          }
-
-          zstyle :bracketed-paste-magic paste-init pasteinit
-          zstyle :bracketed-paste-magic paste-finish pastefinish
-        ''
-        # Binding <Ctrl>z to `fg`.
-        # Inspired by: https://www.reddit.com/r/vim/comments/9bm3x0/ctrlz_binding/
-        #              https://sheerun.net/2014/03/21/how-to-boost-your-vim-productivity/
-        + ''
-          function togglefg {
-            if [[ $#BUFFER -eq 0 ]]; then
-              # No need to consume a line when the buffer is empty
-              fg
+      # Run nushell when launching an interactive shell.
+      # Inspired by: https://github.com/NixOS/nixpkgs/issues/297449#issuecomment-2009853257
+      # See also: https://nixos.wiki/wiki/Fish#Setting_fish_as_your_shell
+      #           https://wiki.archlinux.org/title/Fish#System_integration
+      #           https://wiki.gentoo.org/wiki/Fish#Caveats
+      initExtra = ''
+        if [[ ! $(ps -T -o "comm" | tail -n +2 | grep "nu$") && -z $ZSH_EXECUTION_STRING ]]; then
+            if [[ -o login ]]; then
+                LOGIN_OPTION='--login'
             else
-              fg
-              zle push-input
-              BUFFER=""
-              zle accept-line
+                LOGIN_OPTION='''
             fi
-          }
-          zle -N togglefg
-          bindkey "^Z" togglefg
-        ''
-        # Don't select on paste
-        # From: https://github.com/ohmyzsh/ohmyzsh/issues/5459#issuecomment-2106102549
-        + ''
-          zle_highlight=('paste:none')
-        '';
+            exec "${lib.getExe pkgs.nushell}" "$LOGIN_OPTION"
+        fi
+      '';
     };
   };
 }
