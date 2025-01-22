@@ -37,22 +37,6 @@
       done
     '';
 
-    file = {
-      "./.config/nvim/" = {
-        source = ./nvim;
-        recursive = true;
-      };
-
-      "./.config/wezterm/" = {
-        source = ./wezterm;
-        recursive = true;
-      };
-
-      "./.config/starship.toml" = {
-        source = ./starship/starship.toml;
-      };
-    };
-
     shellAliases = {
       lg = "lazygit";
     };
@@ -107,6 +91,17 @@
 
   xdg = {
     enable = true;
+
+    configFile = {
+      "nvim" = {
+        source = ./nvim;
+        recursive = true;
+      };
+
+      "starship.toml" = {
+        source = ./starship/starship.toml;
+      };
+    };
   };
 
   programs = {

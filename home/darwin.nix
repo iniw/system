@@ -15,4 +15,13 @@
       LIBRARY_PATH = "$LIBRARY_PATH:$(brew --prefix)/lib:$(brew --prefix libiconv)/lib";
     };
   };
+
+  xdg = {
+    configFile = {
+      "wezterm" = {
+        source = ./wezterm;
+        recursive = true;
+      };
+    };
+  };
 }
