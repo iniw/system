@@ -109,6 +109,10 @@
     stateVersion = "24.11";
   };
 
+  xdg = {
+    enable = true;
+  };
+
   programs = {
     bat = {
       enable = true;
