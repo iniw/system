@@ -16,9 +16,11 @@
       # For treesitter
       gcc14
     ];
+  };
 
-    file = {
-      "./.config/ghostty/" = {
+  xdg = {
+    configFile = {
+      "ghostty" = {
         source = ./ghostty;
         recursive = true;
       };
