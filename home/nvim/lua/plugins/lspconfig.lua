@@ -1,3 +1,5 @@
+---@module "lspconfig"
+
 ---@type LazySpec
 return {
   {
@@ -6,6 +8,7 @@ return {
       inlay_hints = {
         enabled = false,
       },
+      ---@type { [string]: lspconfig.Config }
       servers = {
         clangd = {
           cmd = {

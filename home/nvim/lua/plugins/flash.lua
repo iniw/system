@@ -1,8 +1,11 @@
+---@module "flash"
+
 ---@type LazySpec
 return {
   {
     "folke/flash.nvim",
     vscode = true,
+    ---@type Flash.Config
     opts = {
       search = {
         multi_window = false,
