@@ -1,3 +1,7 @@
+---@module "yazi"
+---@module "plenary"
+---@module "which-key"
+
 ---@type LazySpec
 return {
   {
@@ -24,6 +28,7 @@ return {
         mode = { "n", "v" },
       },
     },
+    ---@type YaziConfig
     opts = {
       integrations = {
         grep_in_directory = function(directory)
@@ -45,6 +50,7 @@ return {
 
   {
     "folke/which-key.nvim",
+    ---@type wk.Config
     opts = {
       spec = {
         {
