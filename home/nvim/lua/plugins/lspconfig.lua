@@ -18,6 +18,15 @@ return {
             "--background-index",
           },
         },
+        lua_ls = {
+          settings = {
+            Lua = {
+              diagnostics = {
+                disable = { "missing-fields" },
+              },
+            },
+          },
+        },
       },
     },
   },
