@@ -1,5 +1,4 @@
 {
-  self,
   lib,
   pkgs,
   config,
@@ -9,34 +8,6 @@
   fonts.fontconfig.enable = true;
 
   home = {
-    # Warn the user when neovim's lazy{vim,-lock}.json files differ from the ones in the repo.
-    activation.neovim = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-      # Paths to the source files (in nvim/lazy) and destination (nvim config folder)
-      src_dir="${self}/home/nvim/lazy"
-      dst_dir=".config/nvim"
-
-      files=("lazy-lock.json" "lazyvim.json")
-
-      # Loop over files to copy or check differences
-      for file in "''${files[@]}"; do
-        src_file="$src_dir/$file"
-        dst_file="$dst_dir/$file"
-
-        if [ ! -f "$dst_file" ]; then
-          # If file doesn't exist in the destination, copy it over
-          run cp $VERBOSE_ARG -no-preserve=all "$src_file" "$dst_file"
-          run echo "Placed $file"
-        else
-          # If file exists, compare hashes
-          src_hash=$(nix hash file "$src_file")
-          dst_hash=$(nix hash file "$dst_file")
-          if [[ "$src_hash" != "$dst_hash" ]]; then
-            run echo -e "\033[35mwarning:\033[0m $file differs from the version in the nix store, please sync them using the 'sync-lazy' script."
-          fi
-        fi
-      done
-    '';
-
     shellAliases = {
       lg = "lazygit";
     };
