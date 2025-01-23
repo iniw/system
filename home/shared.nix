@@ -162,6 +162,12 @@
         };
       };
 
+      extraConfig = {
+        pull = {
+          rebase = true;
+        };
+      };
+
       ignores = [
         ".DS_Store"
         "**/.DS_Store"
