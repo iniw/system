@@ -3,6 +3,7 @@ local palette = {
   primary_light = "#c5d8e8",
 }
 
+---@type LazySpec
 return {
   {
     "jesseleite/nvim-noirbuddy",
@@ -11,6 +12,7 @@ return {
 
   {
     "LazyVim/LazyVim",
+    ---@type LazyVimOptions
     opts = {
       colorscheme = function()
         require("noirbuddy").setup({
