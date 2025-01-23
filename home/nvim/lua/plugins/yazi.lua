@@ -31,4 +31,15 @@ return {
       },
     },
   },
+
+  {
+    "folke/which-key.nvim",
+    opts = {
+      spec = {
+        {
+          { "<leader>y", group = "yazi", icon = { icon = " ", color = "blue" } },
+        },
+      },
+    },
+  },
 }
