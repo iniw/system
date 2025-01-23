@@ -12,10 +12,6 @@ return {
 
       hl("MultiCursorCursor", "TodoBgFIX")
       hl("MultiCursorSign", "TodoBgFIX")
-      hl("MultiCursorVisual", "TodoBgWARN")
-      hl("MultiCursorDisabledCursor", "@text.todo")
-      hl("MultiCursorDisabledSign", "@text.todo")
-      hl("MultiCursorDisabledVisual", "Substitute")
     end,
     keys = {
       -- add cursors above/below the main cursor, skipping empty lines
