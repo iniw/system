@@ -25,9 +25,19 @@ return {
     },
     opts = {
       integrations = {
+        grep_in_directory = function(directory)
+          Snacks.picker.grep({ dirs = { directory } })
+        end,
+        grep_in_selected_files = function(selected_files)
+          local files = {}
+          for _, path in ipairs(selected_files) do
+            files[#files + 1] = path:make_relative(vim.uv.cwd()):gsub(" ", "\\ ")
+          end
+
+          Snacks.picker.grep({ dirs = files })
+        end,
+
         resolve_relative_path_application = "realpath",
-        grep_in_selected_files = "fzf-lua",
-        grep_in_directory = "fzf-lua",
       },
     },
   },
