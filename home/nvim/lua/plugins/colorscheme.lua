@@ -24,20 +24,21 @@ return {
 
         cb.Color.new("primary_light", palette.primary_light)
 
-        -- Slightly off-white text
+        -- Slightly brighter text
         cb.Group.new("Normal", cb.colors.secondary)
         cb.Group.new("NormalFloat", cb.colors.secondary)
 
         -- White methods
-        cb.Group.new("@method", cb.colors.noir_0)
-        cb.Group.new("@lsp.type.method", cb.colors.noir_0)
+        cb.Group.new("@method", cb.colors.white)
+        cb.Group.new("@lsp.type.method", cb.colors.white)
 
-        -- Blue punctuation and operators
+        -- More highlights here and there
+        cb.Group.new("SnacksPickerMatch", cb.colors.primary)
         cb.Group.new("@operator", cb.colors.primary)
         cb.Group.new("@punctuation.bracket", cb.colors.primary_light)
 
-        -- Blue highlight on the picker
-        cb.Group.new("SnacksPickerMatch", cb.colors.primary)
+        -- Slightly brighter NonText, which is usually used for dimmed stuff
+        cb.Group.new("NonText", cb.groups.Comment)
       end,
     },
   },
