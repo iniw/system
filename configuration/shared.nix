@@ -1,6 +1,5 @@
 {
   user,
-  self,
   overlay,
   pkgs,
   ...
@@ -35,7 +34,6 @@
   home-manager = {
     extraSpecialArgs = {
       inherit user;
-      inherit self;
     };
 
     useGlobalPkgs = true;

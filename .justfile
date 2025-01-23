@@ -1,3 +1,5 @@
+mod lazy
+
 rebuild-cmd := if os() == 'linux' {
   "sudo nixos-rebuild"
 } else {
@@ -12,4 +14,3 @@ rebuild-cmd := if os() == 'linux' {
 
 @update:
   nix flake update --commit-lock-file --commit-lockfile-summary "flake: update lockfile"
-
