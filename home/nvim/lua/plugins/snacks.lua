@@ -11,7 +11,13 @@ return {
       }
     end,
     keys = {
-      { "<leader><space>", LazyVim.pick("files", { root = false }), desc = "Find Files (cwd)" },
+      {
+        "<leader><space>",
+        function()
+          Snacks.picker.smart({ cwd = vim.uv.cwd() })
+        end,
+        desc = "Smart Find Files (cwd)",
+      },
       { "<leader>ff", LazyVim.pick("files", { root = false }), desc = "Find Files (cwd)" },
       { "<leader>fF", LazyVim.pick("files"), desc = "Find Files (Root Dir)" },
       {
