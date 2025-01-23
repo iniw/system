@@ -1,6 +1,8 @@
+---@type LazySpec
 return {
   {
     "folke/snacks.nvim",
+    ---@param opts snacks.Config
     opts = function(_, opts)
       -- Remove the delay before updating
       opts.words.debounce = 25
@@ -14,7 +16,7 @@ return {
       {
         "<leader><space>",
         function()
-          Snacks.picker.smart({ cwd = vim.uv.cwd() })
+          Snacks.picker.smart({ multi = { "buffers", "files" }, cwd = vim.uv.cwd() })
         end,
         desc = "Smart Find Files",
       },

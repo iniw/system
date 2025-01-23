@@ -1,3 +1,4 @@
+---@type LazySpec
 return {
   {
     "jake-stewart/multicursor.nvim",

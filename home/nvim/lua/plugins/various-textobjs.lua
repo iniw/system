@@ -1,3 +1,4 @@
+---@type LazySpec
 return {
   {
     "chrisgrieser/nvim-various-textobjs",
