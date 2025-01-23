@@ -13,3 +13,6 @@ vim.lsp.set_log_level("off")
 
 -- Disable snacks animations
 vim.g.snacks_animate = false
+
+-- Disable LazyVim's automatic root detection
+vim.g.root_spec = { "cwd" }
