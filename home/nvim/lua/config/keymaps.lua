@@ -1,7 +1,7 @@
 -- Quick jump to the Nth window/tab
 for i = 1, 6 do
-  vim.keymap.set("n", "<leader>" .. i, i .. "<C-w>w", { desc = "Move to window " .. i })
-  vim.keymap.set("n", "<leader><tab>" .. i, i .. "gt", { desc = "Move to tab " .. i })
+  vim.keymap.set("n", "<leader>" .. i, i .. "<C-w>w", { desc = "Move to Window " .. i })
+  vim.keymap.set("n", "<leader><tab>" .. i, i .. "gt", { desc = "Move to Tab " .. i })
 end
 
 vim.keymap.set("i", "<C-o>", "<Left><C-o>")

@@ -21,7 +21,7 @@ return {
           require("multicursor-nvim").lineAddCursor(-1)
         end,
         mode = { "n", "v" },
-        desc = "Add cursor above",
+        desc = "Add Cursor Above",
       },
       {
         "<C-Down>",
@@ -29,7 +29,7 @@ return {
           require("multicursor-nvim").lineAddCursor(1)
         end,
         mode = { "n", "v" },
-        desc = "Add cursor below",
+        desc = "Add Cursor Below",
       },
 
       -- add a cursor and jump to the next/previous selection/word under cursor
@@ -39,7 +39,7 @@ return {
           require("multicursor-nvim").matchAddCursor(1)
         end,
         mode = { "n", "v" },
-        desc = "Add cursor + jump to next selection/word",
+        desc = "Add Cursor + Jump to Next Selection/Word",
       },
       {
         "<C-p>",
@@ -47,7 +47,7 @@ return {
           require("multicursor-nvim").matchAddCursor(-1)
         end,
         mode = { "n", "v" },
-        desc = "Add cursor + jump to previous selection/word",
+        desc = "Add Cursor + Jump to Previous Selection/Word",
       },
 
       -- jump to the next/previous selection/word under cursor without adding a cursor
@@ -57,7 +57,7 @@ return {
           require("multicursor-nvim").matchSkipCursor(1)
         end,
         mode = { "n", "v" },
-        desc = "Next selection/word w/o adding a cursor",
+        desc = "Next Selection/Word Without Adding a Cursor",
       },
       {
         "<C-A-p>",
@@ -65,7 +65,7 @@ return {
           require("multicursor-nvim").matchSkipCursor(-1)
         end,
         mode = { "n", "v" },
-        desc = "Previous selection/word w/o adding a cursor",
+        desc = "Previous Selection/Word Without Adding a Cursor",
       },
 
       {
@@ -79,7 +79,7 @@ return {
           end
           vim.cmd([[execute "normal! \<CMD>noh\<CR>\<ESC>"]])
         end,
-        desc = "Escape, Clear hlsearch and remove muticursors.",
+        desc = "Escape, Clear hlsearch and Remove Muticursors.",
         mode = { "n", "v" },
       },
     },
