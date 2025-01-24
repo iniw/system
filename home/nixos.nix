@@ -44,10 +44,6 @@
     obs-studio = {
       enable = true;
     };
-
-    wezterm = {
-      enable = true;
-    };
   };
 
   dconf = {
