@@ -1,6 +1,7 @@
 {
   lib,
   pkgs,
+  pkgs-unstable,
   config,
   ...
 }:
@@ -197,6 +198,7 @@
 
     yazi = {
       enable = true;
+      package = pkgs-unstable.yazi;
     };
 
     zoxide = {
