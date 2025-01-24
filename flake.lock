@@ -109,7 +109,7 @@
         "flake-compat": "flake-compat",
         "nixpkgs-stable": "nixpkgs-stable",
         "nixpkgs-unstable": [
-          "nixpkgs"
+          "nixpkgs-nixos"
         ],
         "zig": "zig"
       },
@@ -130,19 +130,20 @@
     "home-manager": {
       "inputs": {
         "nixpkgs": [
-          "nixpkgs"
+          "nixpkgs-unstable"
         ]
       },
       "locked": {
-        "lastModified": 1737704314,
-        "narHash": "sha256-zta8jvOQ2wRCZmiwFEnS5iCulWAh8e+fLUlQxrgOBjM=",
+        "lastModified": 1736373539,
+        "narHash": "sha256-dinzAqCjenWDxuy+MqUQq0I4zUSfaCvN9rzuCmgMZJY=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "a0428685572b134f6594e7d7f5db5e1febbab2d7",
+        "rev": "bd65bc3cde04c16755955630b344bc9e35272c56",
         "type": "github"
       },
       "original": {
         "owner": "nix-community",
+        "ref": "release-24.11",
         "repo": "home-manager",
         "type": "github"
       }
@@ -151,7 +152,7 @@
       "inputs": {
         "flake-utils": "flake-utils_2",
         "nixpkgs": [
-          "nixpkgs"
+          "nixpkgs-unstable"
         ],
         "rust-overlay": "rust-overlay"
       },
@@ -175,7 +176,7 @@
         "flake-compat": "flake-compat_2",
         "flake-utils": "flake-utils_3",
         "nixpkgs": [
-          "nixpkgs"
+          "nixpkgs-darwin"
         ],
         "systems": "systems_3"
       },
@@ -196,35 +197,52 @@
     "nix-darwin": {
       "inputs": {
         "nixpkgs": [
-          "nixpkgs"
+          "nixpkgs-darwin"
         ]
       },
       "locked": {
-        "lastModified": 1737504076,
-        "narHash": "sha256-/B4XJnzYU/6K1ZZOBIgsa3K4pqDJrnC2579c44c+4rI=",
+        "lastModified": 1737421067,
+        "narHash": "sha256-/hgw8fDKDpko0XqOw1e9tX8lS2Hqecg7W/JsONun6Qc=",
         "owner": "LnL7",
         "repo": "nix-darwin",
-        "rev": "65cc1fa8e36ceff067daf6cfb142331f02f524d3",
+        "rev": "cae8d1c4a3bd37be5887203fe3b0c3a860c53a07",
         "type": "github"
       },
       "original": {
         "owner": "LnL7",
+        "ref": "nix-darwin-24.11",
         "repo": "nix-darwin",
         "type": "github"
       }
     },
-    "nixpkgs": {
+    "nixpkgs-darwin": {
       "locked": {
-        "lastModified": 1737622296,
-        "narHash": "sha256-GWHH9ljsR0LR29IEruJnKVVk6veeQpo7kfolyDyCVGQ=",
+        "lastModified": 1737728197,
+        "narHash": "sha256-Ltd3Ov3awL2OWS69Dm+6dRLpm1UdMuvQzF9GgfOyz30=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "055c50feaa548eadca66407630961b77f3ebb750",
+        "rev": "8e39f04b54a435f14b9c1d6a6caede0a0a9825b6",
         "type": "github"
       },
       "original": {
         "owner": "NixOS",
-        "ref": "nixpkgs-unstable",
+        "ref": "nixpkgs-24.11-darwin",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs-nixos": {
+      "locked": {
+        "lastModified": 1737569578,
+        "narHash": "sha256-6qY0pk2QmUtBT9Mywdvif0i/CLVgpCjMUn6g9vB+f3M=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "47addd76727f42d351590c905d9d1905ca895b82",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-24.11",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -245,6 +263,22 @@
         "type": "github"
       }
     },
+    "nixpkgs-unstable": {
+      "locked": {
+        "lastModified": 1737622296,
+        "narHash": "sha256-GWHH9ljsR0LR29IEruJnKVVk6veeQpo7kfolyDyCVGQ=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "055c50feaa548eadca66407630961b77f3ebb750",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixpkgs-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "ghostty": "ghostty",
@@ -252,7 +286,9 @@
         "klip": "klip",
         "mac-app-util": "mac-app-util",
         "nix-darwin": "nix-darwin",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs-darwin": "nixpkgs-darwin",
+        "nixpkgs-nixos": "nixpkgs-nixos",
+        "nixpkgs-unstable": "nixpkgs-unstable"
       }
     },
     "rust-overlay": {

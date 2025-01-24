@@ -2,6 +2,7 @@
   user,
   overlay,
   pkgs,
+  pkgs-unstable,
   ...
 }:
 {
@@ -34,6 +35,7 @@
   home-manager = {
     extraSpecialArgs = {
       inherit user;
+      inherit pkgs-unstable;
     };
 
     useGlobalPkgs = true;
