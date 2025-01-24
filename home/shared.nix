@@ -21,41 +21,20 @@
         discord
 
         # tools
-        ast-grep
-        binwalk
         coreutils
         exiftool
         hyperfine
         just
         klip
-        radare2
         scc
         zlib
 
         # fonts
         inter
 
-        # languages
-        luajit
-
-        # lsp
-        bash-language-server
-        lua-language-server
-        marksman
+        # nix
         nil
-        taplo
-        texlab
-        vscode-langservers-extracted
-        yaml-language-server
-
-        # formatters/linters
-        eslint
-        markdownlint-cli2
         nixfmt-rfc-style
-        prettier
-        shellcheck
-        shfmt
-        stylua
       ];
 
     stateVersion = "24.11";

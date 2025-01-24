@@ -46,15 +46,28 @@
     }:
 
     let
+      darwin-system = "x86_64-darwin";
+      nixos-system = "x86_64-linux";
       user = "sol";
+
       overlay = final: prev: {
         klip = klip.packages."${prev.system}".klip;
         ghostty = ghostty.packages."${prev.system}".ghostty;
       };
+
+      devShell =
+        pkgs:
+        with pkgs;
+        mkShell {
+          packages = [
+            lua-language-server
+            stylua
+          ];
+        };
     in
     {
       darwinConfigurations.mac = nix-darwin.lib.darwinSystem rec {
-        system = "x86_64-darwin";
+        system = darwin-system;
 
         specialArgs = {
           inherit user;
@@ -71,7 +84,7 @@
       };
 
       nixosConfigurations.nixos = nixpkgs-nixos.lib.nixosSystem rec {
-        system = "x86_64-linux";
+        system = nixos-system;
 
         specialArgs = {
           inherit user;
@@ -84,5 +97,8 @@
           home-manager.nixosModules.home-manager
         ];
       };
+
+      devShells.${darwin-system}.default = devShell (import nixpkgs-darwin { system = darwin-system; });
+      devShells.${nixos-system}.default = devShell (import nixpkgs-nixos { system = nixos-system; });
     };
 }
