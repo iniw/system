@@ -70,9 +70,7 @@
         system = darwin-system;
 
         specialArgs = {
-          inherit user;
-          inherit overlay;
-          inherit mac-app-util;
+          inherit user overlay mac-app-util;
           pkgs-unstable = import nixpkgs-unstable { inherit system; };
         };
 
@@ -87,8 +85,7 @@
         system = nixos-system;
 
         specialArgs = {
-          inherit user;
-          inherit overlay;
+          inherit user overlay;
           pkgs-unstable = import nixpkgs-unstable { inherit system; };
         };
 

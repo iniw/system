@@ -34,8 +34,7 @@
 
   home-manager = {
     extraSpecialArgs = {
-      inherit user;
-      inherit pkgs-unstable;
+      inherit user pkgs-unstable;
     };
 
     useGlobalPkgs = true;
