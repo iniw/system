@@ -16,7 +16,13 @@ return {
       {
         "<leader><space>",
         function()
-          Snacks.picker.smart({ multi = { "buffers", "files" }, cwd = vim.uv.cwd() })
+          Snacks.picker.smart({
+            multi = { "buffers", "files" },
+            cwd = vim.uv.cwd(),
+            layout = {
+              preview = false,
+            },
+          })
         end,
         desc = "Smart Find Files",
       },
