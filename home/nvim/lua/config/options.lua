@@ -1,3 +1,6 @@
+-- NOTE: Remove once https://github.com/neovim/neovim/issues/31675 is fixed
+vim.hl = vim.highlight
+
 -- 4-spaces indentation
 vim.opt.shiftwidth = 4
 vim.opt.tabstop = 4
