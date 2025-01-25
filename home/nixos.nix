@@ -69,7 +69,7 @@
       };
 
       "org/gnome/desktop/peripherals/mouse" = {
-        speed = -0.35;
+        speed = -0.20;
       };
 
       "org/gnome/desktop/interface" = {
