@@ -8,12 +8,6 @@
       # meaning it has be manually added to $PATH.
       "/usr/local/mysql/bin/"
     ];
-
-    sessionVariables = {
-      # Fix for libioconv linker errors when compiling rust code.
-      # TODO: Manage brew with nix-darwin.
-      LIBRARY_PATH = "$LIBRARY_PATH:$(brew --prefix)/lib:$(brew --prefix libiconv)/lib";
-    };
   };
 
   xdg = {
