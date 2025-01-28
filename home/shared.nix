@@ -155,6 +155,10 @@
       plugins = with pkgs.vimPlugins; [
         nvim-treesitter.withAllGrammars
       ];
+
+      extraPackages = with pkgs; [
+        ast-grep
+      ];
     };
 
     nushell = {
