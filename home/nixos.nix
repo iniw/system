@@ -33,7 +33,6 @@
 
     ghostty = {
       enable = true;
-      package = pkgs.ghostty;
     };
 
     neovim = {
