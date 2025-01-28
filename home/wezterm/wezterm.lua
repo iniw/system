@@ -7,18 +7,6 @@ local highlight = "#73b3e7"
 
 -- -- Center tab bar
 wezterm.on("update-status", function(window)
-  local tabs = window:mux_window():tabs()
-  local mid_width = 0
-  for idx, tab in ipairs(tabs) do
-    local title = tab:get_title()
-    mid_width = mid_width + math.floor(math.log(idx, 10)) + 1
-    mid_width = mid_width + 2 + #title + 1
-  end
-  local tab_width = window:active_tab():get_size().cols
-  local max_left = tab_width / 2 - mid_width / 2
-
-  window:set_left_status(wezterm.pad_left(" ", max_left))
-
   window:set_right_status(wezterm.format({
     { Foreground = { Color = foreground } },
     { Text = " " .. wezterm.strftime("%H:%M") },
