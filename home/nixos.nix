@@ -10,11 +10,6 @@
     packages = with pkgs; [
       spotify
       cmusfm
-
-      # For the neovim system clipboard
-      xclip
-      # For treesitter
-      gcc14
     ];
   };
 
@@ -39,6 +34,15 @@
     ghostty = {
       enable = true;
       package = pkgs.ghostty;
+    };
+
+    neovim = {
+      extraPackages = with pkgs; [
+        # For interacting with the system clipboard
+        xclip
+        # For treesitter
+        gcc
+      ];
     };
 
     obs-studio = {
