@@ -32,4 +32,4 @@ vim.keymap.set("n", "<leader>cy", function()
   local line = vim.fn.line(".")
   local result = file .. ":" .. line
   vim.fn.setreg("+", result)
-end, { noremap = true, silent = true })
+end, { desc = "Copy File Name + Column (GDB)" })
