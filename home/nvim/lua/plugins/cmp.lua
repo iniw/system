@@ -24,7 +24,7 @@ return {
           lsp = {
             transform_items = function(_, items)
               return vim.tbl_filter(function(item)
-                local kind = vim.lsp.protocol.CompletionItemKind
+                local kind = require("blink.cmp.types").CompletionItemKind
                 return item.kind ~= kind.Text and item.kind ~= kind.Snippet and item.kind ~= kind.Keyword
               end, items)
             end,
