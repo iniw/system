@@ -44,14 +44,13 @@ require("lazy").setup({
 
   defaults = {
     lazy = false,
-    version = false,
+    version = "*",
   },
 
   install = { colorscheme = { "noirbuddy" } },
 
   checker = {
-    enabled = true,
-    notify = false,
+    enabled = false,
   },
 
   performance = {

@@ -7,7 +7,7 @@ local palette = {
 return {
   {
     "jesseleite/nvim-noirbuddy",
-    dependencies = { "tjdevries/colorbuddy.nvim" },
+    dependencies = { { "tjdevries/colorbuddy.nvim", version = false } },
   },
 
   {
