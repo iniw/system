@@ -2,13 +2,8 @@
 return {
   {
     "saghen/blink.cmp",
-    init = function()
-      vim.g.autocomplete_enabled = true
-    end,
+    --- @type blink.cmp.ConfigStrict
     opts = {
-      enabled = function()
-        return vim.bo.buftype ~= "prompt" and vim.g.autocomplete_enabled
-      end,
       keymap = {
         ["<C-j>"] = { "select_next", "fallback" },
         ["<C-k>"] = { "select_prev", "fallback" },

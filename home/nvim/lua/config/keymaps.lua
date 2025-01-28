@@ -17,12 +17,12 @@ vim.keymap.set("n", "C", "cc")
 
 Snacks.toggle
   .new({
-    name = "Autocomplete",
+    name = "Autocomplete (Buffer)",
     get = function()
-      return vim.g.autocomplete_enabled
+      return vim.b.completion ~= false
     end,
     set = function(state)
-      vim.g.autocomplete_enabled = state
+      vim.api.nvim_buf_set_var(0, "completion", state)
     end,
   })
   :map("<leader>ua")
