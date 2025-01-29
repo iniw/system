@@ -96,17 +96,17 @@
         ]
       },
       "locked": {
-        "lastModified": 1738128785,
-        "narHash": "sha256-w+lUDe++ZiC6yqALPf6A4QNoFhKD44M4pYyQTZXUvIg=",
-        "owner": "iniw",
-        "repo": "fonts",
-        "rev": "6634d9384c12d966277a29f61e5ed7b693367b0e",
-        "type": "github"
+        "lastModified": 1738131850,
+        "narHash": "sha256-ct5V7OQvhXczWGduPzFKR9v7nU0nxEN62ppRCQeO3Dw=",
+        "ref": "refs/heads/master",
+        "rev": "62e9e49b8215086b97d8061a4ef7ea3bfa6fdab9",
+        "revCount": 2,
+        "type": "git",
+        "url": "ssh://git@github.com/iniw/fonts"
       },
       "original": {
-        "owner": "iniw",
-        "repo": "fonts",
-        "type": "github"
+        "type": "git",
+        "url": "ssh://git@github.com/iniw/fonts"
       }
     },
     "home-manager": {
