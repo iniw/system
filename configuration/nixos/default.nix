@@ -16,7 +16,7 @@
 
     extraGroups = [
       "wheel"
-      "networking"
+      "networkmanager"
     ];
 
     isNormalUser = true;
