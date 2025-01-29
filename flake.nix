@@ -27,7 +27,7 @@
     };
 
     fonts = {
-      url = "github:iniw/fonts";
+      url = "git+ssh://git@github.com/iniw/fonts";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
   };
