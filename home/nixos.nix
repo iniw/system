@@ -13,15 +13,6 @@
     ];
   };
 
-  xdg = {
-    configFile = {
-      "ghostty" = {
-        source = ./ghostty;
-        recursive = true;
-      };
-    };
-  };
-
   programs = {
     cmus = {
       enable = true;
@@ -45,6 +36,21 @@
     };
 
     obs-studio = {
+      enable = true;
+    };
+  };
+
+  xdg = {
+    configFile = {
+      "ghostty" = {
+        source = ./ghostty;
+        recursive = true;
+      };
+    };
+  };
+
+  services = {
+    ssh-agent = {
       enable = true;
     };
   };

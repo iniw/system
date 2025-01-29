@@ -6,31 +6,7 @@
   ...
 }:
 {
-  nix = {
-    extraOptions = ''
-      keep-outputs = false
-      keep-derivations = false
-      experimental-features = nix-command flakes
-    '';
-  };
-
-  nixpkgs = {
-    overlays = [ overlay ];
-    config.allowUnfree = true;
-  };
-
-  # Set zsh as the default/login shell to avoid problems when using a non-posix compliant (nu) shell.
-  # See: https://nixos.wiki/wiki/Fish#Setting_fish_as_your_shell
-  #      https://wiki.archlinux.org/title/Fish#System_integration
-  #      https://wiki.gentoo.org/wiki/Fish#Caveats
-  programs.zsh.enable = true;
-
-  environment.shells = [ pkgs.zsh ];
-
-  users.users.${user} = {
-    name = user;
-    shell = pkgs.zsh;
-  };
+  # User
 
   home-manager = {
     extraSpecialArgs = {
@@ -41,5 +17,59 @@
     useUserPackages = true;
 
     backupFileExtension = "hm-backup";
+  };
+
+  # Shell
+
+  programs = {
+    zsh = {
+      enable = true;
+    };
+  };
+
+  environment = {
+    shells = [ pkgs.zsh ];
+  };
+
+  users.users.${user} = {
+    shell = pkgs.zsh;
+  };
+
+  # SSH
+
+  services = {
+    openssh = {
+      enable = true;
+    };
+  };
+
+  programs = {
+    ssh = {
+      knownHosts = {
+        "github.com" = {
+          hostNames = [ "20.201.28.151" ];
+          publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl";
+        };
+      };
+    };
+  };
+
+  # Nix
+
+  nix = {
+    settings = {
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
+    };
+  };
+
+  nixpkgs = {
+    overlays = [ overlay ];
+
+    config = {
+      allowUnfree = true;
+    };
   };
 }

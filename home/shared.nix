@@ -6,13 +6,7 @@
   ...
 }:
 {
-  fonts.fontconfig.enable = true;
-
   home = {
-    shellAliases = {
-      lg = "lazygit";
-    };
-
     packages =
       with pkgs;
       with nodePackages;
@@ -31,28 +25,19 @@
 
         # fonts
         inter
+        berkeley-mono
+        tx-02
 
         # nix
         nil
         nixfmt-rfc-style
       ];
 
-    stateVersion = "24.11";
-  };
-
-  xdg = {
-    enable = true;
-
-    configFile = {
-      "nvim" = {
-        source = ./nvim;
-        recursive = true;
-      };
-
-      "starship.toml" = {
-        source = ./starship/starship.toml;
-      };
+    shellAliases = {
+      lg = "lazygit";
     };
+
+    stateVersion = "24.11";
   };
 
   programs = {
@@ -176,6 +161,12 @@
       enable = true;
     };
 
+    ssh = {
+      enable = true;
+
+      addKeysToAgent = "confirm";
+    };
+
     starship = {
       enable = true;
     };
@@ -206,6 +197,33 @@
             exec "${lib.getExe pkgs.nushell}" "$LOGIN_OPTION"
         fi
       '';
+    };
+  };
+
+  xdg = {
+    enable = true;
+
+    configFile = {
+      "nvim" = {
+        source = ./nvim;
+        recursive = true;
+      };
+
+      "starship.toml" = {
+        source = ./starship/starship.toml;
+      };
+    };
+  };
+
+  fonts = {
+    fontconfig = {
+      enable = true;
+
+      defaultFonts = {
+        monospace = [ "Berkeley Mono" ];
+        sansSerif = [ "Inter" ];
+        serif = [ "Inter" ];
+      };
     };
   };
 }

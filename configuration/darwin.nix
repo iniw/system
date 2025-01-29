@@ -7,12 +7,12 @@
   imports = [ ./shared.nix ];
 
   users = {
-    knownUsers = [ user ];
-
     users.${user} = {
       home = "/Users/${user}";
       uid = 501;
     };
+
+    knownUsers = [ user ];
   };
 
   home-manager = {
@@ -22,7 +22,11 @@
     ];
   };
 
-  services.nix-daemon.enable = true;
+  services = {
+    nix-daemon = {
+      enable = true;
+    };
+  };
 
   nixpkgs = {
     hostPlatform = "x86_64-darwin";
