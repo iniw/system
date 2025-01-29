@@ -7,31 +7,28 @@
 }:
 {
   home = {
-    packages =
-      with pkgs;
-      with nodePackages;
-      [
-        # apps
-        discord
+    packages = with pkgs; [
+      # apps
+      discord
 
-        # tools
-        coreutils
-        exiftool
-        hyperfine
-        just
-        klip
-        scc
-        zlib
+      # tools
+      coreutils
+      exiftool
+      hyperfine
+      just
+      klip
+      scc
+      zlib
 
-        # fonts
-        inter
-        berkeley-mono
-        tx-02
+      # fonts
+      inter
+      berkeley-mono
+      tx-02
 
-        # nix
-        nil
-        nixfmt-rfc-style
-      ];
+      # nix
+      nil
+      nixfmt-rfc-style
+    ];
 
     shellAliases = {
       lg = "lazygit";
