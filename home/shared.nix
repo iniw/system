@@ -201,7 +201,7 @@
             else
                 LOGIN_OPTION='''
             fi
-            exec "${lib.getExe pkgs.nushell}" "$LOGIN_OPTION"
+            exec nu "$LOGIN_OPTION"
         fi
       '';
     };
