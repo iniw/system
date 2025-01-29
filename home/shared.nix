@@ -220,7 +220,7 @@
       enable = true;
 
       defaultFonts = {
-        monospace = [ "Berkeley Mono" ];
+        monospace = [ "TX-02" ];
         sansSerif = [ "Inter" ];
         serif = [ "Inter" ];
       };
