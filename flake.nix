@@ -48,20 +48,17 @@
     }:
 
     let
-      darwin-system = "x86_64-darwin";
-      nixos-system = "x86_64-linux";
       user = "sol";
 
       overlay = final: prev: {
         klip = klip.packages."${prev.system}".klip;
-
-        berkeley-mono = fonts.packages."${prev.system}".berkeley-mono;
         tx-02 = fonts.packages."${prev.system}".tx-02;
+        berkeley-mono = fonts.packages."${prev.system}".berkeley-mono;
       };
     in
     {
       darwinConfigurations.mac = nix-darwin.lib.darwinSystem rec {
-        system = darwin-system;
+        system = "x86_64-darwin";
 
         specialArgs = {
           inherit user overlay mac-app-util;
@@ -76,7 +73,7 @@
       };
 
       nixosConfigurations.nixos = nixpkgs-nixos.lib.nixosSystem rec {
-        system = nixos-system;
+        system = "x86_64-linux";
 
         specialArgs = {
           inherit user overlay;

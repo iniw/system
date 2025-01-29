@@ -22,8 +22,8 @@
 
       # fonts
       inter
-      berkeley-mono
       tx-02
+      berkeley-mono
     ];
 
     shellAliases = {
@@ -57,7 +57,10 @@
 
     direnv = {
       enable = true;
-      nix-direnv.enable = true;
+
+      nix-direnv = {
+        enable = true;
+      };
     };
 
     fd = {
