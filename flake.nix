@@ -56,16 +56,6 @@
         berkeley-mono = fonts.packages."${prev.system}".berkeley-mono;
         tx-02 = fonts.packages."${prev.system}".tx-02;
       };
-
-      devShell =
-        pkgs:
-        with pkgs;
-        mkShell {
-          packages = [
-            lua-language-server
-            stylua
-          ];
-        };
     in
     {
       darwinConfigurations.mac = nix-darwin.lib.darwinSystem rec {
@@ -96,8 +86,5 @@
           home-manager.nixosModules.home-manager
         ];
       };
-
-      devShells.${darwin-system}.default = devShell (import nixpkgs-darwin { system = darwin-system; });
-      devShells.${nixos-system}.default = devShell (import nixpkgs-nixos { system = nixos-system; });
     };
 }
