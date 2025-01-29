@@ -24,10 +24,6 @@
       inter
       berkeley-mono
       tx-02
-
-      # nix
-      nil
-      nixfmt-rfc-style
     ];
 
     shellAliases = {
@@ -139,7 +135,14 @@
       ];
 
       extraPackages = with pkgs; [
+        # For grug-far.nvim
         ast-grep
+
+        # System-wide LSP support for Nix and Lua, since they are used everywhere.
+        nil
+        nixfmt-rfc-style
+        lua-language-server
+        stylua
       ];
     };
 
