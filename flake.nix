@@ -4,6 +4,7 @@
   inputs = {
     nixpkgs-darwin.url = "github:NixOS/nixpkgs/nixpkgs-24.11-darwin";
     nixpkgs-nixos.url = "github:NixOS/nixpkgs/nixos-24.11";
+    nixpkgs-universal.url = "github:NixOS/nixpkgs/release-24.11";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
     nix-darwin = {
@@ -13,7 +14,7 @@
 
     home-manager = {
       url = "github:nix-community/home-manager/release-24.11";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs-universal";
     };
 
     mac-app-util = {
@@ -23,12 +24,12 @@
 
     klip = {
       url = "github:iniw/klip";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs-universal";
     };
 
     fonts = {
       url = "git+ssh://git@github.com/iniw/fonts";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs-universal";
     };
   };
 
@@ -37,6 +38,7 @@
       self,
       nixpkgs-darwin,
       nixpkgs-nixos,
+      nixpkgs-universal,
       nixpkgs-unstable,
       nix-darwin,
       home-manager,
