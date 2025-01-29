@@ -25,6 +25,11 @@
       url = "github:iniw/klip";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
+
+    fonts = {
+      url = "github:iniw/fonts";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
   };
 
   outputs =
@@ -37,6 +42,7 @@
       home-manager,
       mac-app-util,
       klip,
+      fonts,
     }:
 
     let
@@ -46,6 +52,9 @@
 
       overlay = final: prev: {
         klip = klip.packages."${prev.system}".klip;
+
+        berkeley-mono = fonts.packages."${prev.system}".berkeley-mono;
+        tx-02 = fonts.packages."${prev.system}".tx-02;
       };
 
       devShell =
