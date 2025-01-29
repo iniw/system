@@ -167,7 +167,7 @@ end
 
 return {
   -- Font
-  font = wezterm.font("BerkeleyMono Nerd Font Mono"),
+  font = wezterm.font("Berkeley Mono"),
   font_size = 15.0,
 
   -- Tab bar
@@ -192,11 +192,11 @@ return {
     cursor_fg = background,
     cursor_border = foreground,
 
-    selection_bg = "#3e4249",
+    selection_bg = "#323232", -- Same as Neovim's
     selection_fg = foreground,
 
     ansi = {
-      background,
+      "#121212",
       "#e77171",
       "#a1bf78",
       "#dbb774",
@@ -208,12 +208,12 @@ return {
     brights = {
       "#88909f",
       "#e77171",
-      foreground,
+      "#d5d5d5",
       "#dbb774",
       "#73b3e7",
       "#d390e7",
       "#5ebaa5",
-      foreground,
+      "#d5d5d5",
     },
 
     tab_bar = {
@@ -234,7 +234,6 @@ return {
   keys = keybinds(),
 
   -- Misc
-  front_end = "WebGpu",
   force_reverse_video_cursor = true,
   term = "wezterm",
 }
