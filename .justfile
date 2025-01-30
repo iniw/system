@@ -1,13 +1,13 @@
 mod lazy
 
 rebuild-cmd := if os() == 'linux' {
-  "sudo nixos-rebuild"
+  "nixos-rebuild switch --flake . --use-remote-sudo"
 } else {
-  "darwin-rebuild"
+  "darwin-rebuild switch --flake ."
 }
 
 @switch:
-  {{rebuild-cmd}} switch --flake .
+  {{rebuild-cmd}}
 
 @gc:
   sudo nix-collect-garbage --delete-old
