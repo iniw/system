@@ -7,7 +7,7 @@ nvim-extras := "$XDG_CONFIG_HOME/nvim/lazyvim.json"
   nvim --headless "+Lazy! sync" +qa
   cp {{nvim-lock}} {{nix-lock}}
   cp {{nvim-extras}} {{nix-extras}}
-  git commit "{{nix-lock}} {{nix-extras}}" -m "nvim: update lockfile"
+  git commit -m "nvim: update lockfile" {{nix-lock}} {{nix-extras}}
 
 @restore:
   cp {{nix-lock}} {{nvim-lock}}
