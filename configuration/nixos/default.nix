@@ -27,17 +27,6 @@
     ];
   };
 
-  programs = {
-    ssh = {
-      knownHosts = {
-        "github.com" = {
-          hostNames = [ "20.201.28.151" ];
-          publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGlRanrUGkBeUqc6sE0w4dr9Fu37yE1qxhlLTo3qzRlQ";
-        };
-      };
-    };
-  };
-
   # Use the systemd-boot EFI boot loader.
   boot.loader = {
     systemd-boot.enable = true;
