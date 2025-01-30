@@ -2,16 +2,31 @@
 return {
   {
     "folke/snacks.nvim",
-    ---@param opts snacks.Config
-    opts = function(_, opts)
-      -- Remove the delay before updating
-      opts.words.debounce = 25
+    ---@type snacks.Config
+    opts = {
+      words = {
+        -- Remove the delay before updating
+        debounce = 25,
+      },
 
-      -- Remove the header/footer
-      opts.dashboard.sections = {
-        { section = "keys", gap = 1, padding = 1 },
-      }
-    end,
+      dashboard = {
+        sections = {
+          [1] = { section = "keys", gap = 1 },
+          -- Remove the header and footer
+          [2] = nil,
+          [3] = nil,
+        },
+      },
+
+      terminal = {
+        -- Remove terminal title bar
+        win = {
+          wo = {
+            winbar = "",
+          },
+        },
+      },
+    },
     keys = {
       {
         "<leader><space>",
@@ -29,8 +44,7 @@ return {
       {
         "gad",
         function()
-          local snacks = require("snacks")
-          snacks.picker.lsp_definitions({
+          Snacks.picker.lsp_definitions({
             confirm = "edit_vsplit",
           })
         end,
