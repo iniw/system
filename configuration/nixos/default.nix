@@ -37,7 +37,14 @@
 
   time.timeZone = "America/Sao_Paulo";
 
-  i18n.defaultLocale = "en_US.UTF-8";
+  i18n = {
+    defaultLocale = "en_US.UTF-8";
+
+    inputMethod = {
+      enable = true;
+      type = "ibus";
+    };
+  };
 
   services.xserver = {
     enable = true;
