@@ -232,7 +232,7 @@
       enable = true;
 
       defaultFonts = {
-        monospace = [ "TX-02" ];
+        monospace = [ "Berkeley Mono" ];
         sansSerif = [ "Inter" ];
         serif = [ "Inter" ];
       };
