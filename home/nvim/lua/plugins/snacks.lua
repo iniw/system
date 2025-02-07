@@ -4,25 +4,38 @@ return {
     "folke/snacks.nvim",
     ---@type snacks.Config
     opts = {
+      -- Remove the delay before updating
       words = {
-        -- Remove the delay before updating
         debounce = 25,
       },
 
+      -- Remove the header and footer
       dashboard = {
         sections = {
           [1] = { section = "keys", gap = 1 },
-          -- Remove the header and footer
           [2] = nil,
           [3] = nil,
         },
       },
 
+      -- Remove terminal title bar
       terminal = {
-        -- Remove terminal title bar
         win = {
           wo = {
             winbar = "",
+          },
+        },
+      },
+
+      -- Place explorer on the right side of the screen
+      picker = {
+        sources = {
+          explorer = {
+            layout = {
+              layout = {
+                position = "right",
+              },
+            },
           },
         },
       },
