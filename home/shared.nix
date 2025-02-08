@@ -139,11 +139,19 @@
         # For grug-far.nvim
         ast-grep
 
-        # System-wide LSP support for Nix and Lua, since they are used everywhere.
+        # System-wide LSP support languages used everywhere.
+
+        # nix
         nil
         nixfmt-rfc-style
+        # lua
         lua-language-server
         stylua
+        # markdown
+        marksman
+        markdownlint-cli2
+        # toml
+        taplo
       ];
     };
 
