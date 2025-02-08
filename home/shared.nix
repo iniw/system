@@ -102,7 +102,6 @@
 
       ignores = [
         ".DS_Store"
-        "**/.DS_Store"
 
         # Project-specific lazyvim config
         ".lazy.lua"
@@ -114,8 +113,7 @@
         # fd's ignore list
         ".ignore"
 
-        # just's recipe list
-        ".justfile"
+        "justfile"
       ];
     };
 
