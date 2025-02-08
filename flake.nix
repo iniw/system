@@ -85,5 +85,6 @@
           home-manager.nixosModules.home-manager
         ];
       };
+      # julia + vinicius = amor
     };
 }
