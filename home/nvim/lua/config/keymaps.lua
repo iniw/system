@@ -1,35 +1,239 @@
--- Quick jump to the Nth window/tab
-for i = 1, 6 do
-  vim.keymap.set("n", "<leader>" .. i, i .. "<C-w>w", { desc = "Move to Window " .. i })
-  vim.keymap.set("n", "<leader><tab>" .. i, i .. "gt", { desc = "Move to Tab " .. i })
-end
+require("which-key").add({
+  -- General
+  { "<leader>e", Snacks.explorer.open, desc = "File explorer" },
+  { "<leader>q", "<cmd>qa<cr>", desc = "Quit" },
+  { "<leader>/", Snacks.picker.grep, desc = "Grep" },
+  {
+    "<leader><space>",
+    function()
+      Snacks.picker.smart({
+        multi = { "buffers", "files" },
+        layout = { preview = false },
+      })
+    end,
+    desc = "Find files",
+  },
+  {
+    "<leader>?",
+    function() require("which-key").show({ global = false }) end,
+    desc = "Buffer keymaps (which-key)",
+  },
+  {
+    "<c-/>",
+    Snacks.terminal.toggle,
+    mode = { "n", "t" },
+    desc = "Toggle terminal",
+  },
 
-vim.keymap.set("i", "<C-o>", "<Left><C-o>")
+  -- Buffers
+  { "<leader>b", group = "buffer" },
+  { "<leader>bd", Snacks.bufdelete.delete, desc = "Close buffer" },
+  { "<leader>bD", "<cmd>:bd<cr>", desc = "Close buffer and window" },
+  { "<leader>bh", "<cmd>bp<cr>", desc = "Previous buffer" },
+  { "<leader>bl", "<cmd>bn<cr>", desc = "Next buffer" },
+  { "<leader>bn", "<cmd>enew<cr>", desc = "New buffer" },
+  { "<leader>bo", Snacks.bufdelete.other, desc = "Close all other buffers" },
 
-vim.keymap.set("n", "<A-Up>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
-vim.keymap.set("n", "<A-Down>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" })
-vim.keymap.set("n", "<A-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease Window Width" })
-vim.keymap.set("n", "<A-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window Width" })
+  -- Multicursors
+  { "<leader>m", group = "multicursors" },
+  {
+    "<leader>ma",
+    function() require("multicursor-nvim").toggleCursor() end,
+    desc = "Toggle cursor at the current position",
+    mode = { "n", "v" },
+  },
+  {
+    "<leader>mc",
+    function() require("multicursor-nvim").clearCursors() end,
+    desc = "Clear cursors",
+    mode = { "n", "v" },
+  },
+  {
+    "<leader>mj",
+    function() require("multicursor-nvim").lineAddCursor(1) end,
+    desc = "Add cursor below",
+    mode = { "n", "v" },
+  },
+  {
+    "<leader>mk",
+    function() require("multicursor-nvim").lineAddCursor(-1) end,
+    desc = "Add cursor above",
+    mode = { "n", "v" },
+  },
+  {
+    "<leader>mn",
+    function() require("multicursor-nvim").matchAddCursor(1) end,
+    desc = "Add cursor and jump to next match",
+    mode = { "n", "v" },
+  },
+  {
+    "<leader>mp",
+    function() require("multicursor-nvim").matchAddCursor(-1) end,
+    desc = "Add cursor and jump to previous match",
+    mode = { "n", "v" },
+  },
+  {
+    "<leader>mt",
+    function()
+      local mc = require("multicursor-nvim")
+      if mc.cursorsEnabled() then
+        mc.disableCursors()
+      else
+        mc.enableCursors()
+      end
+    end,
+    desc = "Toggle cursors",
+    mode = { "n", "v" },
+  },
+  {
+    "<leader>m<a-n>",
+    function() require("multicursor-nvim").matchSkipCursor(1) end,
+    desc = "Jump to next match",
+    mode = { "n", "v" },
+  },
+  {
+    "<leader>m<a-p>",
+    function() require("multicursor-nvim").matchSkipCursor(-1) end,
+    desc = "Jump to previous match",
+    mode = { "n", "v" },
+  },
+  {
+    "<leader>m<space>",
+    function() require("which-key").show({ keys = "<leader>m", loop = true }) end,
+    desc = "Multicursors (Hydra Mode)",
+    mode = { "n", "v" },
+  },
 
-vim.keymap.set("n", "D", "dd")
-vim.keymap.set("n", "Y", "yy")
-vim.keymap.set("n", "C", "cc")
+  -- Search
+  { "<leader>s", group = "search" },
+  { "<leader>sa", Snacks.picker.autocmds, desc = "Autocmds" },
+  { "<leader>sb", Snacks.picker.lines, desc = "Buffer lines" },
+  { "<leader>sB", Snacks.picker.grep_buffers, desc = "Grep open buffers" },
+  { "<leader>sc", Snacks.picker.command_history, desc = "Command history" },
+  { "<leader>sC", Snacks.picker.commands, desc = "Commands" },
+  { "<leader>sd", Snacks.picker.diagnostics_buffer, desc = "Diagnostics (buffer)" },
+  { "<leader>sD", Snacks.picker.diagnostics, desc = "Diagnostics" },
+  { "<leader>sh", Snacks.picker.help, desc = "Help pages" },
+  { "<leader>sH", Snacks.picker.highlights, desc = "Highlights" },
+  { "<leader>si", Snacks.picker.icons, desc = "Icons" },
+  { "<leader>sk", Snacks.picker.keymaps, desc = "Keymaps" },
+  { "<leader>sn", Snacks.picker.notifications, desc = "Notification history" },
+  { "<leader>sq", Snacks.picker.qflist, desc = "Quickfix list" },
+  { "<leader>sp", Snacks.picker.lazy, desc = "Search plugin spec" },
+  {
+    "<leader>sr",
+    function()
+      local ext = vim.bo.buftype == "" and vim.fn.expand("%:e")
+      require("grug-far").open({
+        transient = true,
+        prefills = {
+          filesFilter = ext and ext ~= "" and "*." .. ext or nil,
+        },
+      })
+    end,
+    desc = "Search and replace",
+    mode = { "n", "v" },
+  },
+  { "<leader>sR", Snacks.picker.resume, desc = "Resume" },
+  { "<leader>su", Snacks.picker.undo, desc = "Undotree" },
+  { '<leader>s"', Snacks.picker.registers, desc = "Registers" },
+  { "<leader>s/", Snacks.picker.search_history, desc = "Search history" },
+  { "<leader>sw", Snacks.picker.grep_word, desc = "Grep Word", mode = { "n", "x" } },
 
+  -- UI
+  { "<leader>u", group = "ui" },
+  { "<leader>uC", function() Snacks.picker.colorschemes() end, desc = "Colorschemes" },
+  { "<leader>ui", vim.show_pos, desc = "Inspect position" },
+  { "<leader>uI", "<cmd>InspectTree<cr>", desc = "Inspect tree" },
+
+  -- Windows
+  { "<leader>w", group = "windows", proxy = "<c-w>" },
+  { "<leader>wd", "<c-w>c", desc = "Close window" },
+
+  { "<c-h>", "<c-w>h", desc = "Go to the left window" },
+  { "<c-j>", "<c-w>j", desc = "Go to the lower window" },
+  { "<c-k>", "<c-w>k", desc = "Go to the upper window" },
+  { "<c-l>", "<c-w>l", desc = "Go to the right window" },
+
+  { "<leader>wr", group = "resize" },
+  { "<leader>wr<up>", "<cmd>resize +2<cr>", desc = "Increase height" },
+  { "<leader>wr<down>", "<cmd>resize -2<cr>", desc = "Decrease height" },
+  { "<leader>wr<left>", "<cmd>vertical resize -2<cr>", desc = "Decrease width" },
+  { "<leader>wr<right>", "<cmd>vertical resize +2<cr>", desc = "Increase width" },
+  { "<leader>wr=", "<c-w>=", desc = "Equally high and wide" },
+  { "<leader>wr_", "<c-w>_", desc = "Max out the height" },
+  { "<leader>wr|", "<c-w>|", desc = "Max out the width" },
+  {
+    "<leader>wr<space>",
+    function() require("which-key").show({ keys = "<leader>wr", loop = true }) end,
+    desc = "Resize window (Hydra Mode)",
+  },
+
+  -- Yazi
+  { "<leader>y", group = "yazi" },
+  {
+    "<leader>yR",
+    "<cmd>Yazi toggle<cr>",
+    desc = "Resume",
+    mode = { "n", "v" },
+  },
+  {
+    "<leader>yy",
+    "<cmd>Yazi<cr>",
+    desc = "Open yazi (file)",
+    mode = { "n", "v" },
+  },
+  {
+    "<leader>yY",
+    "<cmd>Yazi cwd<cr>",
+    desc = "Open yazi (cwd)",
+    mode = { "n", "v" },
+  },
+
+  -- Tabs
+  { "<leader><tab>", group = "tabs" },
+  { "<leader><tab>d", "<cmd>tabc<cr>", desc = "Close tab" },
+  { "<leader><tab>h", "<cmd>tabp<cr>", desc = "Go to the previous tab" },
+  { "<leader><tab>l", "<cmd>tabn<cr>", desc = "Go to the next tab" },
+  { "<leader><tab>n", "<cmd>tabnew<cr>", desc = "New tab" },
+  { "<leader><tab>o", "<cmd>tabo<cr>", desc = "Close all other tabs" },
+
+  -- Clear search on escape
+  {
+    "<esc>",
+    function()
+      vim.cmd("noh")
+      return "<esc>"
+    end,
+    mode = { "i", "n", "s" },
+    expr = true,
+  },
+  -- Better <c-o>
+  { "<c-o>", "<Left><c-o>", mode = "i" },
+  -- Better delete/yank/copy
+  { "D", "dd" },
+  { "Y", "yy" },
+  { "C", "cc" },
+  -- Better up/down
+  { "j", "v:count == 0 ? 'gj' : 'j'", mode = { "n", "x" }, expr = true, silent = true },
+  { "<Down>", "v:count == 0 ? 'gj' : 'j'", mode = { "n", "x" }, expr = true, silent = true },
+  { "k", "v:count == 0 ? 'gk' : 'k'", mode = { "n", "x" }, expr = true, silent = true },
+  { "<Up>", "v:count == 0 ? 'gk' : 'k'", mode = { "n", "x" }, expr = true, silent = true },
+  -- Better indenting
+  { "<", "<gv", mode = "v" },
+  { ">", ">gv", mode = "v" },
+  -- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
+  { "n", "'Nn'[v:searchforward].'zv'", mode = "n", expr = true },
+  { "N", "'nN'[v:searchforward].'zv'", mode = "n", expr = true },
+  { "n", "'Nn'[v:searchforward]", mode = "x", expr = true },
+  { "N", "'nN'[v:searchforward]", mode = "x", expr = true },
+  { "n", "'Nn'[v:searchforward]", mode = "o", expr = true },
+  { "N", "'nN'[v:searchforward]", mode = "o", expr = true },
+})
+
+-- Toggles
+sol.toggle("zoom", "<leader>wm")
+Snacks.toggle.option("wrap", { name = "wrap" }):map("<leader>uw")
 Snacks.toggle
-  .new({
-    name = "Autocomplete (Buffer)",
-    get = function()
-      return vim.b.completion ~= false
-    end,
-    set = function(state)
-      vim.api.nvim_buf_set_var(0, "completion", state)
-    end,
-  })
-  :map("<leader>ua")
-
-vim.keymap.set("n", "<leader>cy", function()
-  local file = vim.fn.expand("%")
-  local line = vim.fn.line(".")
-  local result = file .. ":" .. line
-  vim.fn.setreg("+", result)
-end, { desc = "Copy File Name + Column (GDB)" })
+  .option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2, name = "conceal level" })
+  :map("<leader>uc")
