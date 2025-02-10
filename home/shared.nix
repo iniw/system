@@ -135,12 +135,8 @@
         nvim-treesitter.withAllGrammars
       ];
 
+      # System-wide LSP support for languages used everywhere.
       extraPackages = with pkgs; [
-        # For grug-far.nvim
-        ast-grep
-
-        # System-wide LSP support languages used everywhere.
-
         # nix
         nil
         nixfmt-rfc-style

@@ -1,16 +1,13 @@
----@module "lspconfig"
-
 ---@type LazySpec
 return {
   {
     "neovim/nvim-lspconfig",
     opts = {
-      inlay_hints = {
-        enabled = false,
-      },
-      ---@type { [string]: lspconfig.Config }
       servers = {
         clangd = {
+          keys = {
+            { "<leader>ch", "<cmd>ClangdSwitchSourceHeader<cr>", desc = "Switch source/header" },
+          },
           cmd = {
             "clangd",
             "--query-driver=**",
@@ -19,15 +16,16 @@ return {
             "--background-index",
           },
         },
-        lua_ls = {
-          settings = {
-            Lua = {
-              diagnostics = {
-                disable = { "missing-fields" },
-              },
-            },
-          },
-        },
+      },
+    },
+  },
+
+  {
+    "stevearc/conform.nvim",
+    opts = {
+      formatters_by_ft = {
+        c = { "clang-format" },
+        cpp = { "clang-format" },
       },
     },
   },
