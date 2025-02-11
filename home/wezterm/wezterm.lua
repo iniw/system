@@ -233,6 +233,7 @@ return {
   -- Keys
   disable_default_key_bindings = true,
   keys = keybinds(),
+  enable_kitty_keyboard = true,
 
   -- Misc
   force_reverse_video_cursor = true,
