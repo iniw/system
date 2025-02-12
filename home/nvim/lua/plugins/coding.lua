@@ -1,49 +1,6 @@
 ---@type LazySpec
 return {
   {
-    "stevearc/conform.nvim",
-    event = "BufWritePre",
-    cmd = "ConformInfo",
-    opts = {
-      format_on_save = function(buf)
-        if vim.g.autoformat ~= false and vim.b[buf].autoformat ~= false then
-          return { timeout_ms = 3000, lsp_format = "fallback" }
-        end
-      end,
-    },
-    keys = {
-      {
-        "<leader>cf",
-        function() require("conform").format({ async = true }) end,
-        desc = "Format buffer",
-      },
-      {
-        "<c-s>",
-        "<cmd>w<cr>",
-        desc = "Save Buffer",
-        mode = { "n", "i" },
-      },
-    },
-    config = function(_, opts)
-      require("conform").setup(opts)
-
-      Snacks.toggle({
-        name = "autoformat (buffer)",
-        get = function() return vim.b.autoformat ~= false end,
-        set = function(state) vim.b.autoformat = state end,
-      }):map("<leader>uf")
-
-      Snacks.toggle({
-        name = "autoformat (global)",
-        get = function() return vim.g.autoformat ~= false end,
-        set = function(state) vim.g.autoformat = state end,
-      }):map("<leader>uF")
-
-      vim.o.formatexpr = "v:lua.require('conform').formatexpr()"
-    end,
-  },
-
-  {
     "jake-stewart/multicursor.nvim",
     config = function()
       local function hl(group, definition) vim.api.nvim_set_hl(0, group, { link = definition }) end
@@ -53,7 +10,6 @@ return {
 
       require("multicursor-nvim").setup()
     end,
-    keys = {},
   },
 
   {

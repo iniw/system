@@ -27,10 +27,6 @@ return {
         debounce = 25,
       },
     },
-    keys = {
-      { "]]", function() Snacks.words.jump(vim.v.count1) end, desc = "Next reference", mode = { "n", "t" } },
-      { "[[", function() Snacks.words.jump(-vim.v.count1) end, desc = "Previous reference", mode = { "n", "t" } },
-    },
   },
 
   -- Explorer

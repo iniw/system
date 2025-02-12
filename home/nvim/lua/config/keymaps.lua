@@ -142,14 +142,25 @@ require("which-key").add({
 
   -- UI
   { "<leader>u", group = "ui" },
-  { "<leader>uC", function() Snacks.picker.colorschemes() end, desc = "Colorschemes" },
+  { "<leader>uC", Snacks.picker.colorschemes, desc = "Colorschemes" },
   { "<leader>ui", vim.show_pos, desc = "Inspect position" },
   { "<leader>uI", "<cmd>InspectTree<cr>", desc = "Inspect tree" },
 
   -- Windows
   { "<leader>w", group = "windows", proxy = "<c-w>" },
   { "<leader>wd", "<c-w>c", desc = "Close window" },
-
+  sol.toggle({
+    key = "<leader>wm",
+    name = "zoom",
+    get = function() return Snacks.zen.win and Snacks.zen.win:valid() or false end,
+    set = function(state)
+      if state then
+        Snacks.zen.zoom()
+      elseif Snacks.zen.win then
+        Snacks.zen.win:close()
+      end
+    end,
+  }),
   { "<c-h>", "<c-w>h", desc = "Go to the left window" },
   { "<c-j>", "<c-w>j", desc = "Go to the lower window" },
   { "<c-k>", "<c-w>k", desc = "Go to the upper window" },
@@ -198,6 +209,13 @@ require("which-key").add({
   { "<leader><tab>n", "<cmd>tabnew<cr>", desc = "New tab" },
   { "<leader><tab>o", "<cmd>tabo<cr>", desc = "Close all other tabs" },
 
+  -- Save with <c-s>
+  {
+    "<c-s>",
+    "<cmd>w<cr>",
+    desc = "Save buffer",
+    mode = { "n", "i" },
+  },
   -- Clear search on escape
   {
     "<esc>",
@@ -235,10 +253,3 @@ require("which-key").add({
   { "<c-k>", "<up>", mode = "i" },
   { "<c-l>", "<right>", mode = "i" },
 })
-
--- Toggles
-sol.toggle("zoom", "<leader>wm")
-Snacks.toggle.option("wrap", { name = "wrap" }):map("<leader>uw")
-Snacks.toggle
-  .option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2, name = "conceal level" })
-  :map("<leader>uc")
