@@ -4,7 +4,28 @@ return {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
-        marksman = {},
+        marksman = {
+          keys = {
+            { "<leader>cm", group = "markdown" },
+            {
+              "<leader>cmp",
+              "<cmd>MarkdownPreviewToggle<cr>",
+              desc = "Markdown preview",
+            },
+            sol.toggle({
+              key = "<leader>cmr",
+              name = "markdown rendering",
+              get = function() return require("render-markdown.state").enabled end,
+              set = function(enabled)
+                if enabled then
+                  require("render-markdown").enable()
+                else
+                  require("render-markdown").disable()
+                end
+              end,
+            }),
+          },
+        },
       },
     },
   },
@@ -27,14 +48,6 @@ return {
       require("lazy").load({ plugins = { "markdown-preview.nvim" } })
       vim.fn["mkdp#util#install"]()
     end,
-    keys = {
-      {
-        "<leader>cp",
-        ft = "markdown",
-        "<cmd>MarkdownPreviewToggle<cr>",
-        desc = "Markdown preview",
-      },
-    },
     config = function() vim.cmd("do FileType") end,
   },
 
@@ -55,21 +68,23 @@ return {
       checkbox = {
         enabled = false,
       },
-      on = {
-        attach = function()
-          Snacks.toggle({
-            name = "markdown rendering",
-            get = function() return require("render-markdown.state").enabled end,
-            set = function(enabled)
-              local m = require("render-markdown")
-              if enabled then
-                m.enable()
-              else
-                m.disable()
-              end
-            end,
-          }):map("<leader>um")
-        end,
+    },
+  },
+
+  {
+    "saghen/blink.cmp",
+    --- @module "blink.cmp"
+    --- @type blink.cmp.ConfigStrict
+    opts = {
+      sources = {
+        default = { "markdown" },
+        providers = {
+          markdown = {
+            name = "RenderMarkdown",
+            module = "render-markdown.integ.blink",
+            fallbacks = { "lsp" },
+          },
+        },
       },
     },
   },
