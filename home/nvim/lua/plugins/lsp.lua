@@ -32,13 +32,7 @@ function setup.keymaps(buffer, server_keymaps)
       { "<leader>ca", vim.lsp.buf.code_action, desc = "Code action", mode = { "n", "x" } },
       {
         "<leader>cb",
-        function()
-          local file = vim.fn.expand("%")
-          local line = vim.fn.line(".")
-          local result = file .. ":" .. line
-          vim.fn.setreg("+", result)
-          vim.notify("Yanked gdb breakpoint", "info")
-        end,
+        function() vim.fn.setreg("+", vim.fn.expand("%") .. ":" .. vim.fn.line(".")) end,
         desc = "Yank gdb breakpoint",
       },
       { "<leader>cd", Snacks.picker.lsp_definitions, desc = "Go to definition" },
