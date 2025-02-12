@@ -91,7 +91,7 @@ end
 return {
   {
     "neovim/nvim-lspconfig",
-    event = { "BufRead", "BufNewFile" },
+    event = sol.OnFile,
     config = function(_, opts)
       setup.diagnostics()
 

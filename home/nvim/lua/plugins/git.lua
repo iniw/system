@@ -12,7 +12,7 @@ return {
 
   {
     "lewis6991/gitsigns.nvim",
-    event = { "BufRead", "BufNewFile" },
+    event = sol.OnFile,
     ---@module "gitsigns"
     opts = {
       on_attach = function(buffer)

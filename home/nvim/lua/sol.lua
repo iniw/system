@@ -21,4 +21,6 @@ function M.toggle(name, key, opts)
   toggle:map(key, opts)
 end
 
+M.OnFile = { "BufReadPost", "BufNewFile", "BufWritePre" }
+
 return M

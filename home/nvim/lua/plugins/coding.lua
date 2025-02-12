@@ -123,7 +123,7 @@ return {
 
   {
     "chrisgrieser/nvim-various-textobjs",
-    event = { "BufRead", "BufNewFile" },
+    event = sol.OnFile,
     ---@module "various-textobjs"
     ---@type VariousTextobjs.Config
     opts = {
@@ -135,7 +135,7 @@ return {
 
   {
     "echasnovski/mini.ai",
-    event = { "BufRead", "BufNewFile" },
+    event = sol.OnFile,
     opts = {
       silent = true,
       search_method = "cover",
@@ -144,7 +144,7 @@ return {
 
   {
     "echasnovski/mini.surround",
-    event = { "BufRead", "BufNewFile" },
+    event = sol.OnFile,
     init = function()
       -- https://github.com/echasnovski/mini.nvim/blob/57e47cf7a2923684e7413989ab267ed9730e7d03/doc/mini-surround.txt#L570
       vim.keymap.set({ "n", "v" }, "s", "<Nop>")
@@ -154,13 +154,13 @@ return {
 
   {
     "echasnovski/mini.jump",
-    event = { "BufRead", "BufNewFile" },
+    event = sol.OnFile,
     opts = { silent = true },
   },
 
   {
     "echasnovski/mini.move",
-    event = { "BufRead", "BufNewFile" },
+    event = sol.OnFile,
     opts = {
       -- Use wasd instead of hjkl to avoid moving lines around when quickly pressing esc+{motion}
       mappings = {
@@ -179,7 +179,7 @@ return {
 
   {
     "echasnovski/mini.comment",
-    event = { "BufRead", "BufNewFile" },
+    event = sol.OnFile,
     opts = {},
   },
 }
