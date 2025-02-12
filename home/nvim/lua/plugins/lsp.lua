@@ -23,12 +23,6 @@ function setup.diagnostics()
 end
 
 function setup.keymaps(buffer, server_keymaps)
-  local function goto_diagnostic(next, severity)
-    local go = vim.diagnostic["goto_" .. next]
-    severity = severity and vim.diagnostic.severity[severity] or nil
-    return function() go({ severity = severity }) end
-  end
-
   require("which-key").add({
     {
       buffer = buffer,
@@ -69,12 +63,8 @@ function setup.keymaps(buffer, server_keymaps)
       { "<c-k>", vim.lsp.buf.signature_help, desc = "Signature help", mode = "i" },
 
       -- Movement
-      { "]d", goto_diagnostic("next"), desc = "Next diagnostic" },
-      { "[d", goto_diagnostic("prev"), desc = "Previous diagnostic" },
-      { "]e", goto_diagnostic("next", "ERROR"), desc = "Next error" },
-      { "[e", goto_diagnostic("prev", "ERROR"), desc = "Previous error" },
-      { "]w", goto_diagnostic("next", "WARN"), desc = "Next warning" },
-      { "[w", goto_diagnostic("prev", "WARN"), desc = "Previous warning" },
+      { "]d", vim.diagnostic.goto_next, desc = "Next diagnostic" },
+      { "[d", vim.diagnostic.goto_prev, desc = "Previous diagnostic" },
 
       -- UI (keymaps added after)
       { "<leader>cu", group = "ui" },
