@@ -6,26 +6,30 @@ return {
     --- @module "blink.cmp"
     --- @type blink.cmp.ConfigStrict
     opts = {
+      completion = {
+        documentation = {
+          auto_show = true,
+          auto_show_delay_ms = 1000,
+        },
+
+        keyword = {
+          range = "full",
+        },
+      },
+
       keymap = {
         preset = "enter",
         ["<c-j>"] = { "select_next", "fallback" },
         ["<c-k>"] = { "select_prev", "fallback" },
       },
 
+      signature = {
+        enabled = true,
+      },
+
       sources = {
         default = { "lsp" },
         cmdline = {},
-      },
-
-      completion = {
-        keyword = {
-          range = "full",
-        },
-
-        documentation = {
-          auto_show = true,
-          auto_show_delay_ms = 1000,
-        },
       },
     },
     opts_extend = { "sources.default" },
