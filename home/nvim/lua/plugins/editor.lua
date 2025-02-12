@@ -108,7 +108,7 @@ return {
 
   {
     "folke/todo-comments.nvim",
-    event = { "BufRead", "BufNewFile" },
+    event = sol.OnFile,
     opts = {
       highlight = {
         keyword = "wide_fg",
@@ -133,6 +133,6 @@ return {
   {
     "tpope/vim-sleuth",
     version = false,
-    event = { "BufRead", "BufNewFile" },
+    event = sol.OnFile,
   },
 }
