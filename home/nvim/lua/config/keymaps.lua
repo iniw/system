@@ -94,6 +94,12 @@ require("which-key").add({
     mode = { "n", "v" },
   },
   {
+    "<leader>mu",
+    function() require("multicursor-nvim").restoreCursors() end,
+    desc = "Restore cursors",
+    mode = { "n", "v" },
+  },
+  {
     "<leader>mw",
     function() require("multicursor-nvim").operator({ motion = "iw" }) end,
     desc = "Add cursor to every match of [word] in [motion]",
