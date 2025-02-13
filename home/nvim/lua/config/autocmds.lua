@@ -38,6 +38,11 @@ vim.api.nvim_create_autocmd("FileType", {
   callback = function() vim.opt.formatoptions = "tcqjrln" end,
 })
 
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "cpp",
+  callback = function() vim.opt_local.indentkeys:remove(":") end,
+})
+
 vim.api.nvim_create_autocmd("RecordingEnter", {
   callback = function() vim.opt.cmdheight = 1 end,
 })
