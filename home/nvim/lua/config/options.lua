@@ -64,5 +64,4 @@ o.foldtext = ""
 
 -- Status line
 o.laststatus = 3
-o.cmdheight = 0
 o.statusline = [[ %{expand("%:~:.")} %m %r %w%=%l:%c ]]
