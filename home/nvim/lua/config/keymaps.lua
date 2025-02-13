@@ -116,7 +116,7 @@ require("which-key").add({
   { "<leader>s", group = "search" },
   { "<leader>sa", Snacks.picker.autocmds, desc = "Autocmds" },
   { "<leader>sb", Snacks.picker.lines, desc = "Buffer lines" },
-  { "<leader>sB", Snacks.picker.grep_buffers, desc = "Grep open buffers" },
+  { "<leader>sB", Snacks.picker.buffers, desc = "Buffer list" },
   { "<leader>sc", Snacks.picker.command_history, desc = "Command history" },
   { "<leader>sC", Snacks.picker.commands, desc = "Commands" },
   { "<leader>sd", Snacks.picker.diagnostics_buffer, desc = "Diagnostics (buffer)" },
