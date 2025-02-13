@@ -94,6 +94,18 @@ require("which-key").add({
     mode = { "n", "v" },
   },
   {
+    "<leader>mw",
+    function() require("multicursor-nvim").operator({ motion = "iw" }) end,
+    desc = "Add cursor to every match of [word] in [motion]",
+    mode = { "n", "x" },
+  },
+  {
+    "<leader>mx",
+    function() require("multicursor-nvim").operator() end,
+    desc = "Add cursor to every match of [operator] in [motion]",
+    mode = "n",
+  },
+  {
     "<leader>m<a-n>",
     function() require("multicursor-nvim").matchSkipCursor(1) end,
     desc = "Jump to next match",
@@ -107,7 +119,24 @@ require("which-key").add({
   },
   {
     "<leader>m<space>",
-    function() require("which-key").show({ keys = "<leader>m", loop = true }) end,
+    function()
+      --  HACK: The goal is to set scrolloff to a huge value, essentially locking the cursor to the vertical center of the screen,
+      --        until we are out of hydra mode.
+      --        Which-key unfortunately provides no callback for when that happens, so we hook key presses and compare them against '<esc>'
+      local esc_termcode = vim.api.nvim_replace_termcodes("<esc>", true, true, true)
+      local ns = vim.api.nvim_create_namespace("center-cursor-while-in-hydra-mode")
+      vim.on_key(function(_, typed)
+        if typed == esc_termcode then
+          -- Go back to the global value
+          vim.cmd.setlocal("scrolloff<")
+          -- Remove the callback
+          vim.on_key(nil, ns)
+        end
+      end, ns)
+
+      vim.cmd.setlocal("scrolloff=999")
+      require("which-key").show({ keys = "<leader>m", loop = true })
+    end,
     desc = "Hydra Mode",
     mode = { "n", "v" },
   },

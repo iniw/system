@@ -7,6 +7,8 @@ return {
 
       hl("MultiCursorCursor", "TodoBgFIX")
       hl("MultiCursorSign", "TodoSignFIX")
+      hl("MultiCursorDisabledCursor", "TodoBgNOTE")
+      hl("MultiCursorDisabledSign", "TodoSignNOTE")
 
       require("multicursor-nvim").setup()
     end,
