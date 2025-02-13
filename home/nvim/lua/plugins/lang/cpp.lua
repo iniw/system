@@ -8,6 +8,7 @@ return {
           keys = {
             { "<leader>ch", "<cmd>ClangdSwitchSourceHeader<cr>", desc = "Switch source/header" },
           },
+
           cmd = {
             "clangd",
             "--query-driver=**",
