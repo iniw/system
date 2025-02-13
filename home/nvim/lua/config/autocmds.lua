@@ -7,7 +7,7 @@ vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
   end,
 })
 
--- Close some filetypes with <q>
+-- Close some filetypes with "q"
 vim.api.nvim_create_autocmd("FileType", {
   pattern = {
     "help",
@@ -30,36 +30,9 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
--- Vim automatically changes `formatoptions` depending on the detected filetype, inserting the nasty "o" flag.
--- That behavior is unmodifiable, so we have to override the option with an autocmd.
--- See also: https://github.com/neovim/neovim/discussions/26908
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "*",
-  callback = function() vim.opt.formatoptions = "tcqjrln" end,
-})
-
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "cpp",
-  callback = function() vim.opt_local.indentkeys:remove(":") end,
-})
-
-vim.api.nvim_create_autocmd("RecordingEnter", {
-  callback = function() vim.opt.cmdheight = 1 end,
-})
-
-vim.api.nvim_create_autocmd("RecordingLeave", {
-  callback = function() vim.opt.cmdheight = 0 end,
-})
-
 -- Highlight on yank
 vim.api.nvim_create_autocmd("TextYankPost", {
   callback = function() vim.highlight.on_yank() end,
-})
-
--- Make it easier to close man-files when opened inline
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "man" },
-  callback = function(event) vim.bo[event.buf].buflisted = false end,
 })
 
 -- Fix conceallevel for json files
@@ -77,4 +50,23 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
     local file = vim.uv.fs_realpath(event.match) or event.match
     vim.fn.mkdir(vim.fn.fnamemodify(file, ":p:h"), "p")
   end,
+})
+
+-- Vim automatically changes `formatoptions` depending on the detected filetype, inserting the nasty "o" flag.
+-- That behavior is unmodifiable, so we have to override the option with an autocmd.
+-- See also: https://github.com/neovim/neovim/discussions/26908
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "*",
+  callback = function() vim.opt.formatoptions = "tcqjrln" end,
+})
+
+-- Disable c-label-oriented autoindentation for c++ since it collides with namespaces
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "cpp",
+  callback = function() vim.opt_local.indentkeys:remove(":") end,
+})
+
+-- Expand the cmdheight when recording a macro
+vim.api.nvim_create_autocmd({ "RecordingEnter", "RecordingLeave" }, {
+  callback = function(event) vim.opt.cmdheight = event.event == "RecordingEnter" and 1 or 0 end,
 })
