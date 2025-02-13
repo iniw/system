@@ -51,6 +51,12 @@ require("which-key").add({
     mode = { "n", "v" },
   },
   {
+    "<leader>mi",
+    function() require("multicursor-nvim").insertVisual() end,
+    desc = "Create a cursor in each selected line",
+    mode = "x",
+  },
+  {
     "<leader>mj",
     function() require("multicursor-nvim").lineAddCursor(1) end,
     desc = "Add cursor below",
