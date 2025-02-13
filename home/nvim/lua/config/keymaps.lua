@@ -33,6 +33,8 @@ require("which-key").add({
   { "<leader>bl", "<cmd>bn<cr>", desc = "Next buffer" },
   { "<leader>bn", "<cmd>enew<cr>", desc = "New buffer" },
   { "<leader>bo", Snacks.bufdelete.other, desc = "Close all other buffers" },
+  { "<leader>bs", sol.send_buffer_to_split("s"), desc = "Send buffer to split" },
+  { "<leader>bv", sol.send_buffer_to_split("v"), desc = "Send buffer to vertical split" },
 
   -- Multicursors
   { "<leader>m", group = "multicursors" },
