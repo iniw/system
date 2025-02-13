@@ -36,13 +36,13 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 -- Fix conceallevel for json files
-vim.api.nvim_create_autocmd({ "FileType" }, {
+vim.api.nvim_create_autocmd("FileType", {
   pattern = { "json", "jsonc", "json5" },
   callback = function() vim.opt_local.conceallevel = 0 end,
 })
 
 -- Auto create dir when saving a file, in case some intermediate directory does not exist
-vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+vim.api.nvim_create_autocmd("BufWritePre", {
   callback = function(event)
     if event.match:match("^%w%w+:[\\/][\\/]") then
       return
@@ -57,7 +57,7 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 -- See also: https://github.com/neovim/neovim/discussions/26908
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "*",
-  callback = function() vim.opt.formatoptions = "tcqjrln" end,
+  callback = function() vim.cmd.setlocal("formatoptions<") end,
 })
 
 -- Disable c-label-oriented autoindentation for c++ since it collides with namespaces
