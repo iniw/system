@@ -66,7 +66,11 @@ vim.api.nvim_create_autocmd("FileType", {
   callback = function() vim.opt_local.indentkeys:remove(":") end,
 })
 
--- Expand the cmdheight when recording a macro
 vim.api.nvim_create_autocmd({ "RecordingEnter", "RecordingLeave" }, {
-  callback = function(event) vim.opt.cmdheight = event.event == "RecordingEnter" and 1 or 0 end,
+  callback = function(event)
+    local msg = event.event == "RecordingEnter" and "Recording @" .. vim.fn.reg_recording() or "Stopped recording"
+    vim.notify(msg, vim.log.levels.INFO, {
+      title = "Macro",
+    })
+  end,
 })
