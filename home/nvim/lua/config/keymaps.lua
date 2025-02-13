@@ -108,7 +108,7 @@ require("which-key").add({
   {
     "<leader>m<space>",
     function() require("which-key").show({ keys = "<leader>m", loop = true }) end,
-    desc = "Multicursors (Hydra Mode)",
+    desc = "Hydra Mode",
     mode = { "n", "v" },
   },
 
@@ -185,7 +185,7 @@ require("which-key").add({
   {
     "<leader>wr<space>",
     function() require("which-key").show({ keys = "<leader>wr", loop = true }) end,
-    desc = "Resize window (Hydra Mode)",
+    desc = "Hydra Mode",
   },
 
   -- Yazi
