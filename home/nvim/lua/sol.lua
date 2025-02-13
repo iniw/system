@@ -62,7 +62,7 @@ function M.send_buffer_to_split(split)
     if existing_split_win > 0 and existing_split_win ~= previous_win then
       vim.api.nvim_win_set_buf(existing_split_win, vim.api.nvim_get_current_buf())
     else
-      vim.api.nvim_open_win(0, true, { vertical = is_vertical, win = previous_win })
+      vim.api.nvim_open_win(0, false, { vertical = is_vertical, win = previous_win })
     end
 
     vim.fn.win_execute(previous_win, "b#")
