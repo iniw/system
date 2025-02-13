@@ -21,6 +21,7 @@ return {
       search = {
         multi_window = false,
       },
+
       modes = {
         char = {
           -- mini.jump is used for this instead.
@@ -43,6 +44,7 @@ return {
     opts = {
       terminal = {
         enabled = true,
+
         win = {
           wo = {
             winbar = "",
@@ -60,6 +62,7 @@ return {
       textobjects = {
         select = {
           enable = true,
+
           keymaps = {
             ["af"] = "@function.outer",
             ["if"] = "@function.inner",
@@ -68,6 +71,7 @@ return {
 
         move = {
           enable = true,
+
           goto_next_start = {
             ["]f"] = "@function.outer",
           },

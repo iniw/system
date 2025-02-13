@@ -45,6 +45,7 @@ return {
     opts = {
       dashboard = {
         enabled = true,
+
         preset = {
           keys = {
             { icon = " ", key = "f", desc = "Find file", action = ":lua Snacks.picker.files()" },
@@ -54,6 +55,7 @@ return {
             { icon = " ", key = "q", desc = "Quit", action = ":qa" },
           },
         },
+
         sections = {
           { section = "keys", gap = 1 },
         },

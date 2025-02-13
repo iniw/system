@@ -10,9 +10,11 @@ return {
 
       indent = {
         enabled = true,
+
         animate = {
           enabled = false,
         },
+
         scope = {
           only_current = true,
         },
@@ -20,6 +22,7 @@ return {
 
       statuscolumn = {
         enabled = true,
+
         left = { "sign" },
       },
 
@@ -48,6 +51,7 @@ return {
                 },
               },
             },
+
             layout = {
               layout = {
                 position = "right",

@@ -2,15 +2,12 @@ local setup = {}
 
 function setup.diagnostics()
   vim.diagnostic.config({
-    virtual_text = {
-      spacing = 4,
-      source = "if_many",
-      prefix = "●",
-    },
     float = {
       source = true,
     },
+
     severity_sort = true,
+
     signs = {
       text = {
         [vim.diagnostic.severity.ERROR] = " ",
@@ -18,6 +15,12 @@ function setup.diagnostics()
         [vim.diagnostic.severity.INFO] = " ",
         [vim.diagnostic.severity.HINT] = " ",
       },
+    },
+
+    virtual_text = {
+      spacing = 4,
+      source = "if_many",
+      prefix = "●",
     },
   })
 end
