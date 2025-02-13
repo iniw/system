@@ -15,7 +15,6 @@ function M.lsp_capabilities()
   }, true)
 end
 
---- Options for `newtoggle`
 ---@class ToggleOpts
 ---@field key string
 ---@field set fun(value: boolean)
@@ -49,6 +48,25 @@ function M.toggle(opts)
     end,
     buffer = opts.buffer,
   }
+end
+
+---@param split "v"|"s"
+function M.send_buffer_to_split(split)
+  return function()
+    local previous_win = vim.fn.win_getid()
+
+    local is_vertical = split == "v"
+    local direction = is_vertical and (vim.o.splitright and "l" or "h") or (vim.o.splitbelow and "j" or "k")
+    local existing_split_win = vim.fn.win_getid(vim.fn.winnr(direction))
+
+    if existing_split_win > 0 and existing_split_win ~= previous_win then
+      vim.api.nvim_win_set_buf(existing_split_win, vim.api.nvim_get_current_buf())
+    else
+      vim.api.nvim_open_win(0, true, { vertical = is_vertical, win = previous_win })
+    end
+
+    vim.fn.win_execute(previous_win, "b#")
+  end
 end
 
 M.OnFile = { "BufReadPost", "BufNewFile", "BufWritePre" }
