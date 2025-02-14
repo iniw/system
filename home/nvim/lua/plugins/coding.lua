@@ -123,20 +123,7 @@ return {
   {
     "echasnovski/mini.move",
     event = sol.OnFile,
-    opts = {
-      -- Use wasd instead of hjkl to avoid moving lines around when quickly pressing esc+{motion}
-      mappings = {
-        left = "<a-a>",
-        right = "<a-d>",
-        down = "<a-s>",
-        up = "<a-w>",
-
-        line_left = "<a-a>",
-        line_right = "<a-d>",
-        line_down = "<a-s>",
-        line_up = "<a-w>",
-      },
-    },
+    opts = {},
   },
 
   {
