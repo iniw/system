@@ -51,6 +51,7 @@ o.splitright = true
 o.splitbelow = true
 o.splitkeep = "screen"
 o.termguicolors = true
+o.ttimeoutlen = 0
 o.timeoutlen = 300
 o.undofile = true
 o.undolevels = 10000
