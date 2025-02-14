@@ -8,7 +8,7 @@ require("which-key").add({
     function()
       Snacks.picker.smart({
         multi = { "buffers", "files" },
-        layout = { preview = false },
+        layout = { preview = true },
       })
     end,
     desc = "Find files",
