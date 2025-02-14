@@ -57,7 +57,6 @@ function setup.keymaps(buffer, server_keymaps)
 
       -- Hover
       { "K", vim.lsp.buf.hover, desc = "Hover" },
-      { "<c-k>", vim.lsp.buf.signature_help, desc = "Signature help", mode = "i" },
 
       -- Movement
       { "]d", vim.diagnostic.goto_next, desc = "Next diagnostic" },
