@@ -31,6 +31,11 @@
       url = "git+ssh://git@github.com/iniw/fonts";
       inputs.nixpkgs.follows = "nixpkgs-universal";
     };
+
+    neovim-nightly = {
+      url = "github:iniw/neovim-nightly-overlay";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
   };
 
   outputs =
@@ -45,23 +50,24 @@
       mac-app-util,
       klip,
       fonts,
+      neovim-nightly,
     }:
 
     let
       user = "sol";
 
-      overlay = final: prev: {
-        klip = klip.packages."${prev.system}".klip;
-        tx-02 = fonts.packages."${prev.system}".tx-02;
-        berkeley-mono = fonts.packages."${prev.system}".berkeley-mono;
-      };
+      overlays = [
+        klip.overlays.default
+        fonts.overlays.default
+        neovim-nightly.overlays.default
+      ];
     in
     {
       darwinConfigurations.mac = nix-darwin.lib.darwinSystem rec {
         system = "x86_64-darwin";
 
         specialArgs = {
-          inherit user overlay mac-app-util;
+          inherit user overlays mac-app-util;
           pkgs-unstable = import nixpkgs-unstable { inherit system; };
         };
 
@@ -76,7 +82,7 @@
         system = "x86_64-linux";
 
         specialArgs = {
-          inherit user overlay;
+          inherit user overlays;
           pkgs-unstable = import nixpkgs-unstable { inherit system; };
         };
 

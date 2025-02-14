@@ -1,6 +1,6 @@
 {
   user,
-  overlay,
+  overlays,
   pkgs,
   pkgs-unstable,
   ...
@@ -58,7 +58,7 @@
   };
 
   nixpkgs = {
-    overlays = [ overlay ];
+    inherit overlays;
 
     config = {
       allowUnfree = true;
