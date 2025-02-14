@@ -56,7 +56,7 @@ function M.send_buffer_to_split(split)
     local previous_win = vim.fn.win_getid()
 
     local is_vertical = split == "v"
-    local direction = is_vertical and (vim.o.splitright and "l" or "h") or (vim.o.splitbelow and "j" or "k")
+    local direction = is_vertical and (vim.opt.splitright and "l" or "h") or (vim.opt.splitbelow and "j" or "k")
     local existing_split_win = vim.fn.win_getid(vim.fn.winnr(direction))
 
     if existing_split_win > 0 and existing_split_win ~= previous_win then

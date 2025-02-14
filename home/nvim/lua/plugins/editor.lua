@@ -25,10 +25,6 @@ return {
 
         left = { "sign" },
       },
-
-      words = {
-        debounce = 25,
-      },
     },
   },
 

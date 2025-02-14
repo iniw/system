@@ -210,13 +210,13 @@ require("which-key").add({
   { "<c-l>", "<c-w>l", desc = "Go to the right window" },
 
   { "<leader>wr", group = "resize" },
-  { "<leader>wr<up>", "<cmd>resize +2<cr>", desc = "Increase height" },
-  { "<leader>wr<down>", "<cmd>resize -2<cr>", desc = "Decrease height" },
-  { "<leader>wr<left>", "<cmd>vertical resize -2<cr>", desc = "Decrease width" },
-  { "<leader>wr<right>", "<cmd>vertical resize +2<cr>", desc = "Increase width" },
   { "<leader>wr=", "<c-w>=", desc = "Equally high and wide" },
   { "<leader>wr_", "<c-w>_", desc = "Max out the height" },
   { "<leader>wr|", "<c-w>|", desc = "Max out the width" },
+  { "<leader>wr<left>", "<cmd>vertical resize -2<cr>", desc = "Decrease width" },
+  { "<leader>wr<right>", "<cmd>vertical resize +2<cr>", desc = "Increase width" },
+  { "<leader>wr<up>", "<cmd>resize +2<cr>", desc = "Increase height" },
+  { "<leader>wr<down>", "<cmd>resize -2<cr>", desc = "Decrease height" },
   {
     "<leader>wr<space>",
     function() require("which-key").show({ keys = "<leader>wr", loop = true }) end,
