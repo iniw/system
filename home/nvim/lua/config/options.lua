@@ -60,7 +60,6 @@ o.wildmode = { "longest:full", "full" }
 o.winminwidth = 5
 o.wrap = false
 o.smoothscroll = true
-o.foldtext = ""
 
 -- Status line
 o.laststatus = 3

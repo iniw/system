@@ -23,6 +23,10 @@ return {
       statuscolumn = {
         enabled = true,
 
+        folds = {
+          open = true,
+        },
+
         left = { "sign" },
       },
     },
@@ -79,15 +83,17 @@ return {
     "nvim-treesitter/nvim-treesitter",
     version = false,
     build = ":TSUpdate",
+    main = "nvim-treesitter.configs",
     lazy = false,
     ---@type TSConfig
     opts = {
       highlight = { enable = true },
       indent = { enable = true },
     },
-    config = function(_, opts)
-      require("nvim-treesitter.configs").setup(opts)
-      vim.o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+    init = function()
+      vim.opt.foldmethod = "expr"
+      vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+      vim.opt.foldtext = ""
     end,
   },
 
