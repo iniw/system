@@ -46,6 +46,10 @@
 
   nix = {
     settings = {
+      trusted-users = [
+        user
+      ];
+
       experimental-features = [
         "nix-command"
         "flakes"
