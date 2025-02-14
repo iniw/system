@@ -65,7 +65,7 @@ function setup.keymaps(buffer, server_keymaps)
       { "]]", function() Snacks.words.jump(vim.v.count1) end, desc = "Next reference", mode = { "n", "t" } },
       { "[[", function() Snacks.words.jump(-vim.v.count1) end, desc = "Previous reference", mode = { "n", "t" } },
 
-      -- UI (keymaps added after)
+      -- UI
       { "<leader>cu", group = "ui" },
       sol.toggle({
         key = "<leader>cua",
@@ -182,5 +182,15 @@ return {
       require("conform").setup(opts)
       vim.o.formatexpr = "v:lua.require('conform').formatexpr()"
     end,
+  },
+
+  {
+    "folke/snacks.nvim",
+    opts = {
+      words = {
+        enabled = true,
+        debounce = 25,
+      },
+    },
   },
 }
