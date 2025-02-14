@@ -127,7 +127,7 @@
 
     neovim = {
       enable = true;
-      package = pkgs-unstable.neovim-unwrapped;
+      package = pkgs.neovim;
 
       defaultEditor = true;
 
