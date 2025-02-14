@@ -2,6 +2,7 @@
 return {
   {
     "folke/snacks.nvim",
+    priority = 1000,
     lazy = false,
     opts = {
       bigfile = {
@@ -81,6 +82,7 @@ return {
 
   {
     "nvim-treesitter/nvim-treesitter",
+    priority = 3000,
     version = false,
     build = ":TSUpdate",
     main = "nvim-treesitter.configs",
