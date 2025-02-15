@@ -33,8 +33,7 @@
     };
 
     neovim-nightly = {
-      url = "github:iniw/neovim-nightly-overlay";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      url = "github:nix-community/neovim-nightly-overlay";
     };
   };
 
@@ -59,7 +58,6 @@
       overlays = [
         klip.overlays.default
         fonts.overlays.default
-        neovim-nightly.overlays.default
       ];
     in
     {
@@ -67,7 +65,13 @@
         system = "x86_64-darwin";
 
         specialArgs = {
-          inherit user overlays mac-app-util;
+          inherit
+            user
+            overlays
+            neovim-nightly
+            mac-app-util
+            ;
+
           pkgs-unstable = import nixpkgs-unstable { inherit system; };
         };
 
@@ -82,7 +86,7 @@
         system = "x86_64-linux";
 
         specialArgs = {
-          inherit user overlays;
+          inherit user overlays neovim-nightly;
           pkgs-unstable = import nixpkgs-unstable { inherit system; };
         };
 
