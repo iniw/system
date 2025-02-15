@@ -148,6 +148,10 @@ return {
         },
       },
 
+      cmdline = {
+        enabled = false,
+      },
+
       keymap = {
         preset = "enter",
         ["<c-j>"] = { "select_next", "fallback" },
@@ -160,7 +164,6 @@ return {
 
       sources = {
         default = { "lsp" },
-        cmdline = {},
       },
     },
     opts_extend = { "sources.default" },
