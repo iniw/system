@@ -291,8 +291,8 @@ require("which-key").add({
   { "n", "'Nn'[v:searchforward]", mode = "o", expr = true },
   { "N", "'nN'[v:searchforward]", mode = "o", expr = true },
   -- Move in insert mode
-  { "<c-h>", "<left>", mode = "i" },
-  { "<c-j>", "<down>", mode = "i" },
-  { "<c-k>", "<up>", mode = "i" },
-  { "<c-l>", "<right>", mode = "i" },
+  { "<c-h>", "<left>", mode = "i", remap = true },
+  { "<c-j>", "<down>", mode = "i", remap = true },
+  { "<c-k>", "<up>", mode = "i", remap = true },
+  { "<c-l>", "<right>", mode = "i", remap = true },
 })
