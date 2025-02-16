@@ -173,6 +173,8 @@ return {
     "stevearc/conform.nvim",
     event = "BufWritePre",
     cmd = "ConformInfo",
+    ---@module "conform"
+    ---@type conform.setupOpts
     opts = {
       format_on_save = function(buf)
         if vim.g.autoformat ~= false and vim.b[buf].autoformat ~= false then
@@ -185,6 +187,8 @@ return {
 
   {
     "folke/snacks.nvim",
+    ---@module "snacks"
+    ---@type snacks.Config
     opts = {
       words = {
         enabled = true,

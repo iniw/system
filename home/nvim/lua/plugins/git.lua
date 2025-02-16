@@ -2,6 +2,7 @@
 return {
   {
     "folke/snacks.nvim",
+    ---@module "snacks"
     ---@type snacks.Config
     opts = {
       lazygit = {
@@ -14,6 +15,7 @@ return {
     "lewis6991/gitsigns.nvim",
     event = sol.OnFile,
     ---@module "gitsigns"
+    ---@type Gitsigns.Config
     opts = {
       on_attach = function(buffer)
         local gs = require("gitsigns")

@@ -4,6 +4,8 @@ return {
     "folke/snacks.nvim",
     priority = 1000,
     lazy = false,
+    ---@module "snacks"
+    ---@type snacks.Config
     opts = {
       bigfile = {
         enabled = true,
@@ -36,6 +38,7 @@ return {
   -- Explorer
   {
     "folke/snacks.nvim",
+    ---@module "snacks"
     ---@type snacks.Config
     opts = {
       explorer = {
@@ -87,6 +90,7 @@ return {
     build = ":TSUpdate",
     main = "nvim-treesitter.configs",
     lazy = false,
+    ---@module "nvim-treesitter"
     ---@type TSConfig
     opts = {
       highlight = { enable = true },
@@ -102,6 +106,7 @@ return {
   {
     "folke/which-key.nvim",
     lazy = false,
+    ---@module "which-key"
     ---@type wk.Config
     opts = {
       icons = {
@@ -113,6 +118,8 @@ return {
   {
     "folke/todo-comments.nvim",
     event = sol.OnFile,
+    ---@module "todo-comments"
+    ---@type TodoOptions
     opts = {
       highlight = {
         keyword = "wide_fg",
@@ -125,12 +132,16 @@ return {
   {
     "MagicDuck/grug-far.nvim",
     cmd = "GrugFar",
+    ---@module "grug-far"
+    ---@type GrugFarOptions
     opts = {},
   },
 
   {
     "folke/persistence.nvim",
     event = "BufReadPre",
+    ---@module "persistence"
+    ---@type Persistence.Config
     opts = {},
   },
 
