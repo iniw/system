@@ -270,16 +270,16 @@ require("which-key").add({
     expr = true,
   },
   -- Better <c-o>
-  { "<c-o>", "<Left><c-o>", mode = "i" },
+  { "<c-o>", "<left><c-o>", mode = "i" },
   -- Better delete/yank/copy
   { "D", "dd" },
   { "Y", "yy" },
   { "C", "cc" },
   -- Better up/down
   { "j", "v:count == 0 ? 'gj' : 'j'", mode = { "n", "x" }, expr = true, silent = true },
-  { "<Down>", "v:count == 0 ? 'gj' : 'j'", mode = { "n", "x" }, expr = true, silent = true },
+  { "<down>", "v:count == 0 ? 'gj' : 'j'", mode = { "n", "x" }, expr = true, silent = true },
   { "k", "v:count == 0 ? 'gk' : 'k'", mode = { "n", "x" }, expr = true, silent = true },
-  { "<Up>", "v:count == 0 ? 'gk' : 'k'", mode = { "n", "x" }, expr = true, silent = true },
+  { "<up>", "v:count == 0 ? 'gk' : 'k'", mode = { "n", "x" }, expr = true, silent = true },
   -- Better indenting
   { "<", "<gv", mode = "v" },
   { ">", ">gv", mode = "v" },
