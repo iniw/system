@@ -2,20 +2,21 @@
 return {
   {
     "jake-stewart/multicursor.nvim",
-    config = function()
+    ---@module "multicursor-nvim"
+    ---@type MultiCursorOpts
+    opts = {},
+    init = function()
       local function hl(group, definition) vim.api.nvim_set_hl(0, group, { link = definition }) end
-
       hl("MultiCursorCursor", "TodoBgFIX")
       hl("MultiCursorSign", "TodoSignFIX")
       hl("MultiCursorDisabledCursor", "TodoBgNOTE")
       hl("MultiCursorDisabledSign", "TodoSignNOTE")
-
-      require("multicursor-nvim").setup()
     end,
   },
 
   {
     "folke/flash.nvim",
+    ---@module "flash"
     ---@type Flash.Config
     opts = {
       search = {
@@ -40,6 +41,7 @@ return {
 
   {
     "folke/snacks.nvim",
+    ---@module "snacks"
     ---@type snacks.Config
     opts = {
       terminal = {
@@ -57,6 +59,7 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     dependencies = { "nvim-treesitter/nvim-treesitter-textobjects" },
+    ---@module "nvim-treesitter"
     ---@type TSConfig
     opts = {
       textobjects = {
