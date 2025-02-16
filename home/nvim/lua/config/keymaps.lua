@@ -24,6 +24,11 @@ require("which-key").add({
     mode = { "n", "t" },
     desc = "Toggle terminal",
   },
+  {
+    "<cr>",
+    function() require("flash").jump() end,
+    mode = { "n", "o", "v" },
+  },
 
   -- Buffers
   { "<leader>b", group = "buffer" },
