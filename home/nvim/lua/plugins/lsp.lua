@@ -135,14 +135,9 @@ return {
     "saghen/blink.cmp",
     event = "InsertEnter",
     --- @module "blink.cmp"
-    --- @type blink.cmp.ConfigStrict
+    --- @type blink.cmp.Config
     opts = {
       completion = {
-        accept = {
-          auto_brackets = {
-            enabled = false,
-          },
-        },
         documentation = {
           auto_show = true,
           auto_show_delay_ms = 1000,
