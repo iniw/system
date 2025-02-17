@@ -69,10 +69,6 @@ return {
         animate = {
           enabled = false,
         },
-
-        scope = {
-          only_current = true,
-        },
       },
 
       picker = {
