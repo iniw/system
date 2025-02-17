@@ -45,7 +45,7 @@ return {
   {
     "saghen/blink.cmp",
     --- @module "blink.cmp"
-    --- @type blink.cmp.ConfigStrict
+    --- @type blink.cmp.Config
     opts = {
       sources = {
         default = { "lazydev" },
