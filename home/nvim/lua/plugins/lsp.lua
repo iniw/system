@@ -118,7 +118,7 @@ return {
       vim.api.nvim_create_autocmd("LspAttach", {
         callback = function(event)
           local client = vim.lsp.get_client_by_id(event.data.client_id)
-          local server_keymaps = client and opts.servers[client.name] and opts.servers[client.name].keys or {}
+          local server_keymaps = client and opts.servers[client.name] and vim.deepcopy(opts.servers[client.name].keys) or {}
           setup.keymaps(event.buf, server_keymaps)
         end,
       })
