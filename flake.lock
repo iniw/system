@@ -166,7 +166,7 @@
       "inputs": {
         "flake-utils": "flake-utils",
         "nixpkgs": [
-          "nixpkgs-universal"
+          "nixpkgs-nixos"
         ]
       },
       "locked": {
@@ -253,7 +253,7 @@
     "home-manager": {
       "inputs": {
         "nixpkgs": [
-          "nixpkgs-universal"
+          "nixpkgs-nixos"
         ]
       },
       "locked": {
@@ -275,7 +275,7 @@
       "inputs": {
         "flake-utils": "flake-utils_2",
         "nixpkgs": [
-          "nixpkgs-universal"
+          "nixpkgs-nixos"
         ],
         "rust-overlay": "rust-overlay"
       },
@@ -426,22 +426,6 @@
         "type": "github"
       }
     },
-    "nixpkgs-universal": {
-      "locked": {
-        "lastModified": 1739537915,
-        "narHash": "sha256-7whoQ0/0oWvjEYyQqR1ClLMkfT5RTmXjhN6sXJ2a01Q=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "4eea18b2165eb1cf9c2c4db3f5ecded86fbdd083",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "release-24.11",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "nixpkgs-unstable": {
       "locked": {
         "lastModified": 1739451785,
@@ -468,7 +452,6 @@
         "nix-darwin": "nix-darwin",
         "nixpkgs-darwin": "nixpkgs-darwin",
         "nixpkgs-nixos": "nixpkgs-nixos",
-        "nixpkgs-universal": "nixpkgs-universal",
         "nixpkgs-unstable": "nixpkgs-unstable"
       }
     },
