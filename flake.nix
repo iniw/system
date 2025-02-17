@@ -71,7 +71,6 @@
             neovim-nightly
             mac-app-util
             ;
-
           pkgs-unstable = import nixpkgs-unstable { inherit system; };
         };
 
