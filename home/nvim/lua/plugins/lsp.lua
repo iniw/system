@@ -59,8 +59,8 @@ function setup.keymaps(buffer, server_keymaps)
       { "K", vim.lsp.buf.hover, desc = "Hover" },
 
       -- Movement
-      { "]d", vim.diagnostic.goto_next, desc = "Next diagnostic" },
-      { "[d", vim.diagnostic.goto_prev, desc = "Previous diagnostic" },
+      { "]d", function() vim.diagnostic.jump({ count = 1 }) end, desc = "Next diagnostic" },
+      { "[d", function() vim.diagnostic.jump({ count = -1 }) end, desc = "Previous diagnostic" },
       { "]]", function() Snacks.words.jump(vim.v.count1) end, desc = "Next reference", mode = { "n", "t" } },
       { "[[", function() Snacks.words.jump(-vim.v.count1) end, desc = "Previous reference", mode = { "n", "t" } },
 
