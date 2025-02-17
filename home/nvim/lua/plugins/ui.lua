@@ -76,7 +76,7 @@ return {
   {
     "folke/noice.nvim",
     lazy = false,
-    dependencies = "MunifTanjim/nui.nvim",
+    dependencies = { { "MunifTanjim/nui.nvim", version = false } },
     ---@module "noice"
     ---@type NoiceConfig
     opts = {
@@ -87,6 +87,10 @@ return {
         },
 
         signature = {
+          enabled = false,
+        },
+
+        progress = {
           enabled = false,
         },
       },
