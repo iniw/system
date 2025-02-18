@@ -1,3 +1,5 @@
+$env.config.show_banner = false
+
 let fzf_command_picker = {
   name: fzf_command_picker
   modifier: control
@@ -38,8 +40,6 @@ $env.config.keybindings = [
   $fzf_file_picker,
 ]
 
-$env.config.show_banner = false
-
 let carapace_completer = {|spans|
     # if the current command is an alias, get it's expansion
     let expanded_alias = (scope aliases | where name == $spans.0 | get -i 0 | get -i expansion)
@@ -68,8 +68,10 @@ let external_completer = {|spans|
   } | do $in $spans
 }
 
-
 $env.config.completions.external = {
     enable: true
     completer: $external_completer
 }
+
+# https://github.com/ghostty-org/ghostty/discussions/3476
+$env.config.shell_integration.osc133 = false
