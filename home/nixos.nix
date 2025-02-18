@@ -30,8 +30,6 @@
       extraPackages = with pkgs; [
         # For interacting with the system clipboard
         xclip
-        # For treesitter
-        gcc
       ];
     };
 
