@@ -154,6 +154,8 @@ return {
         -- Don't highlight the actual comment text, just the keyword.
         after = "",
       },
+
+      signs = false,
     },
   },
 
