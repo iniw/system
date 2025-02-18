@@ -103,18 +103,14 @@
 
       ignores = [
         ".DS_Store"
-
-        # Project-specific lazyvim config
+        "justfile"
+        # Project-specific lazy.nvim spec/config
         ".lazy.lua"
-
         # direnv
         ".envrc"
         ".direnv/"
-
         # fd's ignore list
         ".ignore"
-
-        "justfile"
       ];
     };
 
