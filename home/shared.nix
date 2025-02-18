@@ -1,4 +1,5 @@
 {
+  lib,
   pkgs,
   pkgs-unstable,
   config,
@@ -131,8 +132,13 @@
 
       defaultEditor = true;
 
-      plugins = with pkgs.vimPlugins; [
-        nvim-treesitter.withAllGrammars
+      # Add gcc to PATH to compile treesitter grammars.
+      # It is prepended to make sure the same compiler is used by treesitter even when another, project-specific, one is in PATH.
+      extraWrapperArgs = [
+        "--prefix"
+        "PATH"
+        ":"
+        "${lib.makeBinPath [ pkgs.gcc ]}"
       ];
 
       # System-wide LSP support for languages used everywhere.
