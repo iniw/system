@@ -88,6 +88,16 @@ return {
               },
             },
           },
+
+          notifications = {
+            win = {
+              preview = {
+                wo = {
+                  wrap = true,
+                },
+              },
+            },
+          },
         },
       },
 
