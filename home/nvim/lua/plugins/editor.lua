@@ -225,6 +225,7 @@ return {
     opts = {
       silent = true,
       search_method = "cover",
+      n_lines = 200,
     },
   },
 
@@ -235,13 +236,17 @@ return {
       -- https://github.com/echasnovski/mini.nvim/blob/57e47cf7a2923684e7413989ab267ed9730e7d03/doc/mini-surround.txt#L570
       vim.keymap.set({ "n", "v" }, "s", "<nop>")
     end,
-    opts = { silent = true },
+    opts = {
+      silent = true,
+    },
   },
 
   {
     "echasnovski/mini.jump",
     event = sol.OnFile,
-    opts = { silent = true },
+    opts = {
+      silent = true,
+    },
   },
 
   {
