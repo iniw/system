@@ -5,7 +5,11 @@ return {
     opts = {
       servers = {
         pyright = {},
-        ruff = {},
+        ruff = {
+          server_capabilities = {
+            hoverProvider = false,
+          },
+        },
       },
     },
   },

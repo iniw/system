@@ -118,8 +118,17 @@ return {
       vim.api.nvim_create_autocmd("LspAttach", {
         callback = function(event)
           local client = vim.lsp.get_client_by_id(event.data.client_id)
-          local server_keymaps = client and opts.servers[client.name] and vim.deepcopy(opts.servers[client.name].keys) or {}
+          if not client then
+            return
+          end
+
+          local server_opts = opts.servers[client.name]
+
+          local server_keymaps = server_opts and server_opts.keys and vim.deepcopy(server_opts.keys) or {}
           setup.keymaps(event.buf, server_keymaps)
+
+          local server_capabilities = server_opts and server_opts.server_capabilities or {}
+          client.server_capabilities = vim.tbl_deep_extend("force", client.server_capabilities, server_capabilities)
         end,
       })
 
