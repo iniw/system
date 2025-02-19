@@ -28,80 +28,78 @@ end
 function setup.keymaps(buffer, server_keymaps)
   require("which-key").add({
     buffer = buffer,
+    -- Code
+    { "<leader>c", group = "code" },
+    { "<leader>ca", vim.lsp.buf.code_action, desc = "Code action", mode = { "n", "x" } },
+    { "<leader>cd", Snacks.picker.lsp_definitions, desc = "Go to definition" },
+    { "<leader>cD", Snacks.picker.lsp_declarations, desc = "Go to declaration" },
+    { "<leader>ce", vim.diagnostic.open_float, desc = "Error diagnostics" },
+    { "<leader>cf", function() require("conform").format({ async = true }) end, desc = "Format buffer" },
+    { "<leader>ci", Snacks.picker.lsp_implementations, desc = "Go to implementation" },
     {
-      -- Code
-      { "<leader>c", group = "code" },
-      { "<leader>ca", vim.lsp.buf.code_action, desc = "Code action", mode = { "n", "x" } },
-      { "<leader>cd", Snacks.picker.lsp_definitions, desc = "Go to definition" },
-      { "<leader>cD", Snacks.picker.lsp_declarations, desc = "Go to declaration" },
-      { "<leader>ce", vim.diagnostic.open_float, desc = "Error diagnostics" },
-      { "<leader>cf", function() require("conform").format({ async = true }) end, desc = "Format buffer" },
-      { "<leader>ci", Snacks.picker.lsp_implementations, desc = "Go to implementation" },
-      {
-        "<leader>cp",
-        function() vim.fn.setreg("+", vim.fn.expand("%") .. ":" .. vim.fn.line(".")) end,
-        desc = "Yank gdb breakpoint",
-      },
-      { "<leader>cr", vim.lsp.buf.rename, desc = "Rename" },
-      { "<leader>cR", Snacks.picker.lsp_references, desc = "Go to references" },
-      { "<leader>ct", Snacks.picker.lsp_type_definitions, desc = "Go to type definition" },
-      {
-        "<leader>cv",
-        function() Snacks.picker.lsp_definitions({ confirm = "edit_vsplit" }) end,
-        desc = "Go to definition in vertical split",
-      },
-
-      -- Search
-      { "<leader>ss", Snacks.picker.lsp_symbols, desc = "Document symbols" },
-      { "<leader>sS", Snacks.picker.lsp_workspace_symbols, desc = "Workspace symbols" },
-
-      -- Hover
-      { "K", vim.lsp.buf.hover, desc = "Hover" },
-
-      -- Movement
-      { "]d", function() vim.diagnostic.jump({ count = 1 }) end, desc = "Next diagnostic" },
-      { "[d", function() vim.diagnostic.jump({ count = -1 }) end, desc = "Previous diagnostic" },
-      { "]]", function() Snacks.words.jump(vim.v.count1) end, desc = "Next reference", mode = { "n", "t" } },
-      { "[[", function() Snacks.words.jump(-vim.v.count1) end, desc = "Previous reference", mode = { "n", "t" } },
-
-      -- UI
-      { "<leader>cu", group = "ui" },
-      sol.toggle({
-        key = "<leader>cua",
-        name = "autocomplete (buffer)",
-        get = function() return vim.b.completion ~= false end,
-        set = function(state) vim.b.completion = state end,
-        buffer = buffer,
-      }),
-      sol.toggle({
-        key = "<leader>cud",
-        name = "diagnostics",
-        get = function() return vim.diagnostic.is_enabled({ bufnr = buffer }) end,
-        set = function(state) vim.diagnostic.enable(state, { bufnr = buffer }) end,
-        buffer = buffer,
-      }),
-      sol.toggle({
-        key = "<leader>cuf",
-        name = "autoformat (buffer)",
-        get = function() return vim.b.autoformat ~= false end,
-        set = function(state) vim.b.autoformat = state end,
-        buffer = buffer,
-      }),
-      sol.toggle({
-        key = "<leader>cuF",
-        name = "autoformat (global)",
-        get = function() return vim.g.autoformat ~= false end,
-        set = function(state) vim.g.autoformat = state end,
-        buffer = buffer,
-      }),
-      sol.toggle({
-        key = "<leader>cuh",
-        name = "inlay hints",
-        get = function() return vim.lsp.inlay_hint.is_enabled({ bufnr = buffer }) end,
-        set = function(state) vim.lsp.inlay_hint.enable(state, { bufnr = buffer }) end,
-        buffer = buffer,
-      }),
+      "<leader>cp",
+      function() vim.fn.setreg("+", vim.fn.expand("%") .. ":" .. vim.fn.line(".")) end,
+      desc = "Yank gdb breakpoint",
     },
+    { "<leader>cr", vim.lsp.buf.rename, desc = "Rename" },
+    { "<leader>cR", Snacks.picker.lsp_references, desc = "Go to references" },
+    { "<leader>ct", Snacks.picker.lsp_type_definitions, desc = "Go to type definition" },
+    {
+      "<leader>cv",
+      function() Snacks.picker.lsp_definitions({ confirm = "edit_vsplit" }) end,
+      desc = "Go to definition in vertical split",
+    },
+
+    -- Search
+    { "<leader>ss", Snacks.picker.lsp_symbols, desc = "Document symbols" },
+    { "<leader>sS", Snacks.picker.lsp_workspace_symbols, desc = "Workspace symbols" },
+
+    -- Hover
+    { "K", vim.lsp.buf.hover, desc = "Hover" },
+
+    -- Movement
+    { "]d", function() vim.diagnostic.jump({ count = 1 }) end, desc = "Next diagnostic" },
+    { "[d", function() vim.diagnostic.jump({ count = -1 }) end, desc = "Previous diagnostic" },
+    { "]]", function() Snacks.words.jump(vim.v.count1) end, desc = "Next reference", mode = { "n", "t" } },
+    { "[[", function() Snacks.words.jump(-vim.v.count1) end, desc = "Previous reference", mode = { "n", "t" } },
+
+    -- UI
+    { "<leader>cu", group = "ui" },
+    sol.toggle({
+      key = "<leader>cua",
+      name = "autocomplete (buffer)",
+      get = function() return vim.b.completion ~= false end,
+      set = function(state) vim.b.completion = state end,
+      buffer = buffer,
+    }),
+    sol.toggle({
+      key = "<leader>cud",
+      name = "diagnostics",
+      get = function() return vim.diagnostic.is_enabled({ bufnr = buffer }) end,
+      set = function(state) vim.diagnostic.enable(state, { bufnr = buffer }) end,
+      buffer = buffer,
+    }),
+    sol.toggle({
+      key = "<leader>cuf",
+      name = "autoformat (buffer)",
+      get = function() return vim.b.autoformat ~= false end,
+      set = function(state) vim.b.autoformat = state end,
+      buffer = buffer,
+    }),
+    sol.toggle({
+      key = "<leader>cuF",
+      name = "autoformat (global)",
+      get = function() return vim.g.autoformat ~= false end,
+      set = function(state) vim.g.autoformat = state end,
+      buffer = buffer,
+    }),
+    sol.toggle({
+      key = "<leader>cuh",
+      name = "inlay hints",
+      get = function() return vim.lsp.inlay_hint.is_enabled({ bufnr = buffer }) end,
+      set = function(state) vim.lsp.inlay_hint.enable(state, { bufnr = buffer }) end,
+      buffer = buffer,
+    }),
     -- Also add the server specific keymaps
     server_keymaps,
   })
