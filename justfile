@@ -1,22 +1,13 @@
 mod lazy
 
-rebuild-cmd := if os() == 'linux' {
-  "nixos-rebuild"
-} else {
-  "darwin-rebuild"
-}
-
-rebuild-cmd-extra-args := if os() == 'linux' {
-  "--use-remote-sudo"
-} else {
-  ""
-}
+rebuild-cmd := if os() == 'linux' { "nixos-rebuild" } else { "darwin-rebuild" }
+rebuild-cmd-extra-args := if os() == 'linux' { "--use-remote-sudo" } else { "" }
 
 @switch:
-  {{rebuild-cmd}} switch --flake . {{rebuild-cmd-extra-args}}
+    {{ rebuild-cmd }} switch --flake . {{ rebuild-cmd-extra-args }}
 
 @gc:
-  sudo nix-collect-garbage --delete-old
+    sudo nix-collect-garbage --delete-old
 
 @update:
-  nix flake update --commit-lock-file --commit-lockfile-summary "flake: update lockfile"
+    nix flake update --commit-lock-file --commit-lockfile-summary "flake: update lockfile"
