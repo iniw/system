@@ -2,7 +2,7 @@
 return {
   {
     "mrcjkb/rustaceanvim",
-    ft = { "rust" },
+    ft = "rust",
     ---@module "rustaceanvim"
     ---@type rustaceanvim.Opts
     opts = {
@@ -44,7 +44,7 @@ return {
     "stevearc/conform.nvim",
     opts = {
       formatters_by_ft = {
-        rust = { "rustfmt" },
+        rust = { "rustfmt", lsp_format = "prefer" },
       },
     },
   },
