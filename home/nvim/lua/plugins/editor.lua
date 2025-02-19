@@ -109,6 +109,7 @@ return {
         },
 
         left = { "sign" },
+        right = { "git", "fold" },
       },
 
       terminal = {
