@@ -137,8 +137,11 @@
         "${lib.makeBinPath [ pkgs.gcc ]}"
       ];
 
-      # System-wide LSP support for languages used everywhere.
       extraPackages = with pkgs; [
+        # For `snacks.image`.
+        imagemagick
+
+        # System-wide LSP support for languages used everywhere.
         # nix
         nil
         nixfmt-rfc-style
