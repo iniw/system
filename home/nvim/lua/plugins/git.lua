@@ -82,6 +82,16 @@ return {
     dependencies = { "sindrets/diffview.nvim" },
     verson = false,
     cmd = "Neogit",
-    opts = {},
+    ---@module "neogit"
+    ---@type NeogitConfig
+    opts = {
+      disable_hint = true,
+
+      graph_style = "unicode",
+
+      integrations = {
+        snacks = true,
+      },
+    },
   },
 }
