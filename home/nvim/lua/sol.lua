@@ -26,13 +26,9 @@ end
 ---@return table
 function M.toggle(opts)
   local function notify(state, name)
-    vim.notify(
-      (state and "Disabled " or "Enabled ") .. "**" .. name .. "**",
-      state and vim.log.levels.INFO or vim.log.levels.WARN,
-      {
-        title = "Toggle",
-      }
-    )
+    vim.notify((state and "Disabled " or "Enabled ") .. "**" .. name .. "**", state and vim.log.levels.INFO or vim.log.levels.WARN, {
+      title = "Toggle",
+    })
   end
 
   return {
