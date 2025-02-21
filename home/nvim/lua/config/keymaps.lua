@@ -221,10 +221,10 @@ require("which-key").add({
       end
     end,
   }),
-  { "<c-h>", "<c-w>h", desc = "Go to the left window" },
-  { "<c-j>", "<c-w>j", desc = "Go to the lower window" },
-  { "<c-k>", "<c-w>k", desc = "Go to the upper window" },
-  { "<c-l>", "<c-w>l", desc = "Go to the right window" },
+  { "<c-h>", sol.jump_window_with_wrap("h", "l"), desc = "Go to the left window" },
+  { "<c-j>", sol.jump_window_with_wrap("j", "k"), desc = "Go to the lower window" },
+  { "<c-k>", sol.jump_window_with_wrap("k", "j"), desc = "Go to the upper window" },
+  { "<c-l>", sol.jump_window_with_wrap("l", "h"), desc = "Go to the right window" },
 
   { "<leader>wr", group = "resize" },
   { "<leader>wr=", "<c-w>=", desc = "Equally high and wide" },
