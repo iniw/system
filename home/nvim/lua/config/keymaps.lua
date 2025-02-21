@@ -49,8 +49,10 @@ require("which-key").add({
   { "<leader>gg", Snacks.lazygit.open, desc = "Lazygit" },
   { "<leader>gl", Snacks.picker.git_log, desc = "Log" },
   { "<leader>gL", Snacks.picker.git_log_line, desc = "Log line" },
+  { "<leader>gn", "<cmd>Neogit<cr>", desc = "Neogit" },
   { "<leader>gs", Snacks.picker.git_status, desc = "Status" },
   { "<leader>gS", Snacks.picker.git_stash, desc = "Stash" },
+  { "<leader>gz", Snacks.lazygit.open, desc = "Lazygit" },
 
   -- Multicursors
   { "<leader>m", group = "multicursors" },

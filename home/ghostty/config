@@ -28,11 +28,11 @@ shell-integration-features = no-cursor
 mouse-hide-while-typing = true
 
 # window
-window-decoration = false
 window-padding-x = 0
 window-padding-y = 0
 
 # keybinds
+macos-option-as-alt = true
 keybind = clear
 
 # keybinds.tab

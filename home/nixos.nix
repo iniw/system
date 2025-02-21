@@ -8,7 +8,6 @@
 
   home = {
     packages = with pkgs; [
-      spotify
       cmusfm
     ];
   };
@@ -22,10 +21,6 @@
       enable = true;
     };
 
-    ghostty = {
-      enable = true;
-    };
-
     neovim = {
       extraPackages = with pkgs; [
         # For interacting with the system clipboard
@@ -35,15 +30,6 @@
 
     obs-studio = {
       enable = true;
-    };
-  };
-
-  xdg = {
-    configFile = {
-      "ghostty" = {
-        source = ./ghostty;
-        recursive = true;
-      };
     };
   };
 

@@ -9,10 +9,11 @@
 {
   home = {
     packages = with pkgs; [
-      # apps
+      # Apps
       discord
+      spotify
 
-      # tools
+      # Tools
       coreutils
       exiftool
       hyperfine
@@ -21,7 +22,7 @@
       scc
       zlib
 
-      # fonts
+      # Fonts
       inter
       tx-02
       berkeley-mono
@@ -29,6 +30,7 @@
 
     shellAliases = {
       lg = "lazygit";
+      ng = "nvim -c \"Neogit\"";
     };
 
     stateVersion = "24.11";
@@ -79,6 +81,13 @@
 
     gh = {
       enable = true;
+    };
+
+    ghostty = {
+      enable = true;
+      # FIXME: Remove this hack once https://github.com/nix-community/home-manager/pull/6300 lands on a release channel
+      package = if pkgs.stdenv.isDarwin then pkgs.emptyDirectory else pkgs.ghostty;
+      installBatSyntax = !pkgs.stdenv.isDarwin;
     };
 
     git = {
@@ -218,6 +227,11 @@
     enable = true;
 
     configFile = {
+      "ghostty" = {
+        source = ./ghostty;
+        recursive = true;
+      };
+
       "nvim" = {
         source = ./nvim;
         recursive = true;

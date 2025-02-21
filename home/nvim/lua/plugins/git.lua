@@ -73,4 +73,15 @@ return {
       end,
     },
   },
+
+  {
+    -- FIXME: Move to the official one after these two PRs get merged:
+    --        https://github.com/NeogitOrg/neogit/pull/1655
+    --        https://github.com/NeogitOrg/neogit/pull/1654
+    "iniw/neogit",
+    dependencies = { "sindrets/diffview.nvim" },
+    verson = false,
+    cmd = "Neogit",
+    opts = {},
+  },
 }
