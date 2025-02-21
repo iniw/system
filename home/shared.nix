@@ -151,7 +151,7 @@
         "${lib.makeBinPath [ pkgs.gcc ]}"
       ];
 
-      extraPackages = with pkgs; [
+      extraPackages = with pkgs-unstable; [
         # For `snacks.image`.
         imagemagick
 
