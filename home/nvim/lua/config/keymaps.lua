@@ -1,6 +1,6 @@
 require("which-key").add({
   -- General
-  { "<leader>e", Snacks.explorer.open, desc = "File explorer" },
+  { "<leader>e", "<cmd>Oil<cr>", desc = "File explorer" },
   { "<leader>q", "<cmd>qa<cr>", desc = "Quit" },
   { "<leader>/", Snacks.picker.grep, desc = "Grep" },
   {
@@ -25,7 +25,7 @@ require("which-key").add({
     desc = "Toggle terminal",
   },
   {
-    "<cr>",
+    "<c-f>",
     function() require("flash").jump() end,
     mode = { "n", "o", "v" },
   },
@@ -46,10 +46,9 @@ require("which-key").add({
   { "<leader>gb", Snacks.picker.git_branches, desc = "Branches" },
   { "<leader>gd", Snacks.picker.git_diff, desc = "Diff (hunks)" },
   { "<leader>gf", Snacks.picker.git_log_file, desc = "Log file" },
-  { "<leader>gg", Snacks.lazygit.open, desc = "Lazygit" },
+  { "<leader>gg", "<cmd>Neogit<cr>", desc = "Neogit" },
   { "<leader>gl", Snacks.picker.git_log, desc = "Log" },
   { "<leader>gL", Snacks.picker.git_log_line, desc = "Log line" },
-  { "<leader>gn", "<cmd>Neogit<cr>", desc = "Neogit" },
   { "<leader>gs", Snacks.picker.git_status, desc = "Status" },
   { "<leader>gS", Snacks.picker.git_stash, desc = "Stash" },
   { "<leader>gz", Snacks.lazygit.open, desc = "Lazygit" },

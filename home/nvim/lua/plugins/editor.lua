@@ -275,4 +275,43 @@ return {
     version = false,
     event = sol.OnFile,
   },
+
+  {
+    "stevearc/oil.nvim",
+    lazy = false,
+    ---@module 'oil'
+    ---@type oil.SetupOpts
+    opts = {
+      default_file_explorer = true,
+
+      constrain_cursor = "name",
+
+      skip_confirm_for_simple_edits = true,
+
+      lsp_file_methods = {
+        autosave_changes = "unmodified",
+      },
+
+      use_default_keymaps = false,
+      keymaps = {
+        ["H"] = "actions.parent",
+        ["L"] = "actions.select",
+        ["R"] = "actions.open_cwd",
+        ["gx"] = "actions.open_external",
+        ["<cr>"] = "actions.select",
+        ["<c-y>"] = "actions.yank_entry",
+        ["<c-r>"] = "actions.refresh",
+        ["<c-q>"] = "actions.send_to_qflist",
+        ["<c-v>"] = { "actions.select", opts = { vertical = true } },
+        ["<a-h>"] = "actions.toggle_hidden",
+        ["?"] = "actions.show_help",
+      },
+
+      view_options = {
+        show_hidden = true,
+      },
+
+      watch_for_changes = true,
+    },
+  },
 }
