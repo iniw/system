@@ -32,6 +32,12 @@
     hostPlatform = "x86_64-darwin";
   };
 
+  security = {
+    pam = {
+      enableSudoTouchIdAuth = true;
+    };
+  };
+
   system = {
     activationScripts.postUserActivation.text = ''
       /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
