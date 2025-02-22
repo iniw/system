@@ -33,13 +33,6 @@ return {
             mode = { "n", "v" },
           },
           { "<leader>ghR", gs.reset_buffer, desc = "Reset buffer" },
-          {
-            "<leader>ghs",
-            function() gs.stage_hunk({ vim.fn.line("."), vim.fn.line("v") }) end,
-            desc = "Stage/Unstage hunk",
-            mode = { "n", "v" },
-          },
-          { "<leader>ghS", gs.stage_buffer, desc = "Stage buffer" },
 
           -- Movement
           {

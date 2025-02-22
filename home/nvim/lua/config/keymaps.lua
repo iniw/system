@@ -43,14 +43,8 @@ require("which-key").add({
 
   -- Git
   { "<leader>g", group = "git" },
-  { "<leader>gb", Snacks.picker.git_branches, desc = "Branches" },
-  { "<leader>gd", Snacks.picker.git_diff, desc = "Diff (hunks)" },
-  { "<leader>gf", Snacks.picker.git_log_file, desc = "Log file" },
   { "<leader>gg", "<cmd>Neogit<cr>", desc = "Neogit" },
-  { "<leader>gl", Snacks.picker.git_log, desc = "Log" },
   { "<leader>gL", Snacks.picker.git_log_line, desc = "Log line" },
-  { "<leader>gs", Snacks.picker.git_status, desc = "Status" },
-  { "<leader>gS", Snacks.picker.git_stash, desc = "Stash" },
   { "<leader>gz", Snacks.lazygit.open, desc = "Lazygit" },
 
   -- Multicursors
