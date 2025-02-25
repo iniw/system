@@ -105,8 +105,16 @@
       };
 
       extraConfig = {
+        diff = {
+          algorithm = "histogram";
+        };
+
         pull = {
           rebase = true;
+        };
+
+        push = {
+          autoSetupRemote = true;
         };
       };
 
