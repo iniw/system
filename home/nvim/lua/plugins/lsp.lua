@@ -168,10 +168,6 @@ return {
         },
       },
 
-      cmdline = {
-        enabled = false,
-      },
-
       keymap = {
         preset = "enter",
         ["<c-j>"] = { "select_next", "fallback" },
