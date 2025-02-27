@@ -68,8 +68,9 @@ vim.api.nvim_create_autocmd("FileType", {
 
 vim.api.nvim_create_autocmd({ "RecordingEnter", "RecordingLeave" }, {
   callback = function(event)
-    local msg = event.event == "RecordingEnter" and "Recording @" .. vim.fn.reg_recording() or "Stopped recording"
-    vim.notify(msg, vim.log.levels.INFO, {
+    local started = event.event == "RecordingEnter"
+    local msg = started and "Recording @" .. vim.fn.reg_recording() or "Stopped recording"
+    vim.notify(msg, started and vim.log.levels.WARN or vim.log.levels.INFO, {
       title = "Macro",
     })
   end,

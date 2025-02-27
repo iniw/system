@@ -1,18 +1,25 @@
 local M = {}
 
 function M.lsp_capabilities()
-  return require("blink.cmp").get_lsp_capabilities({
-    textDocument = {
-      completion = { completionItem = { snippetSupport = false } },
-    },
+  return require("blink.cmp").get_lsp_capabilities(
+    {
+      textDocument = {
+        completion = {
+          completionItem = {
+            snippetSupport = false,
+          },
+        },
+      },
 
-    workspace = {
-      fileOperations = {
-        didRename = true,
-        willRename = true,
+      workspace = {
+        fileOperations = {
+          didRename = true,
+          willRename = true,
+        },
       },
     },
-  }, true)
+    true -- Include neovim's defaults
+  )
 end
 
 ---@class ToggleOpts
