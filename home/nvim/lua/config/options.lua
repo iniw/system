@@ -62,6 +62,7 @@ o.winminwidth = 5
 o.wrap = false
 o.smoothscroll = true
 o.guicursor = { "n-v-c-sm:block", "i-ci-ve:ver25", "r-cr-o:hor20" }
+o.spell = false
 
 -- Status line
 o.laststatus = 3
