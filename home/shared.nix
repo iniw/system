@@ -105,6 +105,11 @@
       };
 
       extraConfig = {
+        core = {
+          fsmonitor = true;
+          untrackedcache = true;
+        };
+
         diff = {
           algorithm = "histogram";
         };
