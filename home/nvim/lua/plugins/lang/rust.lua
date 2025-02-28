@@ -17,6 +17,10 @@ return {
               },
             },
 
+            checkOnSave = {
+              allTargets = false,
+            },
+
             cargo = {
               allFeatures = true,
               loadOutDirsFromCheck = true,
