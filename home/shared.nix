@@ -16,6 +16,7 @@
       # Tools
       coreutils
       exiftool
+      git-absorb
       hyperfine
       just
       klip
