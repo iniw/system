@@ -66,4 +66,15 @@ o.spelllang = ""
 
 -- Status line
 o.laststatus = 3
-o.statusline = [[ %{expand("%:~:.")} %m %r %w%=%l:%c ]]
+o.statusline = [[ %{expand("%:~:.")} %m %r %w%=%l:%c %{v:lua.VisualSelection()} ]]
+
+function VisualSelection()
+  if vim.fn.mode():find("[vV]") then
+    local wc = vim.fn.wordcount()
+    local start_line = vim.fn.line("v")
+    local end_line = vim.fn.line(".")
+    local line_count = math.abs(end_line - start_line) + 1
+    return string.format("[%d:%d]", line_count, wc.visual_chars)
+  end
+  return ""
+end
