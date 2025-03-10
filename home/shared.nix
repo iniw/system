@@ -166,7 +166,6 @@
         stylua
         # markdown
         marksman
-        markdownlint-cli2
         # toml
         taplo
       ];
