@@ -45,17 +45,41 @@ return {
   {
     "MeanderingProgrammer/render-markdown.nvim",
     ft = "markdown",
+    ---@module "render-markdown"
+    ---@type render.md.Config
     opts = {
-      enabled = false,
+      enabled = true,
+
+      render_modes = true,
+
       code = {
-        sign = false,
         width = "block",
-        right_pad = 1,
-      },
-      heading = {
         sign = false,
-        icons = {},
+        style = "language",
+        language_name = true,
+        border = "none",
       },
+
+      heading = {
+        position = "inline",
+        backgrounds = {
+          "Title",
+          "Title",
+          "Title",
+          "Title",
+          "Title",
+          "Title",
+        },
+        foregrounds = {
+          "Title",
+          "Title",
+          "Title",
+          "Title",
+          "Title",
+          "Title",
+        },
+      },
+
       checkbox = {
         enabled = false,
       },
@@ -65,7 +89,7 @@ return {
   {
     "saghen/blink.cmp",
     --- @module "blink.cmp"
-    --- @type blink.cmp.ConfigStrict
+    --- @type blink.cmp.Config
     opts = {
       sources = {
         default = { "markdown" },
