@@ -199,6 +199,12 @@ require("which-key").add({
   { "<leader>uC", Snacks.picker.colorschemes, desc = "Colorschemes" },
   { "<leader>ui", vim.show_pos, desc = "Inspect position" },
   { "<leader>uI", "<cmd>InspectTree<cr>", desc = "Inspect tree" },
+  sol.toggle({
+    name = "wrap",
+    key = "<leader>uw",
+    get = function() return vim.opt_local.wrap:get() end,
+    set = function(state) vim.opt_local.wrap = state end,
+  }),
 
   -- Windows
   { "<leader>w", group = "windows", proxy = "<c-w>" },
