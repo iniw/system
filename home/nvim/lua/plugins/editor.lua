@@ -242,6 +242,9 @@ return {
     "echasnovski/mini.jump",
     event = sol.OnFile,
     opts = {
+      delay = {
+        highlight = 0,
+      },
       silent = true,
     },
   },
