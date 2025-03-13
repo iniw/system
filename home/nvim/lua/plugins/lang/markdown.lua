@@ -34,21 +34,24 @@ return {
     "iamcco/markdown-preview.nvim",
     version = false,
     cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-    ft = "markdown",
+    ft = { "markdown", "noice" },
     build = function()
       require("lazy").load({ plugins = { "markdown-preview.nvim" } })
       vim.fn["mkdp#util#install"]()
     end,
+    init = function() vim.g.mkdp_filetypes = { "markdown", "noice" } end,
     config = function() vim.cmd("do FileType") end,
   },
 
   {
     "MeanderingProgrammer/render-markdown.nvim",
-    ft = "markdown",
+    ft = { "markdown", "noice" },
     ---@module "render-markdown"
     ---@type render.md.Config
     opts = {
       enabled = true,
+
+      file_types = { "markdown", "noice" },
 
       render_modes = true,
 
