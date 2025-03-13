@@ -78,6 +78,8 @@ return {
     ---@module "neogit"
     ---@type NeogitConfig
     opts = {
+      auto_show_console_on = "error",
+
       disable_hint = true,
 
       graph_style = "unicode",
