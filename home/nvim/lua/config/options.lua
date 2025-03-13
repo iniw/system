@@ -66,15 +66,43 @@ o.spelllang = ""
 
 -- Status line
 o.laststatus = 3
-o.statusline = [[ %{expand("%:~:.")} %m %r %w%=%l:%c %{v:lua.VisualSelection()} ]]
+o.statusline = [[ %{v:lua.StatusLineLeft()}%=%{v:lua.StatusLineRight()} ]]
 
-function VisualSelection()
-  if vim.fn.mode():find("[vV]") then
-    local wc = vim.fn.wordcount()
-    local start_line = vim.fn.line("v")
-    local end_line = vim.fn.line(".")
-    local line_count = math.abs(end_line - start_line) + 1
-    return string.format("[%d:%d]", line_count, wc.visual_chars)
+local function concat(elements)
+  local filtered = vim.tbl_filter(function(s) return s ~= "" end, elements)
+  return table.concat(filtered, " ")
+end
+
+function StatusLineLeft()
+  local function Filename() return vim.fn.expand("%:~:.") end
+  local function Modified() return vim.bo.modified and "[+]" or (vim.bo.modifiable and "" or "[-]") end
+
+  return concat({
+    Filename(),
+    Modified(),
+  })
+end
+
+function StatusLineRight()
+  local function LineInfo()
+    local cursorpos = vim.fn.getpos(".")
+    return string.format("%s:%s", cursorpos[2], cursorpos[3])
   end
-  return ""
+
+  local function VisualSelectionInfo()
+    if vim.fn.mode():find("[vV]") then
+      local wc = vim.fn.wordcount()
+      local start_line = vim.fn.line("v")
+      local end_line = vim.fn.line(".")
+      local line_count = math.abs(end_line - start_line) + 1
+      return string.format("[%d:%d]", line_count, wc.visual_chars)
+    else
+      return ""
+    end
+  end
+
+  return concat({
+    LineInfo(),
+    VisualSelectionInfo(),
+  })
 end
