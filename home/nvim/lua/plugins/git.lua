@@ -21,18 +21,38 @@ return {
         local gs = require("gitsigns")
         require("which-key").add({
           buffer = buffer,
+
+          -- Genreal
+          { "<leader>gB", function() gs.blame_line({ full = true }) end, desc = "Blame line" },
+          { "<leader>gb", gs.blame, desc = "Blame buffer" },
+
+          -- Hunks
           { "<leader>gh", group = "hunks" },
-          { "<leader>ghb", function() gs.blame_line({ full = true }) end, desc = "Blame line" },
-          { "<leader>ghB", gs.blame, desc = "Blame buffer" },
-          { "<leader>ghd", gs.diffthis, desc = "Diff this" },
           { "<leader>ghp", gs.preview_hunk_inline, desc = "Preview hunk inline" },
+          {
+            "<leader>ghr",
+            gs.reset_hunk,
+            desc = "Reset hunk",
+            mode = "n",
+          },
           {
             "<leader>ghr",
             function() gs.reset_hunk({ vim.fn.line("."), vim.fn.line("v") }) end,
             desc = "Reset hunk",
-            mode = { "n", "v" },
+            mode = "v",
           },
-          { "<leader>ghR", gs.reset_buffer, desc = "Reset buffer" },
+          {
+            "<leader>ghs",
+            gs.stage_hunk,
+            desc = "Stage hunk",
+            mode = "n",
+          },
+          {
+            "<leader>ghs",
+            function() gs.stage_hunk({ vim.fn.line("."), vim.fn.line("v") }) end,
+            desc = "Stage hunk",
+            mode = "v",
+          },
 
           -- Movement
           {
