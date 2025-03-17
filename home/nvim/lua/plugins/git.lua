@@ -72,7 +72,6 @@ return {
     --        https://github.com/NeogitOrg/neogit/pull/1655
     --        https://github.com/NeogitOrg/neogit/pull/1654
     "iniw/neogit",
-    dependencies = { "sindrets/diffview.nvim" },
     verson = false,
     cmd = "Neogit",
     ---@module "neogit"
@@ -88,5 +87,11 @@ return {
         snacks = true,
       },
     },
+  },
+
+  {
+    "sindrets/diffview.nvim",
+    cmd = { "DiffviewOpen", "DiffviewFileHistory" },
+    opts = {},
   },
 }
