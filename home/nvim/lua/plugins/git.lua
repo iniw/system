@@ -22,7 +22,7 @@ return {
         require("which-key").add({
           buffer = buffer,
 
-          -- Genreal
+          -- General
           { "<leader>gB", function() gs.blame_line({ full = true }) end, desc = "Blame line" },
           { "<leader>gb", gs.blame, desc = "Blame buffer" },
 

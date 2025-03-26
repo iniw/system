@@ -25,6 +25,29 @@ function setup.diagnostics()
   })
 end
 
+local function document_symbols()
+  local function cursor_in_range(cursor, range)
+    local row, col = unpack(cursor)
+    row = row - 1
+    return (row > range.start.line or (row == range.start.line and col >= range.start.character))
+      and (row < range["end"].line or (row == range["end"].line and col <= range["end"].character))
+  end
+
+  local cursor = vim.api.nvim_win_get_cursor(0)
+  local picker = Snacks.picker.lsp_symbols()
+  picker.matcher.task:on(
+    "done",
+    vim.schedule_wrap(function()
+      for symbol in vim.iter(picker:items()):rev() do
+        if cursor_in_range(cursor, symbol.range) then
+          picker.list:move(symbol.idx, true)
+          return
+        end
+      end
+    end)
+  )
+end
+
 function setup.keymaps(buffer, server_keymaps)
   require("which-key").add({
     buffer = buffer,
@@ -43,16 +66,14 @@ function setup.keymaps(buffer, server_keymaps)
     },
     { "<leader>cr", vim.lsp.buf.rename, desc = "Rename" },
     { "<leader>cR", Snacks.picker.lsp_references, desc = "Go to references" },
+    { "<leader>cs", document_symbols, desc = "Document Symbols" },
+    { "<leader>cS", Snacks.picker.lsp_workspace_symbols, desc = "Workspace symbols" },
     { "<leader>ct", Snacks.picker.lsp_type_definitions, desc = "Go to type definition" },
     {
       "<leader>cv",
       function() Snacks.picker.lsp_definitions({ confirm = "edit_vsplit" }) end,
       desc = "Go to definition in vertical split",
     },
-
-    -- Search
-    { "<leader>ss", Snacks.picker.lsp_symbols, desc = "Document symbols" },
-    { "<leader>sS", Snacks.picker.lsp_workspace_symbols, desc = "Workspace symbols" },
 
     -- Hover
     { "K", vim.lsp.buf.hover, desc = "Hover" },
