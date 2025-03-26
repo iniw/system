@@ -38,7 +38,7 @@ keybind = clear
 # keybinds.tab
 keybind = super+n=new_tab
 keybind = super+d=close_surface
-keybind = super+shift+d=close_window
+keybind = super+shift+d=close_tab
 keybind = super+shift+h=previous_tab
 keybind = super+shift+l=next_tab
 
