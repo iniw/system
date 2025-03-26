@@ -5,7 +5,6 @@ return {
     opts = {
       servers = {
         cssls = {},
-        eslint = {},
         html = {},
         vtsls = {
           settings = {
