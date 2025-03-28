@@ -74,6 +74,10 @@ local function concat(elements)
 end
 
 function StatusLineLeft()
+  if vim.bo.buftype == "terminal" then
+    return ""
+  end
+
   local function Filename() return vim.fn.expand("%:~:.") end
   local function Modified() return vim.bo.modified and "[+]" or (vim.bo.modifiable and "" or "[-]") end
   local function ReadOnly() return vim.bo.readonly and "[RO]" or "" end
