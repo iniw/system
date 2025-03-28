@@ -213,9 +213,9 @@ return {
     ---@module "conform"
     ---@type conform.setupOpts
     opts = {
-      format_on_save = function(buf)
+      format_after_save = function(buf)
         if vim.g.autoformat ~= false and vim.b[buf].autoformat ~= false then
-          return { timeout_ms = 3000, lsp_format = "fallback" }
+          return { lsp_format = "fallback" }
         end
       end,
     },
