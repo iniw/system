@@ -196,7 +196,7 @@ require("which-key").add({
 
   -- UI
   { "<leader>u", group = "ui" },
-  { "<leader>uC", Snacks.picker.colorschemes, desc = "Colorschemes" },
+  { "<leader>uc", Snacks.picker.colorschemes, desc = "Colorschemes" },
   { "<leader>ui", vim.show_pos, desc = "Inspect position" },
   { "<leader>uI", "<cmd>InspectTree<cr>", desc = "Inspect tree" },
   sol.toggle({
