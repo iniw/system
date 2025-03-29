@@ -5,6 +5,8 @@ return {
     opts = {
       servers = {
         clangd = {
+          filetypes = { "c", "cpp" },
+
           keys = {
             { "<leader>ch", "<cmd>ClangdSwitchSourceHeader<cr>", desc = "Switch source/header" },
           },
