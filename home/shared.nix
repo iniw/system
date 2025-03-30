@@ -3,7 +3,6 @@
   pkgs,
   pkgs-unstable,
   config,
-  neovim-nightly,
   ...
 }:
 {
@@ -147,7 +146,7 @@
 
     neovim = {
       enable = true;
-      package = neovim-nightly.packages.${pkgs.system}.default;
+      package = pkgs-unstable.neovim-unwrapped;
 
       defaultEditor = true;
 

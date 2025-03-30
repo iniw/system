@@ -30,10 +30,6 @@
       url = "git+ssh://git@github.com/iniw/fonts";
       inputs.nixpkgs.follows = "nixpkgs-nixos";
     };
-
-    neovim-nightly = {
-      url = "github:nix-community/neovim-nightly-overlay";
-    };
   };
 
   outputs =
@@ -47,7 +43,6 @@
       mac-app-util,
       klip,
       fonts,
-      neovim-nightly,
     }:
 
     let
@@ -66,7 +61,6 @@
           inherit
             user
             overlays
-            neovim-nightly
             mac-app-util
             ;
           pkgs-unstable = import nixpkgs-unstable { inherit system; };
@@ -83,7 +77,7 @@
         system = "x86_64-linux";
 
         specialArgs = {
-          inherit user overlays neovim-nightly;
+          inherit user overlays;
           pkgs-unstable = import nixpkgs-unstable { inherit system; };
         };
 

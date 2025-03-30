@@ -3,7 +3,6 @@
   overlays,
   pkgs,
   pkgs-unstable,
-  neovim-nightly,
   ...
 }:
 {
@@ -11,7 +10,7 @@
 
   home-manager = {
     extraSpecialArgs = {
-      inherit user pkgs-unstable neovim-nightly;
+      inherit user pkgs-unstable;
     };
 
     useGlobalPkgs = true;
