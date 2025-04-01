@@ -51,6 +51,8 @@ return {
     opts = {
       enabled = true,
 
+      completions = { lsp = { enabled = true } },
+
       file_types = { "markdown", "noice" },
 
       render_modes = true,
@@ -85,24 +87,6 @@ return {
 
       checkbox = {
         enabled = false,
-      },
-    },
-  },
-
-  {
-    "saghen/blink.cmp",
-    --- @module "blink.cmp"
-    --- @type blink.cmp.Config
-    opts = {
-      sources = {
-        default = { "markdown" },
-        providers = {
-          markdown = {
-            name = "RenderMarkdown",
-            module = "render-markdown.integ.blink",
-            fallbacks = { "lsp" },
-          },
-        },
       },
     },
   },
