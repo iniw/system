@@ -197,6 +197,10 @@ return {
 
       signature = {
         enabled = true,
+
+        trigger = {
+          show_on_insert = true,
+        },
       },
 
       sources = {
