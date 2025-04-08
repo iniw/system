@@ -4,18 +4,7 @@ return {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
-        lua_ls = {
-          settings = {
-            Lua = {
-              -- Disable snippets
-              -- From: https://cmp.saghen.dev/configuration/snippets#disable-all-snippets
-              completion = {
-                callSnippet = "Disable",
-                keywordSnippet = "Disable",
-              },
-            },
-          },
-        },
+        lua_ls = {},
       },
     },
   },
