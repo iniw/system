@@ -47,4 +47,13 @@ return {
       attach_jdtls()
     end,
   },
+
+  {
+    "stevearc/conform.nvim",
+    opts = {
+      formatters_by_ft = {
+        java = { lsp_format = "prefer" },
+      },
+    },
+  },
 }
