@@ -277,6 +277,7 @@ return {
 
   {
     "stevearc/oil.nvim",
+    version = false,
     lazy = false,
     ---@module 'oil'
     ---@type oil.SetupOpts
