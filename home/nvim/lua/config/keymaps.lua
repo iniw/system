@@ -135,24 +135,7 @@ require("which-key").add({
   },
   {
     "<leader>m<space>",
-    function()
-      --  HACK: The goal is to set scrolloff to a huge value, essentially locking the cursor to the vertical center of the screen,
-      --        until we are out of hydra mode.
-      --        Which-key unfortunately provides no callback for when that happens, so we hook key presses and compare them against '<esc>'
-      local esc_termcode = vim.api.nvim_replace_termcodes("<esc>", true, true, true)
-      local ns = vim.api.nvim_create_namespace("center-cursor-while-in-hydra-mode")
-      vim.on_key(function(_, typed)
-        if typed == esc_termcode then
-          -- Go back to the global value
-          vim.cmd.setlocal("scrolloff<")
-          -- Remove the callback
-          vim.on_key(nil, ns)
-        end
-      end, ns)
-
-      vim.cmd.setlocal("scrolloff=999")
-      require("which-key").show({ keys = "<leader>m", loop = true })
-    end,
+    function() require("which-key").show({ keys = "<leader>m", loop = true }) end,
     desc = "Hydra Mode",
     mode = { "n", "v" },
   },
