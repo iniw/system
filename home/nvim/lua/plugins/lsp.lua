@@ -75,9 +75,6 @@ function setup.keymaps(buffer, server_keymaps)
       desc = "Go to definition in vertical split",
     },
 
-    -- Hover
-    { "K", vim.lsp.buf.hover, desc = "Hover" },
-
     -- Movement
     { "]d", function() vim.diagnostic.jump({ count = 1 }) end, desc = "Next diagnostic" },
     { "[d", function() vim.diagnostic.jump({ count = -1 }) end, desc = "Previous diagnostic" },
@@ -130,6 +127,7 @@ end
 return {
   {
     "neovim/nvim-lspconfig",
+    version = false,
     event = sol.OnFile,
     config = function(_, opts)
       setup.diagnostics()
@@ -151,10 +149,9 @@ return {
         end,
       })
 
-      local lspconfig = require("lspconfig")
       for server, config in pairs(opts.servers) do
-        config.capabilities = sol.lsp_capabilities()
-        lspconfig[server].setup(config)
+        vim.lsp.config(server, config)
+        vim.lsp.enable(server)
       end
     end,
   },
