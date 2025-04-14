@@ -191,13 +191,6 @@ return {
     ---@module "multicursor-nvim"
     ---@type MultiCursorOpts
     opts = {},
-    init = function()
-      local function hl(group, definition) vim.api.nvim_set_hl(0, group, { link = definition }) end
-      hl("MultiCursorCursor", "TodoBgFIX")
-      hl("MultiCursorSign", "TodoSignFIX")
-      hl("MultiCursorDisabledCursor", "TodoBgNOTE")
-      hl("MultiCursorDisabledSign", "TodoSignNOTE")
-    end,
   },
 
   {
