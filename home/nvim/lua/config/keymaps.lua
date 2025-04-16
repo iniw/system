@@ -158,15 +158,7 @@ require("which-key").add({
   { "<leader>sp", Snacks.picker.lazy, desc = "Search plugin spec" },
   {
     "<leader>sr",
-    function()
-      local ext = vim.bo.buftype == "" and vim.fn.expand("%:e")
-      require("grug-far").open({
-        transient = true,
-        prefills = {
-          filesFilter = ext and ext ~= "" and "*." .. ext or nil,
-        },
-      })
-    end,
+    function() require("grug-far").open({ transient = true }) end,
     desc = "Search and replace",
     mode = { "n", "v" },
   },
