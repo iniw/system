@@ -8,7 +8,7 @@ return {
           filetypes = { "c", "cpp" },
 
           keys = {
-            { "<leader>ch", "<cmd>ClangdSwitchSourceHeader<cr>", desc = "Switch source/header" },
+            { "<leader>ch", "<cmd>LspClangdSwitchSourceHeader<cr>", desc = "Switch source/header" },
           },
 
           cmd = {
