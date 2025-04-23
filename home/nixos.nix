@@ -17,10 +17,6 @@
       enable = true;
     };
 
-    firefox = {
-      enable = true;
-    };
-
     neovim = {
       extraPackages = with pkgs; [
         # For interacting with the system clipboard

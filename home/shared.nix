@@ -10,6 +10,7 @@
     packages = with pkgs; [
       # Apps
       discord
+      google-chrome
       spotify
 
       # Tools
