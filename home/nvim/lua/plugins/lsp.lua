@@ -64,15 +64,7 @@ function setup.keymaps(buffer, server_keymaps)
       function() vim.fn.setreg("+", vim.fn.expand("%") .. ":" .. vim.fn.line(".")) end,
       desc = "Yank gdb breakpoint",
     },
-    {
-      "<leader>cr",
-      function()
-        vim.lsp.buf.rename()
-        vim.cmd("silent! wa")
-      end,
-      desc = "Rename",
-    },
-
+    { "<leader>cr", vim.lsp.buf.rename, desc = "Rename" },
     { "<leader>cR", Snacks.picker.lsp_references, desc = "Go to references" },
     { "<leader>cs", document_symbols, desc = "Document Symbols" },
     { "<leader>cS", Snacks.picker.lsp_workspace_symbols, desc = "Workspace symbols" },
