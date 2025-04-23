@@ -24,9 +24,9 @@
       zlib
 
       # Fonts
+      berkeley-mono
       inter
       tx-02
-      berkeley-mono
     ];
 
     shellAliases = {
