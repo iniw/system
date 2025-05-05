@@ -76,7 +76,7 @@ return {
   {
     "folke/noice.nvim",
     lazy = false,
-    dependencies = { { "MunifTanjim/nui.nvim", version = false } },
+    dependencies = { "MunifTanjim/nui.nvim" },
     ---@module "noice"
     ---@type NoiceConfig
     opts = {
