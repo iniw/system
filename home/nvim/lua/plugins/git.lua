@@ -88,11 +88,8 @@ return {
   },
 
   {
-    -- FIXME: Move to the official one after these two PRs get merged:
-    --        https://github.com/NeogitOrg/neogit/pull/1655
-    --        https://github.com/NeogitOrg/neogit/pull/1654
-    "iniw/neogit",
-    verson = false,
+    "NeogitOrg/neogit",
+    version = false,
     cmd = "Neogit",
     ---@module "neogit"
     ---@type NeogitConfig
