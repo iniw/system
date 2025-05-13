@@ -1,6 +1,4 @@
-local setup = {}
-
-function setup.diagnostics()
+local function setup_diagnostics()
   vim.diagnostic.config({
     float = {
       source = true,
@@ -25,30 +23,30 @@ function setup.diagnostics()
   })
 end
 
-local function document_symbols()
-  local function cursor_in_range(cursor, range)
-    local row, col = unpack(cursor)
-    row = row - 1
-    return (row > range.start.line or (row == range.start.line and col >= range.start.character))
-      and (row < range["end"].line or (row == range["end"].line and col <= range["end"].character))
+local function setup_keymaps(buffer, server_keymaps)
+  local function document_symbols()
+    local function cursor_in_range(cursor, range)
+      local row, col = unpack(cursor)
+      row = row - 1
+      return (row > range.start.line or (row == range.start.line and col >= range.start.character))
+        and (row < range["end"].line or (row == range["end"].line and col <= range["end"].character))
+    end
+
+    local cursor = vim.api.nvim_win_get_cursor(0)
+    local picker = Snacks.picker.lsp_symbols()
+    picker.matcher.task:on(
+      "done",
+      vim.schedule_wrap(function()
+        for symbol in vim.iter(picker:items()):rev() do
+          if cursor_in_range(cursor, symbol.range) then
+            picker.list:move(symbol.idx, true)
+            return
+          end
+        end
+      end)
+    )
   end
 
-  local cursor = vim.api.nvim_win_get_cursor(0)
-  local picker = Snacks.picker.lsp_symbols()
-  picker.matcher.task:on(
-    "done",
-    vim.schedule_wrap(function()
-      for symbol in vim.iter(picker:items()):rev() do
-        if cursor_in_range(cursor, symbol.range) then
-          picker.list:move(symbol.idx, true)
-          return
-        end
-      end
-    end)
-  )
-end
-
-function setup.keymaps(buffer, server_keymaps)
   require("which-key").add({
     buffer = buffer,
     -- Code
@@ -130,7 +128,7 @@ return {
     version = false,
     event = sol.OnFile,
     config = function(_, opts)
-      setup.diagnostics()
+      setup_diagnostics()
 
       vim.api.nvim_create_autocmd("LspAttach", {
         callback = function(event)
@@ -142,7 +140,7 @@ return {
           local server_opts = opts.servers[client.name]
 
           local server_keymaps = server_opts and server_opts.keys and vim.deepcopy(server_opts.keys) or {}
-          setup.keymaps(event.buf, server_keymaps)
+          setup_keymaps(event.buf, server_keymaps)
 
           local server_capabilities = server_opts and server_opts.server_capabilities or {}
           client.server_capabilities = vim.tbl_deep_extend("force", client.server_capabilities, server_capabilities)
