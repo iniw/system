@@ -50,8 +50,8 @@ return {
 
         preset = {
           keys = {
-            { icon = " ", key = "f", desc = "Find file", action = ":lua Snacks.picker.files()" },
-            { icon = " ", key = "g", desc = "Find text", action = ":lua Snacks.picker.grep()" },
+            { icon = " ", key = "f", desc = "File picker", action = ":lua Snacks.picker.smart()" },
+            { icon = " ", key = "g", desc = "Grep", action = ":lua Snacks.picker.grep()" },
             { icon = " ", key = "s", desc = "Restore session", section = "session" },
             { icon = "󰒲 ", key = "l", desc = "Lazy", action = ":Lazy" },
             { icon = " ", key = "q", desc = "Quit", action = ":qa" },
