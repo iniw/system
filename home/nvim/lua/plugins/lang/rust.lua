@@ -21,7 +21,6 @@ return {
 
               files = {
                 excludeDirs = {
-                  ".direnv",
                   ".git",
                   ".github",
                   "target",
