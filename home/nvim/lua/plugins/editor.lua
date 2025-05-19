@@ -69,22 +69,6 @@ return {
 
       picker = {
         sources = {
-          explorer = {
-            win = {
-              list = {
-                keys = {
-                  ["<c-t>"] = { { "tab", "tcd" } },
-                },
-              },
-            },
-
-            layout = {
-              layout = {
-                position = "right",
-              },
-            },
-          },
-
           notifications = {
             win = {
               preview = {
