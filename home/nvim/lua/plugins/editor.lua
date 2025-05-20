@@ -124,7 +124,6 @@ return {
 
   {
     "folke/which-key.nvim",
-    lazy = false,
     ---@module "which-key"
     ---@type wk.Config
     opts = {
