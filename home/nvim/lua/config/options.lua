@@ -68,6 +68,8 @@ o.spelllang = ""
 o.laststatus = 3
 o.statusline = [[ %{v:lua.StatusLineLeft()}%=%{v:lua.StatusLineRight()} ]]
 
+o.cmdheight = 0
+
 local function concat(elements)
   local filtered = vim.tbl_filter(function(s) return s ~= "" end, elements)
   return table.concat(filtered, " ")
