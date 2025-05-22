@@ -172,7 +172,7 @@ return {
   {
     "jake-stewart/multicursor.nvim",
     ---@module "multicursor-nvim"
-    ---@type MultiCursorOpts
+    ---@type mc.MultiCursorOpts
     opts = {},
   },
 
@@ -241,7 +241,7 @@ return {
     "MagicDuck/grug-far.nvim",
     cmd = "GrugFar",
     ---@module "grug-far"
-    ---@type GrugFarOptions
+    ---@type grug.far.Options
     opts = {},
   },
 
