@@ -252,6 +252,12 @@ return {
   },
 
   {
+    "tpope/vim-fugitive",
+    version = false,
+    cmd = { "Git", "G" },
+  },
+
+  {
     "stevearc/oil.nvim",
     version = false,
     lazy = false,
