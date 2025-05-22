@@ -281,6 +281,17 @@ return {
         ["<c-v>"] = { "actions.select", opts = { vertical = true } },
         ["<a-h>"] = "actions.toggle_hidden",
         ["?"] = "actions.show_help",
+        ["<leader>;"] = {
+          "actions.open_cmdline",
+          desc = "Open the command line with the current file as an argument",
+        },
+        ["<leader>:"] = {
+          "actions.open_cmdline",
+          opts = {
+            modify = ":h",
+          },
+          desc = "Open the command line with the current directory as an argument",
+        },
       },
 
       view_options = {
