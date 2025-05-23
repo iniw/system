@@ -239,7 +239,7 @@ return {
 
   {
     "MagicDuck/grug-far.nvim",
-    cmd = "GrugFar",
+    cmd = { "GrugFar", "GrugFarWithin" },
     ---@module "grug-far"
     ---@type grug.far.Options
     opts = {},
