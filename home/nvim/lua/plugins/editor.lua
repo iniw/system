@@ -271,7 +271,7 @@ return {
       skip_confirm_for_simple_edits = true,
 
       lsp_file_methods = {
-        autosave_changes = "unmodified",
+        autosave_changes = true,
       },
 
       use_default_keymaps = false,
