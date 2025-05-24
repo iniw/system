@@ -2,7 +2,6 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
-    priority = 3000,
     branch = "main",
     version = false,
     build = ":TSUpdate",
@@ -17,7 +16,6 @@ return {
 
   {
     "folke/snacks.nvim",
-    priority = 1000,
     lazy = false,
     ---@module "snacks"
     ---@type snacks.Config
