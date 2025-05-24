@@ -1,17 +1,6 @@
 ---@type LazySpec
 return {
   {
-    "folke/snacks.nvim",
-    ---@module "snacks"
-    ---@type snacks.Config
-    opts = {
-      lazygit = {
-        enabled = true,
-      },
-    },
-  },
-
-  {
     "lewis6991/gitsigns.nvim",
     event = sol.OnFile,
     ---@module "gitsigns"
