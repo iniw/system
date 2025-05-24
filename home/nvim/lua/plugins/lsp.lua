@@ -125,7 +125,6 @@ end
 return {
   {
     "neovim/nvim-lspconfig",
-    version = false,
     event = sol.OnFile,
     config = function(_, opts)
       setup_diagnostics()
