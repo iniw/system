@@ -3,7 +3,6 @@ return {
   -- Colorscheme
   {
     "jesseleite/nvim-noirbuddy",
-    priority = 2000,
     lazy = false,
     dependencies = { { "tjdevries/colorbuddy.nvim", version = false } },
     config = function()
