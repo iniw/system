@@ -2,49 +2,17 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
-    dependencies = { "nvim-treesitter/nvim-treesitter-textobjects" },
     priority = 3000,
+    branch = "main",
     version = false,
     build = ":TSUpdate",
-    main = "nvim-treesitter.configs",
     lazy = false,
-    ---@module "nvim-treesitter"
-    ---@type TSConfig
-    opts = {
-      highlight = {
-        enable = true,
-      },
-
-      indent = {
-        enable = true,
-      },
-
-      textobjects = {
-        select = {
-          enable = true,
-
-          keymaps = {
-            ["af"] = "@function.outer",
-            ["if"] = "@function.inner",
-          },
-        },
-
-        move = {
-          enable = true,
-
-          goto_next_start = {
-            ["]f"] = "@function.outer",
-          },
-          goto_previous_start = {
-            ["[f"] = "@function.outer",
-          },
-        },
-      },
-    },
+    opts = {},
     init = function()
       vim.opt.foldmethod = "expr"
       vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
       vim.opt.foldtext = ""
+      vim.opt.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
     end,
   },
 

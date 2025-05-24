@@ -84,3 +84,12 @@ vim.api.nvim_create_autocmd({ "VimResized" }, {
     vim.cmd("tabnext " .. current_tab)
   end,
 })
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "*",
+  callback = function(event)
+    if vim.treesitter.get_parser(event.buf, nil, { error = false }) then
+      vim.treesitter.start(event.buf)
+    end
+  end,
+})
