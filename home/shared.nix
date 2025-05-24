@@ -30,7 +30,6 @@
     ];
 
     shellAliases = {
-      lg = "lazygit";
       ng = "nvim -c \"Neogit\"";
     };
 
@@ -152,10 +151,6 @@
     };
 
     home-manager = {
-      enable = true;
-    };
-
-    lazygit = {
       enable = true;
     };
 
