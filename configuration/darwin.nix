@@ -41,6 +41,8 @@
 
     defaults = {
       NSGlobalDomain = {
+        _HIHideMenuBar = true;
+
         AppleKeyboardUIMode = 3;
         ApplePressAndHoldEnabled = false;
         AppleShowAllFiles = true;
