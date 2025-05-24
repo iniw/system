@@ -68,18 +68,20 @@
 
       # Store direnv caches in a unified location
       # From: https://github.com/direnv/direnv/wiki/Customizing-cache-location#human-readable-directories
-      stdlib = ''
-        : "''${XDG_CACHE_HOME:="''${HOME}/.cache"}"
-        declare -A direnv_layout_dirs
-        direnv_layout_dir() {
-            local hash path
-            echo "''${direnv_layout_dirs[$PWD]:=$(
-                hash="$(sha1sum - <<< "$PWD" | head -c40)"
-                path="''${PWD//[^a-zA-Z0-9]/-}"
-                echo "''${XDG_CACHE_HOME}/direnv/layouts/''${hash}''${path}"
-            )}"
-        }
-      '';
+      stdlib =
+        # sh
+        ''
+          : "''${XDG_CACHE_HOME:="''${HOME}/.cache"}"
+          declare -A direnv_layout_dirs
+          direnv_layout_dir() {
+              local hash path
+              echo "''${direnv_layout_dirs[$PWD]:=$(
+                  hash="$(sha1sum - <<< "$PWD" | head -c40)"
+                  path="''${PWD//[^a-zA-Z0-9]/-}"
+                  echo "''${XDG_CACHE_HOME}/direnv/layouts/''${hash}''${path}"
+              )}"
+          }
+        '';
     };
 
     fd = {
@@ -224,16 +226,18 @@
       # See also: https://nixos.wiki/wiki/Fish#Setting_fish_as_your_shell
       #           https://wiki.archlinux.org/title/Fish#System_integration
       #           https://wiki.gentoo.org/wiki/Fish#Caveats
-      initContent = ''
-        if [[ ! $(ps -T -o "comm" | tail -n +2 | grep "nu$") && -z $ZSH_EXECUTION_STRING ]]; then
-            if [[ -o login ]]; then
-                LOGIN_OPTION='--login'
-            else
-                LOGIN_OPTION='''
-            fi
-            exec nu "$LOGIN_OPTION"
-        fi
-      '';
+      initContent =
+        # sh
+        ''
+          if [[ ! $(ps -T -o "comm" | tail -n +2 | grep "nu$") && -z $ZSH_EXECUTION_STRING ]]; then
+              if [[ -o login ]]; then
+                  LOGIN_OPTION='--login'
+              else
+                  LOGIN_OPTION='''
+              fi
+              exec nu "$LOGIN_OPTION"
+          fi
+        '';
     };
   };
 
