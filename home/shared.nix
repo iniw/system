@@ -170,6 +170,7 @@
         imagemagick
         # To compile treesitter grammars.
         gcc
+        tree-sitter
 
         # System-wide LSP support for languages used everywhere.
         # nix
