@@ -20,14 +20,6 @@ return {
     ---@module "snacks"
     ---@type snacks.Config
     opts = {
-      indent = {
-        enabled = true,
-
-        animate = {
-          enabled = false,
-        },
-      },
-
       picker = {
         sources = {
           notifications = {
