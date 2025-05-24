@@ -101,7 +101,7 @@
 
     ghostty = {
       enable = true;
-      package = if pkgs.stdenv.isDarwin then null else pkgs.ghostty;
+      package = if pkgs.stdenv.isDarwin then pkgs-unstable.ghostty-bin else pkgs-unstable.ghostty;
     };
 
     git = {
