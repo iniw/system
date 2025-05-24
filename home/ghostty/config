@@ -1,3 +1,6 @@
+# Ghostty is managed through nix
+auto-update = off
+
 # font
 font-family = "Berkeley Mono"
 font-size = 15
