@@ -22,26 +22,22 @@
     ];
   };
 
-  services = {
-    nix-daemon = {
-      enable = true;
-    };
-  };
-
   nixpkgs = {
     hostPlatform = "x86_64-darwin";
   };
 
   security = {
     pam = {
-      enableSudoTouchIdAuth = true;
+      services = {
+        sudo_local = {
+          touchIdAuth = true;
+        };
+      };
     };
   };
 
   system = {
-    activationScripts.postUserActivation.text = ''
-      /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
-    '';
+    primaryUser = user;
 
     defaults = {
       NSGlobalDomain = {

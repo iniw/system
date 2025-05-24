@@ -34,7 +34,7 @@
       ng = "nvim -c \"Neogit\"";
     };
 
-    stateVersion = "24.11";
+    stateVersion = "25.05";
   };
 
   programs = {
@@ -101,9 +101,7 @@
 
     ghostty = {
       enable = true;
-      # FIXME: Remove this hack once https://github.com/nix-community/home-manager/pull/6300 lands on a release channel
-      package = if pkgs.stdenv.isDarwin then pkgs.emptyDirectory else pkgs.ghostty;
-      installBatSyntax = !pkgs.stdenv.isDarwin;
+      package = if pkgs.stdenv.isDarwin then null else pkgs.ghostty;
     };
 
     git = {
@@ -230,7 +228,7 @@
       # See also: https://nixos.wiki/wiki/Fish#Setting_fish_as_your_shell
       #           https://wiki.archlinux.org/title/Fish#System_integration
       #           https://wiki.gentoo.org/wiki/Fish#Caveats
-      initExtra = ''
+      initContent = ''
         if [[ ! $(ps -T -o "comm" | tail -n +2 | grep "nu$") && -z $ZSH_EXECUTION_STRING ]]; then
             if [[ -o login ]]; then
                 LOGIN_OPTION='--login'
