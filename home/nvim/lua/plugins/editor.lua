@@ -7,7 +7,6 @@ return {
     version = false,
     build = ":TSUpdate",
     lazy = false,
-    opts = {},
     init = function()
       vim.opt.foldmethod = "expr"
       vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
