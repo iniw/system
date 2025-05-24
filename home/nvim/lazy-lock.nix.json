@@ -18,7 +18,7 @@
   "multicursor.nvim": { "branch": "main", "commit": "cecbb3028ba166578eb8620ce885e2362d112ee0" },
   "neogit": { "branch": "master", "commit": "f48912295e86065e84808bbc85619fb6e7fcbc0e" },
   "nvim-jdtls": { "branch": "master", "commit": "c23f200fee469a415c77265ca55b496feb646992" },
-  "nvim-lspconfig": { "branch": "master", "commit": "562487bc108bf73c2493f9e701b9334b48163216" },
+  "nvim-lspconfig": { "branch": "master", "commit": "fa2662510d30b06168b6e2e6915518decde6bbac" },
   "nvim-noirbuddy": { "branch": "master", "commit": "4b690fb0c4e44683e04af789911d7f17234ba2e4" },
   "nvim-treesitter": { "branch": "main", "commit": "354c30d2a2f0996b56886928cb3d36e9c6664a06" },
   "nvim-various-textobjs": { "branch": "main", "commit": "e60113244e43c8aefc118626056b310261211175" },
