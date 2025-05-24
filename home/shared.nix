@@ -208,10 +208,6 @@
       enable = true;
     };
 
-    wezterm = {
-      enable = true;
-    };
-
     yazi = {
       enable = true;
       package = pkgs-unstable.yazi;
@@ -257,11 +253,6 @@
 
       "starship.toml" = {
         source = ./starship/starship.toml;
-      };
-
-      "wezterm" = {
-        source = ./wezterm;
-        recursive = true;
       };
     };
   };
