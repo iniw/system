@@ -22,10 +22,6 @@ return {
     ---@module "snacks"
     ---@type snacks.Config
     opts = {
-      explorer = {
-        replace_netrw = true,
-      },
-
       indent = {
         enabled = true,
 
