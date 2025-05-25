@@ -78,7 +78,7 @@
 
       "org/gnome/shell" = {
         favorite-apps = [
-          "firefox.desktop"
+          "google-chrome.desktop"
           "com.mitchellh.ghostty.desktop"
           "discord.desktop"
           "spotify.desktop"
