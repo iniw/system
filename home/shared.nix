@@ -147,6 +147,8 @@
         "justfile"
         # Project-specific lazy.nvim spec/config
         ".lazy.lua"
+        # Project-specific helix config
+        ".helix"
         # direnv
         ".envrc"
         # fd's ignore list
@@ -154,15 +156,42 @@
       ];
     };
 
-    home-manager = {
+    helix = {
       enable = true;
+      # NOTE: The `helix` packaged is overlayed and points to the github repo.
+      package = pkgs.helix;
+
+      defaultEditor = true;
+
+      extraPackages = with pkgs-unstable; [
+        # System-wide LSP support for languages used everywhere.
+        # nix
+        nil
+        nixfmt-rfc-style
+        # lua
+        lua-language-server
+        stylua
+        # markdown
+        marksman
+        # toml
+        taplo
+      ];
+    };
+
+    jujutsu = {
+      enable = true;
+
+      settings = {
+        user = {
+          name = "Vinicius Deolindo";
+          email = "andrade.vinicius934@gmail.com";
+        };
+      };
     };
 
     neovim = {
       enable = true;
       package = pkgs-unstable.neovim-unwrapped;
-
-      defaultEditor = true;
 
       extraPackages = with pkgs-unstable; [
         # For `snacks.image`.
@@ -249,6 +278,11 @@
         source = ./ghostty;
         recursive = true;
       };
+
+      # "helix" = {
+      #   source = ./helix;
+      #   recursive = true;
+      # };
 
       "nvim" = {
         source = ./nvim;

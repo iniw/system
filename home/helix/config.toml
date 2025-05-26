@@ -1,0 +1,38 @@
+theme = "sol"
+
+[editor]
+color-modes = true
+completion-timeout = 5
+completion-trigger-len = 1
+continue-comments = false
+cursorline = true
+end-of-line-diagnostics = "hint"
+line-number = "relative"
+trim-final-newlines = true
+trim-trailing-whitespace = true
+
+[editor.indent-guides]
+render = true
+
+[keys.normal]
+A-e = "move_next_sub_word_end"
+A-b = "move_prev_sub_word_start"
+
+[keys.normal.space]
+f = "file_picker_in_current_directory"
+F = "file_picker"
+e = "file_explorer_in_current_buffer_directory"
+E = "file_explorer_in_current_directory"
+
+[keys.normal.g]
+C-d = ["vsplit", "jump_view_up", "goto_definition"]
+C-S-d = ["vsplit", "jump_view_up", "goto_declaration"]
+C-y = ["vsplit", "jump_view_up", "goto_type_definition"]
+C-i = ["vsplit", "jump_view_up", "goto_implementation"]
+
+[keys.select]
+A-e = "extend_next_sub_word_end"
+A-b = "extend_prev_sub_word_start"
+
+[keys.insert]
+"A-;" = "flip_selections"
