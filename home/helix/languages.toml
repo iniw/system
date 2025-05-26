@@ -1,0 +1,138 @@
+# C/C++
+[[language]]
+name = "cpp"
+auto-format = true
+formatter = { command = "clang-format", args = [
+  "-assume-filename",
+  "%{buffer_name}",
+] }
+
+[[language]]
+name = "c"
+auto-format = true
+formatter = { command = "clang-format", args = [
+  "-assume-filename",
+  "%{buffer_name}",
+] }
+
+[language-server.clangd]
+args = [
+  "--query-driver=**",
+  "--header-insertion=never",
+  "--clang-tidy",
+  "--background-index",
+]
+
+# Web
+[[language]]
+name = "css"
+auto-format = true
+formatter = { command = "prettierd", args = [
+  "--stdin-filepath",
+  "%{buffer_name}",
+] }
+
+[[language]]
+name = "html"
+auto-format = true
+formatter = { command = "prettierd", args = [
+  "--stdin-filepath",
+  "%{buffer_name}",
+] }
+
+[[language]]
+name = "javascript"
+auto-format = true
+formatter = { command = "prettierd", args = [
+  "--stdin-filepath",
+  "%{buffer_name}",
+] }
+language-servers = ["vtsls"]
+
+[[language]]
+name = "jsx"
+auto-format = true
+formatter = { command = "prettierd", args = [
+  "--stdin-filepath",
+  "%{buffer_name}",
+] }
+language-servers = ["vtsls"]
+
+[[language]]
+name = "typescript"
+auto-format = true
+formatter = { command = "prettierd", args = [
+  "--stdin-filepath",
+  "%{buffer_name}",
+] }
+language-servers = ["vtsls"]
+
+[[language]]
+name = "tsx"
+auto-format = true
+formatter = { command = "prettierd", args = [
+  "--stdin-filepath",
+  "%{buffer_name}",
+] }
+language-servers = ["vtsls"]
+
+[language-server.vtsls]
+command = "vtsls"
+args = ["--stdio"]
+
+[language-server.vtsls.config]
+hostInfo = "helix"
+typescript.inlayHints.enumMemberValues.enabled = true
+typescript.inlayHints.functionLikeReturnTypes.enabled = true
+typescript.inlayHints.parameterNames.enabled = "literals"
+typescript.inlayHints.parameterTypes.enabled = true
+typescript.inlayHints.propertyDeclarationTypes.enabled = true
+typescript.inlayHints.variableTypes.enabled = true
+typescript.updateImportsOnFileMove.enabled = "always"
+vtsls.autoUseWorkspaceTsdk = true
+vtsls.experimental.maxInlayHintLength = 30
+
+# Nix
+[[language]]
+name = "nix"
+auto-format = true
+formatter = { command = "nixfmt" }
+
+# Lua
+[[language]]
+name = "lua"
+auto-format = true
+formatter = { command = "stylua", args = [
+  "--search-parent-directories",
+  "--respect-ignores",
+  "--stdin-filepath",
+  "${buffer_name}",
+  "-",
+] }
+
+# TOML
+[[language]]
+name = "toml"
+auto-format = true
+formatter = { command = "taplo", args = ["format", "-"] }
+
+# Python
+[[language]]
+name = "python"
+auto-format = true
+formatter = { command = "ruff", args = [
+  "format",
+  "--force-exclude",
+  "--stdin-filename",
+  "%{buffer_name}",
+  "-",
+] }
+language-servers = ["pyright", "ruff"]
+
+[language-server.pyright]
+command = "pyright-langserver"
+args = ["--stdio"]
+
+[language-server.ruff]
+command = "ruff"
+args = ["server"]

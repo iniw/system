@@ -30,6 +30,11 @@
       url = "git+ssh://git@github.com/iniw/fonts";
       inputs.nixpkgs.follows = "nixpkgs-nixos";
     };
+
+    helix = {
+      url = "github:helix-editor/helix";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
   };
 
   outputs =
@@ -43,6 +48,7 @@
       mac-app-util,
       klip,
       fonts,
+      helix,
     }:
 
     let
@@ -51,6 +57,7 @@
       overlays = [
         klip.overlays.default
         fonts.overlays.default
+        helix.overlays.default
       ];
     in
     {

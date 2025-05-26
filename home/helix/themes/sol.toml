@@ -1,0 +1,123 @@
+# UI
+"ui.background" = { bg = "noir_10" }
+"ui.background.separator" = { fg = "noir_7" }
+"ui.cursor" = { fg = "noir_2", modifiers = ["reversed"] }
+"ui.cursor.match" = { bg = "noir_8" }
+"ui.cursor.primary" = { fg = "hl", modifiers = ["reversed"] }
+"ui.cursorcolumn.primary" = { bg = "noir_9" }
+"ui.cursorcolumn.secondary" = { bg = "noir_9" }
+"ui.cursorline.primary" = { bg = "noir_9" }
+"ui.cursorline.secondary" = { bg = "noir_9" }
+"ui.gutter" = { bg = "noir_10" }
+"ui.gutter.selected" = { bg = "noir_10", fg = "hl" }
+"ui.help" = { fg = "noir_2", bg = "noir_10" }
+"ui.highlight" = { fg = "hl" }
+"ui.linenr" = { fg = "noir_7" }
+"ui.linenr.selected" = { fg = "hl", bg = "noir_10" }
+"ui.menu" = { fg = "noir_2", bg = "noir_9" }
+"ui.menu.scroll" = { fg = "noir_5", bg = "noir_7" }
+"ui.menu.selected" = { fg = "hl", bg = "noir_9" }
+"ui.picker.header" = "light-hl"
+"ui.picker.header.active" = { fg = "hl", bg = "noir_8" }
+"ui.popup" = { fg = "noir_2", bg = "noir_9" }
+"ui.selection" = { bg = "noir_8" }
+"ui.selection.primary" = { bg = "noir_8", modifiers = ["bold"] }
+"ui.statusline" = { fg = "noir_5", bg = "noir_9" }
+"ui.statusline.inactive" = { fg = "noir_7", bg = "noir_9" }
+"ui.statusline.insert" = { fg = "hl", bg = "noir_9" }
+"ui.statusline.normal" = { fg = "noir_5", bg = "noir_9" }
+"ui.statusline.select" = { fg = "light-hl", bg = "noir_9" }
+"ui.text" = { fg = "noir_2" }
+"ui.text.directory" = { fg = "noir_7" }
+"ui.text.focus" = { fg = "noir_2", bg = "noir_9" }
+"ui.text.inactive" = { fg = "noir_7" }
+"ui.virtual.indent-guide" = { fg = "noir_8" }
+"ui.virtual.inlay-hint" = { fg = "noir_7" }
+"ui.virtual.inlay-hint.parameter" = { fg = "noir_7" }
+"ui.virtual.inlay-hint.type" = { fg = "noir_7" }
+"ui.virtual.jump-label" = { fg = "hl", modifiers = ["bold"] }
+"ui.virtual.ruler" = { bg = "noir_8" }
+"ui.virtual.whitespace" = { fg = "noir_8" }
+"ui.window" = { fg = "noir_7" }
+
+# Treesitter
+"attribute" = { fg = "hl" }
+"comment" = { fg = "noir_7" }
+"constant" = { fg = "noir_2" }
+"constant.builtin" = { fg = "hl" }
+"constant.builtin.character" = { fg = "hl" }
+"constant.builtin.character.escape" = { fg = "noir_2" }
+"constant.builtin.numeric" = { fg = "hl" }
+"constructor" = { fg = "noir_1" }
+"function" = { fg = "noir_0" }
+"keyword" = { fg = "noir_5" }
+"keyword.operator" = { fg = "hl" }
+"label" = { fg = "hl" }
+"namespace" = { fg = "noir_2" }
+"number_literal" = { fg = "hl" }
+"operator" = { fg = "hl" }
+"punctuation" = "light-hl"
+"punctuation.bracket" = "light-hl"
+"punctuation.delimiter" = { fg = "noir_6" }
+"punctuation.special" = { fg = "hl" }
+"special" = { fg = "noir_5" }
+"string" = { fg = "hl" }
+"tag" = { fg = "noir_6" }
+"type" = { fg = "noir_2" }
+"type.builtin" = { fg = "noir_6" }
+"variable" = { fg = "noir_2" }
+
+# Markup
+"markup.bold" = { fg = "noir_2", modifiers = ["bold"] }
+"markup.heading" = { fg = "noir_3" }
+"markup.italic" = { fg = "noir_2", modifiers = ["italic"] }
+"markup.link.text" = { fg = "noir_2" }
+"markup.link.url" = { fg = "hl" }
+"markup.list" = { fg = "noir_5" }
+"markup.quote" = { fg = "noir_9", modifiers = ["italic"] }
+"markup.raw" = { fg = "noir_2" }
+
+# Diff
+"diff.delta" = { fg = "changed" }
+"diff.minus" = { fg = "removed" }
+"diff.plus" = { fg = "added" }
+
+# Diagnostics
+"diagnostic" = { fg = "noir_5" }
+"diagnostic.error" = { underline.style = "dotted" }
+"diagnostic.hint" = { underline.style = "dotted" }
+"diagnostic.info" = { underline.style = "dotted" }
+"diagnostic.warning" = { underline.style = "dotted" }
+"error" = { fg = "error" }
+"hint" = { fg = "hint" }
+"info" = { fg = "info" }
+"warning" = { fg = "warning" }
+
+[palette]
+# White -> Black
+noir_0 = "#ffffff"
+noir_1 = "#f5f5f5"
+noir_2 = "#d5d5d5"
+noir_3 = "#b4b4b4"
+noir_4 = "#a7a7a7"
+noir_5 = "#949494"
+noir_6 = "#737373"
+noir_7 = "#535353"
+noir_8 = "#323232"
+noir_9 = "#212121"
+noir_10 = "#121212"
+
+# Highlights
+hl = "#73b3e7"
+light-hl = "#c5d8e8"
+
+# Diff
+added = "#82e773"
+changed = "#73e3e7"
+deleted = "#e77373"
+
+# Diagnostics
+error = "#e77373"
+hint = "#73e3e7"
+info = "#73e3e7"
+warning = "#e7b173"
