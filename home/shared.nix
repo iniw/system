@@ -33,6 +33,10 @@
       ng = "nvim -c \"Neogit\"";
     };
 
+    sessionVariables = {
+      PAGER = "less -FRX";
+    };
+
     stateVersion = "25.05";
   };
 
