@@ -186,6 +186,12 @@
           name = "Vinicius Deolindo";
           email = "andrade.vinicius934@gmail.com";
         };
+
+        ui = {
+          movement = {
+            edit = true;
+          };
+        };
       };
     };
 
