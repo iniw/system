@@ -182,6 +182,11 @@
       enable = true;
 
       settings = {
+        revset-aliases = {
+          # I do a whole lot of force-pushing and history-rewriting, so immutable heads are really annoying.
+          "immutable_heads()" = "none()";
+        };
+
         user = {
           name = "Vinicius Deolindo";
           email = "andrade.vinicius934@gmail.com";
