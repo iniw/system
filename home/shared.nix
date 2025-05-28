@@ -290,10 +290,10 @@
         recursive = true;
       };
 
-      # "helix" = {
-      #   source = ./helix;
-      #   recursive = true;
-      # };
+      "helix" = {
+        source = ./helix;
+        recursive = true;
+      };
 
       "nvim" = {
         source = ./nvim;

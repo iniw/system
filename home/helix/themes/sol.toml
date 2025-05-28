@@ -1,81 +1,81 @@
 # UI
-"ui.background" = { bg = "noir_10" }
-"ui.background.separator" = { fg = "noir_7" }
-"ui.cursor" = { fg = "noir_2", modifiers = ["reversed"] }
-"ui.cursor.match" = { bg = "noir_8" }
+"ui.background" = { bg = "shade-10" }
+"ui.background.separator" = { fg = "shade-7" }
+"ui.cursor" = { fg = "shade-2", modifiers = ["reversed"] }
+"ui.cursor.match" = { bg = "shade-8" }
 "ui.cursor.primary" = { fg = "hl", modifiers = ["reversed"] }
-"ui.cursorcolumn.primary" = { bg = "noir_9" }
-"ui.cursorcolumn.secondary" = { bg = "noir_9" }
-"ui.cursorline.primary" = { bg = "noir_9" }
-"ui.cursorline.secondary" = { bg = "noir_9" }
-"ui.gutter" = { bg = "noir_10" }
-"ui.gutter.selected" = { bg = "noir_10", fg = "hl" }
-"ui.help" = { fg = "noir_2", bg = "noir_10" }
+"ui.cursorcolumn.primary" = { bg = "shade-9" }
+"ui.cursorcolumn.secondary" = { bg = "shade-9" }
+"ui.cursorline.primary" = { bg = "shade-9" }
+"ui.cursorline.secondary" = { bg = "shade-9" }
+"ui.gutter" = { bg = "shade-10" }
+"ui.gutter.selected" = { bg = "shade-10", fg = "hl" }
+"ui.help" = { fg = "shade-2", bg = "shade-10" }
 "ui.highlight" = { fg = "hl" }
-"ui.linenr" = { fg = "noir_7" }
-"ui.linenr.selected" = { fg = "hl", bg = "noir_10" }
-"ui.menu" = { fg = "noir_2", bg = "noir_9" }
-"ui.menu.scroll" = { fg = "noir_5", bg = "noir_7" }
-"ui.menu.selected" = { fg = "hl", bg = "noir_9" }
+"ui.linenr" = { fg = "shade-7" }
+"ui.linenr.selected" = { fg = "hl", bg = "shade-10" }
+"ui.menu" = { fg = "shade-2", bg = "shade-9" }
+"ui.menu.scroll" = { fg = "shade-5", bg = "shade-7" }
+"ui.menu.selected" = { fg = "hl", bg = "shade-9" }
 "ui.picker.header" = "light-hl"
-"ui.picker.header.active" = { fg = "hl", bg = "noir_8" }
-"ui.popup" = { fg = "noir_2", bg = "noir_9" }
-"ui.selection" = { bg = "noir_8" }
-"ui.selection.primary" = { bg = "noir_8", modifiers = ["bold"] }
-"ui.statusline" = { fg = "noir_5", bg = "noir_9" }
-"ui.statusline.inactive" = { fg = "noir_7", bg = "noir_9" }
-"ui.statusline.insert" = { fg = "hl", bg = "noir_9" }
-"ui.statusline.normal" = { fg = "noir_5", bg = "noir_9" }
-"ui.statusline.select" = { fg = "light-hl", bg = "noir_9" }
-"ui.text" = { fg = "noir_2" }
-"ui.text.directory" = { fg = "noir_7" }
-"ui.text.focus" = { fg = "noir_2", bg = "noir_9" }
-"ui.text.inactive" = { fg = "noir_7" }
-"ui.virtual.indent-guide" = { fg = "noir_8" }
-"ui.virtual.inlay-hint" = { fg = "noir_7" }
-"ui.virtual.inlay-hint.parameter" = { fg = "noir_7" }
-"ui.virtual.inlay-hint.type" = { fg = "noir_7" }
+"ui.picker.header.active" = { fg = "hl", bg = "shade-8" }
+"ui.popup" = { fg = "shade-2", bg = "shade-9" }
+"ui.selection" = { bg = "shade-8" }
+"ui.selection.primary" = { bg = "shade-8", modifiers = ["bold"] }
+"ui.statusline" = { fg = "shade-5", bg = "shade-9" }
+"ui.statusline.inactive" = { fg = "shade-7", bg = "shade-9" }
+"ui.statusline.insert" = { fg = "shade-9", bg = "hl" }
+"ui.statusline.normal" = { fg = "shade-5", bg = "shade-9" }
+"ui.statusline.select" = { fg = "shade-9", bg = "light-hl" }
+"ui.text" = { fg = "shade-2" }
+"ui.text.directory" = { fg = "shade-7" }
+"ui.text.focus" = { fg = "shade-2", bg = "shade-9" }
+"ui.text.inactive" = { fg = "shade-7" }
+"ui.virtual.indent-guide" = { fg = "shade-8" }
+"ui.virtual.inlay-hint" = { fg = "shade-7" }
+"ui.virtual.inlay-hint.parameter" = { fg = "shade-7" }
+"ui.virtual.inlay-hint.type" = { fg = "shade-7" }
 "ui.virtual.jump-label" = { fg = "hl", modifiers = ["bold"] }
-"ui.virtual.ruler" = { bg = "noir_8" }
-"ui.virtual.whitespace" = { fg = "noir_8" }
-"ui.window" = { fg = "noir_7" }
+"ui.virtual.ruler" = { bg = "shade-8" }
+"ui.virtual.whitespace" = { fg = "shade-8" }
+"ui.window" = { fg = "shade-7" }
 
-# Treesitter
+# Syntax highlighting
 "attribute" = { fg = "hl" }
-"comment" = { fg = "noir_7" }
-"constant" = { fg = "noir_2" }
+"comment" = { fg = "shade-7" }
+"constant" = { fg = "shade-2" }
 "constant.builtin" = { fg = "hl" }
 "constant.builtin.character" = { fg = "hl" }
-"constant.builtin.character.escape" = { fg = "noir_2" }
+"constant.builtin.character.escape" = { fg = "shade-2" }
 "constant.builtin.numeric" = { fg = "hl" }
-"constructor" = { fg = "noir_1" }
-"function" = { fg = "noir_0" }
-"keyword" = { fg = "noir_5" }
+"constructor" = { fg = "shade-1" }
+"function" = { fg = "shade-0" }
+"keyword" = { fg = "shade-5" }
 "keyword.operator" = { fg = "hl" }
 "label" = { fg = "hl" }
-"namespace" = { fg = "noir_2" }
+"namespace" = { fg = "shade-2" }
 "number_literal" = { fg = "hl" }
 "operator" = { fg = "hl" }
 "punctuation" = "light-hl"
 "punctuation.bracket" = "light-hl"
-"punctuation.delimiter" = { fg = "noir_6" }
+"punctuation.delimiter" = { fg = "shade-6" }
 "punctuation.special" = { fg = "hl" }
-"special" = { fg = "noir_5" }
+"special" = { fg = "hl", modifiers = ["bold"] }
 "string" = { fg = "hl" }
-"tag" = { fg = "noir_6" }
-"type" = { fg = "noir_2" }
-"type.builtin" = { fg = "noir_6" }
-"variable" = { fg = "noir_2" }
+"tag" = { fg = "shade-6" }
+"type" = { fg = "shade-2" }
+"type.builtin" = { fg = "shade-6" }
+"variable" = { fg = "shade-2" }
 
 # Markup
-"markup.bold" = { fg = "noir_2", modifiers = ["bold"] }
-"markup.heading" = { fg = "noir_3" }
-"markup.italic" = { fg = "noir_2", modifiers = ["italic"] }
-"markup.link.text" = { fg = "noir_2" }
+"markup.bold" = { fg = "shade-2", modifiers = ["bold"] }
+"markup.heading" = { fg = "shade-3" }
+"markup.italic" = { fg = "shade-2", modifiers = ["italic"] }
+"markup.link.text" = { fg = "shade-2" }
 "markup.link.url" = { fg = "hl" }
-"markup.list" = { fg = "noir_5" }
-"markup.quote" = { fg = "noir_9", modifiers = ["italic"] }
-"markup.raw" = { fg = "noir_2" }
+"markup.list" = { fg = "shade-5" }
+"markup.quote" = { fg = "shade-9", modifiers = ["italic"] }
+"markup.raw" = { fg = "shade-2" }
 
 # Diff
 "diff.delta" = { fg = "changed" }
@@ -83,7 +83,7 @@
 "diff.plus" = { fg = "added" }
 
 # Diagnostics
-"diagnostic" = { fg = "noir_5" }
+"diagnostic" = { fg = "shade-5" }
 "diagnostic.error" = { underline.style = "dotted" }
 "diagnostic.hint" = { underline.style = "dotted" }
 "diagnostic.info" = { underline.style = "dotted" }
@@ -94,18 +94,18 @@
 "warning" = { fg = "warning" }
 
 [palette]
-# White -> Black
-noir_0 = "#ffffff"
-noir_1 = "#f5f5f5"
-noir_2 = "#d5d5d5"
-noir_3 = "#b4b4b4"
-noir_4 = "#a7a7a7"
-noir_5 = "#949494"
-noir_6 = "#737373"
-noir_7 = "#535353"
-noir_8 = "#323232"
-noir_9 = "#212121"
-noir_10 = "#121212"
+# White -> Dark gray
+shade-0 = "#ffffff"
+shade-1 = "#f5f5f5"
+shade-2 = "#d5d5d5"
+shade-3 = "#b4b4b4"
+shade-4 = "#a7a7a7"
+shade-5 = "#949494"
+shade-6 = "#737373"
+shade-7 = "#535353"
+shade-8 = "#323232"
+shade-9 = "#212121"
+shade-10 = "#121212"
 
 # Highlights
 hl = "#73b3e7"
