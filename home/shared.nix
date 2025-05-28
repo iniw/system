@@ -19,6 +19,7 @@
       git-absorb
       hyperfine
       just
+      jq
       klip
       scc
       zlib
