@@ -78,9 +78,9 @@
 "markup.raw" = { fg = "shade-2" }
 
 # Diff
-"diff.delta" = { fg = "changed" }
-"diff.minus" = { fg = "removed" }
-"diff.plus" = { fg = "added" }
+"diff.delta" = { fg = "delta" }
+"diff.minus" = { fg = "minus" }
+"diff.plus" = { fg = "plus" }
 
 # Diagnostics
 "diagnostic" = { fg = "shade-5" }
@@ -112,9 +112,9 @@ hl = "#73b3e7"
 light-hl = "#c5d8e8"
 
 # Diff
-added = "#82e773"
-changed = "#73e3e7"
-deleted = "#e77373"
+delta = "#73e3e7"
+minus = "#e77373"
+plus = "#82e773"
 
 # Diagnostics
 error = "#e77373"
