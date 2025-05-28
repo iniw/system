@@ -16,7 +16,6 @@
       # Tools
       coreutils
       exiftool
-      git-absorb
       hyperfine
       just
       jq
@@ -96,9 +95,9 @@
       enable = true;
 
       # Use fd instead of find.
-      changeDirWidgetCommand = ''fd --type d --hidden --follow --exclude ".git"'';
-      defaultCommand = ''fd --hidden --follow --exclude ".git"'';
-      fileWidgetCommand = ''fd --hidden --follow --exclude ".git"'';
+      changeDirWidgetCommand = ''fd --type d --hidden --follow --exclude ".git" --exclude ".jj"'';
+      defaultCommand = ''fd --hidden --follow --exclude ".git" --exclude ".jj"'';
+      fileWidgetCommand = ''fd --hidden --follow --exclude ".git" --exclude ".jj"'';
     };
 
     gh = {
@@ -118,6 +117,7 @@
 
       delta = {
         enable = true;
+
         options = {
           navigate = true;
           line-numbers = true;
