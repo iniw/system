@@ -1,5 +1,3 @@
-$env.config.show_banner = false
-
 let fzf_command_picker = {
   name: fzf_command_picker
   modifier: control
@@ -44,12 +42,4 @@ $env.config.keybindings = [
 # See: https://github.com/ghostty-org/ghostty/discussions/3476
 $env.config.shell_integration.osc133 = false
 
-
-# Required for activating a virtualenv-generated python environment
-# See: https://github.com/nushell/nushell/issues/14780 and https://github.com/pypa/virtualenv/issues/2838
-$env.ENV_CONVERSIONS = {
-    "PATH": {
-        from_string: { |s| $s | split row (char esep) | path expand --no-symlink }
-        to_string: { |v| $v | path expand --no-symlink | str join (char esep) }
-    }
-}
+$env.config.show_banner = false
