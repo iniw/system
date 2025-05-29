@@ -1,6 +1,11 @@
 {
   description = "system flake";
 
+  nixConfig = {
+    extra-substituters = [ "https://helix.cachix.org" ];
+    extra-trusted-public-keys = [ "helix.cachix.org-1:ejp9KQpR1FBI2onstMQ34yogDm4OgU2ru6lIwPvuCVs=" ];
+  };
+
   inputs = {
     nixpkgs-darwin.url = "github:NixOS/nixpkgs/nixpkgs-25.05-darwin";
     nixpkgs-nixos.url = "github:NixOS/nixpkgs/nixos-25.05";
