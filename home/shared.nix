@@ -14,6 +14,7 @@
       spotify
 
       # Tools
+      aichat
       coreutils
       exiftool
       hyperfine

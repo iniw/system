@@ -41,7 +41,7 @@
 "ui.window" = { fg = "shade-7" }
 
 # Syntax highlighting
-"attribute" = { fg = "hl" }
+"attribute" = { fg = "shade-4" }
 "comment" = { fg = "shade-7" }
 "constant" = { fg = "shade-2" }
 "constant.builtin" = { fg = "hl" }
