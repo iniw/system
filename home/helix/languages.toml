@@ -136,3 +136,9 @@ args = ["--stdio"]
 [language-server.ruff]
 command = "ruff"
 args = ["server"]
+
+# SQL
+[[language]]
+name = "sql"
+auto-format = true
+formatter = { command = "pg_format", args = ["-"] }
