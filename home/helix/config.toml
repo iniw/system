@@ -14,6 +14,12 @@ trim-trailing-whitespace = true
 [editor.indent-guides]
 render = true
 
+[editor.inline-diagnostics]
+cursor-line = "hint"
+
+[editor.soft-wrap]
+enable = true
+
 [keys.normal]
 A-e = "move_next_sub_word_end"
 A-b = "move_prev_sub_word_start"
