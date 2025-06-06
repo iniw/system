@@ -43,7 +43,7 @@
 # Syntax highlighting
 "attribute" = { fg = "shade-4" }
 "comment" = { fg = "shade-7" }
-"constant" = { fg = "shade-2" }
+"constant" = { fg = "hl" }
 "constant.builtin" = { fg = "hl" }
 "constant.builtin.character" = { fg = "hl" }
 "constant.builtin.character.escape" = { fg = "shade-2" }
