@@ -68,9 +68,10 @@ keybind = ctrl+shift+c=copy_to_clipboard
 keybind = ctrl+shift+v=paste_from_clipboard
 
 # keybinds.misc
-keybind = super+r=reload_config
+keybind = super+q=quit
+keybind = super+r=reset
 keybind = super+i=inspector:toggle
-keybind = super+x=write_screen_file:paste
+keybind = global:super+shift+;=toggle_quick_terminal
 keybind = super+shift+0=reset_font_size
 keybind = super+shift+plus=increase_font_size:1
 keybind = super+shift+minus=decrease_font_size:1
