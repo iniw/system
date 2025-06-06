@@ -23,6 +23,12 @@
       klip
       scc
       zlib
+      # Very useful as a calculator REPL
+      (python314.withPackages (
+        py: with py; [
+          sympy
+        ]
+      ))
 
       # Fonts
       berkeley-mono
