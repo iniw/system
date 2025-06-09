@@ -19,13 +19,14 @@
       coreutils
       exiftool
       hyperfine
-      just
       jq
+      just
       klip
+      pandoc
       scc
       zlib
-      pandoc
-      # Very useful as a calculator REPL
+
+      # Calculator REPL
       (python314.withPackages (
         py: with py; [
           sympy
