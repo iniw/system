@@ -129,14 +129,6 @@ formatter = { command = "ruff", args = [
 ] }
 language-servers = ["pyright", "ruff"]
 
-[language-server.pyright]
-command = "pyright-langserver"
-args = ["--stdio"]
-
-[language-server.ruff]
-command = "ruff"
-args = ["server"]
-
 # SQL
 [[language]]
 name = "sql"
