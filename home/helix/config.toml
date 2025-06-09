@@ -48,3 +48,14 @@ C-i = ["vsplit", "jump_view_up", "goto_implementation"]
 
 [keys.insert]
 "A-;" = "flip_selections"
+
+[keys.normal.ret]
+e = [
+  ':sh rm -f /tmp/yazi-chooser-file',
+  ':insert-output yazi %{buffer_name} --chooser-file=/tmp/yazi-chooser-file',
+  ':insert-output echo "\x1b[?1049h\x1b[?2004h" > /dev/tty',
+  ':open %sh{cat /tmp/yazi-chooser-file}',
+  ':redraw',
+  ':set mouse false',
+  ':set mouse true',
+]
