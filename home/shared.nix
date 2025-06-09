@@ -15,6 +15,7 @@
 
       # Tools
       aichat
+      argc
       coreutils
       exiftool
       hyperfine
@@ -23,6 +24,7 @@
       klip
       scc
       zlib
+      pandoc
       # Very useful as a calculator REPL
       (python314.withPackages (
         py: with py; [
