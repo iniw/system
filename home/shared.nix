@@ -156,6 +156,7 @@
       ignores = [
         ".DS_Store"
         "justfile"
+        ".claude"
         # Project-specific lazy.nvim spec/config
         ".lazy.lua"
         # Project-specific helix config
