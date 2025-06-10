@@ -27,6 +27,8 @@ A-b = "move_prev_sub_word_start"
 X = "extend_line_above"
 "*" = "search_selection"
 "A-*" = "search_selection_detect_word_boundaries"
+tab = "move_parent_node_end"
+S-tab = "move_parent_node_start"
 
 [keys.select]
 A-w = "move_next_sub_word_start"
@@ -35,6 +37,8 @@ A-b = "move_prev_sub_word_start"
 X = "extend_line_above"
 "*" = "search_selection"
 "A-*" = "search_selection_detect_word_boundaries"
+tab = "extend_parent_node_end"
+S-tab = "extend_parent_node_start"
 
 [keys.normal.space]
 f = "file_picker_in_current_directory"
@@ -50,6 +54,8 @@ C-i = ["vsplit", "jump_view_up", "goto_implementation"]
 
 [keys.insert]
 "A-;" = "flip_selections"
+S-tab = "move_parent_node_start"
+
 
 [keys.normal.ret]
 e = [
