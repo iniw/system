@@ -5,25 +5,7 @@ auto-update = off
 font-family = "Berkeley Mono"
 font-size = 15
 
-# colors
-background = #121212
-foreground = #d5d5d5
-palette = 0=#121212
-palette = 1=#e77171
-palette = 2=#a1bf78
-palette = 3=#dbb774
-palette = 4=#73b3e7
-palette = 5=#d390e7
-palette = 6=#5ebaa5
-palette = 7=#3e4249
-palette = 8=#88909f
-palette = 9=#e77171
-palette = 10=#d5d5d5
-palette = 11=#dbb774
-palette = 12=#73b3e7
-palette = 13=#d390e7
-palette = 14=#5ebaa5
-palette = 15=#d5d5d5
+theme = dark:lua,light:sol
 
 # cursor
 cursor-invert-fg-bg = true
