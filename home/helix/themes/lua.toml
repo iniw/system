@@ -17,7 +17,7 @@
 "ui.menu" = { fg = "shade-2", bg = "shade-9" }
 "ui.menu.scroll" = { fg = "shade-5", bg = "shade-7" }
 "ui.menu.selected" = { fg = "hl", bg = "shade-9" }
-"ui.picker.header" = "dark-hl"
+"ui.picker.header" = "light-hl"
 "ui.picker.header.active" = { fg = "hl", bg = "shade-8" }
 "ui.popup" = { fg = "shade-2", bg = "shade-9" }
 "ui.selection" = { bg = "shade-8" }
@@ -26,7 +26,7 @@
 "ui.statusline.inactive" = { fg = "shade-7", bg = "shade-9" }
 "ui.statusline.insert" = { fg = "shade-9", bg = "hl" }
 "ui.statusline.normal" = { fg = "shade-5", bg = "shade-9" }
-"ui.statusline.select" = { fg = "shade-9", bg = "dark-hl" }
+"ui.statusline.select" = { fg = "shade-9", bg = "light-hl" }
 "ui.text" = { fg = "shade-2" }
 "ui.text.directory" = { fg = "shade-7" }
 "ui.text.focus" = { fg = "shade-2", bg = "shade-9" }
@@ -56,8 +56,8 @@
 "namespace" = { fg = "shade-2" }
 "number_literal" = { fg = "hl" }
 "operator" = { fg = "hl" }
-"punctuation" = "dark-hl"
-"punctuation.bracket" = "dark-hl"
+"punctuation" = "light-hl"
+"punctuation.bracket" = "light-hl"
 "punctuation.delimiter" = { fg = "shade-6" }
 "punctuation.special" = { fg = "hl" }
 "special" = { fg = "hl", modifiers = ["bold"] }
@@ -94,29 +94,29 @@
 "warning" = { fg = "warning" }
 
 [palette]
-# Dark -> Light
-shade-1 = "#000000"
-shade-2 = "#121212"
-shade-3 = "#212121"
-shade-4 = "#323232"
-shade-5 = "#535353"
+# Light -> Dark
+shade-1 = "#f5f5f5"
+shade-2 = "#d5d5d5"
+shade-3 = "#b4b4b4"
+shade-4 = "#a7a7a7"
+shade-5 = "#949494"
 shade-6 = "#737373"
-shade-7 = "#949494"
-shade-8 = "#b4b4b4"
-shade-9 = "#d5d5d5"
-shade-10 = "#f5f5f5"
+shade-7 = "#535353"
+shade-8 = "#323232"
+shade-9 = "#212121"
+shade-10 = "#121212"
 
 # Highlights
-hl = "#238fe8"
-dark-hl = "#4d7799"
+hl = "#73b3e7"
+light-hl = "#c5d8e8"
 
 # Diff
-delta = "#23e1e8"
-minus = "#e82323"
-plus = "#3de823"
+delta = "#73e3e7"
+minus = "#e77373"
+plus = "#82e773"
 
 # Diagnostics
-error = "#e82323"
-hint = "#23e1e8"
-info = "#23e1e8"
-warning = "#e88c23"
+error = "#e77373"
+hint = "#73e3e7"
+info = "#73e3e7"
+warning = "#e7b173"
