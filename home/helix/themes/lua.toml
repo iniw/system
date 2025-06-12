@@ -2,28 +2,21 @@ inherits = "base"
 
 [palette]
 # Light -> Dark
-shade-1 = "#ffffff"
-shade-2 = "#f5f5f5"
-shade-3 = "#b4b4b4"
-shade-4 = "#a7a7a7"
-shade-5 = "#949494"
-shade-6 = "#737373"
-shade-7 = "#535353"
-shade-8 = "#323232"
-shade-9 = "#212121"
-shade-10 = "#121212"
+shade-1 = "#f2f2f2"
+shade-2 = "#cccccc"
+shade-3 = "#999999"
+shade-4 = "#666666"
+shade-5 = "#4d4d4d"
+shade-6 = "#333333"
+shade-7 = "#1a1a1a"
+shade-8 = "#0d0d0d"
 
 # Highlights
 hl = "#73b6e6"
 secondary-hl = "#cfdce6"
 
-# Diff
-delta = "#73b6e6"
-minus = "#e67373"
-plus = "#b6e673"
-
-# Diagnostics
-error = "#e67373"
-hint = "#73b6e6"
-info = "#73b6e6"
-warning = "#e6bf73"
+# Pallete
+blue = "#73b6e6"
+green = "#b6e673"
+red = "#e67373"
+yellow = "#e6bf73"
