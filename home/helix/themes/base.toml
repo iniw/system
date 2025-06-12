@@ -1,86 +1,86 @@
 # UI
-"ui.background" = { bg = "shade-10" }
-"ui.background.separator" = { fg = "shade-7" }
-"ui.cursor" = { fg = "shade-2", modifiers = ["reversed"] }
-"ui.cursor.match" = { bg = "shade-8" }
+"ui.background" = { bg = "shade-8" }
+"ui.background.separator" = { fg = "shade-2" }
+"ui.cursor" = { fg = "shade-1", modifiers = ["reversed"] }
+"ui.cursor.match" = { bg = "shade-5" }
 "ui.cursor.primary" = { fg = "hl", modifiers = ["reversed"] }
-"ui.cursorcolumn.primary" = { bg = "shade-9" }
-"ui.cursorcolumn.secondary" = { bg = "shade-9" }
-"ui.cursorline.primary" = { bg = "shade-9" }
-"ui.cursorline.secondary" = { bg = "shade-9" }
-"ui.gutter" = { bg = "shade-10" }
-"ui.gutter.selected" = { bg = "shade-10", fg = "hl" }
-"ui.help" = { fg = "shade-2", bg = "shade-10" }
+"ui.cursorcolumn.primary" = { bg = "shade-7" }
+"ui.cursorcolumn.secondary" = { bg = "shade-7" }
+"ui.cursorline.primary" = { bg = "shade-7" }
+"ui.cursorline.secondary" = { bg = "shade-7" }
+"ui.gutter" = { bg = "shade-8" }
+"ui.gutter.selected" = { bg = "shade-8", fg = "hl" }
+"ui.help" = { fg = "shade-1", bg = "shade-8" }
 "ui.highlight" = { fg = "hl" }
-"ui.linenr" = { fg = "shade-7" }
-"ui.linenr.selected" = { fg = "hl", bg = "shade-10" }
-"ui.menu" = { fg = "shade-2", bg = "shade-9" }
-"ui.menu.scroll" = { fg = "shade-5", bg = "shade-7" }
-"ui.menu.selected" = { fg = "hl", bg = "shade-9" }
-"ui.picker.header" = "secondary-hl"
-"ui.picker.header.active" = { fg = "hl", bg = "shade-8" }
-"ui.popup" = { fg = "shade-2", bg = "shade-9" }
-"ui.selection" = { bg = "shade-8" }
-"ui.selection.primary" = { bg = "shade-8", modifiers = ["bold"] }
-"ui.statusline" = { fg = "shade-5", bg = "shade-9" }
-"ui.statusline.inactive" = { fg = "shade-7", bg = "shade-9" }
-"ui.statusline.insert" = { fg = "shade-9", bg = "hl" }
-"ui.statusline.normal" = { fg = "shade-5", bg = "shade-9" }
-"ui.statusline.select" = { fg = "shade-9", bg = "secondary-hl" }
-"ui.text" = { fg = "shade-2" }
-"ui.text.directory" = { fg = "shade-7" }
-"ui.text.focus" = { fg = "shade-2", bg = "shade-9" }
-"ui.text.inactive" = { fg = "shade-7" }
-"ui.virtual.indent-guide" = { fg = "shade-8" }
-"ui.virtual.inlay-hint" = { fg = "shade-7" }
-"ui.virtual.inlay-hint.parameter" = { fg = "shade-7" }
-"ui.virtual.inlay-hint.type" = { fg = "shade-7" }
+"ui.linenr" = { fg = "shade-5" }
+"ui.linenr.selected" = { fg = "hl", bg = "shade-8" }
+"ui.menu" = { fg = "shade-1", bg = "shade-6" }
+"ui.menu.scroll" = { fg = "shade-4", bg = "shade-5" }
+"ui.menu.selected" = { fg = "hl", bg = "shade-7" }
+"ui.picker.header" = { fg = "secondary-hl" }
+"ui.picker.header.active" = { fg = "hl", bg = "shade-5" }
+"ui.popup" = { fg = "shade-1", bg = "shade-6" }
+"ui.selection" = { bg = "shade-6" }
+"ui.selection.primary" = { bg = "shade-6", modifiers = ["bold"] }
+"ui.statusline" = { fg = "shade-2", bg = "shade-6" }
+"ui.statusline.inactive" = { fg = "shade-4", bg = "shade-6" }
+"ui.statusline.insert" = { fg = "shade-6", bg = "hl" }
+"ui.statusline.normal" = { fg = "shade-2", bg = "shade-6" }
+"ui.statusline.select" = { fg = "shade-8", bg = "secondary-hl" }
+"ui.text" = { fg = "shade-1" }
+"ui.text.directory" = { fg = "shade-4" }
+"ui.text.focus" = { fg = "shade-1", bg = "shade-7" }
+"ui.text.inactive" = { fg = "shade-4" }
+"ui.virtual.indent-guide" = { fg = "shade-5" }
+"ui.virtual.inlay-hint" = { fg = "shade-5" }
+"ui.virtual.inlay-hint.parameter" = { fg = "shade-5" }
+"ui.virtual.inlay-hint.type" = { fg = "shade-5" }
 "ui.virtual.jump-label" = { fg = "hl", modifiers = ["bold"] }
-"ui.virtual.ruler" = { bg = "shade-8" }
-"ui.virtual.whitespace" = { fg = "shade-8" }
-"ui.window" = { fg = "shade-7" }
+"ui.virtual.ruler" = { bg = "shade-5" }
+"ui.virtual.whitespace" = { fg = "shade-5" }
+"ui.window" = { fg = "shade-6" }
 
 # Syntax highlighting
-"attribute" = { fg = "shade-4" }
-"comment" = { fg = "shade-7" }
+"attribute" = { fg = "shade-3" }
+"comment" = { fg = "shade-4" }
 "constant" = { fg = "hl" }
 "constant.builtin" = { fg = "hl" }
 "constant.builtin.character" = { fg = "hl" }
-"constant.builtin.character.escape" = { fg = "shade-2" }
+"constant.builtin.character.escape" = { fg = "shade-1" }
 "constant.builtin.numeric" = { fg = "hl" }
-"constructor" = { fg = "shade-1" }
-"function" = { fg = "shade-1" }
-"keyword" = { fg = "shade-5" }
+"constructor" = { fg = "shade-2" }
+"function" = { fg = "shade-2" }
+"keyword" = { fg = "shade-4" }
 "keyword.operator" = { fg = "hl" }
 "label" = { fg = "hl" }
-"namespace" = { fg = "shade-2" }
+"namespace" = { fg = "shade-3" }
 "number_literal" = { fg = "hl" }
 "operator" = { fg = "hl" }
-"punctuation" = "secondary-hl"
-"punctuation.bracket" = "secondary-hl"
-"punctuation.delimiter" = { fg = "shade-6" }
+"punctuation" = { fg = "secondary-hl" }
+"punctuation.bracket" = { fg = "secondary-hl" }
+"punctuation.delimiter" = { fg = "shade-4" }
 "punctuation.special" = { fg = "hl" }
 "special" = { fg = "hl", modifiers = ["bold"] }
 "string" = { fg = "hl" }
-"tag" = { fg = "shade-6" }
+"tag" = { fg = "shade-3" }
 "type" = { fg = "shade-2" }
-"type.builtin" = { fg = "shade-6" }
-"variable" = { fg = "shade-2" }
+"type.builtin" = { fg = "shade-2" }
+"variable" = { fg = "shade-1" }
 
 # Markup
 "markup.bold" = { fg = "shade-2", modifiers = ["bold"] }
-"markup.heading" = { fg = "shade-3" }
+"markup.heading" = { fg = "shade-2" }
 "markup.italic" = { fg = "shade-2", modifiers = ["italic"] }
 "markup.link.text" = { fg = "shade-2" }
 "markup.link.url" = { fg = "hl" }
-"markup.list" = { fg = "shade-5" }
-"markup.quote" = { fg = "shade-9", modifiers = ["italic"] }
+"markup.list" = { fg = "shade-3" }
+"markup.quote" = { fg = "shade-3", modifiers = ["italic"] }
 "markup.raw" = { fg = "shade-2" }
 
 # Diff
-"diff.delta" = { fg = "delta" }
-"diff.minus" = { fg = "minus" }
-"diff.plus" = { fg = "plus" }
+"diff.delta" = { fg = "blue" }
+"diff.minus" = { fg = "red" }
+"diff.plus" = { fg = "green" }
 
 # Diagnostics
 "diagnostic" = { fg = "shade-5" }
@@ -88,7 +88,7 @@
 "diagnostic.hint" = { underline.style = "dotted" }
 "diagnostic.info" = { underline.style = "dotted" }
 "diagnostic.warning" = { underline.style = "dotted" }
-"error" = { fg = "error" }
-"hint" = { fg = "hint" }
-"info" = { fg = "info" }
-"warning" = { fg = "warning" }
+"error" = { fg = "red" }
+"hint" = { fg = "blue" }
+"info" = { fg = "blue" }
+"warning" = { fg = "yellow" }

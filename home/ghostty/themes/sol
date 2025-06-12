@@ -1,5 +1,5 @@
 background = #f5f5f5
-foreground = #121212
+foreground = #0d0d0d
 
 palette = 0=#f5f5f5
 palette = 1=#a60000
@@ -8,12 +8,12 @@ palette = 3=#a66f00
 palette = 4=#0061a6
 palette = 5=#8a53a6
 palette = 6=#00a66f
-palette = 7=#121212
+palette = 7=#bfbfbf
 palette = 8=#949494
 palette = 9=#a60000
-palette = 10=#121212
+palette = 10=#0d0d0d
 palette = 11=#a66f00
 palette = 12=#0061a6
 palette = 13=#8a53a6
 palette = 14=#00a66f
-palette = 15=#121212
+palette = 15=#0d0d0d

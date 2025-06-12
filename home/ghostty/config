@@ -1,10 +1,9 @@
 # Ghostty is managed through nix
 auto-update = off
 
-# font
+# style
 font-family = "Berkeley Mono"
 font-size = 15
-
 theme = dark:lua,light:sol
 
 # cursor
@@ -51,7 +50,7 @@ keybind = ctrl+shift+v=paste_from_clipboard
 
 # keybinds.misc
 keybind = super+q=quit
-keybind = super+z=undo
+keybind = super+u=undo
 keybind = super+shift+p=toggle_command_palette
 keybind = super+shift+0=reset_font_size
 keybind = super+shift+plus=increase_font_size:1
