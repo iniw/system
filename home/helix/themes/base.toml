@@ -2,7 +2,7 @@
 "ui.background" = { bg = "shade-8" }
 "ui.background.separator" = { fg = "shade-2" }
 "ui.cursor" = { fg = "shade-1", modifiers = ["reversed"] }
-"ui.cursor.match" = { bg = "shade-5" }
+"ui.cursor.match" = { bg = "shade-6" }
 "ui.cursor.primary" = { fg = "hl", modifiers = ["reversed"] }
 "ui.cursorcolumn.primary" = { bg = "shade-7" }
 "ui.cursorcolumn.secondary" = { bg = "shade-7" }
