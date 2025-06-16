@@ -23,6 +23,56 @@ args = [
   "--background-index",
 ]
 
+## Lua
+[[language]]
+name = "lua"
+auto-format = true
+formatter = { command = "stylua", args = [
+  "--search-parent-directories",
+  "--respect-ignores",
+  "--stdin-filepath",
+  "${buffer_name}",
+  "-",
+] }
+
+# Nix
+[[language]]
+name = "nix"
+auto-format = true
+formatter = { command = "nixfmt" }
+
+# Python
+[[language]]
+name = "python"
+auto-format = true
+formatter = { command = "ruff", args = [
+  "format",
+  "--force-exclude",
+  "--stdin-filename",
+  "%{buffer_name}",
+  "-",
+] }
+language-servers = ["pyright", "ruff"]
+
+# SQL
+[[language]]
+name = "sql"
+auto-format = true
+formatter = { command = "pg_format", args = ["-"] }
+
+# TOML
+[[language]]
+name = "toml"
+auto-format = true
+formatter = { command = "taplo", args = ["format", "-"] }
+
+# Rust
+[language-servers.rust-analyzer.config]
+cargo.features = "all"
+cargo.targetDir = true
+check.command = "clippy"
+files.exclude = [".git", ".jj", "target"]
+
 # Web
 [[language]]
 name = "css"
@@ -91,53 +141,3 @@ typescript.inlayHints.variableTypes.enabled = true
 typescript.updateImportsOnFileMove.enabled = "always"
 vtsls.autoUseWorkspaceTsdk = true
 vtsls.experimental.maxInlayHintLength = 30
-
-# Nix
-[[language]]
-name = "nix"
-auto-format = true
-formatter = { command = "nixfmt" }
-
-# Lua
-[[language]]
-name = "lua"
-auto-format = true
-formatter = { command = "stylua", args = [
-  "--search-parent-directories",
-  "--respect-ignores",
-  "--stdin-filepath",
-  "${buffer_name}",
-  "-",
-] }
-
-# TOML
-[[language]]
-name = "toml"
-auto-format = true
-formatter = { command = "taplo", args = ["format", "-"] }
-
-# Python
-[[language]]
-name = "python"
-auto-format = true
-formatter = { command = "ruff", args = [
-  "format",
-  "--force-exclude",
-  "--stdin-filename",
-  "%{buffer_name}",
-  "-",
-] }
-language-servers = ["pyright", "ruff"]
-
-# SQL
-[[language]]
-name = "sql"
-auto-format = true
-formatter = { command = "pg_format", args = ["-"] }
-
-# Rust
-[language-servers.rust-analyzer.config]
-cargo.features = "all"
-cargo.targetDir = true
-check.command = "clippy"
-files.exclude = [".git", ".jj", "target"]
