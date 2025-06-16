@@ -79,6 +79,13 @@
         enable = true;
       };
 
+      config = {
+        global = {
+          hide_env_diff = true;
+          strict_env = true;
+        };
+      };
+
       # Store direnv caches in a unified location
       # From: https://github.com/direnv/direnv/wiki/Customizing-cache-location#human-readable-directories
       stdlib =
