@@ -20,6 +20,9 @@ cursor-line = "hint"
 [editor.soft-wrap]
 enable = true
 
+[editor.lsp]
+goto-reference-include-declaration = false
+
 [keys.normal]
 A-w = "move_next_sub_word_start"
 A-e = "move_next_sub_word_end"
