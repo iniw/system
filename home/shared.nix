@@ -27,11 +27,7 @@
       zlib
 
       # Calculator REPL
-      (python314.withPackages (
-        py: with py; [
-          sympy
-        ]
-      ))
+      python314
 
       # Fonts
       berkeley-mono
