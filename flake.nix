@@ -18,7 +18,7 @@
 
     home-manager = {
       url = "github:nix-community/home-manager/release-25.05";
-      inputs.nixpkgs.follows = "nixpkgs-nixos";
+      inputs.nixpkgs.follows = "nixpkgs-darwin";
     };
 
     mac-app-util = {
@@ -28,12 +28,12 @@
 
     klip = {
       url = "github:iniw/klip";
-      inputs.nixpkgs.follows = "nixpkgs-nixos";
+      inputs.nixpkgs.follows = "nixpkgs-darwin";
     };
 
     fonts = {
       url = "git+ssh://git@github.com/iniw/fonts";
-      inputs.nixpkgs.follows = "nixpkgs-nixos";
+      inputs.nixpkgs.follows = "nixpkgs-darwin";
     };
 
     helix = {

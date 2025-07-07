@@ -92,7 +92,7 @@
       "inputs": {
         "flake-utils": "flake-utils",
         "nixpkgs": [
-          "nixpkgs-nixos"
+          "nixpkgs-darwin"
         ]
       },
       "locked": {
@@ -133,7 +133,7 @@
     "home-manager": {
       "inputs": {
         "nixpkgs": [
-          "nixpkgs-nixos"
+          "nixpkgs-darwin"
         ]
       },
       "locked": {
@@ -155,7 +155,7 @@
       "inputs": {
         "flake-utils": "flake-utils_2",
         "nixpkgs": [
-          "nixpkgs-nixos"
+          "nixpkgs-darwin"
         ]
       },
       "locked": {
