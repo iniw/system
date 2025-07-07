@@ -50,6 +50,7 @@ keybind = ctrl+shift+v=paste_from_clipboard
 
 # keybinds.misc
 keybind = super+q=quit
+keybind = super+f=toggle_fullscreen
 keybind = super+shift+0=reset_font_size
 keybind = super+shift+plus=increase_font_size:1
 keybind = super+shift+minus=decrease_font_size:1
