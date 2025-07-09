@@ -22,6 +22,11 @@
     ];
   };
 
+  nix = {
+    # Managed by determinate nix
+    enable = false;
+  };
+
   nixpkgs = {
     hostPlatform = "x86_64-darwin";
   };
