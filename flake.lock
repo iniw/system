@@ -159,11 +159,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1751308413,
-        "narHash": "sha256-uZD8wzxqViwGfEYlMqwiECgn8jXGckfAbdUQ/kxIlas=",
+        "lastModified": 1752036986,
+        "narHash": "sha256-mZaFN+xs0tGHvlyhzkuB+G13XPmpu4rSqPPS9rTZMCI=",
         "owner": "iniw",
         "repo": "klip",
-        "rev": "88277d4c4b8a7a8bd5ed234a794b9c95ea3459c0",
+        "rev": "d73e50e54950d1651ef4c13c521bf5b079789db3",
         "type": "github"
       },
       "original": {
