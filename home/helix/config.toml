@@ -1,4 +1,4 @@
-theme = "sol"
+theme = "lua"
 
 [editor]
 color-modes = true
