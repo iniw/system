@@ -54,7 +54,7 @@
       klip,
       fonts,
       helix,
-    }:
+    }@inputs:
 
     let
       user = "sol";
@@ -73,6 +73,7 @@
           inherit
             user
             overlays
+            inputs
             mac-app-util
             ;
           pkgs-unstable = import nixpkgs-unstable { inherit system; };
@@ -89,7 +90,7 @@
         system = "x86_64-linux";
 
         specialArgs = {
-          inherit user overlays;
+          inherit user overlays inputs;
           pkgs-unstable = import nixpkgs-unstable { inherit system; };
         };
 
