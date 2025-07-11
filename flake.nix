@@ -2,8 +2,14 @@
   description = "system flake";
 
   nixConfig = {
-    extra-substituters = [ "https://helix.cachix.org" ];
-    extra-trusted-public-keys = [ "helix.cachix.org-1:ejp9KQpR1FBI2onstMQ34yogDm4OgU2ru6lIwPvuCVs=" ];
+    extra-substituters = [
+      "https://helix.cachix.org"
+      "https://nix-community.cachix.org"
+    ];
+    extra-trusted-public-keys = [
+      "helix.cachix.org-1:ejp9KQpR1FBI2onstMQ34yogDm4OgU2ru6lIwPvuCVs="
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+    ];
   };
 
   inputs = {
@@ -40,6 +46,11 @@
       url = "github:helix-editor/helix";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
+
+    neovim-nightly-overlay = {
+      url = "github:nix-community/neovim-nightly-overlay";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
   };
 
   outputs =
@@ -54,6 +65,7 @@
       klip,
       fonts,
       helix,
+      neovim-nightly-overlay,
     }@inputs:
 
     let
