@@ -15,17 +15,14 @@
       spotify
 
       # Tools
-      aichat
-      argc
+      ast-grep
       coreutils
       exiftool
       hyperfine
       jq
       just
       klip
-      pandoc
       scc
-      zlib
 
       # Calculator REPL
       python314
