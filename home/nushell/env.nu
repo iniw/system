@@ -7,7 +7,11 @@ $env.ENV_CONVERSIONS = {
     }
 }
 
-def --env mc [path: path]: nothing -> nothing {
+def mc [path: path] {
   mkdir $path
   cd $path
+}
+
+def nix-system []: nothing -> string {
+   nix eval --raw --impure --expr "builtins.currentSystem"
 }
