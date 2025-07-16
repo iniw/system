@@ -1,16 +1,5 @@
 {
-  description = "system flake";
-
-  nixConfig = {
-    extra-substituters = [
-      "https://helix.cachix.org"
-      "https://nix-community.cachix.org"
-    ];
-    extra-trusted-public-keys = [
-      "helix.cachix.org-1:ejp9KQpR1FBI2onstMQ34yogDm4OgU2ru6lIwPvuCVs="
-      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-    ];
-  };
+  description = "wini's system flake";
 
   inputs = {
     nixpkgs-darwin.url = "github:NixOS/nixpkgs/nixpkgs-25.05-darwin";
@@ -41,44 +30,20 @@
       url = "git+ssh://git@github.com/iniw/fonts";
       inputs.nixpkgs.follows = "nixpkgs-darwin";
     };
-
-    helix = {
-      url = "github:helix-editor/helix";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
-
-    neovim-nightly-overlay = {
-      url = "github:nix-community/neovim-nightly-overlay";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
   };
 
   outputs =
-    {
-      self,
-      nixpkgs-darwin,
-      nixpkgs-nixos,
-      nixpkgs-unstable,
-      nix-darwin,
-      home-manager,
-      mac-app-util,
-      klip,
-      fonts,
-      helix,
-      neovim-nightly-overlay,
-    }@inputs:
-
+    inputs:
     let
       user = "sol";
 
       overlays = [
-        klip.overlays.default
-        fonts.overlays.default
-        helix.overlays.default
+        inputs.klip.overlays.default
+        inputs.fonts.overlays.default
       ];
     in
     {
-      darwinConfigurations.mac = nix-darwin.lib.darwinSystem rec {
+      darwinConfigurations.mac = inputs.nix-darwin.lib.darwinSystem rec {
         system = "x86_64-darwin";
 
         specialArgs = {
@@ -86,29 +51,28 @@
             user
             overlays
             inputs
-            mac-app-util
             ;
-          pkgs-unstable = import nixpkgs-unstable { inherit system; };
+          pkgs-unstable = import inputs.nixpkgs-unstable { inherit system; };
         };
 
         modules = [
           ./configuration/darwin.nix
-          home-manager.darwinModules.home-manager
-          mac-app-util.darwinModules.default
+          inputs.home-manager.darwinModules.home-manager
+          inputs.mac-app-util.darwinModules.default
         ];
       };
 
-      nixosConfigurations.nixos = nixpkgs-nixos.lib.nixosSystem rec {
+      nixosConfigurations.nixos = inputs.nixpkgs-nixos.lib.nixosSystem rec {
         system = "x86_64-linux";
 
         specialArgs = {
           inherit user overlays inputs;
-          pkgs-unstable = import nixpkgs-unstable { inherit system; };
+          pkgs-unstable = import inputs.nixpkgs-unstable { inherit system; };
         };
 
         modules = [
           ./configuration/nixos
-          home-manager.nixosModules.home-manager
+          inputs.home-manager.nixosModules.home-manager
         ];
       };
       # julia + vinicius = amor

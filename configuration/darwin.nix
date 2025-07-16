@@ -1,6 +1,6 @@
 {
   user,
-  mac-app-util,
+  inputs,
   ...
 }:
 {
@@ -18,7 +18,7 @@
   home-manager = {
     users.${user}.imports = [
       ./../home/darwin.nix
-      mac-app-util.homeManagerModules.default
+      inputs.mac-app-util.homeManagerModules.default
     ];
   };
 

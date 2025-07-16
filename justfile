@@ -1,5 +1,3 @@
-mod lazy
-
 rebuild-cmd := if os() == 'linux' { "nixos-rebuild" } else { "sudo darwin-rebuild" }
 rebuild-cmd-extra-args := if os() == 'linux' { "--use-remote-sudo" } else { "" }
 
