@@ -1,5 +1,4 @@
 {
-  lib,
   pkgs,
   pkgs-unstable,
   config,
@@ -32,10 +31,6 @@
       inter
       tx-02
     ];
-
-    shellAliases = {
-      ng = "nvim -c \"Neogit\"";
-    };
 
     sessionVariables = {
       PAGER = "less -FRX";
@@ -158,8 +153,6 @@
         ".DS_Store"
         "justfile"
         ".claude"
-        # Project-specific lazy.nvim spec/config
-        ".lazy.lua"
         # Project-specific helix config
         ".helix"
         # direnv
@@ -171,8 +164,7 @@
 
     helix = {
       enable = true;
-      # NOTE: The `helix` packaged is overlayed and points to the github repo.
-      package = pkgs.helix;
+      package = pkgs-unstable.helix;
 
       defaultEditor = true;
 
@@ -211,31 +203,6 @@
           };
         };
       };
-    };
-
-    neovim = {
-      enable = true;
-      package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
-
-      extraPackages = with pkgs-unstable; [
-        # For `snacks.image`.
-        imagemagick
-        # To compile treesitter grammars.
-        gcc
-        tree-sitter
-
-        # System-wide LSP support for languages used everywhere.
-        # nix
-        nil
-        nixfmt-rfc-style
-        # lua
-        lua-language-server
-        stylua
-        # markdown
-        marksman
-        # toml
-        taplo
-      ];
     };
 
     nushell = {
@@ -318,11 +285,6 @@
 
       "helix" = {
         source = ./helix;
-        recursive = true;
-      };
-
-      "nvim" = {
-        source = ./nvim;
         recursive = true;
       };
 

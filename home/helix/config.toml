@@ -61,6 +61,10 @@ C-i = ["vsplit", "jump_view_up", "goto_implementation"]
 [keys.insert]
 "A-;" = "flip_selections"
 S-tab = "move_parent_node_start"
+C-h = "move_char_left"
+C-j = "move_line_down"
+C-k = "move_line_up"
+C-l = "move_char_right"
 
 
 [keys.normal.ret]

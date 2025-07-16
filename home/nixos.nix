@@ -17,13 +17,6 @@
       enable = true;
     };
 
-    neovim = {
-      extraPackages = with pkgs; [
-        # For interacting with the system clipboard
-        xclip
-      ];
-    };
-
     obs-studio = {
       enable = true;
     };
