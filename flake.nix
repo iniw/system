@@ -16,6 +16,18 @@
       inputs.nixpkgs.follows = "nixpkgs-darwin";
     };
 
+    nix-homebrew.url = "github:zhaofengli/nix-homebrew";
+
+    homebrew-core = {
+      url = "github:homebrew/homebrew-core";
+      flake = false;
+    };
+
+    homebrew-cask = {
+      url = "github:homebrew/homebrew-cask";
+      flake = false;
+    };
+
     mac-app-util = {
       url = "github:hraban/mac-app-util";
       inputs.nixpkgs.follows = "nixpkgs-darwin";
@@ -59,6 +71,7 @@
           ./configuration/darwin.nix
           inputs.home-manager.darwinModules.home-manager
           inputs.mac-app-util.darwinModules.default
+          inputs.nix-homebrew.darwinModules.nix-homebrew
         ];
       };
 
