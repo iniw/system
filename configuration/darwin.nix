@@ -97,4 +97,36 @@
 
     stateVersion = 5;
   };
+
+  # Homebrew
+  nix-homebrew = {
+    enable = true;
+
+    inherit user;
+
+    taps = {
+      "homebrew/homebrew-core" = inputs.homebrew-core;
+      "homebrew/homebrew-cask" = inputs.homebrew-cask;
+    };
+
+    mutableTaps = false;
+  };
+
+  homebrew = {
+    enable = true;
+
+    brews = [
+      {
+        name = "mysql";
+        restart_service = "changed";
+        conflicts_with = [ "mysql" ];
+      }
+    ];
+
+    casks = [
+      "ticktick"
+      "notion"
+    ];
+
+  };
 }
