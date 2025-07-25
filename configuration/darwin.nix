@@ -15,31 +15,15 @@
     knownUsers = [ user ];
   };
 
-  home-manager = {
-    users.${user}.imports = [
-      ./../home/darwin.nix
-      inputs.mac-app-util.homeManagerModules.default
-    ];
-  };
+  home-manager.users.${user}.imports = [
+    ./../home/darwin.nix
+    inputs.mac-app-util.homeManagerModules.default
+  ];
 
-  nix = {
-    # Managed by determinate nix
-    enable = false;
-  };
+  # Managed by determinate nix
+  nix.enable = false;
 
-  nixpkgs = {
-    hostPlatform = "x86_64-darwin";
-  };
-
-  security = {
-    pam = {
-      services = {
-        sudo_local = {
-          touchIdAuth = true;
-        };
-      };
-    };
-  };
+  security.pam.services.sudo_local.touchIdAuth = true;
 
   system = {
     primaryUser = user;
@@ -124,8 +108,8 @@
     ];
 
     casks = [
+      "android-studio"
       "ticktick"
-      "notion"
     ];
   };
 }

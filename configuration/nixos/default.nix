@@ -21,11 +21,9 @@
     isNormalUser = true;
   };
 
-  home-manager = {
-    users.${user}.imports = [
-      ./../../home/nixos.nix
-    ];
-  };
+  home-manager.users.${user}.imports = [
+    ./../../home/nixos.nix
+  ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader = {
