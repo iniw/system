@@ -6,6 +6,10 @@
 }:
 {
   home = {
+    file = {
+      ".hushlogin".text = "";
+    };
+
     packages = with pkgs; [
       # Apps
       discord
@@ -20,10 +24,8 @@
       jq
       just
       klip
-      scc
-
-      # Calculator REPL
       python314
+      scc
 
       # Fonts
       berkeley-mono
@@ -274,12 +276,6 @@
               exec nu "$LOGIN_OPTION"
           fi
         '';
-    };
-  };
-
-  home = {
-    file = {
-      ".hushlogin".text = "";
     };
   };
 
