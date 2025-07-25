@@ -277,6 +277,12 @@
     };
   };
 
+  home = {
+    file = {
+      ".hushlogin".text = "";
+    };
+  };
+
   xdg = {
     enable = true;
 
