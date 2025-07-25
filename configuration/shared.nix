@@ -1,6 +1,5 @@
 {
   user,
-  overlays,
   pkgs,
   pkgs-unstable,
   inputs,
@@ -54,7 +53,10 @@
   };
 
   nixpkgs = {
-    inherit overlays;
+    overlays = [
+      inputs.klip.overlays.default
+      inputs.fonts.overlays.default
+    ];
 
     config = {
       allowUnfree = true;

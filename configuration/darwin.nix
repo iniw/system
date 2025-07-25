@@ -127,6 +127,5 @@
       "ticktick"
       "notion"
     ];
-
   };
 }
