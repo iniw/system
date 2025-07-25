@@ -66,6 +66,20 @@ name = "toml"
 auto-format = true
 formatter = { command = "taplo", args = ["format", "-"] }
 
+# Typst
+[[language]]
+name = "typst"
+auto-format = true
+
+[language-server.tinymist.config]
+formatterMode = "typstyle"
+preview.background.enabled = true
+preview.background.args = [
+  "--data-plane-host=127.0.0.1:23635",
+  "--invert-colors=never",
+  "--open",
+]
+
 # Rust
 [language-servers.rust-analyzer.config]
 cargo.features = "all"
