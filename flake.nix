@@ -47,23 +47,14 @@
   outputs =
     inputs:
     let
-      user = "sol";
-
-      overlays = [
-        inputs.klip.overlays.default
-        inputs.fonts.overlays.default
-      ];
+      user = "vini";
     in
     {
-      darwinConfigurations.mac = inputs.nix-darwin.lib.darwinSystem rec {
+      darwinConfigurations.sol = inputs.nix-darwin.lib.darwinSystem rec {
         system = "x86_64-darwin";
 
         specialArgs = {
-          inherit
-            user
-            overlays
-            inputs
-            ;
+          inherit user inputs;
           pkgs-unstable = import inputs.nixpkgs-unstable { inherit system; };
         };
 
@@ -75,11 +66,11 @@
         ];
       };
 
-      nixosConfigurations.nixos = inputs.nixpkgs-nixos.lib.nixosSystem rec {
+      nixosConfigurations.lua = inputs.nixpkgs-nixos.lib.nixosSystem rec {
         system = "x86_64-linux";
 
         specialArgs = {
-          inherit user overlays inputs;
+          inherit user inputs;
           pkgs-unstable = import inputs.nixpkgs-unstable { inherit system; };
         };
 
