@@ -173,17 +173,14 @@
 
       defaultEditor = true;
 
+      # System-wide LSP support for languages used everywhere.
       extraPackages = with pkgs-unstable; [
-        # System-wide LSP support for languages used everywhere.
-        # nix
+        # Nix
         nil
-        nixfmt-rfc-style
-        # lua
-        lua-language-server
-        stylua
-        # markdown
+        nixfmt
+        # Markdown
         marksman
-        # toml
+        # Toml
         taplo
       ];
     };
