@@ -2,18 +2,10 @@
 [[language]]
 name = "cpp"
 auto-format = true
-formatter = { command = "clang-format", args = [
-  "-assume-filename",
-  "%{buffer_name}",
-] }
 
 [[language]]
 name = "c"
 auto-format = true
-formatter = { command = "clang-format", args = [
-  "-assume-filename",
-  "%{buffer_name}",
-] }
 
 [language-server.clangd]
 args = [
@@ -23,17 +15,14 @@ args = [
   "--background-index",
 ]
 
-## Lua
+# Lua
 [[language]]
 name = "lua"
 auto-format = true
-formatter = { command = "stylua", args = [
-  "--search-parent-directories",
-  "--respect-ignores",
-  "--stdin-filepath",
-  "${buffer_name}",
-  "-",
-] }
+
+[language-server.lua-language-server.config.Lua.format]
+defaultConfig.indent_style = "space"
+defaultConfig.indent_size = 2
 
 # Nix
 [[language]]
@@ -45,13 +34,6 @@ formatter = { command = "nixfmt" }
 [[language]]
 name = "python"
 auto-format = true
-formatter = { command = "ruff", args = [
-  "format",
-  "--force-exclude",
-  "--stdin-filename",
-  "%{buffer_name}",
-  "-",
-] }
 language-servers = ["pyright", "ruff"]
 
 # SQL
@@ -64,7 +46,6 @@ formatter = { command = "pg_format", args = ["-"] }
 [[language]]
 name = "toml"
 auto-format = true
-formatter = { command = "taplo", args = ["format", "-"] }
 
 # Typst
 [[language]]
