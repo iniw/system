@@ -14,7 +14,8 @@
       # Apps
       discord
       google-chrome
-      spotify
+      # FIXME: Go back to stable once the app actually works on macos.
+      pkgs-unstable.spotify
 
       # Tools
       ast-grep
