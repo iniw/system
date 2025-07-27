@@ -7,7 +7,6 @@
 }:
 {
   # User
-
   home-manager = {
     extraSpecialArgs = {
       inherit user pkgs-unstable inputs;
@@ -19,38 +18,17 @@
   };
 
   # Shell
-
-  programs = {
-    zsh = {
-      enable = true;
-    };
-  };
-
-  environment = {
-    shells = [ pkgs.zsh ];
-  };
-
-  users.users.${user} = {
-    shell = pkgs.zsh;
-  };
+  programs.zsh.enable = true;
+  environment.shells = [ pkgs.zsh ];
+  users.users.${user}.shell = pkgs.zsh;
 
   # SSH
-
-  services = {
-    openssh = {
-      enable = true;
-    };
-  };
+  services.openssh.enable = true;
 
   # Nix
-
-  nix = {
-    settings = {
-      trusted-users = [
-        user
-      ];
-    };
-  };
+  nix.settings.trusted-users = [
+    user
+  ];
 
   nixpkgs = {
     overlays = [
@@ -58,8 +36,6 @@
       inputs.fonts.overlays.default
     ];
 
-    config = {
-      allowUnfree = true;
-    };
+    config.allowUnfree = true;
   };
 }

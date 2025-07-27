@@ -7,6 +7,7 @@
 {
   home = {
     file = {
+      # Disable zsh's "last login" message
       ".hushlogin".text = "";
     };
 
