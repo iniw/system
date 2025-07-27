@@ -48,6 +48,12 @@
     inputs:
     let
       user = "vini";
+      pkgs-unstable =
+        system:
+        import inputs.nixpkgs-unstable {
+          inherit system;
+          config.allowUnfree = true;
+        };
     in
     {
       darwinConfigurations.sol = inputs.nix-darwin.lib.darwinSystem rec {
@@ -55,7 +61,7 @@
 
         specialArgs = {
           inherit user inputs;
-          pkgs-unstable = import inputs.nixpkgs-unstable { inherit system; };
+          pkgs-unstable = pkgs-unstable system;
         };
 
         modules = [
@@ -71,7 +77,7 @@
 
         specialArgs = {
           inherit user inputs;
-          pkgs-unstable = import inputs.nixpkgs-unstable { inherit system; };
+          pkgs-unstable = pkgs-unstable system;
         };
 
         modules = [
