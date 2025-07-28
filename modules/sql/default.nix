@@ -8,6 +8,7 @@
       }
       rec {
         name = "postgresql@17";
+        link = true;
         restart_service = "changed";
         conflicts_with = [ name ];
       }
