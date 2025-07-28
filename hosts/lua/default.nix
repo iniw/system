@@ -5,7 +5,7 @@
 }:
 {
   nixosConfigurations.${name} = sys.nixosSystem {
-    inherit (inputs.nixpkgs-nixos) lib;
+    inherit (inputs.nixpkgs) lib;
     system = "x86_64-linux";
     module =
       { user, config, ... }:
