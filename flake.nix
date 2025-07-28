@@ -47,44 +47,19 @@
   outputs =
     inputs:
     let
-      user = "vini";
-      pkgs-unstable =
-        system:
-        import inputs.nixpkgs-unstable {
-          inherit system;
-          config.allowUnfree = true;
-        };
+      lib = inputs.nixpkgs-unstable.lib;
+      sys = import ./lib/sys.nix inputs;
+
+      configurations =
+        builtins.readDir ./hosts
+        |> lib.mapAttrs (name: _: import ./hosts/${name} sys)
+        |> lib.attrsToList
+        |> lib.groupBy (
+          { name, value }:
+          if value ? class && value.class == "nixos" then "nixosConfigurations" else "darwinConfigurations"
+        )
+        |> lib.mapAttrs (_: lib.listToAttrs);
+
     in
-    {
-      darwinConfigurations.sol = inputs.nix-darwin.lib.darwinSystem rec {
-        system = "x86_64-darwin";
-
-        specialArgs = {
-          inherit user inputs;
-          pkgs-unstable = pkgs-unstable system;
-        };
-
-        modules = [
-          ./configuration/darwin.nix
-          inputs.home-manager.darwinModules.home-manager
-          inputs.nix-homebrew.darwinModules.nix-homebrew
-          inputs.mac-app-util.darwinModules.default
-        ];
-      };
-
-      nixosConfigurations.lua = inputs.nixpkgs-nixos.lib.nixosSystem rec {
-        system = "x86_64-linux";
-
-        specialArgs = {
-          inherit user inputs;
-          pkgs-unstable = pkgs-unstable system;
-        };
-
-        modules = [
-          ./configuration/nixos
-          inputs.home-manager.nixosModules.home-manager
-        ];
-      };
-      # julia + vinicius = amor
-    };
+    configurations;
 }
