@@ -11,7 +11,7 @@
         # System-wide LSP support for languages used everywhere.
         extraPackages = [
           # Nix
-          pkgs.nil
+          pkgs-unstable.nil
           pkgs-unstable.nixfmt
           # Markdown
           pkgs.marksman
