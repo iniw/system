@@ -4,7 +4,7 @@
   };
 
   homeModule =
-    { lib, pkgs, ... }:
+    { pkgs, ... }:
     {
       programs.ssh = {
         enable = true;

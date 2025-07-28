@@ -20,13 +20,11 @@
         ];
       };
 
-      programs.git.ignores = [
-        ".helix"
-      ];
-
       xdg.configFile."helix" = {
         source = ./config;
         recursive = true;
       };
+
+      programs.git.ignores = [ ".helix" ];
     };
 }

@@ -1,7 +1,6 @@
 {
   homeModule =
     {
-      lib,
       pkgs,
       pkgs-unstable,
       ...

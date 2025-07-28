@@ -1,6 +1,6 @@
 {
   homeModule =
-    { lib, pkgs, ... }:
+    { pkgs, ... }:
     {
       home.packages = [
         pkgs.berkeley-mono

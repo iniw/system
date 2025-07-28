@@ -49,7 +49,7 @@ let
   commonModules =
     let
       homeManager =
-        { lib, pkgs, ... }:
+        { pkgs, ... }:
         {
           home-manager = {
             users.${user} = {
@@ -77,9 +77,7 @@ let
           config.allowUnfree = true;
         };
 
-        nix.settings.trusted-users = [
-          user
-        ];
+        nix.settings.trusted-users = [ user ];
       };
     in
     [
@@ -89,39 +87,6 @@ let
 
 in
 {
-  nixosSystem =
-    let
-      userConfigModule = {
-        users.users.${user} = {
-          extraGroups = [
-            "wheel"
-          ];
-          home = "/user/${user}";
-          isNormalUser = true;
-        };
-
-        home-manager.users.${user}.imports = modules.nixosHomeModules or [ ];
-      };
-    in
-    {
-      lib,
-      system,
-      module,
-    }:
-    lib.nixosSystem {
-      inherit system specialArgs;
-
-      modules =
-        commonModules
-        ++ fromInputs.nixosModules
-        ++ modules.systemModules or [ ]
-        ++ modules.nixosSystemModules or [ ]
-        ++ [
-          module
-          userConfigModule
-        ];
-    };
-
   darwinSystem =
     let
       userConfigModule = {
@@ -184,6 +149,37 @@ in
           module
           userConfigModule
           homebrewModule
+        ];
+    };
+
+  nixosSystem =
+    let
+      userConfigModule = {
+        users.users.${user} = {
+          extraGroups = [ "wheel" ];
+          home = "/user/${user}";
+          isNormalUser = true;
+        };
+
+        home-manager.users.${user}.imports = modules.nixosHomeModules or [ ];
+      };
+    in
+    {
+      lib,
+      system,
+      module,
+    }:
+    lib.nixosSystem {
+      inherit system specialArgs;
+
+      modules =
+        commonModules
+        ++ fromInputs.nixosModules
+        ++ modules.systemModules or [ ]
+        ++ modules.nixosSystemModules or [ ]
+        ++ [
+          module
+          userConfigModule
         ];
     };
 }

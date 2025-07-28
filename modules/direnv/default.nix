@@ -28,8 +28,6 @@
         '';
     };
 
-    programs.git.ignores = [
-      ".envrc"
-    ];
+    programs.git.ignores = [ ".envrc" ];
   };
 }
