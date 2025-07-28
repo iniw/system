@@ -1,11 +1,10 @@
 {
-  darwinModule = {
+  darwinSystemModule = {
     homebrew.casks = [ "ticktick" ];
   };
 
   homeModule =
     {
-      lib,
       pkgs,
       pkgs-unstable,
       ...
@@ -16,13 +15,18 @@
         pkgs.google-chrome
         # FIXME: Go back to stable once the app actually works on macos.
         pkgs-unstable.spotify
-      ]
-      ++ lib.optionals pkgs.stdenv.isLinux [
+      ];
+    };
+
+  nixosHomeModule =
+    { pkgs, ... }:
+    {
+      home.packages = [
         pkgs.cmusfm
         pkgs.ticktick
       ];
 
-      programs = lib.optionalAttrs pkgs.stdenv.isLinux {
+      programs = {
         cmus.enable = true;
 
         obs-studio.enable = true;

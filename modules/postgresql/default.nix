@@ -1,5 +1,5 @@
 {
-  darwinModule = {
+  darwinSystemModule = {
     homebrew.brews = [
       rec {
         name = "postgresql@17";
@@ -9,7 +9,7 @@
     ];
   };
 
-  nixosModule = {
+  nixosSystemModule = {
     services.postgresql.enable = true;
   };
 }

@@ -48,17 +48,14 @@
     inputs:
     let
       lib = inputs.nixpkgs-unstable.lib;
-      sys = import ./lib/sys.nix inputs;
+      sys = import ./lib/sys.nix {
+        inherit inputs lib;
+      };
 
       configurations =
         builtins.readDir ./hosts
-        |> lib.mapAttrs (name: _: import ./hosts/${name} sys)
-        |> lib.attrsToList
-        |> lib.groupBy (
-          { name, value }:
-          if value ? class && value.class == "nixos" then "nixosConfigurations" else "darwinConfigurations"
-        )
-        |> lib.mapAttrs (_: lib.listToAttrs);
+        |> lib.mapAttrsToList (name: _: import ./hosts/${name} { inherit name inputs sys; })
+        |> lib.mergeAttrsList;
 
     in
     configurations;

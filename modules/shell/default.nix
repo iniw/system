@@ -1,4 +1,4 @@
-let
+{
   systemModule =
     { user, pkgs, ... }:
     {
@@ -6,11 +6,6 @@ let
       environment.shells = [ pkgs.zsh ];
       users.users.${user}.shell = pkgs.zsh;
     };
-in
-{
-  darwinModule = systemModule;
-
-  nixosModule = systemModule;
 
   homeModule =
     { config, ... }:

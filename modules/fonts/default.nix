@@ -17,13 +17,15 @@
           serif = [ "Inter" ];
         };
       };
+    };
 
-      dconf = lib.optionalAttrs pkgs.stdenv.isLinux {
-        "org/gnome/desktop/interface" = {
-          font-name = "Inter Variable 11";
-          document-font-name = "Inter Variable 11";
-          monospace-font-name = "Berkeley Mono 10";
-        };
+  nixosHomeModule = {
+    dconf = {
+      "org/gnome/desktop/interface" = {
+        font-name = "Inter Variable 11";
+        document-font-name = "Inter Variable 11";
+        monospace-font-name = "Berkeley Mono 10";
       };
     };
+  };
 }
