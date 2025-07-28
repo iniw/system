@@ -1,10 +1,6 @@
 {
   homeModule =
-    {
-      pkgs,
-      pkgs-unstable,
-      ...
-    }:
+    { pkgs, pkgs-unstable, ... }:
     {
       programs.ghostty = {
         enable = true;
@@ -25,16 +21,6 @@
         toggle-quick-settings = [ ];
         # <Super>v
         toggle-message-tray = [ ];
-        # <Super>[0..=9]
-        switch-to-application-1 = [ ];
-        switch-to-application-2 = [ ];
-        switch-to-application-3 = [ ];
-        switch-to-application-4 = [ ];
-        switch-to-application-5 = [ ];
-        switch-to-application-6 = [ ];
-        switch-to-application-7 = [ ];
-        switch-to-application-8 = [ ];
-        switch-to-application-9 = [ ];
         # <Super>n
         focus-active-notification = [ ];
         # <Super><Alt>Up
