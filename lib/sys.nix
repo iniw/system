@@ -2,8 +2,7 @@
 let
   modules =
     builtins.readDir ../modules
-    |> lib.mapAttrs (name: _: import ../modules/${name})
-    |> lib.attrValues
+    |> lib.mapAttrsToList (name: _: import ../modules/${name})
     |> lib.zipAttrs
     |> lib.mapAttrs' (name: values: lib.nameValuePair "${name}s" values);
 
