@@ -1,5 +1,5 @@
 {
-  darwinModule = {
+  darwinSystemModule = {
     homebrew.brews = [
       rec {
         name = "mysql";
@@ -9,7 +9,7 @@
     ];
   };
 
-  nixosModule = {
+  nixosSystemModule = {
     services.mysql.enable = true;
   };
 }

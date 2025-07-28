@@ -1,14 +1,14 @@
 {
-  nixosModule = {
+  nixosSystemModule = {
     services.xserver = {
       displayManager.gdm.enable = true;
       desktopManager.gnome.enable = true;
     };
   };
 
-  homeModule =
-    { lib, pkgs, ... }:
-    lib.mkIf pkgs.stdenv.isLinux {
+  nixosHomeModule =
+    { lib, ... }:
+    {
       dconf = {
         enable = true;
 

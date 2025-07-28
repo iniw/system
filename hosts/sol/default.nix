@@ -1,75 +1,40 @@
-sys:
-sys.darwinSystem (
-  { user, ... }:
-  {
-    imports = [
-      ./hardware.nix
-    ];
+{
+  name,
+  inputs,
+  sys,
+}:
+{
+  darwinConfigurations.${name} = sys.darwinSystem {
+    inherit (inputs.nix-darwin) lib;
+    system = "x86_64-darwin";
+    module =
+      { user, ... }:
+      {
+        # Managed by determinate nix
+        nix.enable = false;
 
-    # For work
-    homebrew.casks = [
-      "android-studio"
-      "notion"
-    ];
+        # For work
+        homebrew.casks = [
+          "android-studio"
+          "notion"
+        ];
 
-    # Managed by determinate nix
-    nix.enable = false;
+        security.pam.services.sudo_local.touchIdAuth = true;
 
-    security.pam.services.sudo_local.touchIdAuth = true;
+        home-manager.users.${user}.home.stateVersion = "25.05";
 
-    system = {
-      defaults = {
-        NSGlobalDomain = {
-          _HIHideMenuBar = true;
+        system = {
+          defaults = {
+            dock.tilesize = 32;
 
-          AppleKeyboardUIMode = 3;
-          ApplePressAndHoldEnabled = false;
-          AppleShowAllFiles = true;
+            trackpad = {
+              Clicking = true;
+              TrackpadThreeFingerDrag = true;
+            };
+          };
 
-          InitialKeyRepeat = 12;
-          KeyRepeat = 2;
-
-          NSAutomaticCapitalizationEnabled = false;
-          NSAutomaticDashSubstitutionEnabled = false;
-          NSAutomaticPeriodSubstitutionEnabled = false;
-          NSAutomaticQuoteSubstitutionEnabled = false;
-          NSAutomaticSpellingCorrectionEnabled = false;
-
-          NSNavPanelExpandedStateForSaveMode = true;
-          NSNavPanelExpandedStateForSaveMode2 = true;
-        };
-
-        dock = {
-          autohide = true;
-          mru-spaces = false;
-          show-recents = false;
-          orientation = "bottom";
-          showhidden = true;
-          tilesize = 32;
-        };
-
-        finder = {
-          AppleShowAllExtensions = true;
-          AppleShowAllFiles = true;
-
-          FXEnableExtensionChangeWarning = false;
-          FXPreferredViewStyle = "clmv";
-
-          QuitMenuItem = true;
-        };
-
-        trackpad = {
-          Clicking = true;
-          TrackpadThreeFingerDrag = true;
+          stateVersion = 5;
         };
       };
-
-      keyboard = {
-        enableKeyMapping = true;
-        remapCapsLockToEscape = true;
-      };
-
-      stateVersion = 5;
-    };
-  }
-)
+  };
+}

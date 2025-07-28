@@ -1,7 +1,5 @@
-inputs:
+{ inputs, lib }:
 let
-  lib = inputs.nixpkgs-unstable.lib;
-
   modules =
     builtins.readDir ../modules
     |> lib.mapAttrs (name: _: import ../modules/${name})
@@ -49,13 +47,12 @@ let
   commonModules =
     let
       homeManager =
-        { pkgs, ... }:
+        { lib, pkgs, ... }:
         {
           home-manager = {
             users.${user} = {
-              imports = fromInputs.homeModules ++ modules.homeModules;
+              imports = fromInputs.homeModules ++ modules.homeModules or [ ];
 
-              home.stateVersion = "25.05";
               xdg.enable = true;
             };
 
@@ -96,25 +93,29 @@ in
         users.users.${user} = {
           extraGroups = [
             "wheel"
-            "networkmanager"
           ];
           home = "/user/${user}";
           isNormalUser = true;
         };
 
-        networking.networkmanager.enable = true;
+        home-manager.users.${user}.imports = modules.nixosHomeModules or [ ];
       };
     in
-    systemModule:
-    inputs.nixpkgs-nixos.lib.nixosSystem {
-      inherit specialArgs;
+    {
+      lib,
+      system,
+      module,
+    }:
+    lib.nixosSystem {
+      inherit system specialArgs;
 
       modules =
         commonModules
         ++ fromInputs.nixosModules
-        ++ modules.nixosModules
+        ++ modules.systemModules or [ ]
+        ++ modules.nixosSystemModules or [ ]
         ++ [
-          systemModule
+          module
           userConfigModule
         ];
     };
@@ -129,7 +130,10 @@ in
           };
           knownUsers = [ user ];
         };
+
         system.primaryUser = user;
+
+        home-manager.users.${user}.imports = modules.darwinHomeModules or [ ];
       };
 
       homebrewModule =
@@ -161,16 +165,21 @@ in
           };
         };
     in
-    systemModule:
-    inputs.nix-darwin.lib.darwinSystem {
-      inherit specialArgs;
+    {
+      lib,
+      system,
+      module,
+    }:
+    lib.darwinSystem {
+      inherit system specialArgs;
 
       modules =
         commonModules
         ++ fromInputs.darwinModules
-        ++ modules.darwinModules
+        ++ modules.systemModules or [ ]
+        ++ modules.darwinSystemModules or [ ]
         ++ [
-          systemModule
+          module
           userConfigModule
           homebrewModule
         ];
