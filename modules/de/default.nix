@@ -14,20 +14,18 @@
 
         settings = {
           "org/gnome/desktop/input-sources" = {
-            xkb-options = [
-              "caps:escape"
-            ];
-          };
-
-          "org/gnome/desktop/peripherals/keyboard" = {
-            delay = lib.hm.gvariant.mkUint32 200;
-            repeat = lib.hm.gvariant.mkUint32 20;
+            xkb-options = [ "caps:escape" ];
           };
 
           "org/gnome/desktop/interface" = {
             color-scheme = "prefer-dark";
             font-hinting = "full";
             font-antialiasing = "rgba";
+          };
+
+          "org/gnome/desktop/peripherals/keyboard" = {
+            delay = lib.hm.gvariant.mkUint32 200;
+            repeat = lib.hm.gvariant.mkUint32 20;
           };
 
           "org/gnome/desktop/session" = {
@@ -47,6 +45,8 @@
     };
 
   darwinSystemModule = {
+    security.pam.services.sudo_local.touchIdAuth = true;
+
     system = {
       defaults = {
         NSGlobalDomain = {
@@ -85,6 +85,11 @@
           FXPreferredViewStyle = "clmv";
 
           QuitMenuItem = true;
+        };
+
+        trackpad = {
+          Clicking = true;
+          TrackpadThreeFingerDrag = true;
         };
       };
 
