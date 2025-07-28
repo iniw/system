@@ -37,9 +37,9 @@
         fzf.fileWidgetCommand = ''fd --hidden --follow --exclude ".git" --exclude ".jj"'';
 
         zoxide.enable = true;
-
-        # fd's ignore list
-        git.ignores = [ ".ignore" ];
       };
+
+      # fd's ignore list
+      programs.git.ignores = [ ".ignore" ];
     };
 }

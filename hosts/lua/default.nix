@@ -19,9 +19,7 @@
 
         time.timeZone = "America/Sao_Paulo";
 
-        users.users.${user}.extraGroups = [
-          "networkmanager"
-        ];
+        users.users.${user}.extraGroups = [ "networkmanager" ];
         networking.networkmanager.enable = true;
 
         home-manager.users.${user} =
