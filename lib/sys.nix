@@ -1,7 +1,5 @@
-inputs:
+{ lib, inputs }:
 let
-  lib = inputs.nixpkgs.lib;
-
   modules =
     builtins.readDir ../modules
     |> lib.mapAttrs (name: _: import ../modules/${name})
