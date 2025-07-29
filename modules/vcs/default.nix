@@ -35,12 +35,16 @@ in
 
       jujutsu = {
         enable = true;
-
         settings = {
           # I do a whole lot of force-pushing and history-rewriting, so immutable heads are really annoying.
-          revset-aliases."immutable_heads()" = "none()";
+          revset-aliases = {
+            "immutable_heads()" = "none()";
+          };
 
-          ui.movement.edit = true;
+          ui = {
+            color = "always";
+            movement.edit = true;
+          };
 
           user = {
             inherit name email;
