@@ -5,7 +5,7 @@ let
     |> lib.filter (lib.hasSuffix ".nix")
     |> lib.map (import)
     |> lib.zipAttrs
-    |> lib.mapAttrs' (name: values: lib.nameValuePair "${name}s" values);
+    |> lib.mapAttrs' (name: lib.nameValuePair "${name}s");
 
   fromInputs =
     let
@@ -90,8 +90,8 @@ in
       userConfigModule = {
         users = {
           users.${user} = {
-            uid = 501;
             home = "/Users/${user}";
+            uid = 501;
           };
           knownUsers = [ user ];
         };
@@ -125,7 +125,7 @@ in
             # The `cleanup = "zap"` field causes brew to try untapping taps that don't appear in the brewfile bundle,
             # so we repeat them here just to get them in the brewfile.
             # See also: https://github.com/zhaofengli/nix-homebrew/issues/5
-            taps = builtins.attrNames taps;
+            taps = lib.attrNames taps;
             onActivation.cleanup = "zap";
           };
         };
@@ -154,8 +154,8 @@ in
     let
       userConfigModule = {
         users.users.${user} = {
-          extraGroups = [ "wheel" ];
           home = "/user/${user}";
+          extraGroups = [ "wheel" ];
           isNormalUser = true;
         };
 
