@@ -27,8 +27,6 @@
         btop.settings.color_theme = "TTY";
         btop.settings.vim_keys = true;
 
-        carapace.enable = true;
-
         zoxide.enable = true;
       };
     };
