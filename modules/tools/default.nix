@@ -6,7 +6,6 @@
         pkgs.ast-grep
         pkgs.coreutils
         pkgs.exiftool
-        pkgs.fd
         pkgs.hyperfine
         pkgs.jq
         pkgs.just
@@ -31,15 +30,8 @@
         carapace.enable = true;
 
         fzf.enable = true;
-        # Use fd instead of find.
-        fzf.changeDirWidgetCommand = ''fd --type d --hidden --follow --exclude ".git" --exclude ".jj"'';
-        fzf.defaultCommand = ''fd --hidden --follow --exclude ".git" --exclude ".jj"'';
-        fzf.fileWidgetCommand = ''fd --hidden --follow --exclude ".git" --exclude ".jj"'';
 
         zoxide.enable = true;
       };
-
-      # fd's ignore list
-      programs.git.ignores = [ ".ignore" ];
     };
 }

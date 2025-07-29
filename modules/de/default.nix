@@ -11,9 +11,6 @@
           ApplePressAndHoldEnabled = false;
           AppleShowAllFiles = true;
 
-          InitialKeyRepeat = 12;
-          KeyRepeat = 2;
-
           NSAutomaticCapitalizationEnabled = false;
           NSAutomaticDashSubstitutionEnabled = false;
           NSAutomaticPeriodSubstitutionEnabled = false;
@@ -41,16 +38,6 @@
 
           QuitMenuItem = true;
         };
-
-        trackpad = {
-          Clicking = true;
-          TrackpadThreeFingerDrag = true;
-        };
-      };
-
-      keyboard = {
-        enableKeyMapping = true;
-        remapCapsLockToEscape = true;
       };
     };
   };
@@ -69,19 +56,10 @@
         enable = true;
 
         settings = {
-          "org/gnome/desktop/input-sources" = {
-            xkb-options = [ "caps:escape" ];
-          };
-
           "org/gnome/desktop/interface" = {
             color-scheme = "prefer-dark";
             font-hinting = "full";
             font-antialiasing = "rgba";
-          };
-
-          "org/gnome/desktop/peripherals/keyboard" = {
-            delay = lib.hm.gvariant.mkUint32 200;
-            repeat = lib.hm.gvariant.mkUint32 20;
           };
 
           "org/gnome/desktop/session" = {

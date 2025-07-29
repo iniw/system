@@ -4,46 +4,47 @@ let
 in
 {
   homeModule = {
-    programs.gh = {
-      enable = true;
-
-      settings.git_protocol = "ssh";
-    };
-
-    programs.git = {
-      enable = true;
-
-      userName = name;
-      userEmail = email;
-
-      delta = {
+    programs = {
+      gh = {
         enable = true;
-
-        options = {
-          navigate = true;
-          line-numbers = true;
-        };
+        settings.git_protocol = "ssh";
       };
 
-      extraConfig.diff.algorithm = "histogram";
+      git = {
+        enable = true;
 
-      ignores = [
-        ".DS_Store"
-        ".claude"
-      ];
-    };
+        userName = name;
+        userEmail = email;
 
-    programs.jujutsu = {
-      enable = true;
+        delta = {
+          enable = true;
 
-      settings = {
-        # I do a whole lot of force-pushing and history-rewriting, so immutable heads are really annoying.
-        revset-aliases."immutable_heads()" = "none()";
+          options = {
+            navigate = true;
+            line-numbers = true;
+          };
+        };
 
-        ui.movement.edit = true;
+        extraConfig.diff.algorithm = "histogram";
 
-        user = {
-          inherit name email;
+        ignores = [
+          ".DS_Store"
+          ".claude"
+        ];
+      };
+
+      jujutsu = {
+        enable = true;
+
+        settings = {
+          # I do a whole lot of force-pushing and history-rewriting, so immutable heads are really annoying.
+          revset-aliases."immutable_heads()" = "none()";
+
+          ui.movement.edit = true;
+
+          user = {
+            inherit name email;
+          };
         };
       };
     };
