@@ -1,8 +1,9 @@
 { lib, inputs }:
 let
   modules =
-    builtins.readDir ../modules
-    |> lib.mapAttrsToList (name: _: import ../modules/${name})
+    lib.filesystem.listFilesRecursive ../modules
+    |> lib.filter (lib.hasSuffix ".nix")
+    |> lib.map (import)
     |> lib.zipAttrs
     |> lib.mapAttrs' (name: values: lib.nameValuePair "${name}s" values);
 

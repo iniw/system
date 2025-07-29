@@ -1,8 +1,4 @@
 {
-  darwinSystemModule = {
-    homebrew.casks = [ "ticktick" ];
-  };
-
   homeModule =
     { pkgs, pkgs-unstable, ... }:
     {
@@ -14,18 +10,7 @@
       ];
     };
 
-  nixosHomeModule =
-    { pkgs, ... }:
-    {
-      home.packages = [
-        pkgs.cmusfm
-        pkgs.ticktick
-      ];
-
-      programs = {
-        cmus.enable = true;
-
-        obs-studio.enable = true;
-      };
-    };
+  nixosHomeModule = {
+    programs.obs-studio.enable = true;
+  };
 }
