@@ -1,13 +1,14 @@
 {
   homeModule =
-    { pkgs, pkgs-unstable, ... }:
+    { pkgs-unstable, ... }:
     {
       programs.ghostty = {
         enable = true;
-        package = if pkgs.stdenv.isDarwin then pkgs-unstable.ghostty-bin else pkgs-unstable.ghostty;
+        package =
+          if pkgs-unstable.stdenv.isDarwin then pkgs-unstable.ghostty-bin else pkgs-unstable.ghostty;
       };
 
-      xdg.configFile."ghostty" = {
+      xdg.configFile.ghostty = {
         source = ./config;
         recursive = true;
       };
@@ -17,39 +18,34 @@
     # Remove some default keybinds that conflict with the config.
     dconf = {
       "org/gnome/shell/keybindings" = {
-        # <Super>s
+        # super+s
         toggle-quick-settings = [ ];
-        # <Super>v
+        # super+v
         toggle-message-tray = [ ];
-        # <Super>n
+        # super+n
         focus-active-notification = [ ];
-        # <Super><Alt>Up
+        # super+alt+up
         shift-overview-up = [ ];
-        # <Super><Alt>Down
+        # super+alt+down
         shift-overview-down = [ ];
       };
 
       "org/gnome/desktop/wm/keybindings" = {
-        # <Super>h
+        # super+h
         minimize = [ ];
-        # <Super>Up
+        # super+up
         maximize = [ ];
-        # <Super>Down
+        # super+down
         unmaximize = [ ];
-        # <Super><Shift>Up
+        # super+shift+up
         move-to-monitor-up = [ ];
-        # <Super><Shift>Down
+        # super+shift+down
         move-to-monitor-down = [ ];
       };
 
       "org/gnome/settings-daemon/plugins/media-keys" = {
-        # <Super>l
+        # super+l
         screensaver = [ ];
-      };
-
-      "org/gnome/mutter/keybindings" = {
-        # <Super>p
-        switch-monitor = [ ];
       };
     };
   };

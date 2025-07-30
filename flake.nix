@@ -47,11 +47,11 @@
     inputs:
     let
       lib = inputs.nixpkgs.lib;
-      sys = import ./lib/sys.nix { inherit lib inputs; };
+      sys = import ./lib/sys.nix inputs;
 
       configurations =
         builtins.readDir ./hosts
-        |> lib.mapAttrsToList (name: _: import ./hosts/${name} { inherit name inputs sys; })
+        |> lib.mapAttrsToList (name: _: import ./hosts/${name} { inherit name sys; })
         |> lib.mergeAttrsList;
     in
     configurations;

@@ -1,5 +1,7 @@
-{ lib, inputs }:
+inputs:
 let
+  lib = inputs.nixpkgs.lib;
+
   modules =
     lib.filesystem.listFilesRecursive ../modules
     |> lib.filter (lib.hasSuffix ".nix")
@@ -131,23 +133,25 @@ in
         };
     in
     {
-      lib,
+      name,
       system,
       module,
     }:
-    lib.darwinSystem {
-      inherit system specialArgs;
+    {
+      darwinConfigurations.${name} = inputs.nix-darwin.lib.darwinSystem {
+        inherit system specialArgs;
 
-      modules =
-        commonModules
-        ++ fromInputs.darwinModules
-        ++ modules.systemModules or [ ]
-        ++ modules.darwinSystemModules or [ ]
-        ++ [
-          module
-          userConfigModule
-          homebrewModule
-        ];
+        modules =
+          commonModules
+          ++ fromInputs.darwinModules
+          ++ modules.systemModules or [ ]
+          ++ modules.darwinSystemModules or [ ]
+          ++ [
+            module
+            userConfigModule
+            homebrewModule
+          ];
+      };
     };
 
   nixosSystem =
@@ -163,21 +167,23 @@ in
       };
     in
     {
-      lib,
+      name,
       system,
       module,
     }:
-    lib.nixosSystem {
-      inherit system specialArgs;
+    {
+      nixosConfigurations.${name} = inputs.nixpkgs.lib.nixosSystem {
+        inherit system specialArgs;
 
-      modules =
-        commonModules
-        ++ fromInputs.nixosModules
-        ++ modules.systemModules or [ ]
-        ++ modules.nixosSystemModules or [ ]
-        ++ [
-          module
-          userConfigModule
-        ];
+        modules =
+          commonModules
+          ++ fromInputs.nixosModules
+          ++ modules.systemModules or [ ]
+          ++ modules.nixosSystemModules or [ ]
+          ++ [
+            module
+            userConfigModule
+          ];
+      };
     };
 }
