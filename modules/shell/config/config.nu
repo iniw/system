@@ -31,7 +31,7 @@ $env.config.keybindings ++= [
       cmd: "commandline edit --insert (
         fzf --scheme=path
             --height=~30%
-            --preview='bat --color=always --style=auto {}'
+            --preview='bat --style=plain {}'
       )"
     }
   },
