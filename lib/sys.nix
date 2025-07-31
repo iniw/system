@@ -111,10 +111,6 @@ in
           };
         in
         {
-          imports = [
-            inputs.nix-homebrew.darwinModules.nix-homebrew
-          ];
-
           nix-homebrew = {
             enable = true;
             inherit user taps;
