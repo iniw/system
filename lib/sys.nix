@@ -132,14 +132,9 @@ in
           };
         };
     in
-    {
-      name,
-      system,
-      module,
-    }:
-    {
+    module: name: {
       darwinConfigurations.${name} = inputs.nix-darwin.lib.darwinSystem {
-        inherit system specialArgs;
+        inherit specialArgs;
 
         modules =
           commonModules
@@ -166,14 +161,9 @@ in
         home-manager.users.${user}.imports = modules.nixosHomeModules or [ ];
       };
     in
-    {
-      name,
-      system,
-      module,
-    }:
-    {
+    module: name: {
       nixosConfigurations.${name} = inputs.nixpkgs.lib.nixosSystem {
-        inherit system specialArgs;
+        inherit specialArgs;
 
         modules =
           commonModules

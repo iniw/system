@@ -51,7 +51,7 @@
 
       configurations =
         builtins.readDir ./hosts
-        |> lib.mapAttrsToList (name: _: import ./hosts/${name} { inherit name sys; })
+        |> lib.mapAttrsToList (name: _: import ./hosts/${name} sys name)
         |> lib.mergeAttrsList;
     in
     configurations;
