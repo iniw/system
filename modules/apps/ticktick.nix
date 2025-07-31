@@ -6,8 +6,6 @@
   nixosHomeModule =
     { pkgs, ... }:
     {
-      home.packages = [
-        pkgs.ticktick
-      ];
+      home.packages = [ pkgs.ticktick ];
     };
 }

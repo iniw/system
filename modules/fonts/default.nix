@@ -2,10 +2,11 @@
   homeModule =
     { pkgs, ... }:
     {
-      home.packages = [
-        pkgs.berkeley-mono
-        pkgs.inter
-        pkgs.tx-02
+      home.packages = with pkgs; [
+        berkeley-mono
+        inter
+        source-serif
+        tx-02
       ];
 
       fonts.fontconfig = {
@@ -14,7 +15,7 @@
         defaultFonts = {
           monospace = [ "Berkeley Mono" ];
           sansSerif = [ "Inter" ];
-          serif = [ "Inter" ];
+          serif = [ "Source Serif 4" ];
         };
       };
     };
