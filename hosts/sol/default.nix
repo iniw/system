@@ -1,19 +1,17 @@
-{ name, sys }:
-sys.darwinSystem {
-  inherit name;
-  system = "x86_64-darwin";
-  module =
-    { user, ... }:
-    {
-      # Managed by determinate nix.
-      nix.enable = false;
+sys:
+sys.darwinSystem (
+  { user, ... }:
+  {
+    imports = [ ./hardware.nix ];
 
-      # For work.
-      homebrew.casks = [ "notion" ];
+    # Managed by determinate nix.
+    nix.enable = false;
 
-      system.defaults.dock.tilesize = 32;
+    homebrew.casks = [ "notion" ];
 
-      home-manager.users.${user}.home.stateVersion = "25.05";
-      system.stateVersion = 5;
-    };
-}
+    system.defaults.dock.tilesize = 32;
+
+    home-manager.users.${user}.home.stateVersion = "25.05";
+    system.stateVersion = 5;
+  }
+)
