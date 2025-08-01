@@ -1,3 +1,12 @@
+# Required for activating a virtualenv-generated python environment
+# See: https://github.com/nushell/nushell/issues/14780 and https://github.com/pypa/virtualenv/issues/2838
+$env.ENV_CONVERSIONS = {
+    "PATH": {
+        from_string: { |s| $s | split row (char esep) | path expand --no-symlink }
+        to_string: { |v| $v | path expand --no-symlink | str join (char esep) }
+    }
+}
+
 $env.config.keybindings ++= [
   {
     name: fzf_command_picker
@@ -44,3 +53,39 @@ $env.config.shell_integration.osc133 = false
 $env.config.show_banner = false
 
 $env.config.use_kitty_protocol = true
+
+def --env grab [path: string] {
+    let dir = if ($path ends-with ".git") { # Git repo
+        # Extract the repository name from the URL to use as the directory name.
+        # e.g: "https://github.com/nushell/nushell.git" becomes "nushell".
+        let dir = $path | path parse | get stem
+
+        jj git clone --colocate $path $dir
+
+        $dir
+    } else if ($path =~ '^https.*\.(tar\.(gz|bz2|xz))$') { # Archive
+        let data = http get -r $path
+
+        # Determine the output dir by looking at the first entry in the archive.
+        let dir = $data | tar -t | lines | first
+
+        # Create the output directory, `tar` doesn't do it automatically.
+        mkdir $dir
+
+        # Extract the archive into the output directory, skipping the root folder.
+        $data | tar -x -C $dir --strip-components 1
+
+        $dir
+    } else { # Directory
+        mkdir $path
+
+        $path
+    }
+
+    # Go to the output directory.
+    cd $dir
+}
+
+def nix-system [] {
+   nix eval --raw --impure --expr "builtins.currentSystem"
+}

@@ -9,7 +9,6 @@
           exiftool
           hyperfine
           jq
-          just
           klip
           python314
           ripgrep
@@ -29,9 +28,9 @@
         bat = {
           enable = true;
           config = {
-            theme = "ansi";
             color = "always";
             style = "numbers";
+            theme = "ansi";
           };
         };
 
