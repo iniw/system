@@ -41,10 +41,7 @@ in
             "immutable_heads()" = "none()";
           };
 
-          ui = {
-            color = "always";
-            movement.edit = true;
-          };
+          ui.movement.edit = true;
 
           user = {
             inherit name email;
