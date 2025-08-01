@@ -31,7 +31,6 @@
         enable = true;
 
         configFile.source = ./config/config.nu;
-        envFile.source = ./config/env.nu;
 
         # See: https://github.com/nix-community/home-manager/issues/4313
         environmentVariables = config.home.sessionVariables;
