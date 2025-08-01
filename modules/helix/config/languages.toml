@@ -76,6 +76,7 @@ formatter = { command = "prettierd", args = [
   "--stdin-filepath",
   "%{buffer_name}",
 ] }
+language-servers = ["vscode-css-language-server", "biome"]
 
 [[language]]
 name = "html"
@@ -92,7 +93,7 @@ formatter = { command = "prettierd", args = [
   "--stdin-filepath",
   "%{buffer_name}",
 ] }
-language-servers = ["vtsls"]
+language-servers = ["vtsls", "biome"]
 
 [[language]]
 name = "jsx"
@@ -101,7 +102,7 @@ formatter = { command = "prettierd", args = [
   "--stdin-filepath",
   "%{buffer_name}",
 ] }
-language-servers = ["vtsls"]
+language-servers = ["vtsls", "biome"]
 
 [[language]]
 name = "typescript"
@@ -110,7 +111,7 @@ formatter = { command = "prettierd", args = [
   "--stdin-filepath",
   "%{buffer_name}",
 ] }
-language-servers = ["vtsls"]
+language-servers = ["vtsls", "biome"]
 
 [[language]]
 name = "tsx"
@@ -119,7 +120,7 @@ formatter = { command = "prettierd", args = [
   "--stdin-filepath",
   "%{buffer_name}",
 ] }
-language-servers = ["vtsls"]
+language-servers = ["vtsls", "biome"]
 
 [language-server.vtsls]
 command = "vtsls"
@@ -136,3 +137,7 @@ typescript.inlayHints.variableTypes.enabled = true
 typescript.updateImportsOnFileMove.enabled = "always"
 vtsls.autoUseWorkspaceTsdk = true
 vtsls.experimental.maxInlayHintLength = 30
+
+[language-server.biome]
+command = "biome"
+args = ["lsp-proxy"]
