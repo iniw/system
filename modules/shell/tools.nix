@@ -28,7 +28,6 @@
         bat = {
           enable = true;
           config = {
-            color = "always";
             style = "numbers";
             theme = "ansi";
           };

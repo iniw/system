@@ -60,20 +60,20 @@ def --env grab [path: string] {
         # e.g: "https://github.com/nushell/nushell.git" becomes "nushell".
         let dir = $path | path parse | get stem
 
-        jj git clone --colocate $path $dir
+        jj git clone $path $dir --colocate
 
         $dir
     } else if ($path =~ '^https.*\.(tar\.(gz|bz2|xz))$') { # Archive
-        let data = http get -r $path
+        let data = http get $path --raw
 
         # Determine the output dir by looking at the first entry in the archive.
-        let dir = $data | tar -t | lines | first
+        let dir = $data | tar --list | lines | first
 
         # Create the output directory, `tar` doesn't do it automatically.
         mkdir $dir
 
         # Extract the archive into the output directory, skipping the root folder.
-        $data | tar -x -C $dir --strip-components 1
+        $data | tar --extract --strip-components 1 --directory $dir
 
         $dir
     } else { # Directory
