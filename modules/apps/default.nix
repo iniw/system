@@ -1,4 +1,8 @@
 {
+  darwinSystemModule = {
+    homebrew.casks = [ "stremio" ];
+  };
+
   homeModule =
     { pkgs, pkgs-unstable, ... }:
     {

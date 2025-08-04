@@ -15,15 +15,6 @@ args = [
   "--background-index",
 ]
 
-# Lua
-[[language]]
-name = "lua"
-auto-format = true
-
-[language-server.lua-language-server.config.Lua.format]
-defaultConfig.indent_style = "space"
-defaultConfig.indent_size = 2
-
 # Nix
 [[language]]
 name = "nix"
