@@ -27,10 +27,7 @@ in
 
         extraConfig.diff.algorithm = "histogram";
 
-        ignores = [
-          ".DS_Store"
-          ".claude"
-        ];
+        ignores = [ ".DS_Store" ];
       };
 
       jujutsu = {

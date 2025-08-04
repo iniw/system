@@ -3,6 +3,7 @@
 const root = path self .
 
 # A helper for managing the nix system.
+# Runs the `switch` subcommand by default.
 def main [] {
   main switch
 }
