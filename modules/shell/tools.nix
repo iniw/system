@@ -9,7 +9,6 @@
           exiftool
           hyperfine
           jq
-          klip
           python314
           ripgrep
           scc
