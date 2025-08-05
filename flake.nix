@@ -32,11 +32,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    klip = {
-      url = "github:iniw/klip";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     fonts = {
       url = "git+ssh://git@github.com/iniw/fonts";
       inputs.nixpkgs.follows = "nixpkgs";
