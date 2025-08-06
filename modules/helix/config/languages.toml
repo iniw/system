@@ -63,59 +63,64 @@ files.exclude = [".git", ".jj", "target"]
 [[language]]
 name = "css"
 auto-format = true
-formatter = { command = "prettierd", args = [
-  "--stdin-filepath",
-  "%{buffer_name}",
-] }
-language-servers = ["vscode-css-language-server", "biome"]
+language-servers = [
+  { name = "vscode-css-language-server", except-features = [
+    "format",
+  ] },
+  "biome",
+]
+
+[[language]]
+name = "json"
+auto-format = true
+language-servers = [
+  { name = "vscode-json-language-server", except-features = [
+    "format",
+  ] },
+  "biome",
+]
+
+[[language]]
+name = "jsonc"
+auto-format = true
+language-servers = [
+  { name = "vscode-json-language-server", except-features = [
+    "format",
+  ] },
+  "biome",
+]
 
 [[language]]
 name = "html"
 auto-format = true
-formatter = { command = "prettierd", args = [
-  "--stdin-filepath",
-  "%{buffer_name}",
-] }
 
 [[language]]
 name = "javascript"
 auto-format = true
-formatter = { command = "prettierd", args = [
-  "--stdin-filepath",
-  "%{buffer_name}",
-] }
-language-servers = ["vtsls", "biome"]
+language-servers = [{ name = "vtsls", except-features = ["format"] }, "biome"]
 
 [[language]]
 name = "jsx"
 auto-format = true
-formatter = { command = "prettierd", args = [
-  "--stdin-filepath",
-  "%{buffer_name}",
-] }
-language-servers = ["vtsls", "biome"]
+language-servers = [{ name = "vtsls", except-features = ["format"] }, "biome"]
 
 [[language]]
 name = "typescript"
 auto-format = true
-formatter = { command = "prettierd", args = [
-  "--stdin-filepath",
-  "%{buffer_name}",
-] }
-language-servers = ["vtsls", "biome"]
+language-servers = [{ name = "vtsls", except-features = ["format"] }, "biome"]
 
 [[language]]
 name = "tsx"
 auto-format = true
-formatter = { command = "prettierd", args = [
-  "--stdin-filepath",
-  "%{buffer_name}",
-] }
-language-servers = ["vtsls", "biome"]
+language-servers = [{ name = "vtsls", except-features = ["format"] }, "biome"]
+
+[language-server.biome]
+command = "npx"
+args = ["biome", "lsp-proxy"]
 
 [language-server.vtsls]
-command = "vtsls"
-args = ["--stdio"]
+command = "npx"
+args = ["vtsls", "--stdio"]
 
 [language-server.vtsls.config]
 hostInfo = "helix"
@@ -129,6 +134,14 @@ typescript.updateImportsOnFileMove.enabled = "always"
 vtsls.autoUseWorkspaceTsdk = true
 vtsls.experimental.maxInlayHintLength = 30
 
-[language-server.biome]
-command = "biome"
-args = ["lsp-proxy"]
+[language-server.vscode-css-language-server]
+command = "npx"
+args = ["vscode-css-language-server", "--stdio"]
+
+[language-server.vscode-html-language-server]
+command = "npx"
+args = ["vscode-html-language-server", "--stdio"]
+
+[language-server.vscode-json-language-server]
+command = "npx"
+args = ["vscode-json-language-server", "--stdio"]
