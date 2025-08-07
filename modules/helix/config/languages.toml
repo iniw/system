@@ -64,19 +64,16 @@ files.exclude = [".git", ".jj", "target"]
 name = "css"
 auto-format = true
 language-servers = [
-  { name = "vscode-css-language-server", except-features = [
-    "format",
-  ] },
+  { name = "vscode-css-language-server", except-features = ["format"] },
   "biome",
+  "tailwindcss-ls",
 ]
 
 [[language]]
 name = "json"
 auto-format = true
 language-servers = [
-  { name = "vscode-json-language-server", except-features = [
-    "format",
-  ] },
+  { name = "vscode-json-language-server", except-features = ["format"] },
   "biome",
 ]
 
@@ -84,15 +81,14 @@ language-servers = [
 name = "jsonc"
 auto-format = true
 language-servers = [
-  { name = "vscode-json-language-server", except-features = [
-    "format",
-  ] },
+  { name = "vscode-json-language-server", except-features = ["format"] },
   "biome",
 ]
 
 [[language]]
 name = "html"
 auto-format = true
+language-servers = ["vscode-html-language-server", "tailwindcss-ls"]
 
 [[language]]
 name = "javascript"
@@ -102,7 +98,11 @@ language-servers = [{ name = "vtsls", except-features = ["format"] }, "biome"]
 [[language]]
 name = "jsx"
 auto-format = true
-language-servers = [{ name = "vtsls", except-features = ["format"] }, "biome"]
+language-servers = [
+  { name = "vtsls", except-features = ["format"] },
+  "biome",
+  "tailwindcss-ls",
+]
 
 [[language]]
 name = "typescript"
@@ -112,7 +112,11 @@ language-servers = [{ name = "vtsls", except-features = ["format"] }, "biome"]
 [[language]]
 name = "tsx"
 auto-format = true
-language-servers = [{ name = "vtsls", except-features = ["format"] }, "biome"]
+language-servers = [
+  { name = "vtsls", except-features = ["format"] },
+  "biome",
+  "tailwindcss-ls",
+]
 
 [language-server.biome]
 command = "npx"
@@ -145,3 +149,7 @@ args = ["vscode-html-language-server", "--stdio"]
 [language-server.vscode-json-language-server]
 command = "npx"
 args = ["vscode-json-language-server", "--stdio"]
+
+[language-server.tailwindcss-ls]
+command = "npx"
+args = ["tailwindcss-language-server", "--stdio"]
