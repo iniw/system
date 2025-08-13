@@ -37,6 +37,7 @@
           settings = {
             color_theme = "TTY";
             vim_keys = true;
+            proc_tree = true;
           };
         };
 
