@@ -66,35 +66,47 @@ $env.config.use_kitty_protocol = true
 @example "Grab the 'fonts' repo (clone + cd)" { grab git@github.com:iniw/fonts.git }
 @example "Grab the 'foo' directory (mkdir + cd)" { grab foo }
 def --env grab [url: string]: nothing -> nothing {
-    let dir = if ($url ends-with ".git") { # Git repo
-        # Extract the repository name from the URL to use as the directory name.
-        # e.g: "https://github.com/nushell/nushell.git" becomes "nushell".
-        let dir = $url | path parse | get stem
-
-        jj git clone $url $dir --colocate
-
-        $dir
+    if ($url ends-with ".git") { # Git repo
+        grab git $url
     } else if ($url =~ '^https.*\.(tar\.(gz|bz2|xz))$') { # Archive
-        let data = http get $url --raw
-
-        # Determine the output dir by looking at the first entry in the archive.
-        let dir = $data | tar --list | lines | first
-
-        # Create the output directory, `tar` doesn't do it automatically.
-        mkdir $dir
-
-        # Extract the archive into the output directory, skipping the root folder.
-        $data | tar --extract --strip-components 1 --directory $dir
-
-        $dir
+        grab tar $url
     } else { # Directory
-        mkdir $url
-
-        $url
+        grab dir $url
     }
+}
 
-    # Go to the output directory.
-    cd $dir
+# Clones a git repo and cd's into it's output directory.
+def --env "grab git" [url: string]: nothing -> nothing {
+  # Extract the repository name from the URL to use as the directory name.
+  # e.g: "https://github.com/nushell/nushell.git" becomes "nushell".
+  let dir = $url | path parse | get stem
+
+  jj git clone $url $dir --colocate
+
+  cd $dir
+}
+
+# Downloads and extracts a tar archive and cd's into it's output directory.
+def --env "grab tar" [url: string]: nothing -> nothing {
+  let data = http get $url --raw
+
+  # Determine the output dir by looking at the first entry in the archive.
+  let dir = $data | tar --list | lines | first
+
+  # Create the output directory, `tar` doesn't do it automatically.
+  mkdir $dir
+
+  # Extract the archive into the output directory, skipping the root folder.
+  $data | tar --extract --strip-components 1 --directory $dir
+
+  cd $dir
+}
+
+# Creates a directory and cd's into it.
+def --env "grab dir" [path: string]: nothing -> nothing {
+  mkdir $path
+
+  cd $path
 }
 
 # Interact with the system clipboard from the shell.
