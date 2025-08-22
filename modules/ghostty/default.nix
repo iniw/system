@@ -1,11 +1,14 @@
 {
+  darwinSystemModule = {
+    homebrew.casks = [ "ghostty@tip" ];
+  };
+
   homeModule =
     { pkgs-unstable, ... }:
     {
       programs.ghostty = {
         enable = true;
-        package =
-          if pkgs-unstable.stdenv.isDarwin then pkgs-unstable.ghostty-bin else pkgs-unstable.ghostty;
+        package = if pkgs-unstable.stdenv.isDarwin then null else pkgs-unstable.ghostty;
       };
 
       xdg.configFile.ghostty = {
