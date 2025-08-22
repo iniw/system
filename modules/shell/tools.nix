@@ -7,6 +7,7 @@
           ast-grep
           coreutils
           exiftool
+          hut
           hyperfine
           jq
           python314

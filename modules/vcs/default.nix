@@ -3,48 +3,62 @@ let
   email = "andrade.vinicius934@gmail.com";
 in
 {
-  homeModule = {
-    programs = {
-      gh = {
-        enable = true;
-        settings.git_protocol = "ssh";
-      };
+  homeModule =
+    { pkgs, ... }:
+    {
+      home.packages = [
+        # https://github.com/google/gmail-oauth2-tools/blob/master/go/sendgmail/README.md
+        pkgs.sendgmail
+      ];
 
-      git = {
-        enable = true;
-
-        userName = name;
-        userEmail = email;
-
-        delta = {
+      programs = {
+        gh = {
           enable = true;
-
-          options = {
-            navigate = true;
-            line-numbers = true;
-          };
+          settings.git_protocol = "ssh";
         };
 
-        extraConfig.diff.algorithm = "histogram";
+        git = {
+          enable = true;
+          package = pkgs.gitFull;
 
-        ignores = [ ".DS_Store" ];
-      };
+          userName = name;
+          userEmail = email;
 
-      jujutsu = {
-        enable = true;
-        settings = {
-          # I do a whole lot of force-pushing and history-rewriting, so immutable heads are really annoying.
-          revset-aliases = {
-            "immutable_heads()" = "none()";
+          delta = {
+            enable = true;
+
+            options = {
+              navigate = true;
+              line-numbers = true;
+            };
           };
 
-          ui.movement.edit = true;
+          extraConfig = {
+            diff.algorithm = "histogram";
+            sendemail = {
+              smtpServer = "${pkgs.lib.getExe' pkgs.sendgmail "sendgmail"}";
+              smtpServerOption = "-sender=${email}";
+            };
+          };
 
-          user = {
-            inherit name email;
+          ignores = [ ".DS_Store" ];
+        };
+
+        jujutsu = {
+          enable = true;
+          settings = {
+            # I do a whole lot of force-pushing and history-rewriting, so immutable heads are really annoying.
+            revset-aliases = {
+              "immutable_heads()" = "none()";
+            };
+
+            ui.movement.edit = true;
+
+            user = {
+              inherit name email;
+            };
           };
         };
       };
     };
-  };
 }
