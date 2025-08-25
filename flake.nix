@@ -33,7 +33,7 @@
     };
 
     fonts = {
-      url = "git+ssh://git@github.com/iniw/fonts";
+      url = "git+ssh://git@git.sr.ht/~wini/fonts";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };

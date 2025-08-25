@@ -101,11 +101,11 @@
         "rev": "ff9d319d3a77c4f56eb8618af0aac6816f22f6f5",
         "revCount": 7,
         "type": "git",
-        "url": "ssh://git@github.com/iniw/fonts"
+        "url": "ssh://git@git.sr.ht/~wini/fonts"
       },
       "original": {
         "type": "git",
-        "url": "ssh://git@github.com/iniw/fonts"
+        "url": "ssh://git@git.sr.ht/~wini/fonts"
       }
     },
     "home-manager": {
