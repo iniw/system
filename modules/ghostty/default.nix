@@ -19,7 +19,7 @@
 
   nixosHomeModule = {
     # Remove some default keybinds that conflict with the config.
-    dconf = {
+    dconf.settings = {
       "org/gnome/shell/keybindings" = {
         # super+s
         toggle-quick-settings = [ ];

@@ -21,7 +21,7 @@
     };
 
   nixosHomeModule = {
-    dconf = {
+    dconf.settings = {
       "org/gnome/desktop/interface" = {
         font-name = "Inter Variable 11";
         document-font-name = "Inter Variable 11";
