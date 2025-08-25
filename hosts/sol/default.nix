@@ -7,7 +7,11 @@ sys.darwinSystem (
     # Managed by determinate nix.
     nix.enable = false;
 
-    homebrew.casks = [ "notion" ];
+    homebrew.casks = [
+      "notion"
+      "stremio"
+      "tidal"
+    ];
 
     system.defaults.dock.tilesize = 32;
 
