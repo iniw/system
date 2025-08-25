@@ -1,6 +1,6 @@
 let
   name = "Vinicius Deolindo";
-  email = "andrade.vinicius934@gmail.com";
+  email = "vwvw.ini@gmail.com";
 in
 {
   homeModule =
