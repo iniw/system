@@ -10,7 +10,7 @@ sys.darwinSystem (
     homebrew.casks = [
       "notion"
       "stremio"
-      "tidal"
+      "qobuz"
     ];
 
     system.defaults.dock.tilesize = 32;
