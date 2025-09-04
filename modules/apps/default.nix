@@ -1,16 +1,10 @@
 {
   homeModule =
-    { pkgs, pkgs-unstable, ... }:
+    { pkgs, ... }:
     {
-      home.packages = [
-        pkgs.discord
-        pkgs.google-chrome
-        # FIXME: Go back to stable once the app actually works on macos.
-        pkgs-unstable.spotify
+      home.packages = with pkgs; [
+        discord
+        google-chrome
       ];
     };
-
-  nixosHomeModule = {
-    programs.obs-studio.enable = true;
-  };
 }
