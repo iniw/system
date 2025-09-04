@@ -13,6 +13,10 @@ sys.nixosSystem (
       efi.canTouchEfiVariables = true;
     };
 
+    home-manager.users.${user}.imports = [
+      (import ./home.nix)
+    ];
+
     time.timeZone = "America/Sao_Paulo";
 
     users.users.${user}.extraGroups = [ "networkmanager" ];
