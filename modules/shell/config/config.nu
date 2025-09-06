@@ -66,7 +66,7 @@ $env.config.use_kitty_protocol = true
 @example "Grab the 'fonts' repo (clone + cd)" { grab git@github.com:iniw/fonts.git }
 @example "Grab the 'foo' directory (mkdir + cd)" { grab foo }
 def --env grab [url: string]: nothing -> nothing {
-    if ($url =~ '(^(https://)?git)?(\.git$)?') { # Git repo
+    if ($url =~ '(^(https://)?git)|(\.git$)') { # Git repo
         grab git $url
     } else if ($url =~ '^https.*\.(tar\.(gz|bz2|xz))$') { # Archive
         grab tar $url
