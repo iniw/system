@@ -24,19 +24,9 @@ in
           userName = name;
           userEmail = email;
 
-          delta = {
-            enable = true;
-
-            options = {
-              navigate = true;
-              line-numbers = true;
-            };
-          };
-
           extraConfig = {
-            diff.algorithm = "histogram";
             sendemail = {
-              smtpServer = "${pkgs.lib.getExe' pkgs.sendgmail "sendgmail"}";
+              smtpServer = pkgs.lib.getExe' pkgs.sendgmail "sendgmail";
               smtpServerOption = "-sender=${email}";
             };
           };
