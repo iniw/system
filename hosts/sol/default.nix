@@ -11,6 +11,7 @@ sys.darwinSystem (
       "notion"
       "stremio"
       "qobuz"
+      "zoom"
     ];
 
     system.defaults.dock.tilesize = 32;
