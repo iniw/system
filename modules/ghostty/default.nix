@@ -1,6 +1,7 @@
 {
   darwinSystemModule = {
-    homebrew.casks = [ "ghostty@tip" ];
+    # FIXME: Use ghostty-bin package once 1.2.0 lands on unstable
+    homebrew.casks = [ "ghostty" ];
   };
 
   homeModule =
