@@ -43,4 +43,20 @@
 
       home.file.".hushlogin".text = "";
     };
+
+  darwinSystemModule =
+    { pkgs, user, ... }:
+    {
+      programs.zsh.enable = true;
+      environment.shells = [ pkgs.zsh ];
+      users.users.${user}.shell = pkgs.zsh;
+    };
+
+  darwinHomeModule = {
+    programs.zsh.enable = true;
+  };
+
+  nixosHomeModule = {
+    programs.bash.enable = true;
+  };
 }
