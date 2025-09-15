@@ -20,7 +20,7 @@
               echo "if (\$env.__HM_SESS_VARS_SOURCED? | is-empty) or ((\$env.__NIXOS_SET_ENVIRONMENT_DONE? | is-empty) and (\$env.__NIX_DARWIN_SET_ENVIRONMENT_DONE? | is-empty)) { ''$(${lib.getExe pkgs.nushell} -c "
                 use ${pkgs.nu_scripts}/share/nu_scripts/modules/capture-foreign-env
                 with-env {
-                  HOME: ${config.home.path}
+                  HOME: ${config.home.homeDirectory}
                   USER: ${config.home.username}
                 } {
                   open ${osConfig.system.build.setEnvironment} ${config.home.sessionVariablesPackage}/etc/profile.d/hm-session-vars.sh | str join "\n" | capture-foreign-env | to nuon
@@ -36,10 +36,15 @@
       };
 
       programs.ghostty.settings.command =
-        with config.home.sessionVariables;
+        let
+          inherit (config.home.sessionVariables) XDG_CONFIG_HOME XDG_DATA_HOME;
+          XDG_DATA_DIRS =
+            lib.replaceStrings [ "$HOME" "$USER" ] [ config.home.homeDirectory config.home.username ]
+              osConfig.environment.variables.XDG_DATA_DIRS;
+        in
         # Setting `XDG_CONFIG_HOME` is required to avoid looking for the config in `~/Library/Application Support`
         # See also: https://www.nushell.sh/book/configuration.html#startup-variables
-        "env XDG_CONFIG_HOME=${XDG_CONFIG_HOME} XDG_DATA_HOME=${XDG_DATA_HOME} ${lib.getExe pkgs.nushell}";
+        "env XDG_CONFIG_HOME=${XDG_CONFIG_HOME} XDG_DATA_HOME=${XDG_DATA_HOME} XDG_DATA_DIRS=${XDG_DATA_DIRS} ${lib.getExe pkgs.nushell}";
 
       home.file.".hushlogin".text = "";
     };
