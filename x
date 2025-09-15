@@ -38,3 +38,13 @@ def "main update" [] {
 def "main update brew" [] {
   nix flake update nix-homebrew homebrew-core homebrew-cask --commit-lock-file --commit-lock-file-summary "flake: update brew"
 }
+
+# Launch a repl for the current system's config.
+def "main repl" [] {
+  let host = match (sys host | get name) {
+    "Darwin" => "darwin"
+    "Linux" => "nixos"
+  }
+
+  nix repl $".#($host)Configurations.(hostname -s)"
+}
