@@ -5,7 +5,6 @@
       home = {
         packages = with pkgs; [
           ast-grep
-          coreutils
           exiftool
           hut
           hyperfine

@@ -4,7 +4,7 @@ let
 in
 {
   homeModule =
-    { pkgs, ... }:
+    { pkgs, lib, ... }:
     {
       home.packages = [
         # https://github.com/google/gmail-oauth2-tools/blob/master/go/sendgmail/README.md
@@ -26,7 +26,7 @@ in
 
           extraConfig = {
             sendemail = {
-              smtpServer = pkgs.lib.getExe' pkgs.sendgmail "sendgmail";
+              smtpServer = lib.getExe' pkgs.sendgmail "sendgmail";
               smtpServerOption = "-sender=${email}";
             };
           };

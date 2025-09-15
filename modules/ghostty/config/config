@@ -1,6 +1,8 @@
 # Ghostty is managed through nix
 auto-update = off
 
+command = "nu"
+
 # style
 font-family = "Berkeley Mono"
 font-size = 15
