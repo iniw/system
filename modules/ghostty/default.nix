@@ -75,55 +75,80 @@
           ];
         };
 
-        themes = {
-          sol = {
-            background = "#f5f5f5";
-            foreground = "#0d0d0d";
+        themes =
+          let
+            dark = "#0d0d0d";
+            light = "#f5f5f5";
+          in
+          {
+            sol = {
+              background = light;
+              foreground = dark;
+              palette =
+                let
+                  red = "#a60000";
+                  green = "#61a600";
+                  yellow = "#a66f00";
+                  blue = "#0061a6";
+                  purple = "#8a53a6";
+                  cyan = "#00a66f";
+                  gray = "#bfbfbf";
+                  dark-gray = "#949494";
+                in
+                [
+                  "0=${light}"
+                  "1=${red}"
+                  "2=${green}"
+                  "3=${yellow}"
+                  "4=${blue}"
+                  "5=${purple}"
+                  "6=${cyan}"
+                  "7=${gray}"
+                  "8=${dark-gray}"
+                  "9=${red}"
+                  "10=${dark}"
+                  "11=${yellow}"
+                  "12=${blue}"
+                  "13=${purple}"
+                  "14=${cyan}"
+                  "15=${dark}"
+                ];
+            };
 
-            palette = [
-              "0=#f5f5f5"
-              "1=#a60000"
-              "2=#61a600"
-              "3=#a66f00"
-              "4=#0061a6"
-              "5=#8a53a6"
-              "6=#00a66f"
-              "7=#bfbfbf"
-              "8=#949494"
-              "9=#a60000"
-              "10=#0d0d0d"
-              "11=#a66f00"
-              "12=#0061a6"
-              "13=#8a53a6"
-              "14=#00a66f"
-              "15=#0d0d0d"
-            ];
+            lua = {
+              background = dark;
+              foreground = light;
+              palette =
+                let
+                  red = "#e67373";
+                  green = "#b6e673";
+                  yellow = "#e6bf73";
+                  blue = "#73b6e6";
+                  purple = "#bf73e6";
+                  cyan = "#73e6bf";
+                  dark-gray = "#4d4d4d";
+                  light-gray = "#949494";
+                in
+                [
+                  "0=${dark}"
+                  "1=${red}"
+                  "2=${green}"
+                  "3=${yellow}"
+                  "4=${blue}"
+                  "5=${purple}"
+                  "6=${cyan}"
+                  "7=${dark-gray}"
+                  "8=${light-gray}"
+                  "9=${red}"
+                  "10=${light}"
+                  "11=${yellow}"
+                  "12=${blue}"
+                  "13=${purple}"
+                  "14=${cyan}"
+                  "15=${light}"
+                ];
+            };
           };
-
-          lua = {
-            background = "#0d0d0d";
-            foreground = "#f5f5f5";
-
-            palette = [
-              "0=#0d0d0d"
-              "1=#e67373"
-              "2=#b6e673"
-              "3=#e6bf73"
-              "4=#73b6e6"
-              "5=#bf73e6"
-              "6=#73e6bf"
-              "7=#4d4d4d"
-              "8=#949494"
-              "9=#e67373"
-              "10=#f5f5f5"
-              "11=#e6bf73"
-              "12=#73b6e6"
-              "13=#bf73e6"
-              "14=#73e6bf"
-              "15=#f5f5f5"
-            ];
-          };
-        };
       };
     };
 
