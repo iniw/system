@@ -29,7 +29,12 @@ def "main gc" [] {
   sudo nix-collect-garbage --delete-old
 }
 
-# Update the flake's inputs and make a commit out of the change.
+# Update the flake's inputs and make a commit out of the changes.
 def "main update" [] {
   nix flake update --commit-lock-file --commit-lockfile-summary "flake: update lockfile"
+}
+
+# Update the flake's brew-related inputs and make a commit out of the changes.
+def "main update brew" [] {
+  nix flake update nix-homebrew homebrew-core homebrew-cask --commit-lock-file --commit-lock-file-summary "flake: update brew"
 }
