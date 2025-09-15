@@ -35,16 +35,9 @@
           '';
       };
 
-      programs.ghostty.settings.command =
-        let
-          inherit (config.home.sessionVariables) XDG_CONFIG_HOME XDG_DATA_HOME;
-          XDG_DATA_DIRS =
-            lib.replaceStrings [ "$HOME" "$USER" ] [ config.home.homeDirectory config.home.username ]
-              osConfig.environment.variables.XDG_DATA_DIRS;
-        in
-        # Setting `XDG_CONFIG_HOME` is required to avoid looking for the config in `~/Library/Application Support`
-        # See also: https://www.nushell.sh/book/configuration.html#startup-variables
-        "env XDG_CONFIG_HOME=${XDG_CONFIG_HOME} XDG_DATA_HOME=${XDG_DATA_HOME} XDG_DATA_DIRS=${XDG_DATA_DIRS} ${lib.getExe pkgs.nushell}";
+      # Setting `XDG_CONFIG_HOME` is required to avoid looking for the config in `~/Library/Application Support`
+      # See also: https://www.nushell.sh/book/configuration.html#startup-variables
+      programs.ghostty.settings.command = "/usr/bin/env XDG_CONFIG_HOME=${config.home.sessionVariables.XDG_CONFIG_HOME} ${lib.getExe pkgs.nushell}";
 
       home.file.".hushlogin".text = "";
     };
