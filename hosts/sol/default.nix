@@ -7,11 +7,16 @@ sys.darwinSystem (
     # Managed by determinate nix.
     nix.enable = false;
 
+    homebrew.brews = [
+      "docker"
+    ];
+
     homebrew.casks = [
       "notion"
       "stremio"
       "qobuz"
       "zoom"
+      "docker-desktop"
     ];
 
     system.defaults.dock.tilesize = 32;
