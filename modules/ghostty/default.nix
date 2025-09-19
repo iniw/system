@@ -1,15 +1,10 @@
 {
-  darwinSystemModule = {
-    # FIXME: Use ghostty-bin package once 1.2.0 lands on unstable
-    homebrew.casks = [ "ghostty" ];
-  };
-
   homeModule =
     { pkgs-unstable, ... }:
     {
       programs.ghostty = {
         enable = true;
-        package = if pkgs-unstable.stdenv.isDarwin then null else pkgs-unstable.ghostty;
+        package = with pkgs-unstable; if stdenv.isDarwin then ghostty-bin else ghostty;
 
         settings = {
           auto-update = "off";
