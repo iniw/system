@@ -17,7 +17,7 @@
           let
             # Modified from: https://github.com/nix-community/home-manager/pull/6941
             environment = pkgs.runCommand "setup-env-vars.nu" { } ''
-              echo "if (\$env.__HM_SESS_VARS_SOURCED? | is-empty) or ((\$env.__NIXOS_SET_ENVIRONMENT_DONE? | is-empty) and (\$env.__NIX_DARWIN_SET_ENVIRONMENT_DONE? | is-empty)) { ''$(${lib.getExe pkgs.nushell} -c "
+              echo "if ('__HM_SESS_VARS_SOURCED' not-in \$env) or (('__NIXOS_SET_ENVIRONMENT_DONE' not-in \$env) and ('__NIX_DARWIN_SET_ENVIRONMENT_DONE' not-in \$env)) { ''$(${lib.getExe pkgs.nushell} -c "
                 use ${pkgs.nu_scripts}/share/nu_scripts/modules/capture-foreign-env
                 with-env {
                   HOME: ${config.home.homeDirectory}
@@ -31,7 +31,6 @@
           # nu
           ''
             source ${environment}
-            hide-env -i SSH_AUTH_SOCK
           '';
       };
 
