@@ -20,7 +20,8 @@
           theme = "dark:lua,light:sol";
 
           # cursor
-          cursor-invert-fg-bg = true;
+          cursor-color = "cell-foreground";
+          cursor-text = "cell-background";
           shell-integration-features = "no-cursor";
           mouse-hide-while-typing = true;
 
