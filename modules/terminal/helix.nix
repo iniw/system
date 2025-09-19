@@ -159,8 +159,8 @@
                 "ui.cursorline.secondary".bg = shade-7;
 
                 "ui.gutter".bg = shade-8;
-                "ui.gutter.selected".bg = shade-8;
                 "ui.gutter.selected".fg = hl;
+                "ui.gutter.selected".bg = shade-8;
 
                 "ui.help".fg = shade-1;
                 "ui.help".bg = shade-8;
