@@ -11,7 +11,7 @@
       programs.nushell = {
         enable = true;
 
-        configFile.source = ./config/config.nu;
+        configFile.source = ./nushell/config.nu;
 
         envFile.text =
           let
