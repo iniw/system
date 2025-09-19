@@ -56,7 +56,6 @@ preview.background.args = [
 [language-servers.rust-analyzer.config]
 cargo.features = "all"
 cargo.targetDir = true
-check.command = "clippy"
 files.exclude = [".git", ".jj", "target"]
 
 # Web
