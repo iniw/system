@@ -3,7 +3,6 @@ sys.nixosSystem (
   { user, ... }:
   {
     imports = [
-      ./hardware.nix
       ./input.nix
       ./video.nix
     ];
