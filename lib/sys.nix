@@ -2,12 +2,22 @@ inputs:
 let
   lib = inputs.nixpkgs.lib;
 
-  modules =
-    lib.filesystem.listFilesRecursive ../modules
+  collectModules =
+    path:
+    lib.filesystem.listFilesRecursive path
     |> lib.filter (lib.hasSuffix ".nix")
     |> lib.map (import)
     |> lib.zipAttrs
     |> lib.mapAttrs' (name: lib.nameValuePair "${name}s");
+
+  modules = collectModules ../modules;
+
+  collectHostModules =
+    host:
+    let
+      hostModulesPath = ../hosts + "/${host}/modules";
+    in
+    if builtins.pathExists hostModulesPath then collectModules hostModulesPath else { };
 
   fromInputs =
     let
@@ -91,20 +101,6 @@ in
 {
   darwinSystem =
     let
-      userConfigModule = {
-        users = {
-          users.${user} = {
-            home = "/Users/${user}";
-            uid = 501;
-          };
-          knownUsers = [ user ];
-        };
-
-        system.primaryUser = user;
-
-        home-manager.users.${user}.imports = modules.darwinHomeModules or [ ];
-      };
-
       homebrewModule =
         let
           taps = {
@@ -130,15 +126,35 @@ in
           };
         };
     in
-    module: name: {
+    module: name:
+    let
+      hostModules = collectHostModules name;
+
+      userConfigModule = {
+        users = {
+          users.${user} = {
+            home = "/Users/${user}";
+            uid = 501;
+          };
+          knownUsers = [ user ];
+        };
+
+        system.primaryUser = user;
+
+        home-manager.users.${user}.imports =
+          (modules.darwinHomeModules or [ ]) ++ (hostModules.homeModules or [ ]);
+      };
+    in
+    {
       darwinConfigurations.${name} = inputs.nix-darwin.lib.darwinSystem {
         inherit specialArgs;
 
         modules =
           (commonModules name)
           ++ fromInputs.darwinModules
-          ++ modules.systemModules or [ ]
-          ++ modules.darwinSystemModules or [ ]
+          ++ (modules.systemModules or [ ])
+          ++ (modules.darwinSystemModules or [ ])
+          ++ (hostModules.systemModules or [ ])
           ++ [
             module
             userConfigModule
@@ -148,7 +164,10 @@ in
     };
 
   nixosSystem =
+    module: name:
     let
+      hostModules = collectHostModules name;
+
       userConfigModule = {
         users.users.${user} = {
           home = "/user/${user}";
@@ -156,18 +175,20 @@ in
           isNormalUser = true;
         };
 
-        home-manager.users.${user}.imports = modules.nixosHomeModules or [ ];
+        home-manager.users.${user}.imports =
+          (modules.nixosHomeModules or [ ]) ++ (hostModules.homeModules or [ ]);
       };
     in
-    module: name: {
+    {
       nixosConfigurations.${name} = inputs.nixpkgs.lib.nixosSystem {
         inherit specialArgs;
 
         modules =
           (commonModules name)
           ++ fromInputs.nixosModules
-          ++ modules.systemModules or [ ]
-          ++ modules.nixosSystemModules or [ ]
+          ++ (modules.systemModules or [ ])
+          ++ (modules.nixosSystemModules or [ ])
+          ++ (hostModules.systemModules or [ ])
           ++ [
             module
             userConfigModule
