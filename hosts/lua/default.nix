@@ -2,19 +2,10 @@ sys:
 sys.nixosSystem (
   { user, ... }:
   {
-    imports = [
-      ./input.nix
-      ./video.nix
-    ];
-
     boot.loader = {
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
-
-    home-manager.users.${user}.imports = [
-      (import ./home.nix)
-    ];
 
     time.timeZone = "America/Sao_Paulo";
 
