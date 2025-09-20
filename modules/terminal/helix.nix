@@ -344,6 +344,7 @@
                 ".git"
                 ".jj"
                 "target"
+                "node_modules"
               ];
             };
 
