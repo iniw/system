@@ -4,20 +4,17 @@ let
 
   collectModules =
     path:
-    lib.filesystem.listFilesRecursive path
-    |> lib.filter (lib.hasSuffix ".nix")
-    |> lib.map (import)
-    |> lib.zipAttrs
-    |> lib.mapAttrs' (name: lib.nameValuePair "${name}s");
+    if builtins.pathExists path then
+      (lib.filesystem.listFilesRecursive path)
+      |> lib.filter (lib.hasSuffix ".nix")
+      |> lib.map (import)
+      |> lib.zipAttrs
+      |> lib.mapAttrs' (name: lib.nameValuePair "${name}s")
+    else
+      { };
 
   modules = collectModules ../modules;
-
-  collectHostModules =
-    host:
-    let
-      hostModulesPath = ../hosts + "/${host}/modules";
-    in
-    if builtins.pathExists hostModulesPath then collectModules hostModulesPath else { };
+  collectHostModules = host: collectModules (../hosts + "/${host}/modules");
 
   fromInputs =
     let
@@ -126,9 +123,9 @@ in
           };
         };
     in
-    module: name:
+    module: host:
     let
-      hostModules = collectHostModules name;
+      hostModules = collectHostModules host;
 
       userConfigModule = {
         users = {
@@ -146,11 +143,11 @@ in
       };
     in
     {
-      darwinConfigurations.${name} = inputs.nix-darwin.lib.darwinSystem {
+      darwinConfigurations.${host} = inputs.nix-darwin.lib.darwinSystem {
         inherit specialArgs;
 
         modules =
-          (commonModules name)
+          (commonModules host)
           ++ fromInputs.darwinModules
           ++ (modules.systemModules or [ ])
           ++ (modules.darwinSystemModules or [ ])
@@ -164,9 +161,9 @@ in
     };
 
   nixosSystem =
-    module: name:
+    module: host:
     let
-      hostModules = collectHostModules name;
+      hostModules = collectHostModules host;
 
       userConfigModule = {
         users.users.${user} = {
@@ -180,11 +177,11 @@ in
       };
     in
     {
-      nixosConfigurations.${name} = inputs.nixpkgs.lib.nixosSystem {
+      nixosConfigurations.${host} = inputs.nixpkgs.lib.nixosSystem {
         inherit specialArgs;
 
         modules =
-          (commonModules name)
+          (commonModules host)
           ++ fromInputs.nixosModules
           ++ (modules.systemModules or [ ])
           ++ (modules.nixosSystemModules or [ ])
