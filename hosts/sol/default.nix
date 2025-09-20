@@ -2,8 +2,6 @@ sys:
 sys.darwinSystem (
   { user, ... }:
   {
-    imports = [ ./hardware.nix ];
-
     # Managed by determinate nix.
     nix.enable = false;
 
