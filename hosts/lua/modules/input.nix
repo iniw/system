@@ -1,6 +1,5 @@
-{ user, ... }:
 {
-  home-manager.users.${user} =
+  homeModule =
     { lib, ... }:
     {
       dconf.settings = {
@@ -15,11 +14,13 @@
       };
     };
 
-  i18n = {
-    defaultLocale = "en_US.UTF-8";
-    inputMethod = {
-      enable = true;
-      type = "ibus";
+  systemModule = {
+    i18n = {
+      defaultLocale = "en_US.UTF-8";
+      inputMethod = {
+        enable = true;
+        type = "ibus";
+      };
     };
   };
 }
