@@ -6,6 +6,11 @@
         claude-code
         gemini-cli
       ];
-      programs.git.ignores = [ ".claude" ];
+
+      programs.git.ignores = [
+        ".claude"
+        "CLAUDE.md"
+        "GEMINI.md"
+      ];
     };
 }
