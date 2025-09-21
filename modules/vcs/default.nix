@@ -1,15 +1,12 @@
 let
   name = "Vinicius Deolindo";
-  email = "vwvw.ini@gmail.com";
+  email = "git@vini.cat";
 in
 {
   homeModule =
-    { pkgs, lib, ... }:
+    { pkgs, ... }:
     {
-      home.packages = [
-        # https://github.com/google/gmail-oauth2-tools/blob/master/go/sendgmail/README.md
-        pkgs.sendgmail
-      ];
+      home.packages = [ pkgs.hut ];
 
       programs = {
         gh = {
@@ -23,13 +20,6 @@ in
 
           userName = name;
           userEmail = email;
-
-          extraConfig = {
-            sendemail = {
-              smtpServer = lib.getExe' pkgs.sendgmail "sendgmail";
-              smtpServerOption = "-sender=${email}";
-            };
-          };
 
           ignores = [ ".DS_Store" ];
         };
