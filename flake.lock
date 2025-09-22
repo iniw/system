@@ -98,7 +98,7 @@
         "lastModified": 1754316571,
         "narHash": "sha256-9KjsQHSL4zvd6qDuesTkdXFPPrmKujRlmjFLd2Zptqo=",
         "ref": "refs/heads/master",
-        "rev": "ff9d319d3a77c4f56eb8618af0aac6816f22f6f5",
+        "rev": "15e410714cb8d9ee0e7dcbf7d1c5a163f812809f",
         "revCount": 7,
         "type": "git",
         "url": "ssh://git@git.sr.ht/~wini/fonts"
