@@ -6,12 +6,21 @@
   homeModule = {
     programs.ssh = {
       enable = true;
+
       addKeysToAgent = "confirm";
 
       matchBlocks = {
-        # https://man.sr.ht/tutorials/set-up-account-and-git.md#specifying-a-key
         "*sr.ht" = {
-          identityFile = "~/.ssh/id_ed25519.sourcehut";
+          identityFile = "~/.ssh/id.sourcehut";
+          extraOptions.PreferredAuthentications = "publickey";
+        };
+        "github.com" = {
+          identityFile = "~/.ssh/id.github";
+          extraOptions.PreferredAuthentications = "publickey";
+        };
+        "codeberg.org" = {
+          identityFile = "~/.ssh/id.codeberg";
+          extraOptions.User = "git";
           extraOptions.PreferredAuthentications = "publickey";
         };
       };
