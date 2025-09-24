@@ -20,7 +20,10 @@
         ];
 
         settings = {
-          theme = "lua";
+          theme = {
+            dark = "lua";
+            light = "sol";
+          };
 
           editor = {
             color-modes = true;
@@ -202,7 +205,6 @@
 
                 "ui.text".fg = shade-1;
                 "ui.text.directory".fg = shade-4;
-                "ui.text.focus".fg = shade-1;
                 "ui.text.focus".bg = shade-7;
                 "ui.text.inactive".fg = shade-4;
 
@@ -425,9 +427,6 @@
             {
               name = "nix";
               auto-format = true;
-              formatter = {
-                command = "nixfmt";
-              };
             }
             {
               name = "python";
