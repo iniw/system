@@ -71,7 +71,7 @@ let
 
             extraSpecialArgs = specialArgs // {
               pkgs-unstable = import inputs.nixpkgs-unstable {
-                inherit (pkgs) system config;
+                inherit (pkgs) system config overlays;
               };
             };
 
