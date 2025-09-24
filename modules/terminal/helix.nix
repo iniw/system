@@ -137,8 +137,8 @@
                 shade-7,
                 shade-8,
 
-                hl,
-                secondary-hl,
+                primary,
+                secondary,
 
                 blue,
                 green,
@@ -152,7 +152,7 @@
                 "ui.cursor".fg = shade-1;
                 "ui.cursor".modifiers = [ "reversed" ];
                 "ui.cursor.match".bg = shade-6;
-                "ui.cursor.primary".fg = hl;
+                "ui.cursor.primary".fg = primary;
                 "ui.cursor.primary".modifiers = [ "reversed" ];
 
                 "ui.cursorcolumn.primary".bg = shade-7;
@@ -162,27 +162,27 @@
                 "ui.cursorline.secondary".bg = shade-7;
 
                 "ui.gutter".bg = shade-8;
-                "ui.gutter.selected".fg = hl;
+                "ui.gutter.selected".fg = primary;
                 "ui.gutter.selected".bg = shade-8;
 
                 "ui.help".fg = shade-1;
                 "ui.help".bg = shade-8;
 
-                "ui.highlight".fg = hl;
+                "ui.highlight".fg = primary;
 
                 "ui.linenr".fg = shade-5;
-                "ui.linenr.selected".fg = hl;
+                "ui.linenr.selected".fg = primary;
                 "ui.linenr.selected".bg = shade-8;
 
                 "ui.menu".fg = shade-1;
                 "ui.menu".bg = shade-6;
                 "ui.menu.scroll".fg = shade-4;
                 "ui.menu.scroll".bg = shade-5;
-                "ui.menu.selected".fg = hl;
+                "ui.menu.selected".fg = primary;
                 "ui.menu.selected".bg = shade-7;
 
-                "ui.picker.header".fg = secondary-hl;
-                "ui.picker.header.active".fg = hl;
+                "ui.picker.header".fg = secondary;
+                "ui.picker.header.active".fg = primary;
                 "ui.picker.header.active".bg = shade-5;
 
                 "ui.popup".fg = shade-1;
@@ -197,11 +197,11 @@
                 "ui.statusline.inactive".fg = shade-4;
                 "ui.statusline.inactive".bg = shade-6;
                 "ui.statusline.insert".fg = shade-6;
-                "ui.statusline.insert".bg = hl;
+                "ui.statusline.insert".bg = primary;
                 "ui.statusline.normal".fg = shade-2;
                 "ui.statusline.normal".bg = shade-6;
                 "ui.statusline.select".fg = shade-8;
-                "ui.statusline.select".bg = secondary-hl;
+                "ui.statusline.select".bg = secondary;
 
                 "ui.text".fg = shade-1;
                 "ui.text.directory".fg = shade-4;
@@ -212,7 +212,7 @@
                 "ui.virtual.inlay-hint".fg = shade-5;
                 "ui.virtual.inlay-hint.parameter".fg = shade-5;
                 "ui.virtual.inlay-hint.type".fg = shade-5;
-                "ui.virtual.jump-label".fg = hl;
+                "ui.virtual.jump-label".fg = primary;
                 "ui.virtual.jump-label".modifiers = [ "bold" ];
                 "ui.virtual.ruler".bg = shade-5;
                 "ui.virtual.whitespace".fg = shade-5;
@@ -221,26 +221,26 @@
 
                 "attribute".fg = shade-3;
                 "comment".fg = shade-4;
-                "constant".fg = hl;
-                "constant.builtin".fg = hl;
-                "constant.builtin.character".fg = hl;
+                "constant".fg = primary;
+                "constant.builtin".fg = primary;
+                "constant.builtin.character".fg = primary;
                 "constant.builtin.character.escape".fg = shade-1;
-                "constant.builtin.numeric".fg = hl;
+                "constant.builtin.numeric".fg = primary;
                 "constructor".fg = shade-2;
                 "function".fg = shade-2;
                 "keyword".fg = shade-4;
-                "keyword.operator".fg = hl;
-                "label".fg = hl;
+                "keyword.operator".fg = primary;
+                "label".fg = primary;
                 "namespace".fg = shade-3;
-                "number_literal".fg = hl;
-                "operator".fg = hl;
-                "punctuation".fg = secondary-hl;
-                "punctuation.bracket".fg = secondary-hl;
+                "number_literal".fg = primary;
+                "operator".fg = primary;
+                "punctuation".fg = secondary;
+                "punctuation.bracket".fg = secondary;
                 "punctuation.delimiter".fg = shade-4;
-                "punctuation.special".fg = hl;
-                "special".fg = hl;
+                "punctuation.special".fg = primary;
+                "special".fg = primary;
                 "special".modifiers = [ "bold" ];
-                "string".fg = hl;
+                "string".fg = primary;
                 "tag".fg = shade-3;
                 "type".fg = shade-2;
                 "type.builtin".fg = shade-2;
@@ -252,7 +252,7 @@
                 "markup.italic".fg = shade-2;
                 "markup.italic".modifiers = [ "italic" ];
                 "markup.link.text".fg = shade-2;
-                "markup.link.url".fg = hl;
+                "markup.link.url".fg = primary;
                 "markup.list".fg = shade-3;
 
                 "markup.quote".fg = shade-3;
@@ -287,8 +287,8 @@
               shade-7 = "#1a1a1a";
               shade-8 = "#0d0d0d";
 
-              hl = "#73b6e6";
-              secondary-hl = "#cfdce6";
+              primary = "#73b6e6";
+              secondary = "#cfdce6";
 
               blue = "#73b6e6";
               green = "#b6e673";
@@ -306,8 +306,8 @@
               shade-7 = "#e6e6e6";
               shade-8 = "#f2f2f2";
 
-              hl = "#0061a6";
-              secondary-hl = "#73b4e6";
+              primary = "#0061a6";
+              secondary = "#73b4e6";
 
               blue = "#0061a6";
               green = "#61a600";
