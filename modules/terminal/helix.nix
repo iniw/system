@@ -168,7 +168,8 @@
                 "ui.help".fg = shade-1;
                 "ui.help".bg = shade-8;
 
-                "ui.highlight".fg = primary;
+                "ui.highlight".bg = shade-7;
+                "ui.highlight".modifiers = [ "bold" ];
 
                 "ui.linenr".fg = shade-5;
                 "ui.linenr.selected".fg = primary;
