@@ -339,19 +339,13 @@
             };
 
             biome = {
-              command = "npx";
-              args = [
-                "biome"
-                "lsp-proxy"
-              ];
+              command = "biome";
+              args = [ "lsp-proxy" ];
             };
 
             vtsls = {
-              command = "npx";
-              args = [
-                "vtsls"
-                "--stdio"
-              ];
+              command = "vtsls";
+              args = [ "--stdio" ];
               config = {
                 hostInfo = "helix";
                 typescript.inlayHints = {
@@ -368,38 +362,6 @@
                   experimental.maxInlayHintLength = 30;
                 };
               };
-            };
-
-            vscode-css-language-server = {
-              command = "npx";
-              args = [
-                "vscode-css-language-server"
-                "--stdio"
-              ];
-            };
-
-            vscode-html-language-server = {
-              command = "npx";
-              args = [
-                "vscode-html-language-server"
-                "--stdio"
-              ];
-            };
-
-            vscode-json-language-server = {
-              command = "npx";
-              args = [
-                "vscode-json-language-server"
-                "--stdio"
-              ];
-            };
-
-            tailwindcss-ls = {
-              command = "npx";
-              args = [
-                "tailwindcss-language-server"
-                "--stdio"
-              ];
             };
           };
 
@@ -441,11 +403,8 @@
               name = "css";
               auto-format = true;
               language-servers = [
-                {
-                  name = "vscode-css-language-server";
-                  except-features = [ "format" ];
-                }
                 "biome"
+                "vscode-css-language-server"
                 "tailwindcss-ls"
               ];
             }
@@ -453,22 +412,16 @@
               name = "json";
               auto-format = true;
               language-servers = [
-                {
-                  name = "vscode-json-language-server";
-                  except-features = [ "format" ];
-                }
                 "biome"
+                "vscode-json-language-server"
               ];
             }
             {
               name = "jsonc";
               auto-format = true;
               language-servers = [
-                {
-                  name = "vscode-json-language-server";
-                  except-features = [ "format" ];
-                }
                 "biome"
+                "vscode-json-language-server"
               ];
             }
             {
@@ -483,22 +436,16 @@
               name = "javascript";
               auto-format = true;
               language-servers = [
-                {
-                  name = "vtsls";
-                  except-features = [ "format" ];
-                }
                 "biome"
+                "vtsls"
               ];
             }
             {
               name = "jsx";
               auto-format = true;
               language-servers = [
-                {
-                  name = "vtsls";
-                  except-features = [ "format" ];
-                }
                 "biome"
+                "vtsls"
                 "tailwindcss-ls"
               ];
             }
@@ -506,22 +453,16 @@
               name = "typescript";
               auto-format = true;
               language-servers = [
-                {
-                  name = "vtsls";
-                  except-features = [ "format" ];
-                }
                 "biome"
+                "vtsls"
               ];
             }
             {
               name = "tsx";
               auto-format = true;
               language-servers = [
-                {
-                  name = "vtsls";
-                  except-features = [ "format" ];
-                }
                 "biome"
+                "vtsls"
                 "tailwindcss-ls"
               ];
             }
