@@ -427,10 +427,7 @@
             {
               name = "sql";
               auto-format = true;
-              formatter = {
-                command = "pg_format";
-                args = [ "-" ];
-              };
+              formatter.command = "sql-formatter";
             }
             {
               name = "toml";
