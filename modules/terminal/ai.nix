@@ -4,13 +4,13 @@
     {
       home.packages = with pkgs-unstable; [
         claude-code
-        gemini-cli
+        amp-cli
       ];
 
       programs.git.ignores = [
         ".claude"
         "CLAUDE.md"
-        "GEMINI.md"
+        "AGENTS.md"
       ];
     };
 }
