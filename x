@@ -9,24 +9,24 @@ def main [] {
 }
 
 # Build and switch to the new configuration.
-def "main switch" [] {
+def --wrapped "main switch" [...$args] {
   match (sys host | get name) {
-    "Darwin" => (sudo darwin-rebuild switch --flake $root)
-    "Linux" => (nixos-rebuild switch --use-remote-sudo --flake $root)
+    "Darwin" => (sudo darwin-rebuild switch --flake $root ...$args)
+    "Linux" => (nixos-rebuild switch --use-remote-sudo --flake $root ...$args)
   }
 }
 
 # Build the configuration without switching to it.
-def "main build" [] {
+def --wrapped "main build" [...$args] {
   match (sys host | get name) {
-    "Darwin" => (darwin-rebuild build --flake $root)
-    "Linux" => (nixos-rebuild build --flake $root)
+    "Darwin" => (darwin-rebuild build --flake $root ...$args)
+    "Linux" => (nixos-rebuild build --flake $root ...$args)
   }
 }
 
 # Collect garbage for the entire system and delete previous generations.
-def "main gc" [] {
-  sudo nix-collect-garbage --delete-old
+def --wrapped "main gc" [...$args] {
+  sudo nix-collect-garbage --delete-old ...$args
 }
 
 # Update the flake's inputs and make a commit out of the changes.
@@ -40,11 +40,11 @@ def "main update brew" [] {
 }
 
 # Launch a repl for the current system's config.
-def "main repl" [] {
+def --wrapped "main repl" [...$args] {
   let host = match (sys host | get name) {
     "Darwin" => "darwin"
     "Linux" => "nixos"
   }
 
-  nix repl $".#($host)Configurations.(hostname -s)"
+  nix repl $".#($host)Configurations.(hostname -s)" ...$args
 }
