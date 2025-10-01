@@ -2,6 +2,10 @@ sys:
 sys.nixosSystem (
   { user, ... }:
   {
+    imports = [
+      ./hardware.nix
+    ];
+
     boot.loader = {
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;

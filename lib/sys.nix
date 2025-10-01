@@ -54,7 +54,6 @@ let
   };
 
   commonModules =
-    host:
     let
       homeManager =
         { pkgs, ... }:
@@ -91,7 +90,6 @@ let
     [
       homeManager
       nixSettings
-      (import (../hosts + "/${host}/hardware.nix"))
     ];
 
 in
@@ -174,7 +172,7 @@ in
         inherit specialArgs;
 
         modules =
-          (commonModules host)
+          commonModules
           ++ fromInputs.darwinModules
           ++ (modules.systemModules or [ ])
           ++ (modules.darwinSystemModules or [ ])
@@ -209,7 +207,7 @@ in
         inherit specialArgs;
 
         modules =
-          (commonModules host)
+          commonModules
           ++ fromInputs.nixosModules
           ++ (modules.systemModules or [ ])
           ++ (modules.nixosSystemModules or [ ])
