@@ -4,7 +4,7 @@ let
 in
 {
   homeModule =
-    { pkgs, ... }:
+    { pkgs, pkgs-unstable, ... }:
     {
       home.packages = [ pkgs.hut ];
 
@@ -16,7 +16,6 @@ in
 
         git = {
           enable = true;
-          package = pkgs.gitFull;
 
           userName = name;
           userEmail = email;
@@ -26,13 +25,43 @@ in
 
         jujutsu = {
           enable = true;
+          package = pkgs-unstable.jujutsu;
+
           settings = {
-            # I do a whole lot of force-pushing and history-rewriting, so immutable heads are really annoying.
-            revset-aliases = {
-              "immutable_heads()" = "none()";
+            aliases = {
+              # "Long log", shows the full range of logs
+              ll = [
+                "log"
+                "-r"
+                "present(@) | ancestors(immutable_heads().., 2) | present(trunk())"
+              ];
             };
 
-            ui.movement.edit = true;
+            revsets = {
+              # Only show logs from the working copy to trunk() by default
+              log = "(trunk()..@):: | (trunk()..@)-";
+            };
+
+            templates = {
+              draft_commit_description = ''
+                concat(
+                  coalesce(description, default_commit_description, "\n"),
+                  surround(
+                    "\nJJ: This commit contains the following changes:\n", "",
+                    indent("JJ:     ", diff.stat(72)),
+                  ),
+                  "\nJJ: ignore-rest\n",
+                  diff.git(),
+                )
+              '';
+
+            };
+
+            ui = {
+              default-command = "status";
+              # Start editing commit with `jj prev` and `jj next`
+              movement.edit = true;
+            };
 
             user = {
               inherit name email;
