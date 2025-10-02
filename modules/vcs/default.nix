@@ -16,9 +16,19 @@ in
 
         git = {
           enable = true;
+          package = pkgs.gitFull;
 
           userName = name;
           userEmail = email;
+
+          extraConfig = {
+            sendemail = {
+              smtpserver = "smtp.purelymail.com";
+              smtpuser = email;
+              smtpencryption = "ssl";
+              smtpserverport = "465";
+            };
+          };
 
           ignores = [ ".DS_Store" ];
         };
