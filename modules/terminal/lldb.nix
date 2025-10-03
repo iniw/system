@@ -29,7 +29,7 @@
           };
         });
     in
-    { pkgs, pkgs-unstable, ... }:
+    { pkgs, ... }:
     {
       home.file.".lldbinit".text = ''
         # Show more lines when printing source code
@@ -49,7 +49,7 @@
         command script import "${pkgs.callPackage rust-prettifier { }}/share/rust_prettifier_for_lldb.py"
       '';
 
-      home.packages = [ pkgs-unstable.lldb_21 ];
+      home.packages = [ pkgs.lldb_21 ];
 
       programs.git.ignores = [
         # Project-specific lldbinit

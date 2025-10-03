@@ -4,7 +4,7 @@ let
 in
 {
   homeModule =
-    { pkgs, pkgs-unstable, ... }:
+    { pkgs, ... }:
     {
       home.packages = [ pkgs.hut ];
 
@@ -35,7 +35,6 @@ in
 
         jujutsu = {
           enable = true;
-          package = pkgs-unstable.jujutsu;
 
           settings = {
             aliases = {

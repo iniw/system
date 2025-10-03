@@ -1,6 +1,6 @@
 {
   homeModule =
-    { pkgs, pkgs-unstable, ... }:
+    { pkgs, ... }:
     {
       home = {
         packages = with pkgs; [
@@ -8,11 +8,10 @@
           exiftool
           hyperfine
           jq
+          nh
           python314
           ripgrep
           scc
-
-          pkgs-unstable.nh
         ];
 
         sessionVariables = {

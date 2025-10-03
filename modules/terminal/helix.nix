@@ -1,22 +1,21 @@
 {
   homeModule =
-    { pkgs, pkgs-unstable, ... }:
+    { pkgs, ... }:
     {
       programs.helix = {
         enable = true;
-        package = pkgs-unstable.helix;
 
         defaultEditor = true;
 
         # System-wide LSP support for languages used everywhere.
-        extraPackages = [
+        extraPackages = with pkgs; [
           # Nix
-          pkgs-unstable.nil
-          pkgs-unstable.nixfmt
+          nil
+          nixfmt
           # Markdown
-          pkgs.marksman
+          marksman
           # Toml
-          pkgs.taplo
+          taplo
         ];
 
         settings = {

@@ -1,26 +1,22 @@
 {
-  homeModule =
-    { pkgs-unstable, ... }:
-    {
-      programs.yazi = {
+  homeModule = {
+    programs = {
+      yazi = {
         enable = true;
-        package = pkgs-unstable.yazi;
 
-        keymap = {
-          mgr.prepend_keymap = [
-            {
-              run = ''shell -- ya emit cd "$(git rev-parse --show-toplevel)"'';
-              on = [
-                "g"
-                "r"
-              ];
-              desc = "Go to git root";
-            }
-          ];
-        };
+        keymap.mgr.prepend_keymap = [
+          {
+            run = ''shell -- ya emit cd "$(git rev-parse --show-toplevel)"'';
+            on = [
+              "g"
+              "r"
+            ];
+            desc = "Go to git root";
+          }
+        ];
       };
 
-      programs.helix.settings.keys = {
+      helix.settings.keys = {
         normal.ret.e = [
           '':sh rm -f /tmp/yazi-chooser-file''
           '':insert-output yazi %{buffer_name} --chooser-file=/tmp/yazi-chooser-file''
@@ -32,4 +28,5 @@
         ];
       };
     };
+  };
 }
