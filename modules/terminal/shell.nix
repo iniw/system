@@ -3,57 +3,44 @@
     {
       config,
       osConfig,
+      user,
       pkgs,
       lib,
       ...
     }:
     {
-      programs.nushell = {
-        enable = true;
+      programs = {
+        nushell.configFile.source = ./nushell/config.nu;
 
-        configFile.source = ./nushell/config.nu;
-
-        envFile.text =
+        # Use nu as the interactive shell
+        ghostty.settings.command =
           let
-            # Modified from: https://github.com/nix-community/home-manager/pull/6941
-            environment = pkgs.runCommand "setup-env-vars.nu" { } ''
-              echo "if ('__HM_SESS_VARS_SOURCED' not-in \$env) or (('__NIXOS_SET_ENVIRONMENT_DONE' not-in \$env) and ('__NIX_DARWIN_SET_ENVIRONMENT_DONE' not-in \$env)) { ''$(${lib.getExe pkgs.nushell} -c "
-                use ${pkgs.nu_scripts}/share/nu_scripts/modules/capture-foreign-env
-                with-env {
-                  HOME: ${config.home.homeDirectory}
-                  USER: ${config.home.username}
-                } {
-                  open ${osConfig.system.build.setEnvironment} ${config.home.sessionVariablesPackage}/etc/profile.d/hm-session-vars.sh | str join "\n" | capture-foreign-env | to nuon
-                }
-              ") | load-env}" >> "$out"
-            '';
+            shell = lib.getExe osConfig.users.users.${user}.shell;
+            nu = lib.getExe pkgs.nushell;
           in
-          # nu
-          ''
-            source ${environment}
-          '';
-      };
+          "${shell} -l -c '${nu} $0' -l";
 
-      # Setting `XDG_CONFIG_HOME` is required to avoid looking for the config in `~/Library/Application Support`
-      # See also: https://www.nushell.sh/book/configuration.html#startup-variables
-      programs.ghostty.settings.command = "/usr/bin/env XDG_CONFIG_HOME=${config.home.sessionVariables.XDG_CONFIG_HOME} ${lib.getExe pkgs.nushell}";
+        nushell.enable = true;
+        zsh.enable = true;
+        bash.enable = true;
+      };
 
       home.file.".hushlogin".text = "";
     };
 
-  darwinSystemModule =
+  systemModule =
     { pkgs, user, ... }:
     {
-      programs.zsh.enable = true;
-      environment.shells = [ pkgs.zsh ];
-      users.users.${user}.shell = pkgs.zsh;
+      programs = {
+        zsh.enable = true;
+        bash.enable = true;
+      };
+
+      environment.shells = [
+        pkgs.zsh
+        pkgs.bash
+      ];
+
+      users.users.${user}.shell = if pkgs.stdenv.isDarwin then pkgs.zsh else pkgs.bash;
     };
-
-  darwinHomeModule = {
-    programs.zsh.enable = true;
-  };
-
-  nixosHomeModule = {
-    programs.bash.enable = true;
-  };
 }
