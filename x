@@ -10,23 +10,12 @@ def main [] {
 
 # Build and switch to the new configuration.
 def --wrapped "main switch" [...$args] {
-  match (sys host | get name) {
-    "Darwin" => (sudo darwin-rebuild switch --flake $root ...$args)
-    "Linux" => (nixos-rebuild switch --use-remote-sudo --flake $root ...$args)
+  let host = match (sys host | get name) {
+    "Darwin" => "darwin"
+    "Linux" => "os"
   }
-}
 
-# Build the configuration without switching to it.
-def --wrapped "main build" [...$args] {
-  match (sys host | get name) {
-    "Darwin" => (darwin-rebuild build --flake $root ...$args)
-    "Linux" => (nixos-rebuild build --flake $root ...$args)
-  }
-}
-
-# Collect garbage for the entire system and delete previous generations.
-def --wrapped "main gc" [...$args] {
-  sudo nix-collect-garbage --delete-old ...$args
+  nh $host switch $root ...$args
 }
 
 # Update the flake's inputs and make a commit out of the changes.
