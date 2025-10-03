@@ -39,17 +39,12 @@ in
 
           settings = {
             aliases = {
-              # "Long log", shows the full range of logs
+              # "Long log", shows all revisions
               ll = [
                 "log"
                 "-r"
-                "present(@) | ancestors(immutable_heads().., 2) | present(trunk())"
+                "::"
               ];
-            };
-
-            revsets = {
-              # Only show logs from the working copy to trunk() by default
-              log = "(trunk()..@):: | (trunk()..@)-";
             };
 
             templates = {
