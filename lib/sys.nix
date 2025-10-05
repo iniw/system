@@ -18,33 +18,24 @@ let
 
   fromInputs =
     let
-      collectInputs =
-        path:
+      collectDefaultOutputs =
+        output:
+        let
+          path = [
+            output
+            "default"
+          ];
+        in
         inputs
         |> lib.attrValues
         |> lib.filter (lib.hasAttrByPath path)
         |> lib.map (lib.getAttrFromPath path);
     in
     {
-      darwinModules = collectInputs [
-        "darwinModules"
-        "default"
-      ];
-
-      nixosModules = collectInputs [
-        "nixosModules"
-        "default"
-      ];
-
-      homeModules = collectInputs [
-        "homeManagerModules"
-        "default"
-      ];
-
-      overlays = collectInputs [
-        "overlays"
-        "default"
-      ];
+      darwinModules = collectDefaultOutputs "darwinModules";
+      nixosModules = collectDefaultOutputs "nixosModules";
+      homeModules = collectDefaultOutputs "homeManagerModules";
+      overlays = collectDefaultOutputs "overlays";
     };
 
   user = "vini";
