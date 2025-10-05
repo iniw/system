@@ -1,28 +1,34 @@
 {
   homeManagerModule =
-    {
-      config,
-      osConfig,
-      user,
-      pkgs,
-      lib,
-      ...
-    }:
+    { pkgs, lib, ... }:
     {
       programs = {
-        nushell.configFile.source = ./nushell/config.nu;
+        nushell = {
+          enable = true;
+          configFile.source = ./nushell/config.nu;
+        };
 
-        # Use nu as the interactive shell
+        zsh = {
+          enable = true;
+          initContent = # sh
+            ''
+              if [[ -z $ZSH_EXECUTION_STRING ]]; then
+                  if [[ -o login ]]; then
+                      LOGIN_OPTION='--login'
+                  else
+                      LOGIN_OPTION='''
+                  fi
+                  exec nu "$LOGIN_OPTION"
+              fi
+            '';
+        };
+
         ghostty.settings.command =
           let
-            shell = lib.getExe osConfig.users.users.${user}.shell;
+            zsh = lib.getExe pkgs.zsh;
             nu = lib.getExe pkgs.nushell;
           in
-          "${shell} -l -c '${nu} $0' -l";
-
-        nushell.enable = true;
-        zsh.enable = true;
-        bash.enable = true;
+          "${zsh} -l -c '${nu} $0' -l";
       };
 
       home.file.".hushlogin".text = "";
@@ -31,16 +37,8 @@
   systemModule =
     { pkgs, user, ... }:
     {
-      programs = {
-        zsh.enable = true;
-        bash.enable = true;
-      };
-
-      environment.shells = [
-        pkgs.zsh
-        pkgs.bash
-      ];
-
-      users.users.${user}.shell = if pkgs.stdenv.isDarwin then pkgs.zsh else pkgs.bash;
+      programs.zsh.enable = true;
+      environment.shells = [ pkgs.zsh ];
+      users.users.${user}.shell = pkgs.zsh;
     };
 }
