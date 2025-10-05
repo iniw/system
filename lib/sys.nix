@@ -81,8 +81,8 @@ let
     [
       homeManager
       nixSettings
-    ];
-
+    ]
+    ++ modules.systemModules or [ ];
 in
 {
   darwinSystem =
@@ -186,7 +186,6 @@ in
         modules =
           commonModules
           ++ inputsDefaults.darwinModules
-          ++ modules.systemModules or [ ]
           ++ modules.darwinSystemModules or [ ]
           ++ hostModules.systemModules or [ ]
           ++ [
@@ -222,7 +221,6 @@ in
         modules =
           commonModules
           ++ inputsDefaults.nixosModules
-          ++ modules.systemModules or [ ]
           ++ modules.nixosSystemModules or [ ]
           ++ hostModules.systemModules or [ ]
           ++ [
