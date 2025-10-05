@@ -10,8 +10,6 @@
           auto-update = "off";
 
           # style
-          font-family = "Berkeley Mono";
-          font-size = 15;
           theme = "dark:lua,light:sol";
 
           # cursor
@@ -27,7 +25,7 @@
           maximize = true;
 
           # keybinds
-          macos-option-as-alt = true;
+          macos-option-as-alt = "left";
 
           keybind = [
             "clear"

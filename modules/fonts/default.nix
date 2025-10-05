@@ -18,6 +18,11 @@
           serif = [ "Source Serif 4" ];
         };
       };
+
+      programs.ghostty.settings = {
+        font-family = "Berkeley Mono";
+        font-size = 15;
+      };
     };
 
   nixosHomeManagerModule = {
