@@ -176,7 +176,7 @@ in
         system.primaryUser = user;
 
         home-manager.users.${user}.imports =
-          (modules.darwinHomeManagerModules or [ ]) ++ (hostModules.homeManagerModules or [ ]);
+          modules.darwinHomeManagerModules or [ ] ++ hostModules.homeManagerModules or [ ];
       };
     in
     {
@@ -186,9 +186,9 @@ in
         modules =
           commonModules
           ++ inputsDefaults.darwinModules
-          ++ (modules.systemModules or [ ])
-          ++ (modules.darwinSystemModules or [ ])
-          ++ (hostModules.systemModules or [ ])
+          ++ modules.systemModules or [ ]
+          ++ modules.darwinSystemModules or [ ]
+          ++ hostModules.systemModules or [ ]
           ++ [
             module
             userConfigModule
@@ -212,7 +212,7 @@ in
         };
 
         home-manager.users.${user}.imports =
-          (modules.nixosHomeManagerModules or [ ]) ++ (hostModules.homeManagerModules or [ ]);
+          modules.nixosHomeManagerModules or [ ] ++ hostModules.homeManagerModules or [ ];
       };
     in
     {
@@ -222,9 +222,9 @@ in
         modules =
           commonModules
           ++ inputsDefaults.nixosModules
-          ++ (modules.systemModules or [ ])
-          ++ (modules.nixosSystemModules or [ ])
-          ++ (hostModules.systemModules or [ ])
+          ++ modules.systemModules or [ ]
+          ++ modules.nixosSystemModules or [ ]
+          ++ hostModules.systemModules or [ ]
           ++ [
             module
             userConfigModule
