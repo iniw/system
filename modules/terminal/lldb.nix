@@ -1,53 +1,33 @@
 {
   homeManagerModule =
     let
-      rust-prettifier =
-        {
-          lib,
-          fetchgit,
-          stdenvNoCC,
-        }:
-        stdenvNoCC.mkDerivation (finalAttrs: {
-          pname = "rust-prettifier-for-lldb";
-          version = "0.5.1";
-
-          src = fetchgit {
-            url = "https://github.com/cmrschwarz/rust-prettifier-for-lldb.git";
-            rev = "c97ed7a6305725655fe3b636509cc639dce31890";
-            hash = "sha256-6EIR901c6PVOQApKVbpLf1DPHMwef3LUxFJji2PiduI=";
-          };
-
-          buildCommand = ''
-            mkdir -p "$out/share"
-            cp "$src/rust_prettifier_for_lldb.py" "$out/share"
-          '';
-
-          meta = {
-            description = "Rust Prettifier Script for the LLDB Debugger";
-            homepage = "https://github.com/cmrschwarz/rust-prettifier-for-lldb";
-            license = lib.licenses.gpl3;
-          };
-        });
+      rust-prettifier-for-lldb = builtins.fetchGit {
+        name = "rust-prettifier-for-lldb";
+        url = "https://github.com/cmrschwarz/rust-prettifier-for-lldb.git";
+        rev = "c97ed7a6305725655fe3b636509cc639dce31890";
+      };
     in
     { pkgs, ... }:
     {
-      home.file.".lldbinit".text = ''
-        # Show more lines when printing source code
-        settings set stop-line-count-after 15
+      home.file.".lldbinit".text =
+        # sh
+        ''
+          # Show more lines when printing source code
+          settings set stop-line-count-after 15
 
-        # Load project-specific .lldbinit files
-        settings set target.load-cwd-lldbinit true
+          # Load project-specific .lldbinit files
+          settings set target.load-cwd-lldbinit true
 
-        # Disable LLDB 21's statusline
-        settings set show-statusline false
+          # Disable LLDB 21's statusline
+          settings set show-statusline false
 
-        # Alias to save and load the breakpoints into a known (and gitignored) file
-        command alias bs breakpoint write -f .breakpoints
-        command alias bl breakpoint read -f .breakpoints
+          # Alias to save and load the breakpoints into a known (and gitignored) file
+          command alias bs breakpoint write -f .breakpoints
+          command alias bl breakpoint read -f .breakpoints
 
-        # Improve printing of Rust-specific types
-        command script import "${pkgs.callPackage rust-prettifier { }}/share/rust_prettifier_for_lldb.py"
-      '';
+          # Improve printing of Rust-specific types
+          command script import "${rust-prettifier-for-lldb}/rust_prettifier_for_lldb.py"
+        '';
 
       home.packages = [ pkgs.lldb_21 ];
 
