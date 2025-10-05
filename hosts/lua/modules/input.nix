@@ -1,5 +1,5 @@
 {
-  homeModule =
+  homeManagerModule =
     { lib, ... }:
     {
       dconf.settings = {

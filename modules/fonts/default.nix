@@ -1,5 +1,5 @@
 {
-  homeModule =
+  homeManagerModule =
     { pkgs, ... }:
     {
       home.packages = with pkgs; [
@@ -20,7 +20,7 @@
       };
     };
 
-  nixosHomeModule = {
+  nixosHomeManagerModule = {
     dconf.settings = {
       "org/gnome/desktop/interface" = {
         font-name = "Inter Variable 11";

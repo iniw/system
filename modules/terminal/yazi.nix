@@ -1,5 +1,5 @@
 {
-  homeModule = {
+  homeManagerModule = {
     programs = {
       yazi = {
         enable = true;

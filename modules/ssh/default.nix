@@ -3,7 +3,7 @@
     services.openssh.enable = true;
   };
 
-  homeModule = {
+  homeManagerModule = {
     programs.ssh = {
       enable = true;
 
@@ -39,7 +39,7 @@
     };
   };
 
-  nixosHomeModule = {
+  nixosHomeManagerModule = {
     services.ssh-agent.enable = true;
   };
 }

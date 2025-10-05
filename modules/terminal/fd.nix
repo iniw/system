@@ -1,5 +1,5 @@
 {
-  homeModule = {
+  homeManagerModule = {
     programs = {
       fd.enable = true;
 

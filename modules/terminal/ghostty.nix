@@ -1,5 +1,5 @@
 {
-  homeModule =
+  homeManagerModule =
     { pkgs, ... }:
     {
       programs.ghostty = {
@@ -149,7 +149,7 @@
       };
     };
 
-  nixosHomeModule = {
+  nixosHomeManagerModule = {
     # Remove some default keybinds that conflict with the config.
     dconf.settings = {
       "org/gnome/shell/keybindings" = {

@@ -1,5 +1,5 @@
 {
-  homeModule =
+  homeManagerModule =
     {
       config,
       osConfig,

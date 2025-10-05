@@ -16,7 +16,7 @@ let
   modules = collectModules ../modules;
   collectHostModules = host: collectModules (../hosts + "/${host}/modules");
 
-  fromInputs =
+  inputsDefaults =
     let
       collectDefaultOutputs =
         output:
@@ -31,12 +31,16 @@ let
         |> lib.filter (lib.hasAttrByPath path)
         |> lib.map (lib.getAttrFromPath path);
     in
-    {
-      darwinModules = collectDefaultOutputs "darwinModules";
-      nixosModules = collectDefaultOutputs "nixosModules";
-      homeModules = collectDefaultOutputs "homeManagerModules";
-      overlays = collectDefaultOutputs "overlays";
-    };
+    [
+      "darwinModules"
+      "nixosModules"
+      "homeManagerModules"
+      "overlays"
+    ]
+    |> lib.map (output: {
+      ${output} = collectDefaultOutputs output;
+    })
+    |> lib.mergeAttrsList;
 
   user = "vini";
 
@@ -51,7 +55,7 @@ let
         {
           home-manager = {
             users.${user} = {
-              imports = fromInputs.homeModules ++ modules.homeModules or [ ];
+              imports = inputsDefaults.homeManagerModules ++ modules.homeManagerModules or [ ];
 
               xdg.enable = true;
             };
@@ -67,7 +71,7 @@ let
 
       nixSettings = {
         nixpkgs = {
-          overlays = fromInputs.overlays;
+          overlays = inputsDefaults.overlays;
           config.allowUnfree = true;
         };
 
@@ -144,12 +148,7 @@ in
           ...
         }:
         {
-          home-manager.sharedModules = [
-            ({
-
-              targets.darwin.linkApps.enable = lib.mkDefault false;
-            })
-          ];
+          home-manager.sharedModules = [ { targets.darwin.linkApps.enable = lib.mkDefault false; } ];
           system.build.applications = lib.mkForce (
             pkgs.buildEnv {
               name = "system-applications";
@@ -177,7 +176,7 @@ in
         system.primaryUser = user;
 
         home-manager.users.${user}.imports =
-          (modules.darwinHomeModules or [ ]) ++ (hostModules.homeModules or [ ]);
+          (modules.darwinHomeManagerModules or [ ]) ++ (hostModules.homeManagerModules or [ ]);
       };
     in
     {
@@ -186,7 +185,7 @@ in
 
         modules =
           commonModules
-          ++ fromInputs.darwinModules
+          ++ inputsDefaults.darwinModules
           ++ (modules.systemModules or [ ])
           ++ (modules.darwinSystemModules or [ ])
           ++ (hostModules.systemModules or [ ])
@@ -213,7 +212,7 @@ in
         };
 
         home-manager.users.${user}.imports =
-          (modules.nixosHomeModules or [ ]) ++ (hostModules.homeModules or [ ]);
+          (modules.nixosHomeManagerModules or [ ]) ++ (hostModules.homeManagerModules or [ ]);
       };
     in
     {
@@ -222,7 +221,7 @@ in
 
         modules =
           commonModules
-          ++ fromInputs.nixosModules
+          ++ inputsDefaults.nixosModules
           ++ (modules.systemModules or [ ])
           ++ (modules.nixosSystemModules or [ ])
           ++ (hostModules.systemModules or [ ])

@@ -1,5 +1,5 @@
 {
-  homeModule =
+  homeManagerModule =
     { pkgs, ... }:
     {
       home.packages = with pkgs; [

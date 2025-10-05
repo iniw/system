@@ -49,7 +49,7 @@
     };
   };
 
-  nixosHomeModule =
+  nixosHomeManagerModule =
     { lib, ... }:
     {
       dconf = {

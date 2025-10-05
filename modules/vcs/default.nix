@@ -3,7 +3,7 @@ let
   email = "git@vini.cat";
 in
 {
-  homeModule =
+  homeManagerModule =
     { pkgs, ... }:
     {
       home.packages = [ pkgs.hut ];
