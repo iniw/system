@@ -5,7 +5,6 @@
       "stremio"
       "qobuz"
       "zoom"
-      "thunderbird"
     ];
   };
 }
