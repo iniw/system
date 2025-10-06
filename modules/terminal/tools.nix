@@ -1,6 +1,6 @@
 {
   homeManagerModule =
-    { pkgs, ... }:
+    { pkgs, config, ... }:
     {
       home = {
         packages = with pkgs; [
@@ -15,8 +15,12 @@
           scc
         ];
 
-        sessionVariables.PAGER = "less -RXSF";
-        shellAliases.less = "less -RXS";
+        sessionVariables = {
+          PAGER = "less -iRXSF --incsearch";
+          MANPAGER = "col -bx | bat --language man --style plain";
+        };
+
+        shellAliases.less = "less -iRXS --incsearch";
       };
 
       programs = {
@@ -25,6 +29,7 @@
           config = {
             style = "numbers";
             theme = "ansi";
+            pager = config.home.sessionVariables.PAGER;
           };
         };
 
