@@ -10,7 +10,8 @@
 
         zsh = {
           enable = true;
-          initContent = # sh
+          initContent =
+            # sh
             ''
               if [[ -z $ZSH_EXECUTION_STRING ]]; then
                   if [[ -o login ]]; then

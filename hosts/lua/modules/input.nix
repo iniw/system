@@ -13,14 +13,4 @@
         "org/gnome/desktop/peripherals/mouse".speed = -0.20;
       };
     };
-
-  systemModule = {
-    i18n = {
-      defaultLocale = "en_US.UTF-8";
-      inputMethod = {
-        enable = true;
-        type = "ibus";
-      };
-    };
-  };
 }
