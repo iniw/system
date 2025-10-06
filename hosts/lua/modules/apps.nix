@@ -2,11 +2,11 @@
   homeManagerModule =
     { pkgs, ... }:
     {
-      # cmus
-      home.packages = [ pkgs.cmusfm ];
-      programs.cmus.enable = true;
+      home.packages = with pkgs; [
+        cmus
+        cmusfm
 
-      # OBS
-      programs.obs-studio.enable = true;
+        obs-studio
+      ];
     };
 }

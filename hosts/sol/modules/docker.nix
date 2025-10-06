@@ -1,6 +1,8 @@
 {
   systemModule = {
-    homebrew.brews = [ "docker" ];
-    homebrew.casks = [ "docker-desktop" ];
+    homebrew = {
+      brews = [ "docker" ];
+      casks = [ "docker-desktop" ];
+    };
   };
 }

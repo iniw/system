@@ -8,28 +8,32 @@
 
       nixpkgs.hostPlatform = "x86_64-linux";
 
-      boot.initrd.availableKernelModules = [
-        "xhci_pci"
-        "ahci"
-        "usbhid"
-        "sd_mod"
-      ];
-      boot.initrd.kernelModules = [ ];
-      boot.kernelModules = [ "kvm-amd" ];
-      boot.extraModulePackages = [ ];
-
-      fileSystems."/" = {
-        device = "/dev/disk/by-uuid/40c85dd1-0517-4c8b-8633-069b981bbe09";
-        fsType = "ext4";
+      boot = {
+        initrd.availableKernelModules = [
+          "xhci_pci"
+          "ahci"
+          "usbhid"
+          "sd_mod"
+        ];
+        initrd.kernelModules = [ ];
+        kernelModules = [ "kvm-amd" ];
+        extraModulePackages = [ ];
       };
 
-      fileSystems."/boot" = {
-        device = "/dev/disk/by-uuid/265B-0C7C";
-        fsType = "vfat";
-        options = [
-          "fmask=0022"
-          "dmask=0022"
-        ];
+      fileSystems = {
+        "/" = {
+          device = "/dev/disk/by-uuid/40c85dd1-0517-4c8b-8633-069b981bbe09";
+          fsType = "ext4";
+        };
+
+        "/boot" = {
+          device = "/dev/disk/by-uuid/265B-0C7C";
+          fsType = "vfat";
+          options = [
+            "fmask=0022"
+            "dmask=0022"
+          ];
+        };
       };
 
       swapDevices = [ ];
