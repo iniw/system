@@ -1,45 +1,69 @@
 {
   systemModule = {
     services.openssh.enable = true;
-  };
 
-  homeManagerModule = {
-    programs.ssh = {
-      enable = true;
-
-      enableDefaultConfig = false;
-
-      matchBlocks = {
-        "*" = {
-          forwardAgent = false;
-          addKeysToAgent = "confirm";
-          compression = false;
-          serverAliveInterval = 0;
-          serverAliveCountMax = 3;
-          hashKnownHosts = false;
-          userKnownHostsFile = "~/.ssh/known_hosts";
-          controlMaster = "no";
-          controlPath = "~/.ssh/master-%r@%n:%p";
-          controlPersist = "no";
-        };
-        "*sr.ht" = {
-          identityFile = "~/.ssh/id.sourcehut";
-          extraOptions.PreferredAuthentications = "publickey";
-        };
-        "github.com" = {
-          identityFile = "~/.ssh/id.github";
-          extraOptions.PreferredAuthentications = "publickey";
-        };
-        "codeberg.org" = {
-          identityFile = "~/.ssh/id.codeberg";
-          extraOptions.User = "git";
-          extraOptions.PreferredAuthentications = "publickey";
-        };
-      };
+    programs = {
+      _1password.enable = true;
+      _1password-gui.enable = true;
     };
   };
 
-  nixosHomeManagerModule = {
-    services.ssh-agent.enable = true;
-  };
+  homeManagerModule =
+    { pkgs, ... }:
+    let
+      socket =
+        if pkgs.stdenv.isDarwin then
+          ''~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock''
+        else
+          ''~/.1password/agent.sock'';
+
+      signing = {
+        key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMNGcLtjqxIbJpTB1fT8ou1XRu4K9kPTneAIE23eF5z8";
+        program =
+          if pkgs.stdenv.isDarwin then
+            "${pkgs._1password-gui}/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+          else
+            "${pkgs._1password-gui}/bin/op-ssh-sign";
+      };
+    in
+    {
+      programs = {
+        ssh = {
+          enable = true;
+
+          enableDefaultConfig = false;
+
+          matchBlocks = {
+            "*" = {
+              forwardAgent = false;
+              serverAliveInterval = 60;
+              controlMaster = "auto";
+              controlPath = "~/.ssh/master-%r@%h:%p";
+              controlPersist = "10m";
+              identityAgent = socket;
+            };
+          };
+        };
+
+        git.signing = {
+          format = "ssh";
+          key = signing.key;
+          signer = signing.program;
+          signByDefault = true;
+        };
+
+        jujutsu.settings = {
+          signing = {
+            backend = "ssh";
+            key = signing.key;
+            backends.ssh.program = signing.program;
+            behavior = "drop";
+          };
+
+          git.sign-on-push = true;
+        };
+      };
+
+      home.sessionVariables.SSH_AUTH_SOCK = socket;
+    };
 }
