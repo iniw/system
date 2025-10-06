@@ -5,6 +5,8 @@
       home = {
         packages = with pkgs; [
           ast-grep
+          fd
+          fzf
           hyperfine
           jq
           nh
@@ -13,13 +15,8 @@
           scc
         ];
 
-        sessionVariables = {
-          PAGER = "less -RXSF";
-        };
-
-        shellAliases = {
-          less = "less -RXS";
-        };
+        sessionVariables.PAGER = "less -RXSF";
+        shellAliases.less = "less -RXS";
       };
 
       programs = {
@@ -40,10 +37,11 @@
           };
         };
 
-        fzf.enable = true;
-
         zoxide.enable = true;
       };
+
+      # ignored files list used by rg, fd, etc.
+      programs.git.ignores = [ ".ignore" ];
     };
 
   darwinHomeManagerModule = {

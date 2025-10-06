@@ -18,7 +18,7 @@
                 "g"
                 "r"
               ];
-              desc = "Go to git root";
+              desc = "Go to repository root";
             }
           ];
         };
