@@ -4,7 +4,7 @@
     {
       home.packages = with pkgs; [
         discord
-        google-chrome
+        firefox
       ];
     };
 }
