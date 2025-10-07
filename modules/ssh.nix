@@ -45,6 +45,8 @@
           };
         };
 
+        gh.settings.git_protocol = "ssh";
+
         git.signing = {
           format = "ssh";
           key = signing.key;
