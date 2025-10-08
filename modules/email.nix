@@ -264,5 +264,7 @@
             })
             |> lib.mergeAttrsList;
         };
+
+      programs.git.extraConfig.sendemail.identity = "git";
     };
 }
