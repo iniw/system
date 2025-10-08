@@ -233,6 +233,8 @@
                   perIdentitySettings = id: {
                     "mail.identity.id_${id}.reply_on_top" = 1;
                     "mail.identity.id_${id}.sig_bottom" = false;
+                    # See: https://github.com/nix-community/home-manager/issues/7959
+                    "calendar.registry.calendar_${id}.imip.identity.key" = "id_${id}";
                   };
                 };
               };
