@@ -71,7 +71,16 @@ let
 
       nixSettings = {
         nixpkgs = {
-          overlays = inputsDefaults.overlays;
+          overlays = inputsDefaults.overlays ++ [
+            # FIXME: Remove once https://github.com/NixOS/nixpkgs/pull/449689 is merged
+            (final: prev: {
+              gtk3 = prev.gtk3.overrideAttrs (previousAttrs: {
+                patches = previousAttrs.patches ++ [
+                  ./patches/3.0-clang-tests-sincos.patch
+                ];
+              });
+            })
+          ];
           config.allowUnfree = true;
         };
 

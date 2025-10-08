@@ -10,7 +10,7 @@
       programs.thunderbird =
         let
           # FIXME: Remove once https://github.com/NixOS/nixpkgs/pull/449760 is merged
-          thunderbird-bin-drv =
+          thunderbird-bin-pkg =
             {
               lib,
               stdenv,
@@ -168,7 +168,7 @@
               };
             };
 
-          thunderbird-bin-unwrapped = pkgs.callPackage thunderbird-bin-drv {
+          thunderbird-bin-unwrapped = pkgs.callPackage thunderbird-bin-pkg {
             generated = import "${inputs.nixpkgs}/pkgs/applications/networking/mailreaders/thunderbird-bin/release_sources.nix";
           };
 
