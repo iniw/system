@@ -194,29 +194,49 @@
               "work"
               "social"
             ];
+
+            feedAccounts.feed = { };
           };
         };
 
       accounts =
         let
           domain = "vini.cat";
+          # NOTE: The ordering of this list matters, `lib.take 2` is called later and expects to get the 'social' and 'work' accounts
+          accounts = [
+            {
+              name = "social";
+              webdavId = "280603";
+              color = "#6045f7";
+            }
+            {
+              name = "work";
+              webdavId = "280601";
+              color = "#f7455d";
+            }
+            {
+              name = "git";
+              webdavId = "276495";
+              color = "#45a7f7";
+            }
+            {
+              name = "contact";
+              webdavId = "280620";
+              color = "#45f786";
+            }
+          ];
         in
         {
           email.accounts =
-            [
-              "social"
-              "git"
-              "work"
-              "contact"
-            ]
+            accounts
             |> lib.map (account: {
-              ${account} = rec {
-                address = "${account}@${domain}";
+              ${account.name} = rec {
+                address = "${account.name}@${domain}";
 
                 userName = address;
                 realName = "Vinicius Deolindo";
 
-                primary = account == "social";
+                primary = account.name == "social";
 
                 smtp = {
                   host = "smtp.purelymail.com";
@@ -242,25 +262,13 @@
             |> lib.mergeAttrsList;
 
           calendar.accounts =
-            [
-              {
-                name = "social";
-                webdavId = "280603";
-                color = "#5d42f5";
-              }
-              {
-                name = "work";
-                webdavId = "280601";
-                color = "#f5425d";
-              }
-            ]
+            accounts
+            |> lib.take 2 # 'social' and 'work'
             |> lib.map (account: {
               ${account.name} = {
-                primary = account.name == "social";
-
                 remote = {
                   type = "caldav";
-                  url = "https://purelymail.com/webdav/${account.webdavId}/caldav/default";
+                  url = "https://purelymail.com/webdav/${account.webdavId}/caldav/default/";
                   userName = "${account.name}@${domain}";
                 };
 
@@ -268,6 +276,22 @@
                   enable = true;
                   color = account.color;
                 };
+              };
+            })
+            |> lib.mergeAttrsList;
+
+          contact.accounts =
+            accounts
+            |> lib.take 2 # 'social' and 'work'
+            |> lib.map (account: {
+              ${account.name} = {
+                remote = {
+                  type = "carddav";
+                  url = "https://purelymail.com/webdav/${account.webdavId}/carddav/default/";
+                  userName = "${account.name}@${domain}";
+                };
+
+                thunderbird.enable = true;
               };
             })
             |> lib.mergeAttrsList;
