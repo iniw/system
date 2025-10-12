@@ -50,26 +50,24 @@ let
 
   commonModules =
     let
-      homeManager =
-        { pkgs, ... }:
-        {
-          home-manager = {
-            users.${user} = {
-              imports = inputsDefaults.homeManagerModules ++ modules.homeManagerModules or [ ];
+      homeManagerModule = {
+        home-manager = {
+          users.${user} = {
+            imports = inputsDefaults.homeManagerModules ++ modules.homeManagerModules or [ ];
 
-              xdg.enable = true;
-            };
-
-            useGlobalPkgs = true;
-            useUserPackages = true;
-
-            extraSpecialArgs = specialArgs;
-
-            backupFileExtension = "hm-backup";
+            xdg.enable = true;
           };
-        };
 
-      nixSettings = {
+          useGlobalPkgs = true;
+          useUserPackages = true;
+
+          extraSpecialArgs = specialArgs;
+
+          backupFileExtension = "hm-backup";
+        };
+      };
+
+      nixpkgsModule = {
         nixpkgs = {
           overlays = inputsDefaults.overlays ++ [
             # FIXME: Remove once https://github.com/NixOS/nixpkgs/pull/449689 is merged
@@ -83,13 +81,11 @@ let
           ];
           config.allowUnfree = true;
         };
-
-        nix.settings.trusted-users = [ user ];
       };
     in
     [
-      homeManager
-      nixSettings
+      homeManagerModule
+      nixpkgsModule
     ]
     ++ modules.systemModules or [ ];
 in
