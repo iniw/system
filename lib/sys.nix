@@ -4,14 +4,12 @@ let
 
   collectModules =
     path:
-    if builtins.pathExists path then
-      (lib.filesystem.listFilesRecursive path)
-      |> lib.filter (lib.hasSuffix ".nix")
-      |> lib.map (import)
-      |> lib.zipAttrs
-      |> lib.mapAttrs' (name: lib.nameValuePair "${name}s")
-    else
-      { };
+    path
+    |> lib.filesystem.listFilesRecursive
+    |> lib.filter (lib.hasSuffix ".nix")
+    |> lib.map (import)
+    |> lib.zipAttrs
+    |> lib.mapAttrs' (name: lib.nameValuePair "${name}s");
 
   modules = collectModules ../modules;
   collectHostModules = host: collectModules (../hosts + "/${host}/modules");
@@ -74,7 +72,7 @@ let
             (final: prev: {
               gtk3 = prev.gtk3.overrideAttrs (previousAttrs: {
                 patches = previousAttrs.patches ++ [
-                  ./patches/3.0-clang-tests-sincos.patch
+                  ./patches/clang-tests-sincos.patch
                 ];
               });
             })
@@ -119,28 +117,29 @@ in
 
       increaseMaxFilesModule = {
         environment.launchDaemons."limit.maxfiles.plist" = {
-          text = ''
-            <?xml version="1.0" encoding="UTF-8"?>
-            <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-            <plist version="1.0">
-              <dict>
-                <key>Label</key>
-                <string>limit.maxfiles</string>
-                <key>ProgramArguments</key>
-                <array>
-                  <string>launchctl</string>
-                  <string>limit</string>
-                  <string>maxfiles</string>
-                  <string>4096</string>
-                  <string>4096</string>
-                </array>
-                <key>RunAtLoad</key>
-                <true/>
-                <key>ServiceIPC</key>
-                <false/>
-              </dict>
-            </plist>
-          '';
+          text = # xml
+            ''
+              <?xml version="1.0" encoding="UTF-8"?>
+              <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+              <plist version="1.0">
+                <dict>
+                  <key>Label</key>
+                  <string>limit.maxfiles</string>
+                  <key>ProgramArguments</key>
+                  <array>
+                    <string>launchctl</string>
+                    <string>limit</string>
+                    <string>maxfiles</string>
+                    <string>4096</string>
+                    <string>4096</string>
+                  </array>
+                  <key>RunAtLoad</key>
+                  <true/>
+                  <key>ServiceIPC</key>
+                  <false/>
+                </dict>
+              </plist>
+            '';
         };
       };
 

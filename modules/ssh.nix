@@ -66,9 +66,12 @@
         };
       };
 
-      xdg.configFile."1Password/ssh/agent.toml".source = (pkgs.formats.toml { }).generate "agent.toml" {
-        ssh-keys = [ { vault = "Dev"; } ];
-      };
+      # https://developer.1password.com/docs/ssh/agent/config/
+      xdg.configFile."1Password/ssh/agent.toml".text = # toml
+        ''
+          [[ssh-keys]]
+          vault = "Dev"
+        '';
 
       home.sessionVariables.SSH_AUTH_SOCK = socket;
     };

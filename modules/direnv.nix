@@ -14,8 +14,7 @@
 
         # Store direnv caches in a unified location
         # From: https://github.com/direnv/direnv/wiki/Customizing-cache-location#human-readable-directories
-        stdlib =
-          # sh
+        stdlib = # sh
           ''
             : "''${XDG_CACHE_HOME:="''${HOME}/.cache"}"
             declare -A direnv_layout_dirs

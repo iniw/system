@@ -16,7 +16,6 @@
           "sd_mod"
         ];
         kernelModules = [ "kvm-amd" ];
-        extraModulePackages = [ ];
       };
 
       fileSystems = {
@@ -34,8 +33,6 @@
           ];
         };
       };
-
-      swapDevices = [ ];
 
       networking.useDHCP = true;
 
