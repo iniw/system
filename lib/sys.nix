@@ -65,21 +65,17 @@ let
         };
       };
 
-      nixpkgsModule = {
-        nixpkgs = {
-          overlays = inputsDefaults.overlays ++ [
-            # FIXME: Remove once https://github.com/NixOS/nixpkgs/pull/449689 is merged
-            (final: prev: {
-              gtk3 = prev.gtk3.overrideAttrs (previousAttrs: {
-                patches = previousAttrs.patches ++ [
-                  ./patches/clang-tests-sincos.patch
-                ];
-              });
-            })
-          ];
-          config.allowUnfree = true;
+      nixpkgsModule =
+        let
+          overlays =
+            builtins.readDir ../overlays |> lib.mapAttrsToList (name: _: import (../overlays + "/${name}"));
+        in
+        {
+          nixpkgs = {
+            overlays = inputsDefaults.overlays ++ overlays;
+            config.allowUnfree = true;
+          };
         };
-      };
     in
     [
       homeManagerModule
