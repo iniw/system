@@ -55,11 +55,11 @@
           platforms = {
             aarch64-darwin = {
               arch = "arm64";
-              hash = "sha256-TbbaTov2xX1cNuWrOl9q5hZkEgaMFO0WZheoX54O1/0=";
+              hash = "sha256-vtxAgJGDWSRzmmyn+JQaTzAJJDzScxh02/I2/xDNiFg=";
             };
             x86_64-darwin = {
               arch = "x64";
-              hash = "sha256-ZvHuVyPbenXwWc2IGvVsE85fMM5JxMM7f5hqrKerzjI=";
+              hash = "sha256-rYfKXT1vysWG30IlCwqCfUj9kJugQ+6Ramm9UByjmRk=";
             };
           };
 
@@ -67,7 +67,7 @@
         in
         stdenvNoCC.mkDerivation (finalAttrs: {
           pname = "debugserver";
-          version = "1.11.5";
+          version = "1.11.6";
 
           src = fetchurl {
             url = "https://github.com/vadimcn/codelldb/releases/download/v${finalAttrs.version}/codelldb-darwin-${arch}.vsix";
