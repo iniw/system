@@ -4,7 +4,10 @@ in
 {
   systemModule = {
     homebrew = {
-      brews = [ "docker" ];
+      brews = [
+        "docker"
+        "helm"
+      ];
       casks = [
         "docker-desktop"
         "linear-linear"
@@ -15,8 +18,9 @@ in
   };
 
   homeManagerModule =
-    { lib, ... }:
+    { pkgs, lib, ... }:
     {
+      # Emails and accounts
       programs = {
         thunderbird.profiles.default = {
           accountsOrder = lib.mkBefore [ "metalbear" ];
@@ -77,6 +81,32 @@ in
           };
 
           thunderbird.enable = true;
+        };
+      };
+
+      # IDEs to develop the extensions
+      home.packages = with pkgs; [ jetbrains.idea-ultimate ];
+
+      programs.vscode = {
+        enable = true;
+
+        profiles.default = {
+          enableUpdateCheck = false;
+          enableExtensionUpdateCheck = false;
+
+          extensions =
+            with pkgs.vscode-extensions;
+            [
+              mkhl.direnv
+            ]
+            ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+              {
+                name = "mirrord";
+                publisher = "MetalBear";
+                version = "3.66.1";
+                sha256 = "sha256-jB0yP/RnMmoEQ89pu3QrFDLfAqf4ntrZPdoCF+h0Qpo=";
+              }
+            ];
         };
       };
     };
