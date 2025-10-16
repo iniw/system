@@ -5,12 +5,12 @@
 #     nix-shell maintainers/scripts/update.nix --argstr package pkgs.thunderbird-bin-unwrapped
 #     nix-shell maintainers/scripts/update.nix --argstr package pkgs.thunderbird-esr-bin-unwrapped
 {
-  callPackage,
   lib,
   stdenv,
   fetchurl,
   config,
   wrapGAppsHook3,
+  curl,
   gtk3,
   writeScript,
   xidel,
@@ -23,6 +23,13 @@
   generated,
   versionSuffix ? "",
   applicationName ? "Thunderbird",
+  # linux dependencies
+  writeText,
+  autoPatchelfHook,
+  patchelfUnstable,
+  alsa-lib,
+  # darwin dependencies
+  undmg,
 }:
 
 let
@@ -78,6 +85,7 @@ let
       coreutils
       gnused
       gnugrep
+      curl
       gnupg
       runtimeShell
       versionSuffix
@@ -102,13 +110,33 @@ let
   };
 
 in
-callPackage (if stdenv.hostPlatform.isDarwin then ./darwin.nix else ./linux.nix) {
-  inherit
-    pname
-    version
-    src
-    nativeBuildInputs
-    passthru
-    meta
-    ;
-}
+if stdenv.hostPlatform.isDarwin then
+  import ./darwin.nix {
+    inherit
+      pname
+      version
+      src
+      nativeBuildInputs
+      passthru
+      meta
+      stdenv
+      undmg
+      ;
+  }
+else
+  import ./linux.nix {
+    inherit
+      pname
+      version
+      src
+      nativeBuildInputs
+      passthru
+      meta
+      stdenv
+      config
+      writeText
+      autoPatchelfHook
+      patchelfUnstable
+      alsa-lib
+      ;
+  }

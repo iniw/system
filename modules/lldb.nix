@@ -1,15 +1,16 @@
 {
   homeManagerModule =
-    let
-      rust-prettifier-for-lldb = builtins.fetchGit {
-        name = "rust-prettifier-for-lldb";
-        url = "https://github.com/cmrschwarz/rust-prettifier-for-lldb.git";
-        rev = "c97ed7a6305725655fe3b636509cc639dce31890";
-      };
-    in
     { pkgs, ... }:
     {
       home.file.".lldbinit".text =
+        let
+          rust-prettifier-for-lldb = pkgs.fetchFromGitHub {
+            owner = "cmrschwarz";
+            repo = "rust-prettifier-for-lldb";
+            tag = "v0.5.1";
+            hash = "sha256-6EIR901c6PVOQApKVbpLf1DPHMwef3LUxFJji2PiduI=";
+          };
+        in
         # sh
         ''
           # Show more lines when printing source code
@@ -29,7 +30,7 @@
           command script import "${rust-prettifier-for-lldb}/rust_prettifier_for_lldb.py"
         '';
 
-      home.packages = [ pkgs.lldb_21 ];
+      home.packages = [ pkgs.lldb ];
 
       programs.git.ignores = [
         # Project-specific lldbinit

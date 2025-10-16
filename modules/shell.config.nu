@@ -90,7 +90,7 @@ def --env "grab git" [url: string]: nothing -> nothing {
   # e.g: "https://github.com/nushell/nushell.git" becomes "nushell".
   let dir = $url | path parse | get stem
 
-  jj git clone $url $dir --colocate
+  jj git clone $url $dir
 
   cd $dir
 }
