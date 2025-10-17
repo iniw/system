@@ -51,16 +51,6 @@ in
 
           flavor = "gmail.com";
 
-          smtp = {
-            host = "smtp.gmail.com";
-            port = 465;
-          };
-
-          imap = {
-            host = "imap.gmail.com";
-            port = 993;
-          };
-
           thunderbird = {
             enable = true;
             perIdentitySettings = id: {
