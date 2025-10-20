@@ -124,6 +124,6 @@
             |> lib.mergeAttrsList;
         };
 
-      programs.git.extraConfig.sendemail.identity = "git";
+      programs.git.settings.sendemail.identity = "git";
     };
 }

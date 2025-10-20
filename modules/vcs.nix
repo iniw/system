@@ -15,8 +15,9 @@ in
           enable = true;
           package = pkgs.gitFull;
 
-          userName = name;
-          userEmail = email;
+          settings.user = {
+            inherit name email;
+          };
 
           ignores = [ ".DS_Store" ];
         };
