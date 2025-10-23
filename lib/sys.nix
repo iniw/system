@@ -65,21 +65,27 @@ let
         };
       };
 
-      nixpkgsModule =
+      nixModule =
         let
           overlays =
-            builtins.readDir ../overlays |> lib.mapAttrsToList (name: _: import (../overlays + "/${name}"));
+            ../overlays |> builtins.readDir |> lib.mapAttrsToList (name: _: import (../overlays + "/${name}"));
         in
         {
           nixpkgs = {
             overlays = inputsDefaults.overlays ++ overlays;
             config.allowUnfree = true;
           };
+
+          nix.settings.extra-experimental-features = [
+            "flakes"
+            "nix-command"
+            "pipe-operators"
+          ];
         };
     in
     [
       homeManagerModule
-      nixpkgsModule
+      nixModule
     ]
     ++ modules.systemModules or [ ];
 in

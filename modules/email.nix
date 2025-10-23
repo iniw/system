@@ -4,7 +4,10 @@
     {
       programs.thunderbird = {
         enable = true;
-        package = pkgs.thunderbird-bin;
+        # `thunderbird-bin` is not properly codesigned on darwin
+        package =
+          with pkgs;
+          if stdenv.isDarwin then thunderbird-latest-bin-unwrapped else thunderbird-latest-bin;
 
         profiles.default = {
           isDefault = true;
