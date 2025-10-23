@@ -22,7 +22,7 @@
           window-padding-x = 0;
           window-padding-y = 0;
           macos-titlebar-style = "tabs";
-          maximize = true;
+          fullscreen = true;
 
           # keybinds
           macos-option-as-alt = "left";
