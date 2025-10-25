@@ -40,12 +40,9 @@
       ];
     };
 
-  # Nix's LLDB doesn't find `debugserver` on darwin, so we download codelldb's version and tell LLDB to use it through `LLDB_DEBUGSERVER_PATH`.
-  # This idea/code is taken from https://github.com/NixOS/nixpkgs/pull/374846 and should be removed if that ever lands (unlikely).
-  # For context: https://github.com/NixOS/nixpkgs/issues/252838
   darwinHomeManagerModule =
     { pkgs, lib, ... }:
     {
-      home.sessionVariables.LLDB_DEBUGSERVER_PATH = lib.getExe pkgs.debugserver;
+      home.sessionVariables.LLDB_DEBUGSERVER_PATH = "/Library/Developer/CommandLineTools/Library/PrivateFrameworks/LLDB.framework/Versions/A/Resources/debugserver";
     };
 }
