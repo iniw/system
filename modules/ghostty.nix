@@ -24,9 +24,11 @@
           macos-titlebar-style = "tabs";
           fullscreen = true;
 
+          # misc
+          confirm-close-surface = false;
+
           # keybinds
           macos-option-as-alt = "left";
-
           keybind = [
             "clear"
 
