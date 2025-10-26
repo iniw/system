@@ -5,11 +5,15 @@
       security.pam.services.sudo_local.touchIdAuth = true;
 
       system.defaults = {
+        controlcenter = {
+          BatteryShowPercentage = true;
+          Bluetooth = true;
+        };
+
         CustomSystemPreferences = {
           "com.apple.AdLib" = {
             allowApplePersonalizedAdvertising = false;
             allowIdentifierForAdvertising = false;
-            forceLimitAdTracking = true;
             personalizedAdsMigrated = false;
           };
 
@@ -57,6 +61,15 @@
           LSQuarantine = false;
         };
 
+        loginwindow = {
+          DisableConsoleAccess = true;
+          GuestEnabled = false;
+        };
+
+        menuExtraClock = {
+          ShowSeconds = true;
+        };
+
         NSGlobalDomain = {
           ApplePressAndHoldEnabled = false;
           AppleShowAllFiles = true;
@@ -72,6 +85,11 @@
 
         screencapture = {
           target = "clipboard";
+        };
+
+        screensaver = {
+          askForPassword = true;
+          askForPasswordDelay = 0;
         };
       };
     };

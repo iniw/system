@@ -6,9 +6,9 @@ in
   homeManagerModule =
     { pkgs, ... }:
     {
-      home.packages = [
-        pkgs.hut
-        pkgs.meld
+      home.packages = with pkgs; [
+        hut
+        meld
       ];
 
       programs = {
