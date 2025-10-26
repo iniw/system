@@ -42,6 +42,8 @@
           };
         };
 
+        carapace.enable = true;
+
         zoxide.enable = true;
       };
 
