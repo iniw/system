@@ -1,6 +1,9 @@
 {
   homeManagerModule =
     { pkgs, config, ... }:
+    let
+      less = "less -iRXS --incsearch";
+    in
     {
       home = {
         packages = with pkgs; [
@@ -16,11 +19,13 @@
         ];
 
         sessionVariables = {
-          PAGER = "less -iRXSF --incsearch";
+          PAGER = "${less} -F";
           MANPAGER = "col -bx | bat --language man --style plain";
         };
 
-        shellAliases.less = "less -iRXS --incsearch";
+        shellAliases = {
+          inherit less;
+        };
       };
 
       programs = {
