@@ -70,6 +70,7 @@
           ];
         };
 
+        # https://www.ditig.com/256-colors-cheat-sheet
         themes =
           let
             dark = "#0d0d0d";
@@ -92,20 +93,27 @@
                 in
                 [
                   "0=${light}"
-                  "1=${red}"
-                  "2=${green}"
-                  "3=${yellow}"
-                  "4=${blue}"
-                  "5=${purple}"
-                  "6=${cyan}"
-                  "7=${gray}"
                   "8=${dark-gray}"
+
+                  "1=${red}"
                   "9=${red}"
-                  "10=${dark}"
+
+                  "2=${green}"
+                  "10=${green}"
+
+                  "3=${yellow}"
                   "11=${yellow}"
+
+                  "4=${blue}"
                   "12=${blue}"
+
+                  "5=${purple}"
                   "13=${purple}"
+
+                  "6=${cyan}"
                   "14=${cyan}"
+
+                  "7=${gray}"
                   "15=${dark}"
                 ];
             };
@@ -126,20 +134,27 @@
                 in
                 [
                   "0=${dark}"
-                  "1=${red}"
-                  "2=${green}"
-                  "3=${yellow}"
-                  "4=${blue}"
-                  "5=${purple}"
-                  "6=${cyan}"
-                  "7=${dark-gray}"
                   "8=${light-gray}"
+
+                  "1=${red}"
                   "9=${red}"
-                  "10=${light}"
+
+                  "2=${green}"
+                  "10=${green}"
+
+                  "3=${yellow}"
                   "11=${yellow}"
+
+                  "4=${blue}"
                   "12=${blue}"
+
+                  "5=${purple}"
                   "13=${purple}"
+
+                  "6=${cyan}"
                   "14=${cyan}"
+
+                  "7=${dark-gray}"
                   "15=${light}"
                 ];
             };
