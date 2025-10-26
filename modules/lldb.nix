@@ -2,35 +2,37 @@
   homeManagerModule =
     { pkgs, ... }:
     {
-      home.file.".lldbinit".text =
-        let
-          rust-prettifier-for-lldb = pkgs.fetchFromGitHub {
-            owner = "cmrschwarz";
-            repo = "rust-prettifier-for-lldb";
-            tag = "v0.5.1";
-            hash = "sha256-6EIR901c6PVOQApKVbpLf1DPHMwef3LUxFJji2PiduI=";
-          };
-        in
-        # sh
-        ''
-          # Show more lines when printing source code
-          settings set stop-line-count-after 15
+      home = {
+        packages = [ pkgs.lldb ];
 
-          # Load project-specific .lldbinit files
-          settings set target.load-cwd-lldbinit true
+        file.".lldbinit".text =
+          let
+            rust-prettifier-for-lldb = pkgs.fetchFromGitHub {
+              owner = "cmrschwarz";
+              repo = "rust-prettifier-for-lldb";
+              tag = "v0.5.1";
+              hash = "sha256-6EIR901c6PVOQApKVbpLf1DPHMwef3LUxFJji2PiduI=";
+            };
+          in
+          # sh
+          ''
+            # Show more lines when printing source code
+            settings set stop-line-count-after 15
 
-          # Disable LLDB 21's statusline
-          settings set show-statusline false
+            # Load project-specific .lldbinit files
+            settings set target.load-cwd-lldbinit true
 
-          # Alias to save and load the breakpoints into a known (and gitignored) file
-          command alias bs breakpoint write -f .breakpoints
-          command alias bl breakpoint read -f .breakpoints
+            # Disable LLDB 21's statusline
+            settings set show-statusline false
 
-          # Improve printing of Rust-specific types
-          command script import "${rust-prettifier-for-lldb}/rust_prettifier_for_lldb.py"
-        '';
+            # Alias to save and load the breakpoints into a known (and gitignored) file
+            command alias bs breakpoint write -f .breakpoints
+            command alias bl breakpoint read -f .breakpoints
 
-      home.packages = [ pkgs.lldb ];
+            # Improve printing of Rust-specific types
+            command script import "${rust-prettifier-for-lldb}/rust_prettifier_for_lldb.py"
+          '';
+      };
 
       programs.git.ignores = [
         # Project-specific lldbinit
