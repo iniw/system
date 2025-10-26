@@ -35,6 +35,8 @@
             trim-final-newlines = true;
             trim-trailing-whitespace = true;
 
+            rulers = [ 120 ];
+
             indent-guides = {
               render = true;
             };
@@ -214,7 +216,7 @@
                 "ui.virtual.inlay-hint.type".fg = shade-5;
                 "ui.virtual.jump-label".fg = primary;
                 "ui.virtual.jump-label".modifiers = [ "bold" ];
-                "ui.virtual.ruler".bg = shade-5;
+                "ui.virtual.ruler".fg = shade-5;
                 "ui.virtual.whitespace".fg = shade-5;
 
                 "ui.window".fg = shade-6;
@@ -451,6 +453,12 @@
                 "biome"
                 "vtsls"
               ];
+              code-actions-on-save = [
+                {
+                  code-action = "source.organizeImports.biome";
+                  enabled = true;
+                }
+              ];
             }
             {
               name = "jsx";
@@ -460,6 +468,12 @@
                 "vtsls"
                 "tailwindcss-ls"
               ];
+              code-actions-on-save = [
+                {
+                  code-action = "source.organizeImports.biome";
+                  enabled = true;
+                }
+              ];
             }
             {
               name = "typescript";
@@ -467,6 +481,12 @@
               language-servers = [
                 "biome"
                 "vtsls"
+              ];
+              code-actions-on-save = [
+                {
+                  code-action = "source.organizeImports.biome";
+                  enabled = true;
+                }
               ];
             }
             {
@@ -476,6 +496,12 @@
                 "biome"
                 "vtsls"
                 "tailwindcss-ls"
+              ];
+              code-actions-on-save = [
+                {
+                  code-action = "source.organizeImports.biome";
+                  enabled = true;
+                }
               ];
             }
           ];

@@ -32,7 +32,7 @@
     };
 
     helix = {
-      url = "github:helix-editor/helix";
+      url = "github:iniw/helix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
