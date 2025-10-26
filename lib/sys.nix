@@ -68,7 +68,10 @@ let
       nixModule =
         let
           overlays =
-            ../overlays |> builtins.readDir |> lib.mapAttrsToList (name: _: import (../overlays + "/${name}"));
+            if builtins.pathExists ../overlays then
+              ../overlays |> builtins.readDir |> lib.mapAttrsToList (name: _: import (../overlays + "/${name}"))
+            else
+              [ ];
         in
         {
           nixpkgs = {
