@@ -6,7 +6,10 @@ in
   homeManagerModule =
     { pkgs, ... }:
     {
-      home.packages = [ pkgs.hut ];
+      home.packages = [
+        pkgs.hut
+        pkgs.meld
+      ];
 
       programs = {
         gh.enable = true;
@@ -15,8 +18,11 @@ in
           enable = true;
           package = pkgs.gitFull;
 
-          settings.user = {
-            inherit name email;
+          settings = {
+            merge.tool = "meld";
+            user = {
+              inherit name email;
+            };
           };
 
           ignores = [ ".DS_Store" ];
@@ -26,6 +32,24 @@ in
           enable = true;
 
           settings = {
+            ui = {
+              merge-editor = [
+                "meld"
+                "$left"
+                "$base"
+                "$right"
+                "-o"
+                "$output"
+              ];
+              default-command = "status";
+              # Start editing commit with `jj prev` and `jj next`
+              movement.edit = true;
+            };
+
+            user = {
+              inherit name email;
+            };
+
             aliases = {
               # "Long log", shows all revisions
               ll = [
@@ -47,16 +71,6 @@ in
                   diff.git(),
                 )
               '';
-            };
-
-            ui = {
-              default-command = "status";
-              # Start editing commit with `jj prev` and `jj next`
-              movement.edit = true;
-            };
-
-            user = {
-              inherit name email;
             };
           };
         };
