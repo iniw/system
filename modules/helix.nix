@@ -35,15 +35,25 @@
             trim-final-newlines = true;
             trim-trailing-whitespace = true;
 
-            indent-guides.render = true;
+            indent-guides = {
+              render = true;
+            };
 
-            inline-diagnostics.cursor-line = "hint";
+            inline-diagnostics = {
+              cursor-line = "hint";
+            };
 
-            file-picker.hidden = false;
+            file-picker = {
+              hidden = false;
+            };
 
-            soft-wrap.enable = true;
+            soft-wrap = {
+              enable = true;
+            };
 
-            lsp.goto-reference-include-declaration = false;
+            lsp = {
+              goto-reference-include-declaration = false;
+            };
           };
 
           keys = {
