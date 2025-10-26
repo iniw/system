@@ -151,6 +151,12 @@ def klip []: [
 
 # Returns the output of the "builtins.currentSystem" nix expression.
 @example "Build the default package for a flake" { nix build .#packages.(nix-system).default }
-def nix-system [] {
+def nix-system []: nothing -> string {
    nix eval --raw --impure --expr "builtins.currentSystem"
+}
+
+# Performs a 'jj git push' to every remote in the current repo
+@example "Push all bookmarks to all remotes" { push --all }
+def --wrapped push [...$args]: nothing -> nothing {
+  jj git remote list | lines | each {|line| let remote = $line | parse "{name} {url}" | first; jj git push --remote $remote.name ...$args } | ignore
 }
