@@ -6,11 +6,6 @@ in
   homeManagerModule =
     { pkgs, ... }:
     {
-      home.packages = with pkgs; [
-        hut
-        meld
-      ];
-
       programs = {
         gh.enable = true;
 
@@ -19,7 +14,6 @@ in
           package = pkgs.gitFull;
 
           settings = {
-            merge.tool = "meld";
             user = {
               inherit name email;
             };
@@ -41,7 +35,16 @@ in
                 "-o"
                 "$output"
               ];
+
+              diff-formatter = [
+                "difft"
+                "--color=always"
+                "$left"
+                "$right"
+              ];
+
               default-command = "status";
+
               # Start editing commit with `jj prev` and `jj next`
               movement.edit = true;
             };
@@ -74,6 +77,16 @@ in
             };
           };
         };
+      };
+
+      home = {
+        packages = with pkgs; [
+          difftastic
+          hut
+          meld
+        ];
+
+        sessionVariables.DFT_SYNTAX_HIGHLIGHT = "off";
       };
     };
 }
