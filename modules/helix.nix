@@ -56,68 +56,71 @@
             };
           };
 
-          keys = {
-            normal = {
-              A-w = "move_next_sub_word_start";
-              A-e = "move_next_sub_word_end";
-              A-b = "move_prev_sub_word_start";
-              X = "extend_line_above";
-              "*" = "search_selection";
-              "A-*" = "search_selection_detect_word_boundaries";
-              tab = "move_parent_node_end";
-              S-tab = "move_parent_node_start";
+          keys =
+            let
+              shared-keys =
+                let
+                  keys-with-prefix = prefix: {
+                    A-w = "${prefix}_next_sub_word_start";
+                    A-e = "${prefix}_next_sub_word_end";
+                    A-b = "${prefix}_prev_sub_word_start";
+                    tab = "${prefix}_parent_node_end";
+                    S-tab = "${prefix}_parent_node_start";
 
-              space = {
-                f = "file_picker_in_current_directory";
-                F = "file_picker";
-                e = "file_explorer_in_current_buffer_directory";
-                E = "file_explorer_in_current_directory";
+                    "*" = "search_selection";
+                    "A-*" = "search_selection_detect_word_boundaries";
+                    X = "extend_line_above";
+                  };
+                in
+                {
+                  normal = keys-with-prefix "move";
+                  select = keys-with-prefix "extend";
+                };
+            in
+            {
+              normal = shared-keys.normal // {
+                space = {
+                  f = "file_picker_in_current_directory";
+                  F = "file_picker";
+                  e = "file_explorer_in_current_buffer_directory";
+                  E = "file_explorer_in_current_directory";
+                };
+
+                g = {
+                  C-d = [
+                    "vsplit"
+                    "jump_view_up"
+                    "goto_definition"
+                  ];
+                  C-S-d = [
+                    "vsplit"
+                    "jump_view_up"
+                    "goto_declaration"
+                  ];
+                  C-y = [
+                    "vsplit"
+                    "jump_view_up"
+                    "goto_type_definition"
+                  ];
+                  C-i = [
+                    "vsplit"
+                    "jump_view_up"
+                    "goto_implementation"
+                  ];
+                };
               };
 
-              g = {
-                C-d = [
-                  "vsplit"
-                  "jump_view_up"
-                  "goto_definition"
-                ];
-                C-S-d = [
-                  "vsplit"
-                  "jump_view_up"
-                  "goto_declaration"
-                ];
-                C-y = [
-                  "vsplit"
-                  "jump_view_up"
-                  "goto_type_definition"
-                ];
-                C-i = [
-                  "vsplit"
-                  "jump_view_up"
-                  "goto_implementation"
-                ];
+              select = shared-keys.select;
+
+              insert = {
+                "A-;" = "flip_selections";
+                S-tab = "move_parent_node_start";
+                C-h = "move_char_left";
+                C-j = "move_line_down";
+                C-k = "move_line_up";
+                C-l = "move_char_right";
               };
             };
-
-            select = {
-              A-w = "extend_next_sub_word_start";
-              A-e = "extend_next_sub_word_end";
-              A-b = "extend_prev_sub_word_start";
-              X = "extend_line_above";
-              "*" = "search_selection";
-              "A-*" = "search_selection_detect_word_boundaries";
-              tab = "extend_parent_node_end";
-              S-tab = "extend_parent_node_start";
-            };
-
-            insert = {
-              "A-;" = "flip_selections";
-              S-tab = "move_parent_node_start";
-              C-h = "move_char_left";
-              C-j = "move_line_down";
-              C-k = "move_line_up";
-              C-l = "move_char_right";
-            };
-          };
         };
 
         themes =
