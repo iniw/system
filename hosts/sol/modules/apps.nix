@@ -4,6 +4,7 @@
       "stremio"
       "qobuz"
       "zoom"
+      "android-studio"
     ];
   };
 
