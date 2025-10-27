@@ -27,14 +27,7 @@ in
 
           settings = {
             ui = {
-              merge-editor = [
-                "meld"
-                "$left"
-                "$base"
-                "$right"
-                "-o"
-                "$output"
-              ];
+              merge-editor = "mergiraf";
 
               diff-formatter = [
                 "difft"
@@ -83,7 +76,7 @@ in
         packages = with pkgs; [
           difftastic
           hut
-          meld
+          mergiraf
         ];
 
         sessionVariables.DFT_SYNTAX_HIGHLIGHT = "off";
