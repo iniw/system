@@ -53,6 +53,16 @@ $env.config.keybindings ++= [
     )"
     }
   },
+  {
+    name: unfreeze_job
+    modifier: control
+    keycode: char_z
+    mode: emacs
+    event: {
+      send: executehostcommand
+      cmd: "job unfreeze"
+    }
+  },
 ]
 
 # Workaround ghostty hiding our prompt when resizing the window
