@@ -26,6 +26,7 @@
 
           editor = {
             color-modes = true;
+            commandline = false;
             completion-timeout = 5;
             completion-trigger-len = 1;
             continue-comments = false;
