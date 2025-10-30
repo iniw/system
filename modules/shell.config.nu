@@ -170,3 +170,17 @@ def nix-system []: nothing -> string {
 def --wrapped push [...$args]: nothing -> nothing {
   jj git remote list | lines | each {|line| let remote = $line | parse "{name} {url}" | first; jj git push --remote $remote.name ...$args } | ignore
 }
+
+# Forks the current repo using github's cli and configures jj appropriately
+def fork []: nothing -> nothing {
+  gh repo fork
+
+  # https://jj-vcs.github.io/jj/latest/guides/multiple-remotes/#contributing-upstream-with-a-github-style-fork
+  jj config set --repo git.fetch '["upstream", "origin"]'
+  jj config set --repo git.push origin
+
+  let trunk = jj config get 'revset-aliases."trunk()"';
+  jj config set --repo 'revset-aliases."trunk()"' ($trunk | str replace "origin" "upstream")
+
+  jj git fetch
+}
