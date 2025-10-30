@@ -323,7 +323,6 @@
           language-server = {
             clangd.args = [
               "--query-driver=**"
-              "--header-insertion=never"
               "--clang-tidy"
               "--background-index"
             ];
