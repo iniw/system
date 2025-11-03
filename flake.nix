@@ -14,7 +14,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nix-homebrew.url = "github:zhaofengli/nix-homebrew";
+    # FIXME: Clone the normal repo once https://github.com/zhaofengli/nix-homebrew/pull/119 is merged
+    nix-homebrew.url = "github:zhaofengli/nix-homebrew?ref=pull/119/merge";
 
     homebrew-core = {
       url = "github:homebrew/homebrew-core";
