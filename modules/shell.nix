@@ -28,7 +28,7 @@
             zsh = lib.getExe pkgs.zsh;
             nu = lib.getExe pkgs.nushell;
           in
-          "${zsh} -l -c '${nu} $0' -l";
+          "direct:${zsh} -c ${nu}";
       };
 
       home.file.".hushlogin".text = "";
