@@ -1,10 +1,12 @@
 {
   systemModule = {
     homebrew.casks = [
+      "netnewswire"
       "stremio"
-      "qobuz"
       "zoom"
-      "android-studio"
+
+      "mos" # Fixes mouse scroll on Safari
+      "reflex-app" # Fixes media keys on Safari
     ];
   };
 

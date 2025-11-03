@@ -7,14 +7,9 @@
       system.defaults = {
         controlcenter = {
           BatteryShowPercentage = true;
-          Bluetooth = true;
         };
 
         CustomSystemPreferences = {
-          NSGlobalDomain = {
-            AppleMenuBarVisibleInFullscreen = true;
-          };
-
           "com.apple.AdLib" = {
             allowApplePersonalizedAdvertising = false;
             allowIdentifierForAdvertising = false;
@@ -41,10 +36,13 @@
           tilesize = 32;
           persistent-apps = [
             { app = "/Users/${user}/Applications/Home Manager Apps/Ghostty.app"; }
-            { app = "/Users/${user}/Applications/Home Manager Apps/Firefox.app"; }
+            { app = "/System/Cryptexes/App/System/Applications/Safari.app"; }
             { app = "/Users/${user}/Applications/Home Manager Apps/Discord.app"; }
-            { app = "/Applications/Qobuz.app"; }
-            { app = "/Users/${user}/Applications/Home Manager Apps/Thunderbird.app"; }
+            { app = "/System/Applications/Music.app"; }
+            { app = "/System/Applications/Mail.app"; }
+            { app = "/System/Applications/Calendar.app"; }
+            { app = "/Applications/NetNewsWire.app"; }
+            { app = "/Applications/1Password.app"; }
             { app = "/Applications/Slack.app"; }
             { app = "/Applications/Linear.app"; }
           ];
