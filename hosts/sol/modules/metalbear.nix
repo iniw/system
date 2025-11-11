@@ -74,8 +74,13 @@ in
         };
       };
 
-      # IDEs to develop the extensions
-      home.packages = with pkgs; [ jetbrains.idea-ultimate ];
+      home.packages = with pkgs; [
+        kubectl
+        minikube
+        k9s
+
+        jetbrains.idea-ultimate
+      ];
 
       programs.vscode = {
         enable = true;
