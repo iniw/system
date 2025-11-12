@@ -19,7 +19,10 @@ in
             };
           };
 
-          ignores = [ ".DS_Store" ];
+          ignores = [
+            ".DS_Store"
+            "scratch"
+          ];
         };
 
         jujutsu = {
