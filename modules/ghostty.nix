@@ -21,7 +21,6 @@
           # window
           window-padding-x = 0;
           window-padding-y = 0;
-          macos-titlebar-style = "tabs";
           fullscreen = true;
 
           # misc
