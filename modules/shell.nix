@@ -2,34 +2,24 @@
   homeManagerModule =
     { pkgs, lib, ... }:
     {
-      programs = {
-        nushell = {
-          enable = true;
-          configFile.source = ./shell.config.nu;
-        };
+      programs =
+        let
+          nu = lib.getExe pkgs.nushell;
+          zsh = lib.getExe pkgs.zsh;
+        in
+        {
+          nushell = {
+            enable = true;
+            configFile.source = ./shell.config.nu;
+          };
 
-        zsh = {
-          enable = true;
-          initContent = # sh
-            ''
-              if [[ -z $ZSH_EXECUTION_STRING ]]; then
-                  if [[ -o login ]]; then
-                      LOGIN_OPTION='--login'
-                  else
-                      LOGIN_OPTION='''
-                  fi
-                  exec nu "$LOGIN_OPTION"
-              fi
-            '';
-        };
+          zsh = {
+            enable = true;
+            initContent = "exec ${nu}";
+          };
 
-        ghostty.settings.command =
-          let
-            zsh = lib.getExe pkgs.zsh;
-            nu = lib.getExe pkgs.nushell;
-          in
-          "direct:${zsh} -c ${nu}";
-      };
+          ghostty.settings.command = "direct:${zsh} -c ${nu}";
+        };
 
       home.file.".hushlogin".text = "";
     };
