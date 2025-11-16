@@ -20,13 +20,7 @@ in
   homeManagerModule =
     { pkgs, lib, ... }:
     {
-      # Emails and accounts
       programs = {
-        thunderbird.profiles.default = {
-          accountsOrder = lib.mkBefore [ "metalbear" ];
-          calendarAccountsOrder = lib.mkBefore [ "metalbear" ];
-        };
-
         jujutsu.settings."--scope" = [
           {
             "--when".repositories = [ "~/work/metalbear" ];
@@ -40,38 +34,6 @@ in
             contents.user.email = email;
           }
         ];
-      };
-
-      accounts = {
-        email.accounts.metalbear = rec {
-          address = email;
-
-          userName = address;
-          realName = "Vinicius Deolindo";
-
-          flavor = "gmail.com";
-
-          thunderbird = {
-            enable = true;
-            perIdentitySettings = id: {
-              "mail.identity.id_${id}.reply_on_top" = 1;
-              "mail.identity.id_${id}.sig_bottom" = false;
-
-              # See: https://github.com/nix-community/home-manager/issues/7959
-              "calendar.registry.calendar_${id}.imip.identity.key" = "id_${id}";
-            };
-          };
-        };
-
-        calendar.accounts.metalbear = {
-          remote = {
-            type = "caldav";
-            url = "https://apidata.googleusercontent.com/caldav/v2/${email}/events";
-            userName = email;
-          };
-
-          thunderbird.enable = true;
-        };
       };
 
       home.packages = with pkgs; [
