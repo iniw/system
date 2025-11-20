@@ -42,7 +42,6 @@
             { app = "/System/Applications/Mail.app"; }
             { app = "/System/Applications/Calendar.app"; }
             { app = "/Applications/NetNewsWire.app"; }
-            { app = "/Applications/1Password.app"; }
             { app = "/Applications/Slack.app"; }
             { app = "/Applications/Linear.app"; }
           ];

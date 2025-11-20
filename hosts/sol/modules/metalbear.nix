@@ -18,7 +18,7 @@ in
   };
 
   homeManagerModule =
-    { pkgs, lib, ... }:
+    { pkgs, ... }:
     {
       programs = {
         jujutsu.settings."--scope" = [
