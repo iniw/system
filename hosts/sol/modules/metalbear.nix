@@ -18,7 +18,7 @@ in
   };
 
   homeManagerModule =
-    { pkgs, ... }:
+    { pkgs, config, ... }:
     {
       programs = {
         jujutsu.settings."--scope" = [
@@ -51,10 +51,16 @@ in
           enableUpdateCheck = false;
           enableExtensionUpdateCheck = false;
 
+          userSettings = {
+            "mirrord.binaryPath" =
+              "${config.home.homeDirectory}/work/metalbear/mirrord/target/universal-apple-darwin/debug/mirrord";
+          };
+
           extensions =
             with pkgs.vscode-extensions;
             [
               mkhl.direnv
+              vadimcn.vscode-lldb
             ]
             ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
               {
