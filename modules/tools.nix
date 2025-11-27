@@ -62,5 +62,8 @@
     # See: https://github.com/nix-community/home-manager/blob/26993d87fd0d3b14f7667b74ad82235f120d986e/modules/programs/man.nix#L44-L45
     home.extraOutputsToInstall = [ "man" ];
     programs.man.enable = false;
+
+    # See: https://github.com/NixOS/nixpkgs/issues/456879
+    home.shellAliases.man = "env DEVELOPER_DIR= SDKROOT= man";
   };
 }
