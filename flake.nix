@@ -48,7 +48,7 @@
         ./hosts
         |> builtins.readDir
         |> lib.mapAttrsToList (name: _: import ./hosts/${name} sys name)
-        |> lib.fold lib.recursiveUpdate { };
+        |> lib.foldr lib.recursiveUpdate { };
     in
     configurations;
 }
