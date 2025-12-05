@@ -5,10 +5,6 @@
       security.pam.services.sudo_local.touchIdAuth = true;
 
       system.defaults = {
-        controlcenter = {
-          BatteryShowPercentage = true;
-        };
-
         CustomSystemPreferences = {
           "com.apple.AdLib" = {
             allowApplePersonalizedAdvertising = false;
@@ -33,7 +29,7 @@
           show-recents = false;
           orientation = "bottom";
           showhidden = true;
-          tilesize = 32;
+          tilesize = 48;
           persistent-apps = [
             { app = "/Users/${user}/Applications/Home Manager Apps/Ghostty.app"; }
             { app = "/System/Cryptexes/App/System/Applications/Safari.app"; }
@@ -41,8 +37,8 @@
             { app = "/System/Applications/Music.app"; }
             { app = "/System/Applications/Mail.app"; }
             { app = "/System/Applications/Calendar.app"; }
-            { app = "/Applications/NetNewsWire.app"; }
-            { app = "/Applications/Slack.app"; }
+            { app = "/Users/${user}/Applications/Home Manager Apps/NetNewsWire.app"; }
+            { app = "/Users/${user}/Applications/Home Manager Apps/Slack.app"; }
             { app = "/Applications/Linear.app"; }
           ];
         };

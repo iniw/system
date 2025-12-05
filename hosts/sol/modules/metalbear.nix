@@ -3,18 +3,10 @@ let
 in
 {
   systemModule = {
-    homebrew = {
-      brews = [
-        "docker"
-        "helm"
-      ];
-      casks = [
-        "docker-desktop"
-        "linear-linear"
-        "notion"
-        "slack"
-      ];
-    };
+    homebrew.casks = [
+      "docker-desktop"
+      "linear-linear"
+    ];
   };
 
   homeManagerModule =
@@ -37,40 +29,20 @@ in
       };
 
       home.packages = with pkgs; [
-        kubectl
-        minikube
+        # Apps
+        notion-app
+        slack
+
+        # Kubernetes
+        docker
         k9s
+        kubectl
+        kubernetes-helm
+        minikube
 
+        # IDEs for the extensions
         jetbrains.idea-ultimate
+        vscode
       ];
-
-      programs.vscode = {
-        enable = true;
-
-        profiles.default = {
-          enableUpdateCheck = false;
-          enableExtensionUpdateCheck = false;
-
-          userSettings = {
-            "mirrord.binaryPath" =
-              "${config.home.homeDirectory}/work/metalbear/mirrord/target/universal-apple-darwin/debug/mirrord";
-          };
-
-          extensions =
-            with pkgs.vscode-extensions;
-            [
-              mkhl.direnv
-              vadimcn.vscode-lldb
-            ]
-            ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-              {
-                name = "mirrord";
-                publisher = "MetalBear";
-                version = "3.66.1";
-                sha256 = "sha256-jB0yP/RnMmoEQ89pu3QrFDLfAqf4ntrZPdoCF+h0Qpo=";
-              }
-            ];
-        };
-      };
     };
 }

@@ -1,11 +1,7 @@
 {
   systemModule = {
     homebrew.casks = [
-      "netnewswire"
       "stremio"
-      "zoom"
-
-      "mos" # Fixes mouse scroll on Safari
       "reflex-app" # Fixes media keys on Safari
     ];
   };
@@ -15,6 +11,9 @@
     {
       home.packages = with pkgs; [
         google-chrome
+        mos
+        net-news-wire
+        zoom-us
       ];
     };
 }
