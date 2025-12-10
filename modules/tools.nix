@@ -7,6 +7,7 @@
     {
       home = {
         packages = with pkgs; [
+          ansifilter
           ast-grep
           fd
           fzf
