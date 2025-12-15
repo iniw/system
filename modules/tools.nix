@@ -1,9 +1,6 @@
 {
   homeManagerModule =
     { pkgs, config, ... }:
-    let
-      less = "less -iRXS --incsearch";
-    in
     {
       home = {
         packages = with pkgs; [
@@ -20,12 +17,7 @@
         ];
 
         sessionVariables = {
-          PAGER = "${less} -F";
           MANPAGER = "col -bx | bat --language man --style plain";
-        };
-
-        shellAliases = {
-          inherit less;
         };
       };
 
@@ -35,7 +27,6 @@
           config = {
             style = "numbers";
             theme = "ansi";
-            pager = config.home.sessionVariables.PAGER;
           };
         };
 
@@ -49,6 +40,20 @@
         };
 
         carapace.enable = true;
+
+        less = {
+          enable = true;
+
+          options = {
+            RAW-CONTROL-CHARS = true;
+            chop-long-lines = true;
+            ignore-case = true;
+            incsearch = true;
+            no-init = true;
+            quit-if-one-screen = true;
+            quit-on-intr = true;
+          };
+        };
 
         zoxide.enable = true;
       };
