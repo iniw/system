@@ -34,6 +34,7 @@
             { app = "/Users/${user}/Applications/Home Manager Apps/Ghostty.app"; }
             { app = "/System/Cryptexes/App/System/Applications/Safari.app"; }
             { app = "/Users/${user}/Applications/Home Manager Apps/Discord.app"; }
+            { app = "/Applications/WhatsApp.app"; }
             { app = "/System/Applications/Music.app"; }
             { app = "/System/Applications/Mail.app"; }
             { app = "/System/Applications/Calendar.app"; }
