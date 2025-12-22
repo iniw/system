@@ -41,7 +41,7 @@ in
         minikube
 
         # IDEs for the extensions
-        jetbrains.idea-ultimate
+        jetbrains.idea
         vscode
       ];
     };
