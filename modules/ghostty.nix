@@ -1,10 +1,16 @@
 {
+  darwinSystemModule = {
+    homebrew.casks = [
+      "ghostty@tip"
+    ];
+  };
+
   homeManagerModule =
     { pkgs, ... }:
     {
       programs.ghostty = {
         enable = true;
-        package = with pkgs; if stdenv.isDarwin then ghostty-bin else ghostty;
+        package = with pkgs; if stdenv.isDarwin then null else ghostty;
 
         settings = {
           auto-update = "off";
@@ -31,14 +37,20 @@
           keybind = [
             "clear"
 
-            # keybinds.tab
+            # global
+            "super+q=quit"
+            "super+u=undo"
+            "super+shift+p=toggle_command_palette"
+            "global:super+shift+;=toggle_quick_terminal"
+
+            # tab
             "super+n=new_tab"
             "super+d=close_surface"
             "super+shift+d=close_tab"
             "super+shift+h=previous_tab"
             "super+shift+l=next_tab"
 
-            # keybinds.split
+            # split
             "super+s=new_split:down"
             "super+v=new_split:right"
             "super+h=goto_split:left"
@@ -47,7 +59,7 @@
             "super+l=goto_split:right"
             "super+z=toggle_split_zoom"
 
-            # keybinds.scroll
+            # scroll
             "super+up=scroll_page_lines:-1"
             "super+down=scroll_page_lines:1"
             "super+shift+up=scroll_page_up"
@@ -55,19 +67,26 @@
             "super+alt+up=scroll_to_top"
             "super+alt+down=scroll_to_bottom"
 
-            # keybinds.clipboard
+            # clipboard
             "ctrl+shift+c=copy_to_clipboard"
             "ctrl+shift+v=paste_from_clipboard"
 
-            # keybinds.misc
-            "super+q=quit"
-            "super+f=toggle_fullscreen"
-            "super+u=undo"
-            "super+shift+0=reset_font_size"
-            "super+shift+plus=increase_font_size:1"
-            "super+shift+minus=decrease_font_size:1"
-            "super+shift+p=toggle_command_palette"
-            "global:super+shift+;=toggle_quick_terminal"
+            # window
+            "window/"
+            "window/d=close_window"
+            "window/n=new_window"
+            "window/f=toggle_fullscreen"
+            "window/0=reset_font_size"
+            "window/equal=increase_font_size:1"
+            "window/minus=decrease_font_size:1"
+            "window/catch_all=ignore"
+            "window/escape=deactivate_key_table"
+            "super+w=activate_key_table:window"
+
+            # find
+            "super+f=start_search"
+            "super+shift+f=search_selection"
+            "performable:escape=end_search"
           ];
         };
 
