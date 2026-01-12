@@ -175,12 +175,12 @@ def --wrapped push [...$args]: nothing -> nothing {
 def fork []: nothing -> nothing {
   gh repo fork
 
-  # https://jj-vcs.github.io/jj/latest/guides/multiple-remotes/#contributing-upstream-with-a-github-style-fork
+  # https://docs.jj-vcs.dev/latest/guides/multiple-remotes/#contributing-upstream-with-a-github-style-fork
   jj config set --repo git.fetch '["upstream", "origin"]'
   jj config set --repo git.push origin
 
+  jj git fetch
+
   let trunk = jj config get 'revset-aliases."trunk()"';
   jj config set --repo 'revset-aliases."trunk()"' ($trunk | str replace "origin" "upstream")
-
-  jj git fetch
 }
