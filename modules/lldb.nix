@@ -25,6 +25,9 @@
             # Disable LLDB 21's statusline
             settings set show-statusline false
 
+            # Limit the number of fields/inner-data is shown when printing a variable
+            settings set target.max-children-count 5
+
             # Alias to save and load the breakpoints into a known (and gitignored) file
             command alias bs breakpoint write -f .breakpoints
             command alias bl breakpoint read -f .breakpoints
