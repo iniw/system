@@ -488,6 +488,6 @@
         };
       };
 
-      programs.git.ignores = [ ".helix" ];
+      programs.git.ignores = [ ".helix/" ];
     };
 }

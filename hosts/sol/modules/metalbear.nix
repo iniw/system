@@ -20,12 +20,15 @@ in
           }
         ];
 
-        git.includes = [
-          {
-            condition = "gitdir:~/work/metalbear/";
-            contents.user.email = email;
-          }
-        ];
+        git = {
+          ignores = [ ".mirrord/" ];
+          includes = [
+            {
+              condition = "gitdir:~/work/metalbear/";
+              contents.user.email = email;
+            }
+          ];
+        };
       };
 
       home.packages = with pkgs; [

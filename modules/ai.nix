@@ -8,7 +8,7 @@
       ];
 
       programs.git.ignores = [
-        ".claude"
+        ".claude/"
         "CLAUDE.md"
         "AGENTS.md"
       ];
