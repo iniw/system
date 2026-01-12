@@ -52,6 +52,8 @@
             no-init = true;
             quit-if-one-screen = true;
             quit-on-intr = true;
+            status-column = true;
+            use-color = true;
           };
         };
 
