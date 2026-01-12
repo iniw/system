@@ -453,12 +453,7 @@
                 "biome"
                 "vtsls"
               ];
-              code-actions-on-save = [
-                {
-                  code-action = "source.organizeImports.biome";
-                  enabled = true;
-                }
-              ];
+              code-actions-on-save = [ "source.organizeImports.biome" ];
             }
             {
               name = "jsx";
@@ -468,12 +463,7 @@
                 "vtsls"
                 "tailwindcss-ls"
               ];
-              code-actions-on-save = [
-                {
-                  code-action = "source.organizeImports.biome";
-                  enabled = true;
-                }
-              ];
+              code-actions-on-save = [ "source.organizeImports.biome" ];
             }
             {
               name = "typescript";
@@ -482,12 +472,7 @@
                 "biome"
                 "vtsls"
               ];
-              code-actions-on-save = [
-                {
-                  code-action = "source.organizeImports.biome";
-                  enabled = true;
-                }
-              ];
+              code-actions-on-save = [ "source.organizeImports.biome" ];
             }
             {
               name = "tsx";
@@ -497,12 +482,7 @@
                 "vtsls"
                 "tailwindcss-ls"
               ];
-              code-actions-on-save = [
-                {
-                  code-action = "source.organizeImports.biome";
-                  enabled = true;
-                }
-              ];
+              code-actions-on-save = [ "source.organizeImports.biome" ];
             }
           ];
         };
