@@ -14,6 +14,7 @@
           python314
           ripgrep
           scc
+          xld
         ];
 
         sessionVariables = {

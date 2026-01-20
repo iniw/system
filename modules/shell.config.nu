@@ -184,3 +184,13 @@ def fork []: nothing -> nothing {
   let trunk = jj config get 'revset-aliases."trunk()"';
   jj config set --repo 'revset-aliases."trunk()"' ($trunk | str replace "origin" "upstream")
 }
+
+# Converts every flac file in the given folder to alac/m4a
+def flac2alac [folder: path]: nothing -> nothing {
+  fd . $folder -e flac | lines | path dirname | uniq | each { |folder|
+    cd $folder
+    fd . -e flac -x xld -f alac
+    fd . -e flac -x rm
+    print $"Converted flacs in '($folder)'"
+  } | ignore
+}
