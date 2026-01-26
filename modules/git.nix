@@ -30,6 +30,7 @@ in
           ignores = [
             ".DS_Store"
             "scratch"
+            "result"
           ];
         };
 
