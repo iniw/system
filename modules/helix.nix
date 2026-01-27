@@ -29,7 +29,6 @@
             commandline = false;
             completion-timeout = 5;
             completion-trigger-len = 1;
-            continue-comments = false;
             cursorline = true;
             end-of-line-diagnostics = "hint";
             line-number = "relative";
