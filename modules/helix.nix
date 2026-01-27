@@ -88,28 +88,23 @@
                   E = "file_explorer_in_current_directory";
                 };
 
-                g = {
-                  C-d = [
-                    "vsplit"
-                    "jump_view_up"
-                    "goto_definition"
-                  ];
-                  C-S-d = [
-                    "vsplit"
-                    "jump_view_up"
-                    "goto_declaration"
-                  ];
-                  C-y = [
-                    "vsplit"
-                    "jump_view_up"
-                    "goto_type_definition"
-                  ];
-                  C-i = [
-                    "vsplit"
-                    "jump_view_up"
-                    "goto_implementation"
-                  ];
-                };
+                g =
+                  let
+                    in-split = action: [
+                      "vsplit"
+                      "jump_view_up"
+                      action
+                    ];
+                  in
+                  {
+                    C-d = in-split "goto_definition";
+                    C-S-d = in-split "goto_declaration";
+                    C-y = in-split "goto_type_definition";
+                    C-i = in-split "goto_implementation";
+
+                    h = "goto_hover";
+                    C-h = in-split "goto_hover";
+                  };
               };
 
               select = shared-keys.select;
