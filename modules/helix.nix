@@ -118,10 +118,25 @@
               insert = {
                 "A-;" = "flip_selections";
                 S-tab = "move_parent_node_start";
+                # hjkl in insert mode
                 C-h = "move_char_left";
                 C-j = "move_line_down";
                 C-k = "move_line_up";
                 C-l = "move_char_right";
+                # readline emulation
+                C-a = "goto_first_nonwhitespace";
+                C-e = [
+                  "goto_line_end"
+                  "move_char_right"
+                ];
+                A-f = [
+                  "move_next_word_end"
+                  "move_char_right"
+                ];
+                A-b = [
+                  "move_prev_word_start"
+                  "collapse_selection"
+                ];
               };
             };
         };
