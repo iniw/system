@@ -7,6 +7,15 @@ in
     { pkgs, ... }:
     {
       programs = {
+        difftastic = {
+          enable = true;
+          jujutsu.enable = true;
+
+          options = {
+            syntax-highlight = "off";
+          };
+        };
+
         gh.enable = true;
 
         git = {
@@ -29,17 +38,7 @@ in
 
           settings = {
             ui = {
-              merge-editor = "mergiraf";
-
-              diff-formatter = [
-                "difft"
-                "--color=always"
-                "$left"
-                "$right"
-              ];
-
               default-command = "status";
-
               # Start editing commit with `jj prev` and `jj next`
               movement.edit = true;
             };
@@ -73,16 +72,14 @@ in
             };
           };
         };
+
+        mergiraf.enable = true;
       };
 
       home = {
         packages = with pkgs; [
-          difftastic
           hut
-          mergiraf
         ];
-
-        sessionVariables.DFT_SYNTAX_HIGHLIGHT = "off";
       };
     };
 }
