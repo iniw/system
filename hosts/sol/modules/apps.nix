@@ -10,7 +10,6 @@
     { pkgs, ... }:
     {
       home.packages = with pkgs; [
-        google-chrome
         mos
         net-news-wire
         zoom-us
