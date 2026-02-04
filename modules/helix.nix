@@ -105,6 +105,12 @@
                     h = "goto_hover";
                     C-h = in-split "goto_hover";
                   };
+
+                ret.y =
+                  let
+                    clipboard = if pkgs.stdenv.isDarwin then "pbcopy" else "wl-copy";
+                  in
+                  [ ":! echo -n %{buffer_name} | ${clipboard}" ];
               };
 
               select = shared-keys.select;
