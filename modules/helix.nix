@@ -16,6 +16,9 @@
           marksman
           # Toml
           taplo
+          # Yaml
+          yaml-language-server
+          helm-ls
         ];
 
         settings = {
