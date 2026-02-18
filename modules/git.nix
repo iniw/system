@@ -9,7 +9,9 @@ in
       programs = {
         difftastic = {
           enable = true;
+
           jujutsu.enable = true;
+          git.enable = true;
 
           options = {
             syntax-highlight = "off";
