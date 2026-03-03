@@ -28,6 +28,8 @@ in
             }
           ];
         };
+
+        ssh.includes = [ "~/.orbstack/ssh/config" ];
       };
 
       home.packages = with pkgs; [
@@ -35,40 +37,14 @@ in
         notion-app
         slack
 
-        # Docker
-        docker
-        docker-credential-helpers
-
-        # Kubernetes
+        # Containers
+        orbstack
         k9s
-        kubectl
         kubernetes-helm
 
         # IDEs for the extensions
         jetbrains.idea
         vscode
       ];
-
-      services.colima = {
-        enable = true;
-
-        limaHomeDir = "${config.xdg.dataHome}/lima";
-
-        profiles.default = {
-          isActive = true;
-          isService = true;
-          setDockerHost = true;
-
-          settings = {
-            cpu = 6;
-            disk = 100;
-            memory = 6;
-            runtime = "docker";
-            rosetta = true;
-            vmType = "vz";
-            kubernetes.enabled = true;
-          };
-        };
-      };
     };
 }
