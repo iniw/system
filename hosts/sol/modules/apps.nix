@@ -1,7 +1,6 @@
 {
   systemModule = {
     homebrew.casks = [
-      "stremio"
       "reflex-app" # Fixes media keys on Safari
     ];
   };

@@ -7,20 +7,6 @@
 
         defaultEditor = true;
 
-        # System-wide LSP support for languages used everywhere.
-        extraPackages = with pkgs; [
-          # Nix
-          nil
-          nixfmt
-          # Markdown
-          marksman
-          # Toml
-          taplo
-          # Yaml
-          yaml-language-server
-          helm-ls
-        ];
-
         settings = {
           theme = {
             dark = "lua";
@@ -75,6 +61,8 @@
                     "*" = "search_selection";
                     "A-*" = "search_selection_detect_word_boundaries";
                     X = "extend_line_above";
+                    p = "paste_after_all";
+                    P = "paste_before_all";
                   };
                 in
                 {
@@ -362,6 +350,7 @@
                 features = "all";
                 targetDir = true;
               };
+              check.command = "clippy";
               files.exclude = [
                 ".git"
                 ".jj"

@@ -15,7 +15,7 @@
 
           zsh = {
             enable = true;
-            initContent = "exec ${nu}";
+            initContent = "[[ -t 0 ]] && exec ${nu}";
           };
 
           ghostty.settings.command = "direct:${zsh} -c ${nu}";

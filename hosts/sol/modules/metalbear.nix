@@ -9,7 +9,7 @@ in
   };
 
   homeManagerModule =
-    { pkgs, config, ... }:
+    { pkgs, ... }:
     {
       programs = {
         jujutsu.settings."--scope" = [
@@ -32,19 +32,29 @@ in
         ssh.includes = [ "~/.orbstack/ssh/config" ];
       };
 
-      home.packages = with pkgs; [
-        # Apps
-        notion-app
-        slack
+      home.packages =
+        with pkgs;
+        let
+          gcloud = google-cloud-sdk.withExtraComponents [
+            google-cloud-sdk.components.gke-gcloud-auth-plugin
+          ];
+        in
+        [
+          # Communication
+          notion-app
+          slack
 
-        # Containers
-        orbstack
-        k9s
-        kubernetes-helm
+          # Kubernetes/Docker stuff
+          orbstack
+          k9s
+          kubernetes-helm
 
-        # IDEs for the extensions
-        jetbrains.idea
-        vscode
-      ];
+          # To access the staging cluster
+          gcloud
+
+          # IDEs for the extensions
+          jetbrains.idea
+          vscode
+        ];
     };
 }

@@ -10,7 +10,7 @@
     };
 
     home-manager = {
-      url = "github:iniw/home-manager";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -37,8 +37,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    claude-code-overlay = {
-      url = "github:ryoppippi/claude-code-overlay";
+    llm-agents = {
+      url = "github:numtide/llm-agents.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nixpkgs-pr-tracker = {
+      url = "github:thatsneat-dev/nprt";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };

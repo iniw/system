@@ -1,6 +1,9 @@
 {
   homeManagerModule =
-    { pkgs, config, ... }:
+    { pkgs, inputs, ... }:
+    let
+      nprt = inputs.nixpkgs-pr-tracker.packages.${pkgs.stdenv.hostPlatform.system}.nprt;
+    in
     {
       home = {
         packages = with pkgs; [
@@ -15,6 +18,20 @@
           ripgrep
           scc
           xld
+          nprt
+
+          # System-wide LSP support for languages used everywhere.
+
+          # Nix
+          nixd
+          nixfmt
+          # Markdown
+          marksman
+          # Toml
+          taplo
+          # Yaml
+          yaml-language-server
+          helm-ls
         ];
 
         sessionVariables = {
@@ -36,7 +53,6 @@
           settings = {
             color_theme = "TTY";
             vim_keys = true;
-            proc_tree = true;
           };
         };
 

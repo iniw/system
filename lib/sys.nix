@@ -78,12 +78,15 @@ let
             overlays = inputsDefaults.overlays ++ overlays;
             config.allowUnfree = true;
           };
-
-          nix.settings.extra-experimental-features = [
-            "flakes"
-            "nix-command"
-            "pipe-operators"
-          ];
+          nix.settings = {
+            extra-substituters = [ "https://cache.numtide.com" ];
+            extra-trusted-public-keys = [ "niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g=" ];
+            extra-experimental-features = [
+              "flakes"
+              "nix-command"
+              "pipe-operators"
+            ];
+          };
         };
     in
     [

@@ -161,26 +161,6 @@ def nix-system []: nothing -> string {
    nix eval --raw --impure --expr "builtins.currentSystem"
 }
 
-# Performs a 'jj git push' to every remote in the current repo
-@example "Push all bookmarks to all remotes" { push --all }
-def --wrapped push [...$args]: nothing -> nothing {
-  jj git remote list | lines | each {|line| let remote = $line | parse "{name} {url}" | first; jj git push --remote $remote.name ...$args } | ignore
-}
-
-# Forks the current repo using github's cli and configures jj appropriately
-def fork []: nothing -> nothing {
-  gh repo fork
-
-  # https://docs.jj-vcs.dev/latest/guides/multiple-remotes/#contributing-upstream-with-a-github-style-fork
-  jj config set --repo git.fetch '["upstream", "origin"]'
-  jj config set --repo git.push origin
-
-  jj git fetch
-
-  let trunk = jj config get 'revset-aliases."trunk()"';
-  jj config set --repo 'revset-aliases."trunk()"' ($trunk | str replace "origin" "upstream")
-}
-
 # Converts every flac file in the given folder to alac/m4a
 def flac2alac [folder: path]: nothing -> nothing {
   fd . $folder -e flac | lines | path dirname | uniq | each { |folder|
