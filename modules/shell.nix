@@ -15,13 +15,29 @@
 
           zsh = {
             enable = true;
-            initContent = "[[ -t 0 ]] && exec ${nu}";
+            enableCompletion = false;
+            initContent = ''
+              if [[ -o interactive ]] && \
+                [[ -z "$ZSH_EXECUTION_STRING" ]] && \
+                [[ "$TERM" != "dumb" ]] && \
+                [[ ! "$(ps -p $PPID -o comm=)" =~ '(^|/)nu(shell)?$' ]];
+              then
+                if [[ -o login ]]; then
+                  exec ${nu} --login
+                else
+                  exec ${nu}
+                fi
+              fi
+            '';
           };
 
           ghostty.settings.command = "direct:${zsh} -c ${nu}";
         };
 
-      home.file.".hushlogin".text = "";
+      home = {
+        shell.enableZshIntegration = false;
+        file.".hushlogin".text = "";
+      };
     };
 
   systemModule =
@@ -29,6 +45,7 @@
     {
       programs.zsh.enable = true;
       environment.shells = [ pkgs.zsh ];
+      environment.pathsToLink = [ "/share/nushell" ];
       users.users.${user}.shell = pkgs.zsh;
     };
 }

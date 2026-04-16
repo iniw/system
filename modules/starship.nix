@@ -2,9 +2,12 @@
   homeManagerModule = {
     programs.starship = {
       enable = true;
+
       settings = {
+        add_newline = false;
+
         format = ''
-          ''${custom.fix-green-prompt}┌$time$directory$nix_shell$cmd_duration$status
+          [┌](fg:15)$time$directory$nix_shell$cmd_duration$status
           └❯'';
 
         time = {
@@ -35,12 +38,6 @@
           format = ''─\[[$status]($style)\]'';
           disabled = false;
           map_symbol = true;
-        };
-
-        # See: https://github.com/starship/starship/issues/6560
-        custom.fix-green-prompt = {
-          format = ''[${builtins.fromJSON ''"\b"''}](bold)'';
-          when = true;
         };
       };
     };

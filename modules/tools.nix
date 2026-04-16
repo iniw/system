@@ -7,6 +7,7 @@
     {
       home = {
         packages = with pkgs; [
+          # General tools
           ansifilter
           ast-grep
           fd
@@ -14,11 +15,12 @@
           hyperfine
           jq
           nh
+          nprt
+          okapi-ed
           python314
           ripgrep
           scc
           xld
-          nprt
 
           # System-wide LSP support for languages used everywhere.
 
@@ -31,11 +33,13 @@
           taplo
           # Yaml
           yaml-language-server
+          yamlfmt # FIXME: Remove once https://github.com/helix-editor/helix/issues/15576 is fixed
           helm-ls
         ];
 
         sessionVariables = {
           MANPAGER = "col -bx | bat --language man --style plain";
+          CARAPACE_LENIENT = "1";
         };
       };
 

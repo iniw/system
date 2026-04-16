@@ -7,10 +7,8 @@
           enable = true;
           package = pkgs.llm-agents.claude-code;
 
-          enableMcpIntegration = true;
-
-          memory.source = ./ai/AGENTS.md;
-          skillsDir = ./ai/skills;
+          context = ./ai/AGENTS.md;
+          skills = ./ai/skills;
 
           lspServers = {
             rust = {
@@ -56,9 +54,7 @@
           enable = true;
           package = pkgs.llm-agents.codex;
 
-          enableMcpIntegration = true;
-
-          custom-instructions = builtins.readFile ./ai/AGENTS.md;
+          context = ./ai/AGENTS.md;
           skills = ./ai/skills;
         };
 
@@ -66,9 +62,7 @@
           enable = true;
           package = pkgs.llm-agents.opencode;
 
-          enableMcpIntegration = true;
-
-          rules = ./ai/AGENTS.md;
+          context = ./ai/AGENTS.md;
           skills = ./ai/skills;
 
           settings = {
@@ -88,29 +82,17 @@
           };
         };
 
-        mcp = {
-          enable = true;
-
-          servers = {
-            linear.url = "https://mcp.linear.app/mcp";
-          };
-        };
-
         git.ignores = [
-          ".agents/"
-          ".claude/"
-          ".codex/"
+          ".agents"
+          ".claude"
+          ".codex"
         ];
       };
 
-      home = {
-        packages = with pkgs.llm-agents; [
-          amp
-        ];
+      home.sessionVariables.OPENCODE_DISABLE_LSP_DOWNLOAD = "true";
 
-        sessionVariables = {
-          OPENCODE_DISABLE_LSP_DOWNLOAD = "true";
-        };
-      };
+      # amp
+      home.packages = [ pkgs.llm-agents.amp ];
+      xdg.configFile."amp/AGENTS.md".source = ./ai/AGENTS.md;
     };
 }

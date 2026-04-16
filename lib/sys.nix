@@ -2,17 +2,45 @@ inputs:
 let
   lib = inputs.nixpkgs.lib;
 
-  collectModules =
-    path:
-    path
-    |> lib.filesystem.listFilesRecursive
-    |> lib.filter (lib.hasSuffix ".nix")
-    |> lib.map (import)
-    |> lib.zipAttrs
-    |> lib.mapAttrs' (name: lib.nameValuePair "${name}s");
+  modules =
+    let
+      collectModules =
+        path:
+        path
+        |> lib.filesystem.listFilesRecursive
+        |> lib.filter (lib.hasSuffix ".nix")
+        |> lib.map import
+        |> lib.zipAttrs
+        |> lib.mapAttrs' (name: lib.nameValuePair "${name}s");
 
-  modules = collectModules ../modules;
-  collectHostModules = host: collectModules (../hosts + "/${host}/modules");
+    in
+    {
+      common = collectModules ../modules;
+      forHost = host: collectModules (../hosts + "/${host}/modules");
+    };
+
+  overlays =
+    let
+      collectDirectory =
+        path:
+        if builtins.pathExists path then
+          path
+          |> builtins.readDir
+          |> lib.mapAttrs' (
+            name: _: lib.nameValuePair (lib.removeSuffix ".nix" name) (import (path + "/${name}"))
+          )
+        else
+          { };
+
+      overlays = collectDirectory ../overlays |> lib.attrValues;
+
+      packages =
+        final: prev:
+        collectDirectory ../packages
+        |> lib.mapAttrs' (name: pkg: lib.nameValuePair name (final.callPackage pkg { }));
+
+    in
+    overlays ++ [ packages ];
 
   inputsDefaults =
     let
@@ -51,9 +79,10 @@ let
       homeManagerModule = {
         home-manager = {
           users.${user} = {
-            imports = inputsDefaults.homeManagerModules ++ modules.homeManagerModules or [ ];
+            imports = inputsDefaults.homeManagerModules ++ modules.common.homeManagerModules or [ ];
 
             xdg.enable = true;
+            home.preferXdgDirectories = true;
           };
 
           useGlobalPkgs = true;
@@ -65,35 +94,27 @@ let
         };
       };
 
-      nixModule =
-        let
-          overlays =
-            if builtins.pathExists ../overlays then
-              ../overlays |> builtins.readDir |> lib.mapAttrsToList (name: _: import (../overlays + "/${name}"))
-            else
-              [ ];
-        in
-        {
-          nixpkgs = {
-            overlays = inputsDefaults.overlays ++ overlays;
-            config.allowUnfree = true;
-          };
-          nix.settings = {
-            extra-substituters = [ "https://cache.numtide.com" ];
-            extra-trusted-public-keys = [ "niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g=" ];
-            extra-experimental-features = [
-              "flakes"
-              "nix-command"
-              "pipe-operators"
-            ];
-          };
+      nixModule = {
+        nixpkgs = {
+          overlays = inputsDefaults.overlays ++ overlays;
+          config.allowUnfree = true;
         };
+        nix.settings = {
+          extra-substituters = [ "https://cache.numtide.com" ];
+          extra-trusted-public-keys = [ "niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g=" ];
+          extra-experimental-features = [
+            "flakes"
+            "nix-command"
+            "pipe-operators"
+          ];
+        };
+      };
     in
     [
       homeManagerModule
       nixModule
     ]
-    ++ modules.systemModules or [ ];
+    ++ modules.common.systemModules or [ ];
 in
 {
   darwinSystem =
@@ -153,7 +174,7 @@ in
     in
     module: host:
     let
-      hostModules = collectHostModules host;
+      hostModules = modules.forHost host;
 
       userConfigModule = {
         users = {
@@ -167,7 +188,7 @@ in
         system.primaryUser = user;
 
         home-manager.users.${user}.imports =
-          modules.darwinHomeManagerModules or [ ] ++ hostModules.homeManagerModules or [ ];
+          modules.common.darwinHomeManagerModules or [ ] ++ hostModules.homeManagerModules or [ ];
       };
     in
     {
@@ -177,7 +198,7 @@ in
         modules =
           commonModules
           ++ inputsDefaults.darwinModules
-          ++ modules.darwinSystemModules or [ ]
+          ++ modules.common.darwinSystemModules or [ ]
           ++ hostModules.systemModules or [ ]
           ++ [
             module
@@ -191,7 +212,7 @@ in
   nixosSystem =
     module: host:
     let
-      hostModules = collectHostModules host;
+      hostModules = modules.forHost host;
 
       userConfigModule = {
         users.users.${user} = {
@@ -201,7 +222,7 @@ in
         };
 
         home-manager.users.${user}.imports =
-          modules.nixosHomeManagerModules or [ ] ++ hostModules.homeManagerModules or [ ];
+          modules.common.nixosHomeManagerModules or [ ] ++ hostModules.homeManagerModules or [ ];
       };
     in
     {
@@ -211,7 +232,7 @@ in
         modules =
           commonModules
           ++ inputsDefaults.nixosModules
-          ++ modules.nixosSystemModules or [ ]
+          ++ modules.common.nixosSystemModules or [ ]
           ++ hostModules.systemModules or [ ]
           ++ [
             module

@@ -4,7 +4,6 @@
   };
 
   homeManagerModule =
-    { pkgs, ... }:
     let
       signingKey = "~/.ssh/id_ed25519.pub";
     in

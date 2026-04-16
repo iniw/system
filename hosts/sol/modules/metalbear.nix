@@ -51,10 +51,6 @@ in
 
           # To access the staging cluster
           gcloud
-
-          # IDEs for the extensions
-          jetbrains.idea
-          vscode
         ];
     };
 }

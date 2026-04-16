@@ -161,7 +161,7 @@ def nix-system []: nothing -> string {
    nix eval --raw --impure --expr "builtins.currentSystem"
 }
 
-# Converts every flac file in the given folder to alac/m4a
+# Converts every flac file in the given folder to alac/m4a.
 def flac2alac [folder: path]: nothing -> nothing {
   fd . $folder -e flac | lines | path dirname | uniq | each { |folder|
     cd $folder
@@ -169,4 +169,9 @@ def flac2alac [folder: path]: nothing -> nothing {
     fd . -e flac -x rm
     print $"Converted flacs in '($folder)'"
   } | ignore
+}
+
+# Like `which`, but it opens the resulting paths with `yazi`.
+def yich [...applications: string]: nothing -> nothing {
+  y ...(which ...$applications | get path)
 }

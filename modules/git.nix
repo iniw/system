@@ -85,8 +85,10 @@ in
                   jj config set --repo git.fetch '["upstream", "origin"]'
                   jj config set --repo git.push origin
                   trunk=$(jj config get 'revset-aliases."trunk()"')
+                  trunk_bookmark="''${trunk%%@*}"
                   jj config set --repo 'revset-aliases."trunk()"' "''${trunk/origin/upstream}"
                   jj git fetch
+                  jj bookmark track "$trunk_bookmark" --remote upstream
                 ''
               ];
             };
@@ -104,11 +106,6 @@ in
                     diff.git(),
                   )
                 '';
-            };
-
-            fsmonitor = {
-              backend = "watchman";
-              watchman.register-snapshot-trigger = true;
             };
           };
         };
@@ -131,7 +128,7 @@ in
         packages = with pkgs; [
           hut
 
-          # Used by jj to track changes to the working copy
+          # Used by jj to track changes to the working copy in large repositories
           # See: https://docs.jj-vcs.dev/latest/config/#watchman
           watchman
 

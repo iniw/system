@@ -1,6 +1,6 @@
 {
   homeManagerModule =
-    { pkgs, ... }:
+    { pkgs, lib, ... }:
     {
       programs.helix = {
         enable = true;
@@ -13,39 +13,51 @@
             light = "sol";
           };
 
-          editor = {
-            color-modes = true;
-            commandline = false;
-            completion-timeout = 5;
-            completion-trigger-len = 1;
-            cursorline = true;
-            end-of-line-diagnostics = "hint";
-            line-number = "relative";
-            trim-final-newlines = true;
-            trim-trailing-whitespace = true;
+          editor =
+            let
+              max-width = 120;
+            in
+            {
+              color-modes = true;
+              commandline = false;
+              completion-timeout = 5;
+              completion-trigger-len = 1;
+              cursorline = true;
+              end-of-line-diagnostics = "hint";
+              line-number = "relative";
+              trim-final-newlines = true;
+              trim-trailing-whitespace = true;
 
-            rulers = [ 120 ];
+              text-width = max-width;
+              rulers = [ (max-width + 1) ];
 
-            indent-guides = {
-              render = true;
+              breadcrumb = {
+                enable = true;
+                path = "none";
+              };
+
+              indent-guides = {
+                render = true;
+              };
+
+              inline-diagnostics = {
+                cursor-line = "hint";
+              };
+
+              file-picker = {
+                hidden = false;
+                deduplicate-links = false;
+              };
+
+              soft-wrap = {
+                enable = true;
+              };
+
+              lsp = {
+                auto-document-highlight = true;
+                goto-reference-include-declaration = false;
+              };
             };
-
-            inline-diagnostics = {
-              cursor-line = "hint";
-            };
-
-            file-picker = {
-              hidden = false;
-            };
-
-            soft-wrap = {
-              enable = true;
-            };
-
-            lsp = {
-              goto-reference-include-declaration = false;
-            };
-          };
 
           keys =
             let
@@ -63,6 +75,18 @@
                     X = "extend_line_above";
                     p = "paste_after_all";
                     P = "paste_before_all";
+
+                    ret = {
+                      # Reflow current paragraph
+                      r = "@<C-s>mip_:reflow<ret><C-o>";
+
+                      # Copy current buffer to system clipboard
+                      y =
+                        let
+                          clipboard = if pkgs.stdenv.isDarwin then "pbcopy" else "wl-copy";
+                        in
+                        [ ":! echo -n %{buffer_name} | ${clipboard}" ];
+                    };
                   };
                 in
                 {
@@ -71,7 +95,7 @@
                 };
             in
             {
-              normal = shared-keys.normal // {
+              normal = lib.recursiveUpdate shared-keys.normal {
                 space = {
                   f = "file_picker_in_current_directory";
                   F = "file_picker";
@@ -96,12 +120,6 @@
                     h = "goto_hover";
                     C-h = in-split "goto_hover";
                   };
-
-                ret.y =
-                  let
-                    clipboard = if pkgs.stdenv.isDarwin then "pbcopy" else "wl-copy";
-                  in
-                  [ ":! echo -n %{buffer_name} | ${clipboard}" ];
               };
 
               select = shared-keys.select;
@@ -211,6 +229,8 @@
                 "ui.statusline.normal".bg = shade-6;
                 "ui.statusline.select".fg = shade-8;
                 "ui.statusline.select".bg = secondary;
+
+                "ui.breadcrumb".bg = shade-7;
 
                 "ui.text".fg = shade-1;
                 "ui.text.directory".fg = shade-4;
@@ -332,6 +352,8 @@
               "--clang-tidy"
               "--background-index"
             ];
+
+            taplo.config = { };
 
             tinymist.config = {
               formatterMode = "typstyle";
