@@ -10,25 +10,28 @@
         {
           nushell = {
             enable = true;
-            configFile.source = ./shell.config.nu;
+
+            configFile.source = ./config.nu;
           };
 
           zsh = {
             enable = true;
+
             enableCompletion = false;
-            initContent = ''
-              if [[ -o interactive ]] && \
-                [[ -z "$ZSH_EXECUTION_STRING" ]] && \
-                [[ "$TERM" != "dumb" ]] && \
-                [[ ! "$(ps -p $PPID -o comm=)" =~ '(^|/)nu(shell)?$' ]];
-              then
-                if [[ -o login ]]; then
-                  exec ${nu} --login
-                else
-                  exec ${nu}
+            initContent = # zsh
+              ''
+                if [[ -o interactive ]] && \
+                  [[ -z "$ZSH_EXECUTION_STRING" ]] && \
+                  [[ "$TERM" != "dumb" ]] && \
+                  [[ ! "$(ps -p $PPID -o comm=)" =~ '(^|/)nu(shell)?$' ]];
+                then
+                  if [[ -o login ]]; then
+                    exec ${nu} --login
+                  else
+                    exec ${nu}
+                  fi
                 fi
-              fi
-            '';
+              '';
           };
 
           ghostty.settings.command = "direct:${zsh} -c ${nu}";
@@ -45,7 +48,8 @@
     {
       programs.zsh.enable = true;
       environment.shells = [ pkgs.zsh ];
-      environment.pathsToLink = [ "/share/nushell" ];
       users.users.${user}.shell = pkgs.zsh;
+
+      environment.pathsToLink = [ "/share/nushell" ];
     };
 }

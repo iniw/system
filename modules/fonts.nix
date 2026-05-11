@@ -4,6 +4,12 @@ let
   serif = "Source Serif 4";
 in
 {
+  systemModule =
+    { inputs, ... }:
+    {
+      nixpkgs.overlays = [ inputs.fonts.overlays.default ];
+    };
+
   homeManagerModule =
     { pkgs, ... }:
     {

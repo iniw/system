@@ -13,7 +13,6 @@
         google-chrome
         mos
         net-news-wire
-        zoom-us
       ];
     };
 }

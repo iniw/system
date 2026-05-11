@@ -46,6 +46,7 @@
       programs = {
         bat = {
           enable = true;
+
           config = {
             style = "numbers";
             theme = "ansi";
@@ -54,6 +55,7 @@
 
         btop = {
           enable = true;
+
           settings = {
             color_theme = "TTY";
             vim_keys = true;

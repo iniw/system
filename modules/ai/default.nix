@@ -1,4 +1,15 @@
 {
+  systemModule =
+    { inputs, ... }:
+    {
+      nixpkgs.overlays = [ inputs.llm-agents.overlays.default ];
+
+      nix.settings = {
+        extra-substituters = [ "https://cache.numtide.com" ];
+        extra-trusted-public-keys = [ "niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g=" ];
+      };
+    };
+
   homeManagerModule =
     { pkgs, ... }:
     {
@@ -7,8 +18,8 @@
           enable = true;
           package = pkgs.llm-agents.claude-code;
 
-          context = ./ai/AGENTS.md;
-          skills = ./ai/skills;
+          context = ./AGENTS.md;
+          skills = ./skills;
 
           lspServers = {
             rust = {
@@ -54,16 +65,16 @@
           enable = true;
           package = pkgs.llm-agents.codex;
 
-          context = ./ai/AGENTS.md;
-          skills = ./ai/skills;
+          context = ./AGENTS.md;
+          skills = ./skills;
         };
 
         opencode = {
           enable = true;
           package = pkgs.llm-agents.opencode;
 
-          context = ./ai/AGENTS.md;
-          skills = ./ai/skills;
+          context = ./AGENTS.md;
+          skills = ./skills;
 
           settings = {
             lsp.rust = {
@@ -93,6 +104,6 @@
 
       # amp
       home.packages = [ pkgs.llm-agents.amp ];
-      xdg.configFile."amp/AGENTS.md".source = ./ai/AGENTS.md;
+      xdg.configFile."amp/AGENTS.md".source = ./AGENTS.md;
     };
 }
