@@ -142,7 +142,7 @@ def klip []: [
       copy: "pbcopy"
       paste: "pbpaste"
     }
-    "Linux" => {
+    "NixOS" => {
       copy: "wl-copy"
       paste: "wl-paste"
     }

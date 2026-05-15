@@ -12,7 +12,7 @@ def --wrapped main [...$args] {
 def --wrapped "main switch" [...$args] {
   let host = match (sys host | get name) {
     "Darwin" => "darwin"
-    "Linux" => "os"
+    "NixOS" => "os"
   }
 
   nh $host switch $root ...$args
@@ -27,7 +27,7 @@ def --wrapped "main update" [...$args] {
 def --wrapped "main repl" [...$args] {
   let host = match (sys host | get name) {
     "Darwin" => "darwin"
-    "Linux" => "nixos"
+    "NixOS" => "nixos"
   }
 
   nix repl $".#($host)Configurations.(hostname -s)" ...$args
