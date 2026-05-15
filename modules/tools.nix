@@ -20,7 +20,6 @@
           python314
           ripgrep
           scc
-          xld
 
           # System-wide LSP support for languages used everywhere.
 

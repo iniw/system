@@ -14,6 +14,7 @@
         google-chrome
         mos
         net-news-wire
+        xld
       ];
     };
 }
