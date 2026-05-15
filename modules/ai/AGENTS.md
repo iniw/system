@@ -34,9 +34,9 @@ needs them. This reduces cognitive load by limiting the number of names in scope
 See this example that ties everything up:
 
 ```rust
-/// The Big Picture
+/// "The Big Picture", as a function-level doc comment.
 fn function() {
-    // Explain what we'll be doing now and how it fits into The Big Picture:
+    // Explain what we'll be doing now and how it fits into "The Big Picture".
 
     let foo = {
         let bar = /* ... */;
@@ -45,7 +45,7 @@ fn function() {
         // ...
     };
 
-    // Explain what we'll be doing now and how it fits into The Big Picture
+    // Explain what we'll be doing now and how it fits into "The Big Picture".
 
     let alice = {
         // ...
@@ -54,6 +54,8 @@ fn function() {
     let bob  = {
         // ...
     };
+
+    // Explain what we'll be doing now and how it fits into "The Big Picture".
 
     // ...
 }

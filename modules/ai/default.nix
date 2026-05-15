@@ -14,61 +14,6 @@
     { pkgs, ... }:
     {
       programs = {
-        claude-code = {
-          enable = true;
-          package = pkgs.llm-agents.claude-code;
-
-          context = ./AGENTS.md;
-          skills = ./skills;
-
-          lspServers = {
-            rust = {
-              command = "rust-analyzer";
-              settings = {
-                cargo = {
-                  features = "all";
-                  targetDir = true;
-                };
-              };
-              extensionToLanguage = {
-                ".rs" = "rust";
-              };
-            };
-
-            cpp = {
-              command = "clangd";
-              args = [
-                "--query-driver=**"
-                "--clang-tidy"
-              ];
-              extensionToLanguage = {
-                ".cpp" = "cpp";
-                ".hpp" = "cpp";
-                ".c" = "cpp";
-                ".h" = "cpp";
-              };
-            };
-
-            typescript = {
-              command = "vtsls";
-              extensionToLanguage = {
-                ".ts" = "typescript";
-                ".tsx" = "typescriptreact";
-                ".js" = "javascript";
-                ".jsx" = "javascriptreact";
-              };
-            };
-          };
-        };
-
-        codex = {
-          enable = true;
-          package = pkgs.llm-agents.codex;
-
-          context = ./AGENTS.md;
-          skills = ./skills;
-        };
-
         opencode = {
           enable = true;
           package = pkgs.llm-agents.opencode;
