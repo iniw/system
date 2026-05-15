@@ -1,8 +1,4 @@
 {
-  systemModule = {
-    services.openssh.enable = true;
-  };
-
   homeManagerModule =
     let
       signingKey = "~/.ssh/id_ed25519.pub";
