@@ -1,13 +1,13 @@
 {
   systemModule =
-    { inputs, user, ... }:
+    { inputs, ... }:
     {
       home-manager = {
         useGlobalPkgs = true;
         useUserPackages = true;
 
         extraSpecialArgs = {
-          inherit inputs user;
+          inherit inputs;
         };
 
         backupFileExtension = "hm-backup";
