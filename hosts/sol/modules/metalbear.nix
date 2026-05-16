@@ -2,12 +2,6 @@ let
   email = "viniciusd@metalbear.com";
 in
 {
-  systemModule = {
-    homebrew.casks = [
-      "linear-linear"
-    ];
-  };
-
   homeManagerModule =
     { pkgs, ... }:
     {
@@ -41,6 +35,7 @@ in
         in
         [
           # Communication
+          linear
           notion-app
           slack
 

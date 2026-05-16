@@ -40,7 +40,7 @@
             { app = "/System/Applications/Calendar.app"; }
             { app = "/Users/${user}/Applications/Home Manager Apps/NetNewsWire.app"; }
             { app = "/Users/${user}/Applications/Home Manager Apps/Slack.app"; }
-            { app = "/Applications/Linear.app"; }
+            { app = "/Users/${user}/Applications/Home Manager Apps/Linear.app"; }
           ];
         };
 
