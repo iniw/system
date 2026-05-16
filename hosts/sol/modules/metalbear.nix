@@ -50,11 +50,20 @@ in
     };
 
   systemModule =
-    { user, lib, ... }:
     {
-      system.defaults.dock.persistent-apps = lib.mkAfter [
-        { app = "/Users/${user}/Applications/Home Manager Apps/Slack.app"; }
-        { app = "/Users/${user}/Applications/Home Manager Apps/Linear.app"; }
-      ];
+      config,
+      user,
+      lib,
+      ...
+    }:
+    {
+      system.defaults.dock.persistent-apps =
+        let
+          home = config.users.users.${user}.home;
+        in
+        lib.mkAfter [
+          { app = "${home}/Applications/Home Manager Apps/Slack.app"; }
+          { app = "${home}/Applications/Home Manager Apps/Linear.app"; }
+        ];
     };
 }
