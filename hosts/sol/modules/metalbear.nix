@@ -48,4 +48,13 @@ in
           gcloud
         ];
     };
+
+  systemModule =
+    { user, lib, ... }:
+    {
+      system.defaults.dock.persistent-apps = lib.mkAfter [
+        { app = "/Users/${user}/Applications/Home Manager Apps/Slack.app"; }
+        { app = "/Users/${user}/Applications/Home Manager Apps/Linear.app"; }
+      ];
+    };
 }

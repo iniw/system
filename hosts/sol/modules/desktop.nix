@@ -39,8 +39,6 @@
             { app = "/System/Applications/Mail.app"; }
             { app = "/System/Applications/Calendar.app"; }
             { app = "/Users/${user}/Applications/Home Manager Apps/NetNewsWire.app"; }
-            { app = "/Users/${user}/Applications/Home Manager Apps/Slack.app"; }
-            { app = "/Users/${user}/Applications/Home Manager Apps/Linear.app"; }
           ];
         };
 
