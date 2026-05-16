@@ -1,10 +1,4 @@
 {
-  systemModule = {
-    homebrew.casks = [
-      "reflex-app" # Fixes media keys on Safari
-    ];
-  };
-
   homeManagerModule =
     { pkgs, ... }:
     {
@@ -14,6 +8,7 @@
         google-chrome
         mos
         net-news-wire
+        reflex-app
         xld
       ];
     };
