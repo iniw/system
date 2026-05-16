@@ -50,7 +50,7 @@ $env.config.keybindings ++= [
       cmd: "cd (
           fd --type directory --hidden --follow --exclude .git --exclude .jj
         | fzf --scheme path --height '~30%'
-    )"
+      )"
     }
   },
   {
@@ -163,12 +163,18 @@ def nix-system []: nothing -> string {
 
 # Converts every flac file in the given folder to alac/m4a.
 def flac2alac [folder: path]: nothing -> nothing {
-  fd . $folder -e flac | lines | path dirname | uniq | each { |folder|
+  glob ($folder | path join "**" "*.flac") --no-dir
+  | group-by { |file| $file | path dirname }
+  | items { |folder, flacs|
     cd $folder
-    fd . -e flac -x xld -f alac
-    fd . -e flac -x rm
+
+    let flacs = $flacs | path basename
+    $flacs | each { |file| xld -f alac $file } | ignore
+    rm ...$flacs
+
     print $"Converted flacs in '($folder)'"
-  } | ignore
+  }
+  | ignore
 }
 
 # Like `which`, but it opens the resulting paths with `yazi`.
