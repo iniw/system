@@ -24,6 +24,7 @@
               max-width = 120;
             in
             {
+              auto-format = true;
               color-modes = true;
               commandline = false;
               completion-timeout = 5;
@@ -414,20 +415,7 @@
 
           language = [
             {
-              name = "c";
-              auto-format = true;
-            }
-            {
-              name = "cpp";
-              auto-format = true;
-            }
-            {
-              name = "nix";
-              auto-format = true;
-            }
-            {
               name = "python";
-              auto-format = true;
               language-servers = [
                 "pyright"
                 "ruff"
@@ -435,20 +423,10 @@
             }
             {
               name = "sql";
-              auto-format = true;
               formatter.command = "sql-formatter";
             }
             {
-              name = "toml";
-              auto-format = true;
-            }
-            {
-              name = "typst";
-              auto-format = true;
-            }
-            {
               name = "css";
-              auto-format = true;
               language-servers = [
                 "biome"
                 "vscode-css-language-server"
@@ -457,7 +435,6 @@
             }
             {
               name = "json";
-              auto-format = true;
               language-servers = [
                 "biome"
                 "vscode-json-language-server"
@@ -465,7 +442,6 @@
             }
             {
               name = "jsonc";
-              auto-format = true;
               language-servers = [
                 "biome"
                 "vscode-json-language-server"
@@ -473,7 +449,6 @@
             }
             {
               name = "html";
-              auto-format = true;
               language-servers = [
                 "vscode-html-language-server"
                 "tailwindcss-ls"
@@ -481,7 +456,6 @@
             }
             {
               name = "javascript";
-              auto-format = true;
               language-servers = [
                 "biome"
                 "vtsls"
@@ -490,7 +464,6 @@
             }
             {
               name = "jsx";
-              auto-format = true;
               language-servers = [
                 "biome"
                 "vtsls"
@@ -500,7 +473,6 @@
             }
             {
               name = "typescript";
-              auto-format = true;
               language-servers = [
                 "biome"
                 "vtsls"
@@ -509,7 +481,6 @@
             }
             {
               name = "tsx";
-              auto-format = true;
               language-servers = [
                 "biome"
                 "vtsls"
