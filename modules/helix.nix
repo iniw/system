@@ -359,8 +359,6 @@
               "--background-index"
             ];
 
-            taplo.config = { };
-
             tinymist.config = {
               formatterMode = "typstyle";
               preview.background = {

@@ -29,7 +29,7 @@
           # Markdown
           marksman
           # Toml
-          taplo
+          tombi
           # Yaml
           yaml-language-server
           yamlfmt # FIXME: Remove once https://github.com/helix-editor/helix/issues/15576 is fixed
