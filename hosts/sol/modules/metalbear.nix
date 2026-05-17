@@ -15,6 +15,7 @@ in
 
         git = {
           ignores = [ ".mirrord/" ];
+
           includes = [
             {
               condition = "gitdir:~/work/metalbear/";
