@@ -8,13 +8,13 @@ let
         path:
         path
         |> builtins.readDir
-        |> lib.mapAttrsToList (name: _: import (path + "/${name}"))
+        |> lib.mapAttrsToList (name: _: import "${path}/${name}")
         |> lib.zipAttrs
         |> lib.mapAttrs' (name: lib.nameValuePair "${name}s");
     in
     {
-      common = collectModules ../modules;
-      forHost = host: collectModules (../hosts + "/${host}/modules");
+      common = collectModules "${inputs.self}/modules";
+      forHost = host: collectModules "${inputs.self}/hosts/${host}/modules";
     };
 
   user = "vini";
