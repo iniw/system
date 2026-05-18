@@ -10,13 +10,13 @@
 
           enableDefaultConfig = false;
 
-          matchBlocks = {
+          settings = {
             "*" = {
-              forwardAgent = false;
-              serverAliveInterval = 60;
-              controlMaster = "auto";
-              controlPath = "~/.ssh/master-%r@%h:%p";
-              controlPersist = "10m";
+              ControlMaster = "auto";
+              ControlPath = "~/.ssh/master-%r@%h:%p";
+              ControlPersist = "10m";
+              ForwardAgent = false;
+              ServerAliveInterval = 60;
             };
           };
         };
