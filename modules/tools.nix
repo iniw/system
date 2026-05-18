@@ -84,6 +84,12 @@
 
       # ignored files list used by rg, fd, etc.
       programs.git.ignores = [ ".ignore" ];
+
+      xdg.configFile."yamlfmt/yamlfmt.yaml".text = # yaml
+        ''
+          formatter:
+            retain_line_breaks_single: true
+        '';
     };
 
   darwinHomeManagerModule = {
