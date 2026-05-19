@@ -26,8 +26,8 @@ Keep the subject specific enough to orient the reader, but not so detailed that 
 
 ## Body
 
-Write the body in natural, human prose. It should read like an explanation from one engineer to another, not like
-release notes and not like a checklist.
+The body should read like an explanation from one engineer to another - not like release notes and not like a checklist.
+Structure it in a way where the sentences/paragraphs flows smoothly and naturally from beginning to end.
 
 Use markdown formatting if necessary (e.g: code blocks, bullet points).
 
@@ -63,14 +63,7 @@ in its final form as the direct answer to the problem(s).
 
 - Wrap at 72 characters
 
-## Tone And Voice
+## Language
 
-Commit messages should feel calm, direct, human, and easy to read. They should have a light, chill quality to them, like
-one engineer casually but thoughtfully walking another through a change. A little whimsicalness is welcome when it helps
-the message feel natural, but it should stay subtle and never get in the way of clarity.
-
-## Readability
-
-Make the message easy to follow on the first read. Prefer plain words, short sentences, and paragraphs that move
-naturally from the problem to the fix. Avoid technical buzzwords, abstract framing, and puffed-up language. If a simpler
-sentence works, use it.
+Keep the text light, direct, and easy to read. Use plain words over technical buzzwords and explain things as simply as
+possible. The reviewer wants to spend their brain energy on the _code_, not the commit message, so don't complicate it.

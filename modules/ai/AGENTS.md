@@ -14,7 +14,10 @@ use `nix-shell -p "${package}" --quiet --command "${command}"` to run it ephemer
 Always use `jj` instead of `git` for version control operations. Repositories are created with jujutsu and colocated
 with git metadata, so git commands will work, but jujutsu commands are the more correct source of truth.
 
-## Function Structure
+When looking at diffs specify the `--git` flag, like so: `jj diff --git`, to avoid using non-standard diff viewers the
+user may have configured.
+
+## Functions
 
 Avoid extracting trivial, self-contained logic into micro-functions that are only used once. When the code is simple
 (which it most often is), prefer inlining it at the callsite instead of introducing a helper that achieves nothing but

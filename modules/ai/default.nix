@@ -14,28 +14,12 @@
     { pkgs, ... }:
     {
       programs = {
-        opencode = {
+        codex = {
           enable = true;
-          package = pkgs.llm-agents.opencode;
+          package = pkgs.llm-agents.codex;
 
           context = ./AGENTS.md;
           skills = ./skills;
-
-          settings = {
-            lsp.rust = {
-              command = [ "rust-analyzer" ];
-              initialization = {
-                cargo = {
-                  features = "all";
-                  targetDir = true;
-                };
-              };
-            };
-
-            permission.external_directory = {
-              "~/work/**" = "allow";
-            };
-          };
         };
 
         git.ignores = [
@@ -44,8 +28,6 @@
           ".codex"
         ];
       };
-
-      home.sessionVariables.OPENCODE_DISABLE_LSP_DOWNLOAD = "true";
 
       # amp
       home.packages = [ pkgs.llm-agents.amp ];
