@@ -64,6 +64,13 @@
                 auto-document-highlight = true;
                 goto-reference-include-declaration = false;
               };
+
+              workspace-trust = {
+                globs = [
+                  "~/work/**"
+                  "~/dev/**"
+                ];
+              };
             };
 
           keys =
