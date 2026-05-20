@@ -1,4 +1,5 @@
-#!/usr/bin/env nu
+#!/usr/bin/env nix-shell
+#!nix-shell -i nu -p nushell nh
 
 const root = path self .
 
@@ -15,7 +16,9 @@ def --wrapped "main switch" [...$args] {
     "NixOS" => "os"
   }
 
-  nh $host switch $root ...$args
+  with-env { NIX_CONFIG: "extra-experimental-features = flakes nix-command pipe-operators" } {
+    nh $host switch $root ...$args
+  }
 }
 
 # Update the flake's inputs and make a commit out of the changes.

@@ -14,7 +14,6 @@
           fzf
           hyperfine
           jq
-          nh
           nprt
           okapi-ed
           python314
