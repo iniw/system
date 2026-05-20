@@ -28,7 +28,7 @@ in
 
           settings = {
             ui = {
-              default-command = "status";
+              default-command = "log";
               movement.edit = true;
               merge-editor = "meld";
             };
