@@ -78,9 +78,9 @@
               shared-keys =
                 let
                   keys-with-prefix = prefix: {
-                    A-w = "${prefix}_next_sub_word_start";
-                    A-e = "${prefix}_next_sub_word_end";
-                    A-b = "${prefix}_prev_sub_word_start";
+                    C-w = "${prefix}_next_sub_word_start";
+                    C-e = "${prefix}_next_sub_word_end";
+                    C-b = "${prefix}_prev_sub_word_start";
                     tab = "${prefix}_parent_node_end";
                     S-tab = "${prefix}_parent_node_start";
 
