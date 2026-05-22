@@ -25,11 +25,12 @@ let
 in
 {
   darwinSystem =
-    module: host:
+    mainModule: host:
     let
       hostModules = modules.forHost host;
 
-      homeManagerImports = {
+      homeManagerModule = {
+        imports = [ inputs.home-manager.darwinModules.home-manager ];
         home-manager.users.${user}.imports =
           (modules.common.homeManagerModules or [ ])
           ++ (hostModules.homeManagerModules or [ ])
@@ -45,19 +46,19 @@ in
           ++ (hostModules.systemModules or [ ])
           ++ (modules.common.darwinSystemModules or [ ])
           ++ [
-            module
-            homeManagerImports
-            inputs.home-manager.darwinModules.home-manager
+            mainModule
+            homeManagerModule
           ];
       };
     };
 
   nixosSystem =
-    module: host:
+    mainModule: host:
     let
       hostModules = modules.forHost host;
 
-      homeManagerImports = {
+      homeManagerModule = {
+        imports = [ inputs.home-manager.nixosModules.home-manager ];
         home-manager.users.${user}.imports =
           (modules.common.homeManagerModules or [ ])
           ++ (hostModules.homeManagerModules or [ ])
@@ -73,9 +74,8 @@ in
           ++ (hostModules.systemModules or [ ])
           ++ (modules.common.nixosSystemModules or [ ])
           ++ [
-            module
-            homeManagerImports
-            inputs.home-manager.nixosModules.home-manager
+            mainModule
+            homeManagerModule
           ];
       };
     };
