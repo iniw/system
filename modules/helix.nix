@@ -422,13 +422,6 @@
 
           language = [
             {
-              name = "python";
-              language-servers = [
-                "pyright"
-                "ruff"
-              ];
-            }
-            {
               name = "sql";
               formatter.command = "sql-formatter";
             }
