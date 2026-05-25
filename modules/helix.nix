@@ -393,11 +393,6 @@
               ];
             };
 
-            biome = {
-              command = "biome";
-              args = [ "lsp-proxy" ];
-            };
-
             vtsls = {
               command = "vtsls";
               args = [ "--stdio" ];
@@ -428,7 +423,7 @@
             {
               name = "css";
               language-servers = [
-                "biome"
+                "biome-lsp-proxy"
                 "vscode-css-language-server"
                 "tailwindcss-ls"
               ];
@@ -436,14 +431,14 @@
             {
               name = "json";
               language-servers = [
-                "biome"
+                "biome-lsp-proxy"
                 "vscode-json-language-server"
               ];
             }
             {
               name = "jsonc";
               language-servers = [
-                "biome"
+                "biome-lsp-proxy"
                 "vscode-json-language-server"
               ];
             }
@@ -457,7 +452,7 @@
             {
               name = "javascript";
               language-servers = [
-                "biome"
+                "biome-lsp-proxy"
                 "vtsls"
               ];
               code-actions-on-save = [ "source.organizeImports.biome" ];
@@ -465,7 +460,7 @@
             {
               name = "jsx";
               language-servers = [
-                "biome"
+                "biome-lsp-proxy"
                 "vtsls"
                 "tailwindcss-ls"
               ];
@@ -474,7 +469,7 @@
             {
               name = "typescript";
               language-servers = [
-                "biome"
+                "biome-lsp-proxy"
                 "vtsls"
               ];
               code-actions-on-save = [ "source.organizeImports.biome" ];
@@ -482,7 +477,7 @@
             {
               name = "tsx";
               language-servers = [
-                "biome"
+                "biome-lsp-proxy"
                 "vtsls"
                 "tailwindcss-ls"
               ];
