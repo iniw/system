@@ -397,20 +397,7 @@
               command = "vtsls";
               args = [ "--stdio" ];
               config = {
-                hostInfo = "helix";
-                typescript.inlayHints = {
-                  enumMemberValues.enabled = true;
-                  functionLikeReturnTypes.enabled = true;
-                  parameterNames.enabled = "literals";
-                  parameterTypes.enabled = true;
-                  propertyDeclarationTypes.enabled = true;
-                  variableTypes.enabled = true;
-                };
-                typescript.updateImportsOnFileMove.enabled = "always";
-                vtsls = {
-                  autoUseWorkspaceTsdk = true;
-                  experimental.maxInlayHintLength = 30;
-                };
+                vtsls.autoUseWorkspaceTsdk = true;
               };
             };
           };
