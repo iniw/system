@@ -38,7 +38,7 @@ in
             };
 
             revsets = {
-              bookmark-advance-to = "heads(first_ancestors(@) & ~empty())";
+              bookmark-advance-to = ''heads(::@ & mutable() & ~description(exact:"") & (~empty() | merges()))'';
             };
 
             aliases = {
