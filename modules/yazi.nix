@@ -15,7 +15,7 @@
 
           keymap.mgr.prepend_keymap = [
             {
-              run = ''shell -- ya emit cd "$(git rev-parse --show-toplevel)"'';
+              run = ''shell -- ya emit cd "$(jj workspace root)"'';
               on = [
                 "g"
                 "r"
