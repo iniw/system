@@ -23,8 +23,8 @@
           let
             open-yazi = expansion: [
               ":sh rm -f /tmp/yazi-chooser-file"
-              ":insert-output yazi %{${expansion}} --chooser-file=/tmp/yazi-chooser-file"
-              '':insert-output echo "[?1049h[?2004h" > /dev/tty''
+              '':insert-output yazi "%{${expansion}}" --chooser-file=/tmp/yazi-chooser-file''
+              ":sh printf '\033[?1049h\033[?2004h' > /dev/tty"
               ":open %sh{cat /tmp/yazi-chooser-file}"
               ":redraw"
               ":set mouse false"
