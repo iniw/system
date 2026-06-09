@@ -38,7 +38,8 @@
   outputs =
     inputs:
     let
-      lib = inputs.nixpkgs.lib;
+      inherit (inputs.nixpkgs) lib;
+
       sys = import ./lib/sys.nix inputs;
 
       configurations =
