@@ -32,5 +32,6 @@
       # amp
       home.packages = [ pkgs.llm-agents.amp ];
       xdg.configFile."amp/AGENTS.md".source = ./AGENTS.md;
+      xdg.configFile."amp/skills".source = ./skills;
     };
 }
