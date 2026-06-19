@@ -66,7 +66,7 @@
               };
 
               workspace-trust = {
-                globs = [
+                trusted = [
                   "~/work/**"
                   "~/dev/**"
                 ];
