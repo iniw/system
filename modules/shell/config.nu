@@ -1,50 +1,5 @@
 $env.config.keybindings ++= [
   {
-    name: fzf_command_picker
-    modifier: control
-    keycode: char_r
-    mode: emacs
-    event: {
-      send: executehostcommand
-      cmd: "commandline edit --replace (
-        history
-        | get command
-        | reverse
-        | uniq
-        | str join (char -i 0)
-        | fzf --scheme history --height '~30%' --read0 --query (commandline)
-        | decode utf-8
-        | str trim
-      )"
-    }
-  },
-  {
-    name: fzf_file_picker
-    modifier: control
-    keycode: char_t
-    mode: emacs
-    event: {
-      send: executehostcommand
-      cmd: "commandline edit --insert (
-          fd --hidden --follow --exclude .git --exclude .jj
-        | fzf --scheme path --height '~30%' --preview 'bat --style plain --color always {}'
-      )"
-    }
-  },
-  {
-    name: fzf_dir_picker
-    modifier: alt
-    keycode: char_c
-    mode: emacs
-    event: {
-      send: executehostcommand
-      cmd: "cd (
-          fd --type directory --hidden --follow --exclude .git --exclude .jj
-        | fzf --scheme path --height '~30%'
-      )"
-    }
-  },
-  {
     name: unfreeze_job
     modifier: control
     keycode: char_z

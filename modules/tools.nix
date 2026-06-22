@@ -11,7 +11,6 @@
           ansifilter
           ast-grep
           fd
-          fzf
           hyperfine
           jq
           nprt
@@ -61,6 +60,17 @@
         };
 
         carapace.enable = true;
+
+        fzf =
+          let
+            fd = "${pkgs.lib.getExe pkgs.fd} --hidden --follow --exclude .git --exclude .jj";
+          in
+          {
+            enable = true;
+
+            changeDirWidgetCommand = "${fd} --type directory";
+            fileWidgetCommand = fd;
+          };
 
         less = {
           enable = true;
