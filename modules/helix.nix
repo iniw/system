@@ -110,13 +110,6 @@
             in
             {
               normal = lib.recursiveUpdate shared-keys.normal {
-                space = {
-                  f = "file_picker_in_current_directory";
-                  F = "file_picker";
-                  e = "file_explorer_in_current_buffer_directory";
-                  E = "file_explorer_in_current_directory";
-                };
-
                 g =
                   let
                     in-split = action: [
