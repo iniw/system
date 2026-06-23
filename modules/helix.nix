@@ -435,7 +435,10 @@
                 "biome-lsp-proxy"
                 "vtsls"
               ];
-              code-actions-on-save = [ "source.organizeImports.biome" ];
+              code-actions-on-save = [
+                "source.organizeImports.biome"
+                "source.fixAll.biome"
+              ];
             }
             {
               name = "jsx";
@@ -444,7 +447,10 @@
                 "vtsls"
                 "tailwindcss-ls"
               ];
-              code-actions-on-save = [ "source.organizeImports.biome" ];
+              code-actions-on-save = [
+                "source.organizeImports.biome"
+                "source.fixAll.biome"
+              ];
             }
             {
               name = "typescript";
@@ -452,7 +458,10 @@
                 "biome-lsp-proxy"
                 "vtsls"
               ];
-              code-actions-on-save = [ "source.organizeImports.biome" ];
+              code-actions-on-save = [
+                "source.organizeImports.biome"
+                "source.fixAll.biome"
+              ];
             }
             {
               name = "tsx";
@@ -461,7 +470,10 @@
                 "vtsls"
                 "tailwindcss-ls"
               ];
-              code-actions-on-save = [ "source.organizeImports.biome" ];
+              code-actions-on-save = [
+                "source.organizeImports.biome"
+                "source.fixAll.biome"
+              ];
             }
           ];
         };
