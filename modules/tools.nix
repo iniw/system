@@ -7,7 +7,6 @@
     {
       home = {
         packages = with pkgs; [
-          # General tools
           ansifilter
           ast-grep
           fd
@@ -18,26 +17,9 @@
           python314
           ripgrep
           scc
-
-          # System-wide LSP support for languages used everywhere.
-
-          # Nix
-          nixd
-          nixfmt
-          # Markdown
-          marksman
-          # Toml
-          tombi
-          # Yaml
-          yaml-language-server
-          yamlfmt # FIXME: Remove once https://github.com/helix-editor/helix/issues/15576 is fixed
-          helm-ls
         ];
 
-        sessionVariables = {
-          MANPAGER = pkgs.writeShellScript "manpager" "col -bx | bat --language man --style plain";
-          CARAPACE_LENIENT = "1";
-        };
+        sessionVariables.CARAPACE_LENIENT = "1";
       };
 
       programs = {
@@ -93,22 +75,5 @@
 
       # ignored files list used by rg, fd, etc.
       programs.git.ignores = [ ".ignore" ];
-
-      xdg.configFile."yamlfmt/yamlfmt.yaml".text = # yaml
-        ''
-          formatter:
-            retain_line_breaks_single: true
-        '';
     };
-
-  darwinHomeManagerModule = {
-    # See: https://github.com/NixOS/nixpkgs/issues/456879
-    home.shellAliases.man = "env DEVELOPER_DIR= SDKROOT= man";
-  };
-
-  nixosHomeManagerModule = {
-    # GNU groff emits SGR escapes by default, but our MANPAGER runs `col -bx`,
-    # which only cleans up the classic backspace formatting that grotty -c produces.
-    home.sessionVariables.MANROFFOPT = "-P-c";
-  };
 }
