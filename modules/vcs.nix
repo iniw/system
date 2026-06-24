@@ -38,7 +38,10 @@ in
             };
 
             revsets = {
-              bookmark-advance-to = ''heads(::@ & mutable() & ~description(exact:"") & (~empty() | merges()))'';
+              bookmark-advance-to =
+                # From: https://github.com/jj-vcs/jj/issues/9055#issuecomment-4024269740
+                # jujutsu
+                ''heads(::@ & mutable() & ~description(exact:"") & (~empty() | merges()))'';
             };
 
             aliases = {
@@ -48,7 +51,7 @@ in
                 "-r"
                 "::"
               ];
-              # "Log trunk", shows all revisions in trunk()
+              # "Log trunk", shows all revisions in `trunk()`
               lt = [
                 "log"
                 "-r"
@@ -61,8 +64,10 @@ in
                 "--"
                 "bash"
                 "-c"
+                # bash
                 ''
                   set -euo pipefail
+
                   jj git remote list | awk '{print $1}' | while read -r remote; do
                     jj git push --remote "$remote" "$@"
                   done
@@ -77,19 +82,51 @@ in
                 "--"
                 "bash"
                 "-c"
+                # bash
                 ''
                   set -euo pipefail
+
                   original=$(jj git remote list | awk '/^origin /{print $2}')
+
                   gh repo fork
                   gh repo set-default "$original"
+
                   jj config set --repo git.fetch '["upstream", "origin"]'
                   jj config set --repo git.push origin
+
                   trunk=$(jj config get 'revset-aliases."trunk()"')
                   trunk_bookmark="''${trunk%%@*}"
+
                   jj config set --repo 'revset-aliases."trunk()"' "''${trunk/origin/upstream}"
                   jj git fetch
                   jj bookmark track "$trunk_bookmark" --remote upstream
                 ''
+              ];
+              # Squash-merges a branch into a new change on top of `trunk()`
+              squash-branch = [
+                "util"
+                "exec"
+                "--"
+                "bash"
+                "-c"
+                # bash
+                ''
+                  set -euo pipefail
+
+                  if [ "$#" -ne 1 ]; then
+                    echo "usage: jj merge-pr <bookmark>" >&2
+                    exit 2
+                  fi
+
+                  bookmark="$1"
+                  author=$(jj log --no-graph -r "$bookmark" -T 'author')
+
+                  jj new 'trunk()'
+                  jj duplicate "trunk()..$bookmark" -o @
+                  jj squash --from '@::' --into @
+                  jj metaedit --author "$author" -r @
+                ''
+                ""
               ];
             };
 
