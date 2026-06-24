@@ -1,3 +1,5 @@
+# Global User Preferences
+
 ## Tool Availability
 
 Most projects being worked on will have a nix devShell - make sure to use it by prefixing commands

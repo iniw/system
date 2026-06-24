@@ -9,7 +9,7 @@
         nixfmt
 
         # Markdown
-        marksman
+        rumdl
 
         # Toml
         tombi
@@ -19,6 +19,12 @@
         yamlfmt # FIXME: Remove once https://github.com/helix-editor/helix/issues/15576 is fixed
         helm-ls
       ];
+
+      xdg.configFile."rumdl/rumdl.toml".text = # toml
+        ''
+          [global]
+          line-length = 120
+        '';
 
       xdg.configFile."yamlfmt/yamlfmt.yaml".text = # yaml
         ''
