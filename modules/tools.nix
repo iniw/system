@@ -50,8 +50,8 @@
           {
             enable = true;
 
-            changeDirWidgetCommand = "${fd} --type directory";
-            fileWidgetCommand = fd;
+            changeDirWidget.command = "${fd} --type directory";
+            fileWidget.command = fd;
           };
 
         less = {
