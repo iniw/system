@@ -32,6 +32,8 @@
         };
 
       home = {
+        sessionVariables.NU_EXPERIMENTAL_OPTIONS = "native-clip";
+
         shell.enableZshIntegration = false;
         file.".hushlogin".text = "";
       };

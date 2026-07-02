@@ -70,37 +70,6 @@ def --env "grab dir" [path: string]: nothing -> nothing {
   cd $path
 }
 
-# Interact with the system clipboard from the shell.
-#
-# When used in a pipeline, it pipes `$in` to the system clipboard handler (pbcopy/wl-copy).
-# Otherwise, it simply returns the current clipboard as a string.
-@example "Copy the output of a value/command" { ls | klip }
-@example "Return the current clipboard" { klip } --result "{clipboard content}"
-def klip []: [
-  any -> any,
-  nothing -> string
-] {
-  # Save $in to a variable to avoid it being replaced.
-  let input = $in;
-
-  let clipboard = match (sys host | get name) {
-    "Darwin" => {
-      copy: "pbcopy"
-      paste: "pbpaste"
-    }
-    "NixOS" => {
-      copy: "wl-copy"
-      paste: "wl-paste"
-    }
-  }
-
-  if $input == null {
-    ^($clipboard.paste)
-  } else {
-    $input | ^($clipboard.copy)
-  }
-}
-
 # Returns the output of the "builtins.currentSystem" nix expression.
 @example "Build the default package for a flake" { nix build .#packages.(nix-system).default }
 def nix-system []: nothing -> string {
