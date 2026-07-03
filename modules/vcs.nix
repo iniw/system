@@ -114,7 +114,7 @@ in
                   set -euo pipefail
 
                   if [ "$#" -ne 1 ]; then
-                    echo "usage: jj merge-pr <bookmark>" >&2
+                    echo "usage: jj squash-branch <bookmark>" >&2
                     exit 2
                   fi
 
