@@ -1,23 +1,25 @@
 {
   homeManagerModule =
     { pkgs, inputs, ... }:
-    let
-      nprt = inputs.nixpkgs-pr-tracker.packages.${pkgs.stdenv.hostPlatform.system}.nprt;
-    in
     {
       home = {
-        packages = with pkgs; [
-          ansifilter
-          ast-grep
-          fd
-          hyperfine
-          jq
-          nprt
-          okapi-ed
-          python314
-          ripgrep
-          scc
-        ];
+        packages =
+          let
+            nprt = inputs.nixpkgs-pr-tracker.packages.${pkgs.stdenv.hostPlatform.system}.nprt;
+          in
+          with pkgs;
+          [
+            ansifilter
+            ast-grep
+            fd
+            hyperfine
+            jq
+            nprt
+            okapi-ed
+            python314
+            ripgrep
+            scc
+          ];
 
         sessionVariables.CARAPACE_LENIENT = "1";
       };
