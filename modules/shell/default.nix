@@ -21,19 +21,13 @@
             initContent = # zsh
               ''
                 if [[ -z $ZSH_EXECUTION_STRING && $TERM != dumb ]]; then
-                  if [[ -o login ]]; then
-                    exec ${nu} --login
-                  else
-                    exec ${nu}
-                  fi
+                  exec ${nu} --experimental-options native-clip
                 fi
               '';
           };
         };
 
       home = {
-        sessionVariables.NU_EXPERIMENTAL_OPTIONS = "native-clip";
-
         shell.enableZshIntegration = false;
         file.".hushlogin".text = "";
       };
