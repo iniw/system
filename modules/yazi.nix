@@ -18,6 +18,14 @@
         ];
       };
 
+      nushell.extraConfig = # nu
+        ''
+          # Like `which`, but it opens the resulting paths with `yazi`.
+          def yich [...applications: string]: nothing -> nothing {
+            y ...(which ...$applications | get path)
+          }
+        '';
+
       helix.settings.keys = {
         normal.ret =
           let

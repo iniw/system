@@ -91,8 +91,3 @@ def flac2alac [folder: path]: nothing -> nothing {
   }
   | ignore
 }
-
-# Like `which`, but it opens the resulting paths with `yazi`.
-def yich [...applications: string]: nothing -> nothing {
-  y ...(which ...$applications | get path)
-}
