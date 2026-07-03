@@ -12,6 +12,7 @@
             ansifilter
             ast-grep
             fd
+            ffmpeg
             hyperfine
             jq
             nprt

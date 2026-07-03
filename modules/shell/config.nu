@@ -76,18 +76,36 @@ def nix-system []: nothing -> string {
    nix eval --raw --impure --expr "builtins.currentSystem"
 }
 
-# Converts every flac file in the given folder to alac/m4a.
-def flac2alac [folder: path]: nothing -> nothing {
-  glob ($folder | path join "**" "*.flac") --no-dir
+# Converts every file of format `$from` in the given `$folder` to format `$to` using ffmpeg.
+export def musiconv [
+  folder: path,        # The folder in which to recursively look for files.
+  --from (-f): string, # The format to convert from.
+  --to (-t): string,   # The format to convert to.
+  --keep (-k),         # Keep the original files instead of deleting them.
+]: nothing -> nothing {
+  fd $"*.($from)" $folder --glob
+  | lines
   | group-by { |file| $file | path dirname }
-  | items { |folder, flacs|
-    cd $folder
+  | items { |folder, files|
+      let conversions = $files
+        | each { |file|
+            let out_file = $file | path parse | update extension $to | path join
 
-    let flacs = $flacs | path basename
-    $flacs | each { |file| xld -f alac $file } | ignore
-    rm ...$flacs
+            try {
+              ffmpeg -y -v error -i $file $out_file
+              $file
+            } catch {
+              print $"(ansi red)Failed to convert ($file)(ansi reset)"
+              null
+            }
+        }
+        | compact
 
-    print $"Converted flacs in '($folder)'"
+      if $keep == false {
+        rm ...$conversions | ignore
+      }
+
+      print $"Converted ($conversions | length)/($files | length) ($from) songs in '($folder | ansi link)'"
   }
   | ignore
 }

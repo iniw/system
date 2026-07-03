@@ -8,7 +8,6 @@
         mos
         net-news-wire
         reflex-app
-        xld
       ];
     };
 }
