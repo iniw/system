@@ -23,6 +23,8 @@
           ];
 
         sessionVariables.CARAPACE_LENIENT = "1";
+
+        shellAliases.ns = "nix shell --impure -f '<nixpkgs>'";
       };
 
       programs = {
