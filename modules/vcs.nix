@@ -119,12 +119,15 @@ in
                   fi
 
                   bookmark="$1"
-                  author=$(jj log --no-graph -r "$bookmark" -T 'author')
+                  author=$(jj log --no-graph --revision "$bookmark" --template 'author')
+                  trunk=$(jj config get 'revset-aliases."trunk()"')
+                  trunk_bookmark="''${trunk%%@*}"
 
-                  jj new 'trunk()'
-                  jj duplicate "trunk()..$bookmark" -o @
+                  jj new "$trunk_bookmark"
+                  jj duplicate "$trunk_bookmark..$bookmark" --onto @
                   jj squash --from '@::' --into @
-                  jj metaedit --author "$author" -r @
+
+                  jj metaedit --author "$author"
                 ''
                 ""
               ];
