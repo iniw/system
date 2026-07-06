@@ -15,6 +15,8 @@ $env.config.show_banner = false
 
 $env.config.use_kitty_protocol = true
 
+$env.config.table.mode = "single"
+
 # A recreation of oh-my-zsh's `take` function.
 #
 # Based on the given `url` parameter, it produces an "output folder" by doing one of the following things:
