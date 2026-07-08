@@ -79,14 +79,14 @@ def nix-system []: nothing -> string {
 }
 
 # Converts every file of format `$from` in the given `$folder` to format `$to` using ffmpeg.
-export def musiconv [
+def musiconv [
   folder: path,        # The folder in which to recursively look for files.
   --from (-f): string, # The format to convert from.
   --to (-t): string,   # The format to convert to.
   --keep (-k),         # Keep the original files instead of deleting them.
 ]: nothing -> nothing {
-  fd $"*.($from)" $folder --glob
-  | lines
+  ls ($folder | path join $"**/*.($from)" | into glob)
+  | get name
   | group-by { |file| $file | path dirname }
   | items { |folder, files|
       let conversions = $files
