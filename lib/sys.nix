@@ -6,8 +6,7 @@ let
     let
       collectModules =
         path:
-        path
-        |> builtins.readDir
+        builtins.readDir path
         |> lib.mapAttrsToList (name: _: import "${path}/${name}")
         |> lib.zipAttrs
         |> lib.mapAttrs' (name: lib.nameValuePair "${name}s");

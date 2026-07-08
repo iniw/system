@@ -43,8 +43,7 @@
       sys = import ./lib/sys.nix inputs;
 
       configurations =
-        ./hosts
-        |> builtins.readDir
+        builtins.readDir ./hosts
         |> lib.mapAttrsToList (name: _: import ./hosts/${name} sys name)
         |> lib.foldr lib.recursiveUpdate { };
     in
