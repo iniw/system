@@ -2,7 +2,11 @@
   homeManagerModule =
     { pkgs, ... }:
     {
-      home.sessionVariables.MANPAGER = pkgs.writeShellScript "manpager" "col -bx | bat --language man --style plain";
+      home.sessionVariables.MANPAGER =
+        let
+          bat = pkgs.lib.getExe pkgs.bat;
+        in
+        pkgs.writeShellScript "manpager" "col -bx | ${bat} --language man --style plain";
     };
 
   darwinHomeManagerModule = {
