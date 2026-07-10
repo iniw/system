@@ -80,10 +80,10 @@ def nix-system []: nothing -> string {
 
 # Converts every file of format `$from` in the given `$folder` to format `$to` using ffmpeg.
 def musiconv [
-  folder: path,        # The folder in which to recursively look for files.
-  --from (-f): string, # The format to convert from.
-  --to (-t): string,   # The format to convert to.
-  --keep (-k),         # Keep the original files instead of deleting them.
+  folder: path,                 # The folder in which to recursively look for files.
+  --from (-f): string = "flac", # The format to convert from.
+  --to (-t): string = "alac",   # The format to convert to.
+  --keep (-k),                  # Keep the original files instead of deleting them.
 ]: nothing -> nothing {
   let output = if $to == "alac" {
     { extension: "m4a", extra_args: ["-acodec", "alac"] }
