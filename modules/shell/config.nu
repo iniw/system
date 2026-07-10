@@ -88,9 +88,10 @@ def musiconv [
   ls ($folder | path join $"**/*.($from)" | into glob)
   | get name
   | group-by { |file| $file | path dirname }
-  | items { |folder, files|
-      let conversions = $files
-        | each { |file|
+  | transpose folder files
+  | par-each { |group|
+      let conversions = $group.files
+        | par-each { |file|
             let out_file = $file | path parse | update extension $to | path join
 
             try {
@@ -103,11 +104,11 @@ def musiconv [
         }
         | compact
 
-      if $keep == false {
-        rm ...$conversions | ignore
+      if $keep == false and not ($conversions | is-empty) {
+        rm ...$conversions
       }
 
-      print $"Converted ($conversions | length)/($files | length) ($from) songs in '($folder | ansi link)'"
+      print $"Converted ($conversions | length)/($group.files | length) ($from) songs in '($group.folder | ansi link)'"
   }
   | ignore
 }
