@@ -85,6 +85,12 @@ def musiconv [
   --to (-t): string,   # The format to convert to.
   --keep (-k),         # Keep the original files instead of deleting them.
 ]: nothing -> nothing {
+  let output = if $to == "alac" {
+    { extension: "m4a", extra_args: ["-acodec", "alac"] }
+  } else {
+    { extension: $to, extra_args: [] }
+  }
+
   ls ($folder | path join $"**/*.($from)" | into glob)
   | get name
   | group-by { |file| $file | path dirname }
@@ -92,10 +98,10 @@ def musiconv [
   | par-each { |group|
       let conversions = $group.files
         | par-each { |file|
-            let out_file = $file | path parse | update extension $to | path join
+            let out_file = $file | path parse | update extension $output.extension | path join
 
             try {
-              ffmpeg -y -v error -i $file $out_file
+              ffmpeg -y -v error -i $file ...$output.extra_args $out_file
               $file
             } catch {
               print $"(ansi red)Failed to convert ($file)(ansi reset)"
