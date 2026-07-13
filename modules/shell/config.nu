@@ -86,7 +86,7 @@ def musiconv [
   --keep (-k),                  # Keep the original files instead of deleting them.
 ]: nothing -> nothing {
   let output = if $to == "alac" {
-    { extension: "m4a", extra_args: ["-acodec", "alac"] }
+    { extension: "m4a", extra_args: ["-codec:a", "alac"] }
   } else {
     { extension: $to, extra_args: [] }
   }
@@ -101,7 +101,7 @@ def musiconv [
             let out_file = $file | path parse | update extension $output.extension | path join
 
             try {
-              ffmpeg -y -v error -i $file ...$output.extra_args $out_file
+              ffmpeg -y -v error -i  $file ...$output.extra_args -codec:v copy $out_file
               $file
             } catch {
               print $"(ansi red)Failed to convert ($file)(ansi reset)"
