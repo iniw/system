@@ -1,14 +1,14 @@
-# Global User Preferences
+# Global User Guidance
 
 ## Tool Availability
 
-Most projects being worked on will have a nix devShell - make sure to use it by prefixing commands
+Most projects being worked on will have a nix development shell - make sure to use it by prefixing commands
 with `nix develop -c`, this ensures the project's dependencies and build tools are available.
 
 Note that system-level tools (e.g `rg`, `find`, `jj`, `git`, `kubectl`, ...) don't need to go through `nix develop -c`,
 only toolchain and project-specific tools (e.g: `cargo`, `uv`, `node`, `cmake`, ...).
 
-If a package useful for troubleshooting or one-off tasks is not installed globally and not available in the devShell,
+If a package useful for troubleshooting or one-off tasks is not installed globally and not available in the devshell,
 use `nix-shell -p "${package}" --quiet --command "${command}"` to run it ephemerally.
 
 ## Version Control
@@ -29,9 +29,6 @@ Functions make sense when they:
 
 - Hide details that would distract from the callsite's flow;
 - Are used in multiple places.
-
-Do not be afraid of long, monolithic functions. A longer function with clear, logical sections surrounded by comments
-contextualizing each of them are easier to read than a chain of very small, trivial helpers.
 
 If the language supports it, use block expressions to keep temporary variables scoped to the part of the procedure that
 needs them. This reduces cognitive load by limiting the number of names in scope at a given point.
