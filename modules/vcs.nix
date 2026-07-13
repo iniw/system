@@ -38,10 +38,17 @@ in
             };
 
             revsets = {
+              bookmark-advance-from = # jujutsu
+                ''
+                  heads(::to & bookmarks() & ~immutable())
+                '';
+
               bookmark-advance-to =
                 # From: https://github.com/jj-vcs/jj/issues/9055#issuecomment-4024269740
                 # jujutsu
-                ''heads(::@ & mutable() & ~description(exact:"") & (~empty() | merges()))'';
+                ''
+                  heads(::@ & mutable() & ~description(exact:"") & (~empty() | merges()))
+                '';
             };
 
             aliases = {
@@ -119,7 +126,9 @@ in
                   fi
 
                   bookmark="$1"
+
                   author=$(jj log --no-graph --revision "$bookmark" --template 'author')
+
                   trunk=$(jj config get 'revset-aliases."trunk()"')
                   trunk_bookmark="''${trunk%%@*}"
 
