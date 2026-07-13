@@ -30,7 +30,7 @@
               completion-timeout = 5;
               completion-trigger-len = 1;
               cursorline = true;
-              end-of-line-diagnostics = "hint";
+              end-of-line-diagnostics = "disable";
               line-number = "relative";
               trim-final-newlines = true;
               trim-trailing-whitespace = true;
