@@ -80,16 +80,21 @@ def nix-system []: nothing -> string {
 
 # Converts every file of format `$from` in the given `$folder` to format `$to` using ffmpeg.
 def musiconv [
-  folder: path,                 # The folder in which to recursively look for files.
-  --from (-f): string = "flac", # The format to convert from.
-  --to (-t): string = "alac",   # The format to convert to.
-  --keep (-k),                  # Keep the original files instead of deleting them.
+  folder: path,         # The folder in which to recursively look for files.
+  --from (-f): string,  # The format to convert from.
+  --to (-t): string,    # The format to convert to.
+  --codec (-c): string, # The audio codec to use; defaults to the output format.
+  --keep (-k),          # Keep the original files instead of deleting them.
 ]: nothing -> nothing {
-  let output = if $to == "alac" {
-    { extension: "m4a", extra_args: ["-codec:a", "alac"] }
-  } else {
-    { extension: $to, extra_args: [] }
+  if $from == null {
+    error make { msg: "The --from parameter is required" }
   }
+
+  if $to == null {
+    error make { msg: "The --to parameter is required" }
+  }
+
+  let codec = $codec | default $to
 
   ls ($folder | path join $"**/*.($from)" | into glob)
   | get name
@@ -98,21 +103,28 @@ def musiconv [
   | par-each { |group|
       let conversions = $group.files
         | par-each { |file|
-            let out_file = $file | path parse | update extension $output.extension | path join
+            let out_file = $file | path parse | update extension $to | path join
 
             try {
-              ffmpeg -y -v error -i  $file ...$output.extra_args -codec:v copy $out_file
+              ffmpeg -y -v error -i $file -codec:a $codec -codec:v copy $out_file
+
+              if $keep == false {
+                rm $file
+              }
+
               $file
             } catch {
               print $"(ansi red)Failed to convert ($file)(ansi reset)"
+
+              # ffmpeg may still generate a 0 byte output file when it fails to convert
+              if ($out_file | path exists) {
+                rm $out_file
+              }
+
               null
             }
         }
         | compact
-
-      if $keep == false and not ($conversions | is-empty) {
-        rm ...$conversions
-      }
 
       print $"Converted ($conversions | length)/($group.files | length) ($from) songs in '($group.folder | ansi link)'"
   }
