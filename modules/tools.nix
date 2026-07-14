@@ -1,4 +1,19 @@
 {
+  systemModule = {
+    nixpkgs.overlays = [
+      (final: prev: {
+        fzf = prev.fzf.overrideAttrs {
+          patches = [
+            (final.fetchpatch {
+              url = "https://github.com/junegunn/fzf/commit/24832e97ef9640e5f859ede8dc163cf3c27145cb.patch";
+              hash = "sha256-Ul4IphXeWB3evUy/X0pj6vNzKEoPGwaY53pdjZTGG+8=";
+            })
+          ];
+        };
+      })
+    ];
+  };
+
   homeManagerModule =
     { pkgs, inputs, ... }:
     {
