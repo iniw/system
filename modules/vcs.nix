@@ -93,19 +93,19 @@ in
                 ''
                   set -euo pipefail
 
-                  original=$(jj git remote list | awk '/^origin /{print $2}')
-
-                  gh repo fork
-                  gh repo set-default "$original"
-
-                  jj config set --repo git.fetch '["upstream", "origin"]'
-                  jj config set --repo git.push origin
-
                   trunk=$(jj config get 'revset-aliases."trunk()"')
                   trunk_bookmark="''${trunk%%@*}"
+                  trunk_remote="''${trunk##*@}"
 
-                  jj config set --repo 'revset-aliases."trunk()"' "''${trunk/origin/upstream}"
+                  gh repo set-default "$trunk_remote"
+                  gh repo fork --remote-name "$trunk_remote"
+
+                  jj config set --repo git.fetch "['$trunk_remote', 'upstream']"
+                  jj config set --repo git.push "$trunk_remote"
+                  jj config set --repo 'revset-aliases."trunk()"' "$trunk_bookmark@upstream"
+
                   jj git fetch
+
                   jj bookmark track "$trunk_bookmark" --remote upstream
                 ''
               ];
