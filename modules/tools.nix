@@ -24,7 +24,6 @@
           in
           with pkgs;
           [
-            ansifilter
             ast-grep
             fd
             ffmpeg
