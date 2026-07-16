@@ -40,7 +40,10 @@ in
             revsets = {
               bookmark-advance-from = # jujutsu
                 ''
-                  heads(::to & bookmarks() & ~immutable())
+                  coalesce(
+                    heads(::to & bookmarks() & ~immutable()),
+                    heads(::to & bookmarks()),
+                  )
                 '';
 
               bookmark-advance-to =
