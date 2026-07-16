@@ -390,14 +390,6 @@
               # Supresses "Unknown at rule @theme" when using tailwind.
               css.lint.unknownAtRules = "ignore";
             };
-
-            vtsls = {
-              command = "vtsls";
-              args = [ "--stdio" ];
-              config = {
-                vtsls.autoUseWorkspaceTsdk = true;
-              };
-            };
           };
 
           language = [
