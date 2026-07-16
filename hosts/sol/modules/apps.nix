@@ -9,6 +9,8 @@
         WhatsApp = 310633997;
         Xcode = 497799835;
       };
+
+      update = false;
     };
   };
 
