@@ -134,7 +134,7 @@ in
 
                   jj new "$trunk_bookmark"
                   jj duplicate "$trunk_bookmark..$bookmark" --onto @
-                  jj squash --from '@::' --into @
+                  jj squash --from '@::' --into @ --editor
 
                   jj metaedit --author "$author"
                 ''
