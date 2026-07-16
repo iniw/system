@@ -386,6 +386,11 @@
               ];
             };
 
+            vscode-css-language-server.config = {
+              # Supresses "Unknown at rule @theme" when using tailwind.
+              css.lint.unknownAtRules = "ignore";
+            };
+
             vtsls = {
               command = "vtsls";
               args = [ "--stdio" ];
