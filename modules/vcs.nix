@@ -67,81 +67,80 @@ in
                 "-r"
                 "::trunk()"
               ];
-              # Pushes to every remote in the current repo
               pusha = [
                 "util"
                 "exec"
                 "--"
-                "bash"
-                "-c"
-                # bash
-                ''
-                  set -euo pipefail
+                (pkgs.writers.writeNu "jj-pusha" ''
 
-                  jj git remote list | awk '{print $1}' | while read -r remote; do
-                    jj git push --remote "$remote" "$@"
-                  done
-                ''
-                ""
+                  # Pushes to every remote in the current repo.
+                  def --wrapped main [
+                    ...arguments: string # Arguments to forward to each `jj git push` invocation.
+                  ] {
+                    if ('--help' in $arguments) or ('-h' in $arguments) {
+                      return (help main)
+                    }
+
+                    let remotes = jj git remote list
+                      | lines
+                      | parse '{remote} {url}'
+                      | get remote
+
+                    for remote in $remotes {
+                      jj git push --remote $remote ...$arguments
+                    }
+                  }
+                '')
               ];
-              # Forks the current repo and configures jj for multi-remote workflow
-              # See: https://docs.jj-vcs.dev/latest/guides/multiple-remotes/#contributing-upstream-with-a-github-style-fork
               fork = [
                 "util"
                 "exec"
                 "--"
-                "bash"
-                "-c"
-                # bash
-                ''
-                  set -euo pipefail
+                (pkgs.writers.writeNu "jj-fork" ''
 
-                  trunk=$(jj config get 'revset-aliases."trunk()"')
-                  trunk_bookmark="''${trunk%%@*}"
-                  trunk_remote="''${trunk##*@}"
+                  # Forks the current repo and configures jj for multi-remote workflow.
+                  # See: https://docs.jj-vcs.dev/latest/guides/multiple-remotes/#contributing-upstream-with-a-github-style-fork
+                  def main [] {
+                    let trunk = jj config get 'revset-aliases."trunk()"'
+                      | parse '{bookmark}@{remote}'
+                      | first
 
-                  gh repo set-default "$trunk_remote"
-                  gh repo fork --remote-name "$trunk_remote"
+                    gh repo set-default $trunk.remote
+                    gh repo fork --remote-name $trunk.remote
 
-                  jj config set --repo git.fetch "['$trunk_remote', 'upstream']"
-                  jj config set --repo git.push "$trunk_remote"
-                  jj config set --repo 'revset-aliases."trunk()"' "$trunk_bookmark@upstream"
+                    jj config set --repo git.fetch $"['($trunk.remote)', 'upstream']"
+                    jj config set --repo git.push $trunk.remote
+                    jj config set --repo 'revset-aliases."trunk()"' $"($trunk.bookmark)@upstream"
 
-                  jj git fetch
+                    jj git fetch
 
-                  jj bookmark track "$trunk_bookmark" --remote upstream
-                ''
+                    jj bookmark track $trunk.bookmark --remote upstream
+                  }
+                '')
               ];
-              # Squash-merges a branch into a new change on top of `trunk()`
               squash-branch = [
                 "util"
                 "exec"
                 "--"
-                "bash"
-                "-c"
-                # bash
-                ''
-                  set -euo pipefail
+                (pkgs.writers.writeNu "jj-squash-branch" ''
 
-                  if [ "$#" -ne 1 ]; then
-                    echo "usage: jj squash-branch <bookmark>" >&2
-                    exit 2
-                  fi
+                  # Squash-merges a branch into a new change on top of `trunk()`.
+                  def main [
+                    bookmark: string # Bookmark whose changes should be squash-merged.
+                  ] {
+                    let author = jj log --no-graph --revision $bookmark --template 'author'
 
-                  bookmark="$1"
+                    let trunk = jj config get 'revset-aliases."trunk()"'
+                      | parse '{bookmark}@{remote}'
+                      | first
 
-                  author=$(jj log --no-graph --revision "$bookmark" --template 'author')
+                    jj new $trunk.bookmark
+                    jj duplicate $"($trunk.bookmark)..($bookmark)" --onto '@'
+                    jj squash --from '@::' --into '@' --editor
 
-                  trunk=$(jj config get 'revset-aliases."trunk()"')
-                  trunk_bookmark="''${trunk%%@*}"
-
-                  jj new "$trunk_bookmark"
-                  jj duplicate "$trunk_bookmark..$bookmark" --onto @
-                  jj squash --from '@::' --into @ --editor
-
-                  jj metaedit --author "$author"
-                ''
-                ""
+                    jj metaedit --author $author
+                  }
+                '')
               ];
             };
 
