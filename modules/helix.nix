@@ -403,7 +403,7 @@
             {
               name = "css";
               language-servers = [
-                "biome-lsp-proxy"
+                "oxfmt-language-server"
                 "vscode-css-language-server"
                 "tailwindcss-ls"
               ];
@@ -411,20 +411,28 @@
             {
               name = "json";
               language-servers = [
-                "biome-lsp-proxy"
+                "oxfmt-language-server"
                 "vscode-json-language-server"
               ];
             }
             {
               name = "jsonc";
               language-servers = [
-                "biome-lsp-proxy"
+                "oxfmt-language-server"
+                "vscode-json-language-server"
+              ];
+            }
+            {
+              name = "json-ld";
+              language-servers = [
+                "oxfmt-language-server"
                 "vscode-json-language-server"
               ];
             }
             {
               name = "html";
               language-servers = [
+                "oxfmt-language-server"
                 "vscode-html-language-server"
                 "tailwindcss-ls"
               ];
@@ -432,48 +440,40 @@
             {
               name = "javascript";
               language-servers = [
-                "biome-lsp-proxy"
+                "oxlint-language-server"
+                "oxfmt-language-server"
                 "vtsls"
               ];
-              code-actions-on-save = [
-                "source.organizeImports.biome"
-                "source.fixAll.biome"
-              ];
+              code-actions-on-save = [ "source.fixAll.oxc" ];
             }
             {
               name = "jsx";
               language-servers = [
-                "biome-lsp-proxy"
+                "oxlint-language-server"
+                "oxfmt-language-server"
                 "vtsls"
                 "tailwindcss-ls"
               ];
-              code-actions-on-save = [
-                "source.organizeImports.biome"
-                "source.fixAll.biome"
-              ];
+              code-actions-on-save = [ "source.fixAll.oxc" ];
             }
             {
               name = "typescript";
               language-servers = [
-                "biome-lsp-proxy"
+                "oxlint-language-server"
+                "oxfmt-language-server"
                 "vtsls"
               ];
-              code-actions-on-save = [
-                "source.organizeImports.biome"
-                "source.fixAll.biome"
-              ];
+              code-actions-on-save = [ "source.fixAll.oxc" ];
             }
             {
               name = "tsx";
               language-servers = [
-                "biome-lsp-proxy"
+                "oxlint-language-server"
+                "oxfmt-language-server"
                 "vtsls"
                 "tailwindcss-ls"
               ];
-              code-actions-on-save = [
-                "source.organizeImports.biome"
-                "source.fixAll.biome"
-              ];
+              code-actions-on-save = [ "source.fixAll.oxc" ];
             }
           ];
         };
