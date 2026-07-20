@@ -110,7 +110,7 @@ def musiconv [
             try {
               ffmpeg -y -v error -i $file -codec:a $codec -codec:v copy $out_file
 
-              if $keep == false {
+              if not $keep {
                 rm $file
               }
 
