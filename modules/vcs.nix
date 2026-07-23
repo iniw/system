@@ -142,6 +142,23 @@ in
                   }
                 '')
               ];
+              merge-trunk = [
+                "util"
+                "exec"
+                "--"
+                (pkgs.writers.writeNu "jj-merge-trunk" ''
+
+                  # Merges the given bookmark into `trunk()` then advances the bookmark.
+                  def main [
+                    bookmark: string                            # Bookmark that should be merged.
+                    --message (-m): string = "meta: merge main" # Message to use for the merge commit.
+                  ] {
+                    jj new $bookmark "trunk()"
+                    jj commit --message $message
+                    jj bookmark advance $bookmark
+                  }
+                '')
+              ];
             };
 
             templates = {
