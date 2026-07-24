@@ -82,18 +82,18 @@ def nix-system []: nothing -> string {
 
 # Converts every file of format `$from` in the given `$folder` to format `$to` using ffmpeg.
 def musiconv [
-  folder: path,         # The folder in which to recursively look for files.
-  --from (-f): string,  # The format to convert from.
-  --to (-t): string,    # The format to convert to.
-  --codec (-c): string, # The audio codec to use; defaults to the output format.
-  --keep (-k),          # Keep the original files instead of deleting them.
+  folder: path         # The folder in which to recursively look for files.
+  --from (-f): string  # The format to convert from.
+  --to (-t): string    # The format to convert to.
+  --codec (-c): string # The audio codec to use; defaults to the output format.
+  --keep (-k)          # Keep the original files instead of deleting them.
 ]: nothing -> nothing {
   if $from == null {
-    error make { msg: "The --from parameter is required" }
+    error make { msg: "The --from flag is required" }
   }
 
   if $to == null {
-    error make { msg: "The --to parameter is required" }
+    error make { msg: "The --to flag is required" }
   }
 
   let codec = $codec | default $to
