@@ -33,7 +33,7 @@ in
       programs = {
         ghostty.settings = {
           font-family = monospace;
-          font-size = 15;
+          font-size = if pkgs.stdenv.hostPlatform.isDarwin then 15 else 11;
         };
 
         thunderbird.settings = {
