@@ -1,5 +1,5 @@
 {
-  systemModules =
+  systemModule =
     { user, ... }:
     {
       users.users.${user} = {
