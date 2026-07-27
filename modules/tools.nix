@@ -80,4 +80,12 @@
       # ignored files list used by rg, fd, etc.
       programs.git.ignores = [ ".ignore" ];
     };
+
+  nixosHomeManagerModule =
+    { pkgs, ... }:
+    {
+      home.packages = with pkgs; [
+        wl-clipboard
+      ];
+    };
 }
