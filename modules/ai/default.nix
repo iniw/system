@@ -17,7 +17,6 @@
       programs = {
         codex = {
           enable = true;
-          package = llm-agents.codex;
 
           context = ./AGENTS.md;
           skills = ./skills;
