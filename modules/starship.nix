@@ -7,8 +7,14 @@
         add_newline = false;
 
         format = ''
-          [┌](fg:15)$time$directory$nix_shell$cmd_duration$status
+          [┌](fg:15)$hostname$time$directory$nix_shell$cmd_duration$status
           └❯'';
+
+        hostname = {
+          format = ''─\[[$hostname]($style)\]'';
+          ssh_only = false;
+          style = "bright-black";
+        };
 
         time = {
           format = ''─\[[$time]($style)\]'';
