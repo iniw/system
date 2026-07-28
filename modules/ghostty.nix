@@ -15,7 +15,7 @@
           # cursor
           cursor-color = "cell-foreground";
           cursor-text = "cell-background";
-          shell-integration-features = "no-cursor";
+          shell-integration-features = "no-cursor, ssh-env, ssh-terminfo";
           mouse-hide-while-typing = true;
 
           # window
