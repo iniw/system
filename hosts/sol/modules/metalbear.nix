@@ -23,13 +23,7 @@ in
             }
           ];
         };
-
-        ssh.includes = [ "~/.orbstack/ssh/config" ];
       };
-
-      # Keep the CLI and GUI on the same app copy to avoid restarting the service.
-      # See https://github.com/orbstack/orbstack/issues/2614
-      home.sessionPath = [ "$HOME/.orbstack/bin" ];
 
       home.packages =
         with pkgs;
@@ -44,12 +38,11 @@ in
           notion-app
           slack
 
-          # Kubernetes/Docker stuff
-          orbstack
+          # Kubernetes stuff
           k9s
           kubernetes-helm
 
-          # To access the staging cluster
+          # To interact with the staging cluster
           gcloud
         ];
     };
