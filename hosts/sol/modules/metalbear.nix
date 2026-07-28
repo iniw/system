@@ -27,6 +27,10 @@ in
         ssh.includes = [ "~/.orbstack/ssh/config" ];
       };
 
+      # Keep the CLI and GUI on the same app copy to avoid restarting the service.
+      # See https://github.com/orbstack/orbstack/issues/2614
+      home.sessionPath = [ "$HOME/.orbstack/bin" ];
+
       home.packages =
         with pkgs;
         let
