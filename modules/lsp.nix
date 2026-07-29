@@ -1,35 +1,33 @@
 {
-  homeManagerModule =
-    { pkgs, ... }:
-    {
-      # System-wide LSP support for languages used everywhere.
-      home.packages = with pkgs; [
-        # Nix
-        nixd
-        nixfmt
+  homeManagerModule = { pkgs, ... }: {
+    # System-wide LSP support for languages used everywhere.
+    home.packages = with pkgs; [
+      # Nix
+      nixd
+      nixfmt
 
-        # Markdown
-        rumdl
+      # Markdown
+      rumdl
 
-        # Toml
-        tombi
+      # Toml
+      tombi
 
-        # Yaml
-        yaml-language-server
-        yamlfmt # FIXME: Remove once https://github.com/helix-editor/helix/issues/15576 is fixed
-        helm-ls
-      ];
+      # Yaml
+      yaml-language-server
+      yamlfmt # FIXME: Remove once https://github.com/helix-editor/helix/issues/15576 is fixed
+      helm-ls
+    ];
 
-      xdg.configFile."rumdl/rumdl.toml".text = # toml
-        ''
-          [global]
-          line-length = 120
-        '';
+    xdg.configFile."rumdl/rumdl.toml".text = # toml
+      ''
+        [global]
+        line-length = 120
+      '';
 
-      xdg.configFile."yamlfmt/yamlfmt.yaml".text = # yaml
-        ''
-          formatter:
-            retain_line_breaks_single: true
-        '';
-    };
+    xdg.configFile."yamlfmt/yamlfmt.yaml".text = # yaml
+      ''
+        formatter:
+          retain_line_breaks_single: true
+      '';
+  };
 }

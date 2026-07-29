@@ -1,481 +1,477 @@
 {
-  systemModule =
-    { inputs, ... }:
-    {
-      nixpkgs.overlays = [ inputs.helix.overlays.default ];
-    };
+  systemModule = { inputs, ... }: {
+    nixpkgs.overlays = [ inputs.helix.overlays.default ];
+  };
 
-  homeManagerModule =
-    { pkgs, lib, ... }:
-    {
-      programs.helix = {
-        enable = true;
+  homeManagerModule = { pkgs, ... }: {
+    programs.helix = {
+      enable = true;
 
-        defaultEditor = true;
+      defaultEditor = true;
 
-        settings = {
-          theme = {
-            dark = "lua";
-            light = "sol";
-          };
-
-          editor =
-            let
-              max-width = 120;
-            in
-            {
-              auto-format = true;
-              color-modes = true;
-              commandline = false;
-              completion-timeout = 5;
-              completion-trigger-len = 1;
-              cursorline = true;
-              end-of-line-diagnostics = "disable";
-              line-number = "relative";
-              trim-final-newlines = true;
-              trim-trailing-whitespace = true;
-
-              text-width = max-width;
-              rulers = [ (max-width + 1) ];
-
-              breadcrumb = {
-                enable = true;
-                path = "none";
-              };
-
-              indent-guides = {
-                render = true;
-              };
-
-              inline-diagnostics = {
-                cursor-line = "hint";
-              };
-
-              file-picker = {
-                hidden = false;
-                deduplicate-links = false;
-              };
-
-              soft-wrap = {
-                enable = true;
-              };
-
-              lsp = {
-                auto-document-highlight = true;
-                goto-reference-include-declaration = false;
-              };
-
-              workspace-trust = {
-                trusted = [
-                  "~/work/**"
-                  "~/dev/**"
-                ];
-              };
-            };
-
-          keys =
-            let
-              shared-keys =
-                let
-                  keys-with-prefix = prefix: {
-                    C-w = "${prefix}_next_sub_word_start";
-                    C-e = "${prefix}_next_sub_word_end";
-                    C-b = "${prefix}_prev_sub_word_start";
-                    tab = "${prefix}_parent_node_end";
-                    S-tab = "${prefix}_parent_node_start";
-
-                    "*" = "search_selection";
-                    "A-*" = "search_selection_detect_word_boundaries";
-                    X = "extend_line_above";
-                    p = "paste_after_all";
-                    P = "paste_before_all";
-
-                    ret = {
-                      # Reflow current paragraph
-                      r = "@<C-s>mip_:reflow<ret><C-o>";
-
-                      # Copy current buffer to system clipboard
-                      y =
-                        let
-                          clipboard = if pkgs.stdenv.isDarwin then "pbcopy" else "wl-copy";
-                        in
-                        [ ":! echo -n %{buffer_name} | ${clipboard}" ];
-                    };
-                  };
-                in
-                {
-                  normal = keys-with-prefix "move";
-                  select = keys-with-prefix "extend";
-                };
-            in
-            {
-              normal = lib.recursiveUpdate shared-keys.normal {
-                g =
-                  let
-                    in-split = action: [
-                      "vsplit"
-                      "jump_view_up"
-                      action
-                    ];
-                  in
-                  {
-                    C-d = in-split "goto_definition";
-                    C-S-d = in-split "goto_declaration";
-                    C-y = in-split "goto_type_definition";
-                    C-i = in-split "goto_implementation";
-
-                    h = "goto_hover";
-                    C-h = in-split "goto_hover";
-                  };
-              };
-
-              select = shared-keys.select;
-
-              insert = {
-                "A-;" = "flip_selections";
-                S-tab = "move_parent_node_start";
-                # hjkl in insert mode
-                C-h = "move_char_left";
-                C-j = "move_line_down";
-                C-k = "move_line_up";
-                C-l = "move_char_right";
-                # readline emulation
-                C-a = "goto_first_nonwhitespace";
-                C-e = [
-                  "goto_line_end"
-                  "move_char_right"
-                ];
-                A-f = [
-                  "move_next_word_end"
-                  "move_char_right"
-                ];
-                A-b = [
-                  "move_prev_word_start"
-                  "collapse_selection"
-                ];
-              };
-            };
+      settings = {
+        theme = {
+          dark = "lua";
+          light = "sol";
         };
 
-        themes =
+        editor =
           let
-            theme =
+            max-width = 120;
+          in
+          {
+            auto-format = true;
+            color-modes = true;
+            commandline = false;
+            completion-timeout = 5;
+            completion-trigger-len = 1;
+            cursorline = true;
+            end-of-line-diagnostics = "disable";
+            line-number = "relative";
+            trim-final-newlines = true;
+            trim-trailing-whitespace = true;
+
+            text-width = max-width;
+            rulers = [ (max-width + 1) ];
+
+            breadcrumb = {
+              enable = true;
+              path = "none";
+            };
+
+            indent-guides = {
+              render = true;
+            };
+
+            inline-diagnostics = {
+              cursor-line = "hint";
+            };
+
+            file-picker = {
+              hidden = false;
+              deduplicate-links = false;
+            };
+
+            soft-wrap = {
+              enable = true;
+            };
+
+            lsp = {
+              auto-document-highlight = true;
+              goto-reference-include-declaration = false;
+            };
+
+            workspace-trust = {
+              trusted = [
+                "~/work/**"
+                "~/dev/**"
+              ];
+            };
+          };
+
+        keys =
+          let
+            shared-keys =
+              let
+                keys-with-prefix = prefix: {
+                  C-w = "${prefix}_next_sub_word_start";
+                  C-e = "${prefix}_next_sub_word_end";
+                  C-b = "${prefix}_prev_sub_word_start";
+                  tab = "${prefix}_parent_node_end";
+                  S-tab = "${prefix}_parent_node_start";
+
+                  "*" = "search_selection";
+                  "A-*" = "search_selection_detect_word_boundaries";
+                  X = "extend_line_above";
+                  p = "paste_after_all";
+                  P = "paste_before_all";
+
+                  ret = {
+                    # Reflow current paragraph
+                    r = "@<C-s>mip_:reflow<ret><C-o>";
+
+                    # Copy current buffer to system clipboard
+                    y =
+                      let
+                        clipboard = if pkgs.stdenv.isDarwin then "pbcopy" else "wl-copy";
+                      in
+                      [ ":! echo -n %{buffer_name} | ${clipboard}" ];
+                  };
+                };
+              in
               {
-                shade-1,
-                shade-2,
-                shade-3,
-                shade-4,
-                shade-5,
-                shade-6,
-                shade-7,
-                shade-8,
-
-                primary,
-                secondary,
-
-                blue,
-                green,
-                red,
-                yellow,
-              }:
-              {
-                "ui.background".bg = shade-8;
-                "ui.background.separator".fg = shade-2;
-
-                "ui.cursor".fg = shade-1;
-                "ui.cursor".modifiers = [ "reversed" ];
-                "ui.cursor.match".bg = shade-6;
-                "ui.cursor.primary".fg = primary;
-                "ui.cursor.primary".modifiers = [ "reversed" ];
-
-                "ui.cursorcolumn.primary".bg = shade-7;
-                "ui.cursorcolumn.secondary".bg = shade-7;
-
-                "ui.cursorline.primary".bg = shade-7;
-                "ui.cursorline.secondary".bg = shade-7;
-
-                "ui.gutter".bg = shade-8;
-                "ui.gutter.selected".fg = primary;
-                "ui.gutter.selected".bg = shade-8;
-
-                "ui.help".fg = shade-1;
-                "ui.help".bg = shade-8;
-
-                "ui.highlight".bg = shade-7;
-                "ui.highlight".modifiers = [ "bold" ];
-
-                "ui.linenr".fg = shade-5;
-                "ui.linenr.selected".fg = primary;
-                "ui.linenr.selected".bg = shade-8;
-
-                "ui.menu".fg = shade-1;
-                "ui.menu".bg = shade-6;
-                "ui.menu.scroll".fg = shade-4;
-                "ui.menu.scroll".bg = shade-5;
-                "ui.menu.selected".fg = primary;
-                "ui.menu.selected".bg = shade-7;
-
-                "ui.picker.header".fg = secondary;
-                "ui.picker.header.active".fg = primary;
-                "ui.picker.header.active".bg = shade-5;
-
-                "ui.popup".fg = shade-1;
-                "ui.popup".bg = shade-6;
-
-                "ui.selection".bg = shade-6;
-                "ui.selection.primary".bg = shade-6;
-                "ui.selection.primary".modifiers = [ "bold" ];
-
-                "ui.statusline".fg = shade-2;
-                "ui.statusline".bg = shade-6;
-                "ui.statusline.inactive".fg = shade-4;
-                "ui.statusline.inactive".bg = shade-6;
-                "ui.statusline.insert".fg = shade-6;
-                "ui.statusline.insert".bg = primary;
-                "ui.statusline.normal".fg = shade-2;
-                "ui.statusline.normal".bg = shade-6;
-                "ui.statusline.select".fg = shade-8;
-                "ui.statusline.select".bg = secondary;
-
-                "ui.breadcrumb".bg = shade-7;
-
-                "ui.text".fg = shade-1;
-                "ui.text.directory".fg = shade-4;
-                "ui.text.focus".bg = shade-7;
-                "ui.text.inactive".fg = shade-4;
-
-                "ui.virtual.indent-guide".fg = shade-5;
-                "ui.virtual.inlay-hint".fg = shade-5;
-                "ui.virtual.inlay-hint.parameter".fg = shade-5;
-                "ui.virtual.inlay-hint.type".fg = shade-5;
-                "ui.virtual.jump-label".fg = primary;
-                "ui.virtual.jump-label".modifiers = [ "bold" ];
-                "ui.virtual.ruler".fg = shade-5;
-                "ui.virtual.whitespace".fg = shade-5;
-
-                "ui.window".fg = shade-6;
-
-                "attribute".fg = shade-3;
-                "comment".fg = shade-4;
-                "constant".fg = primary;
-                "constant.builtin".fg = primary;
-                "constant.builtin.character".fg = primary;
-                "constant.builtin.character.escape".fg = shade-1;
-                "constant.builtin.numeric".fg = primary;
-                "constructor".fg = shade-2;
-                "function".fg = shade-2;
-                "keyword".fg = shade-4;
-                "keyword.operator".fg = primary;
-                "label".fg = primary;
-                "namespace".fg = shade-3;
-                "number_literal".fg = primary;
-                "operator".fg = primary;
-                "punctuation".fg = secondary;
-                "punctuation.bracket".fg = secondary;
-                "punctuation.delimiter".fg = shade-4;
-                "punctuation.special".fg = primary;
-                "special".fg = primary;
-                "special".modifiers = [ "bold" ];
-                "string".fg = primary;
-                "tag".fg = shade-3;
-                "type".fg = shade-2;
-                "type.builtin".fg = shade-2;
-                "variable".fg = shade-1;
-
-                "markup.bold".fg = shade-2;
-                "markup.bold".modifiers = [ "bold" ];
-                "markup.heading".fg = shade-2;
-                "markup.italic".fg = shade-2;
-                "markup.italic".modifiers = [ "italic" ];
-                "markup.link.text".fg = shade-2;
-                "markup.link.url".fg = primary;
-                "markup.list".fg = shade-3;
-
-                "markup.quote".fg = shade-3;
-                "markup.quote".modifiers = [ "italic" ];
-
-                "markup.raw".fg = shade-2;
-
-                "diff.delta".fg = blue;
-                "diff.minus".fg = red;
-                "diff.plus".fg = green;
-
-                "diagnostic".fg = shade-5;
-                "diagnostic.error".underline.style = "dotted";
-                "diagnostic.hint".underline.style = "dotted";
-                "diagnostic.info".underline.style = "dotted";
-                "diagnostic.warning".underline.style = "dotted";
-
-                "error".fg = red;
-                "hint".fg = blue;
-                "info".fg = blue;
-                "warning".fg = yellow;
+                normal = keys-with-prefix "move";
+                select = keys-with-prefix "extend";
               };
           in
           {
-            lua = theme {
-              shade-1 = "#f2f2f2";
-              shade-2 = "#cccccc";
-              shade-3 = "#999999";
-              shade-4 = "#666666";
-              shade-5 = "#4d4d4d";
-              shade-6 = "#333333";
-              shade-7 = "#1a1a1a";
-              shade-8 = "#0d0d0d";
+            normal = pkgs.lib.recursiveUpdate shared-keys.normal {
+              g =
+                let
+                  in-split = action: [
+                    "vsplit"
+                    "jump_view_up"
+                    action
+                  ];
+                in
+                {
+                  C-d = in-split "goto_definition";
+                  C-S-d = in-split "goto_declaration";
+                  C-y = in-split "goto_type_definition";
+                  C-i = in-split "goto_implementation";
 
-              primary = "#73b6e6";
-              secondary = "#cfdce6";
-
-              blue = "#73b6e6";
-              green = "#b6e673";
-              red = "#e67373";
-              yellow = "#e6bf73";
+                  h = "goto_hover";
+                  C-h = in-split "goto_hover";
+                };
             };
 
-            sol = theme {
-              shade-1 = "#0d0d0d";
-              shade-2 = "#262626";
-              shade-3 = "#666666";
-              shade-4 = "#808080";
-              shade-5 = "#bfbfbf";
-              shade-6 = "#d9d9d9";
-              shade-7 = "#e6e6e6";
-              shade-8 = "#f2f2f2";
+            select = shared-keys.select;
 
-              primary = "#0061a6";
-              secondary = "#73b4e6";
-
-              blue = "#0061a6";
-              green = "#61a600";
-              red = "#a60000";
-              yellow = "#a66f00";
-            };
-          };
-
-        languages = {
-          language-server = {
-            clangd.args = [
-              "--query-driver=**"
-              "--clang-tidy"
-              "--background-index"
-            ];
-
-            tinymist.config = {
-              formatterMode = "typstyle";
-              preview.background = {
-                enabled = true;
-                args = [
-                  "--data-plane-host=127.0.0.1:23635"
-                  "--invert-colors=never"
-                  "--open"
-                ];
-              };
-            };
-
-            rust-analyzer.config = {
-              cargo = {
-                features = "all";
-                targetDir = true;
-              };
-              check.command = "clippy";
-              files.exclude = [
-                ".git"
-                ".jj"
-                "target"
-                "node_modules"
+            insert = {
+              "A-;" = "flip_selections";
+              S-tab = "move_parent_node_start";
+              # hjkl in insert mode
+              C-h = "move_char_left";
+              C-j = "move_line_down";
+              C-k = "move_line_up";
+              C-l = "move_char_right";
+              # readline emulation
+              C-a = "goto_first_nonwhitespace";
+              C-e = [
+                "goto_line_end"
+                "move_char_right"
               ];
-            };
-
-            vscode-css-language-server.config = {
-              # Supresses "Unknown at rule @theme" when using tailwind.
-              css.lint.unknownAtRules = "ignore";
+              A-f = [
+                "move_next_word_end"
+                "move_char_right"
+              ];
+              A-b = [
+                "move_prev_word_start"
+                "collapse_selection"
+              ];
             };
           };
-
-          language = [
-            {
-              name = "sql";
-              formatter.command = "sql-formatter";
-            }
-            {
-              name = "css";
-              language-servers = [
-                "oxfmt-language-server"
-                "vscode-css-language-server"
-                "tailwindcss-ls"
-              ];
-            }
-            {
-              name = "json";
-              language-servers = [
-                "oxfmt-language-server"
-                "vscode-json-language-server"
-              ];
-            }
-            {
-              name = "jsonc";
-              language-servers = [
-                "oxfmt-language-server"
-                "vscode-json-language-server"
-              ];
-            }
-            {
-              name = "json-ld";
-              language-servers = [
-                "oxfmt-language-server"
-                "vscode-json-language-server"
-              ];
-            }
-            {
-              name = "html";
-              language-servers = [
-                "oxfmt-language-server"
-                "vscode-html-language-server"
-                "tailwindcss-ls"
-              ];
-            }
-            {
-              name = "javascript";
-              language-servers = [
-                "oxlint-language-server"
-                "oxfmt-language-server"
-                "vtsls"
-              ];
-              code-actions-on-save = [ "source.fixAll.oxc" ];
-            }
-            {
-              name = "jsx";
-              language-servers = [
-                "oxlint-language-server"
-                "oxfmt-language-server"
-                "vtsls"
-                "tailwindcss-ls"
-              ];
-              code-actions-on-save = [ "source.fixAll.oxc" ];
-            }
-            {
-              name = "typescript";
-              language-servers = [
-                "oxlint-language-server"
-                "oxfmt-language-server"
-                "vtsls"
-              ];
-              code-actions-on-save = [ "source.fixAll.oxc" ];
-            }
-            {
-              name = "tsx";
-              language-servers = [
-                "oxlint-language-server"
-                "oxfmt-language-server"
-                "vtsls"
-                "tailwindcss-ls"
-              ];
-              code-actions-on-save = [ "source.fixAll.oxc" ];
-            }
-          ];
-        };
       };
 
-      programs.git.ignores = [ ".helix/" ];
+      themes =
+        let
+          theme =
+            {
+              shade-1,
+              shade-2,
+              shade-3,
+              shade-4,
+              shade-5,
+              shade-6,
+              shade-7,
+              shade-8,
+
+              primary,
+              secondary,
+
+              blue,
+              green,
+              red,
+              yellow,
+            }:
+            {
+              "ui.background".bg = shade-8;
+              "ui.background.separator".fg = shade-2;
+
+              "ui.cursor".fg = shade-1;
+              "ui.cursor".modifiers = [ "reversed" ];
+              "ui.cursor.match".bg = shade-6;
+              "ui.cursor.primary".fg = primary;
+              "ui.cursor.primary".modifiers = [ "reversed" ];
+
+              "ui.cursorcolumn.primary".bg = shade-7;
+              "ui.cursorcolumn.secondary".bg = shade-7;
+
+              "ui.cursorline.primary".bg = shade-7;
+              "ui.cursorline.secondary".bg = shade-7;
+
+              "ui.gutter".bg = shade-8;
+              "ui.gutter.selected".fg = primary;
+              "ui.gutter.selected".bg = shade-8;
+
+              "ui.help".fg = shade-1;
+              "ui.help".bg = shade-8;
+
+              "ui.highlight".bg = shade-7;
+              "ui.highlight".modifiers = [ "bold" ];
+
+              "ui.linenr".fg = shade-5;
+              "ui.linenr.selected".fg = primary;
+              "ui.linenr.selected".bg = shade-8;
+
+              "ui.menu".fg = shade-1;
+              "ui.menu".bg = shade-6;
+              "ui.menu.scroll".fg = shade-4;
+              "ui.menu.scroll".bg = shade-5;
+              "ui.menu.selected".fg = primary;
+              "ui.menu.selected".bg = shade-7;
+
+              "ui.picker.header".fg = secondary;
+              "ui.picker.header.active".fg = primary;
+              "ui.picker.header.active".bg = shade-5;
+
+              "ui.popup".fg = shade-1;
+              "ui.popup".bg = shade-6;
+
+              "ui.selection".bg = shade-6;
+              "ui.selection.primary".bg = shade-6;
+              "ui.selection.primary".modifiers = [ "bold" ];
+
+              "ui.statusline".fg = shade-2;
+              "ui.statusline".bg = shade-6;
+              "ui.statusline.inactive".fg = shade-4;
+              "ui.statusline.inactive".bg = shade-6;
+              "ui.statusline.insert".fg = shade-6;
+              "ui.statusline.insert".bg = primary;
+              "ui.statusline.normal".fg = shade-2;
+              "ui.statusline.normal".bg = shade-6;
+              "ui.statusline.select".fg = shade-8;
+              "ui.statusline.select".bg = secondary;
+
+              "ui.breadcrumb".bg = shade-7;
+
+              "ui.text".fg = shade-1;
+              "ui.text.directory".fg = shade-4;
+              "ui.text.focus".bg = shade-7;
+              "ui.text.inactive".fg = shade-4;
+
+              "ui.virtual.indent-guide".fg = shade-5;
+              "ui.virtual.inlay-hint".fg = shade-5;
+              "ui.virtual.inlay-hint.parameter".fg = shade-5;
+              "ui.virtual.inlay-hint.type".fg = shade-5;
+              "ui.virtual.jump-label".fg = primary;
+              "ui.virtual.jump-label".modifiers = [ "bold" ];
+              "ui.virtual.ruler".fg = shade-5;
+              "ui.virtual.whitespace".fg = shade-5;
+
+              "ui.window".fg = shade-6;
+
+              "attribute".fg = shade-3;
+              "comment".fg = shade-4;
+              "constant".fg = primary;
+              "constant.builtin".fg = primary;
+              "constant.builtin.character".fg = primary;
+              "constant.builtin.character.escape".fg = shade-1;
+              "constant.builtin.numeric".fg = primary;
+              "constructor".fg = shade-2;
+              "function".fg = shade-2;
+              "keyword".fg = shade-4;
+              "keyword.operator".fg = primary;
+              "label".fg = primary;
+              "namespace".fg = shade-3;
+              "number_literal".fg = primary;
+              "operator".fg = primary;
+              "punctuation".fg = secondary;
+              "punctuation.bracket".fg = secondary;
+              "punctuation.delimiter".fg = shade-4;
+              "punctuation.special".fg = primary;
+              "special".fg = primary;
+              "special".modifiers = [ "bold" ];
+              "string".fg = primary;
+              "tag".fg = shade-3;
+              "type".fg = shade-2;
+              "type.builtin".fg = shade-2;
+              "variable".fg = shade-1;
+
+              "markup.bold".fg = shade-2;
+              "markup.bold".modifiers = [ "bold" ];
+              "markup.heading".fg = shade-2;
+              "markup.italic".fg = shade-2;
+              "markup.italic".modifiers = [ "italic" ];
+              "markup.link.text".fg = shade-2;
+              "markup.link.url".fg = primary;
+              "markup.list".fg = shade-3;
+
+              "markup.quote".fg = shade-3;
+              "markup.quote".modifiers = [ "italic" ];
+
+              "markup.raw".fg = shade-2;
+
+              "diff.delta".fg = blue;
+              "diff.minus".fg = red;
+              "diff.plus".fg = green;
+
+              "diagnostic".fg = shade-5;
+              "diagnostic.error".underline.style = "dotted";
+              "diagnostic.hint".underline.style = "dotted";
+              "diagnostic.info".underline.style = "dotted";
+              "diagnostic.warning".underline.style = "dotted";
+
+              "error".fg = red;
+              "hint".fg = blue;
+              "info".fg = blue;
+              "warning".fg = yellow;
+            };
+        in
+        {
+          lua = theme {
+            shade-1 = "#f2f2f2";
+            shade-2 = "#cccccc";
+            shade-3 = "#999999";
+            shade-4 = "#666666";
+            shade-5 = "#4d4d4d";
+            shade-6 = "#333333";
+            shade-7 = "#1a1a1a";
+            shade-8 = "#0d0d0d";
+
+            primary = "#73b6e6";
+            secondary = "#cfdce6";
+
+            blue = "#73b6e6";
+            green = "#b6e673";
+            red = "#e67373";
+            yellow = "#e6bf73";
+          };
+
+          sol = theme {
+            shade-1 = "#0d0d0d";
+            shade-2 = "#262626";
+            shade-3 = "#666666";
+            shade-4 = "#808080";
+            shade-5 = "#bfbfbf";
+            shade-6 = "#d9d9d9";
+            shade-7 = "#e6e6e6";
+            shade-8 = "#f2f2f2";
+
+            primary = "#0061a6";
+            secondary = "#73b4e6";
+
+            blue = "#0061a6";
+            green = "#61a600";
+            red = "#a60000";
+            yellow = "#a66f00";
+          };
+        };
+
+      languages = {
+        language-server = {
+          clangd.args = [
+            "--query-driver=**"
+            "--clang-tidy"
+            "--background-index"
+          ];
+
+          tinymist.config = {
+            formatterMode = "typstyle";
+            preview.background = {
+              enabled = true;
+              args = [
+                "--data-plane-host=127.0.0.1:23635"
+                "--invert-colors=never"
+                "--open"
+              ];
+            };
+          };
+
+          rust-analyzer.config = {
+            cargo = {
+              features = "all";
+              targetDir = true;
+            };
+            check.command = "clippy";
+            files.exclude = [
+              ".git"
+              ".jj"
+              "target"
+              "node_modules"
+            ];
+          };
+
+          vscode-css-language-server.config = {
+            # Supresses "Unknown at rule @theme" when using tailwind.
+            css.lint.unknownAtRules = "ignore";
+          };
+        };
+
+        language = [
+          {
+            name = "sql";
+            formatter.command = "sql-formatter";
+          }
+          {
+            name = "css";
+            language-servers = [
+              "oxfmt-language-server"
+              "vscode-css-language-server"
+              "tailwindcss-ls"
+            ];
+          }
+          {
+            name = "json";
+            language-servers = [
+              "oxfmt-language-server"
+              "vscode-json-language-server"
+            ];
+          }
+          {
+            name = "jsonc";
+            language-servers = [
+              "oxfmt-language-server"
+              "vscode-json-language-server"
+            ];
+          }
+          {
+            name = "json-ld";
+            language-servers = [
+              "oxfmt-language-server"
+              "vscode-json-language-server"
+            ];
+          }
+          {
+            name = "html";
+            language-servers = [
+              "oxfmt-language-server"
+              "vscode-html-language-server"
+              "tailwindcss-ls"
+            ];
+          }
+          {
+            name = "javascript";
+            language-servers = [
+              "oxlint-language-server"
+              "oxfmt-language-server"
+              "vtsls"
+            ];
+            code-actions-on-save = [ "source.fixAll.oxc" ];
+          }
+          {
+            name = "jsx";
+            language-servers = [
+              "oxlint-language-server"
+              "oxfmt-language-server"
+              "vtsls"
+              "tailwindcss-ls"
+            ];
+            code-actions-on-save = [ "source.fixAll.oxc" ];
+          }
+          {
+            name = "typescript";
+            language-servers = [
+              "oxlint-language-server"
+              "oxfmt-language-server"
+              "vtsls"
+            ];
+            code-actions-on-save = [ "source.fixAll.oxc" ];
+          }
+          {
+            name = "tsx";
+            language-servers = [
+              "oxlint-language-server"
+              "oxfmt-language-server"
+              "vtsls"
+              "tailwindcss-ls"
+            ];
+            code-actions-on-save = [ "source.fixAll.oxc" ];
+          }
+        ];
+      };
     };
+
+    programs.git.ignores = [ ".helix/" ];
+  };
 }

@@ -1,6 +1,4 @@
 {
-  description = "wini's system flake";
-
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
@@ -24,8 +22,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    llm-agents.url = "github:numtide/llm-agents.nix";
-
     nixpkgs-pr-tracker = {
       url = "github:thatsneat-dev/nprt";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -37,12 +33,32 @@
     let
       inherit (inputs.nixpkgs) lib;
 
-      sys = import ./lib/sys.nix inputs;
-
-      configurations =
-        builtins.readDir ./hosts
-        |> lib.mapAttrsToList (name: _: import ./hosts/${name} sys name)
+      hosts =
+        let
+          mkHost = import ./lib/mkHost.nix inputs;
+        in
+        lib.readDir ./hosts
+        |> lib.mapAttrsToList (host: _: import ./hosts/${host} mkHost host)
         |> lib.foldr lib.recursiveUpdate { };
     in
-    configurations;
+    {
+      inherit (hosts) darwinConfigurations nixosConfigurations;
+
+      devShells = lib.genAttrs lib.systems.flakeExposed (
+        system:
+        let
+          pkgs = inputs.nixpkgs.legacyPackages.${system};
+        in
+        {
+          default = pkgs.mkShell {
+            # Everything needed to bootstrap the config with `./x`
+            packages = with pkgs; [
+              git
+              nh
+              nushell
+            ];
+          };
+        }
+      );
+    };
 }

@@ -1,6 +1,6 @@
 {
   systemModule = {
-    # indicate builder support for emulated architectures
+    # Indicate builder support for emulated architectures
     nix.settings.extra-platforms = [
       "x86_64-linux"
       "i686-linux"

@@ -1,11 +1,13 @@
 {
-  systemModule =
-    { user, ... }:
-    {
-      users.users.${user} = {
-        home = "/user/${user}";
+  systemModule = { user, ... }: {
+    users = {
+      mutableUsers = false;
+
+      users.${user} = {
         extraGroups = [ "wheel" ];
+
         isNormalUser = true;
       };
     };
+  };
 }

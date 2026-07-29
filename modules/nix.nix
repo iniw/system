@@ -1,27 +1,25 @@
 {
-  systemModule =
-    { user, ... }:
-    {
-      nix = {
-        gc.automatic = true;
+  systemModule = { user, ... }: {
+    nix = {
+      gc.automatic = true;
 
-        settings = {
-          auto-optimise-store = true;
+      settings = {
+        auto-optimise-store = true;
 
-          experimental-features = [
-            "flakes"
-            "nix-command"
-            "pipe-operators"
-          ];
+        experimental-features = [
+          "flakes"
+          "nix-command"
+          "pipe-operators"
+        ];
 
-          sandbox = true;
+        sandbox = true;
 
-          trusted-users = [ user ];
+        trusted-users = [ user ];
 
-          use-xdg-base-directories = true;
-        };
+        use-xdg-base-directories = true;
       };
     };
+  };
 
   darwinSystemModule = {
     nix.gc.interval = {

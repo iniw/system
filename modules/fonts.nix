@@ -4,32 +4,28 @@ let
   serif = "Source Serif 4";
 in
 {
-  systemModule =
-    { inputs, ... }:
-    {
-      nixpkgs.overlays = [ inputs.fonts.overlays.default ];
-    };
+  systemModule = { inputs, ... }: {
+    nixpkgs.overlays = [ inputs.fonts.overlays.default ];
+  };
 
-  homeManagerModule =
-    { pkgs, ... }:
-    {
-      home.packages = with pkgs; [
-        berkeley-mono
-        inter
-        source-serif
-        tx-02
-      ];
+  homeManagerModule = { pkgs, ... }: {
+    home.packages = with pkgs; [
+      berkeley-mono
+      inter
+      source-serif
+      tx-02
+    ];
 
-      fonts.fontconfig = {
-        enable = true;
+    fonts.fontconfig = {
+      enable = true;
 
-        defaultFonts = {
-          monospace = [ monospace ];
-          sansSerif = [ sansSerif ];
-          serif = [ serif ];
-        };
+      defaultFonts = {
+        monospace = [ monospace ];
+        sansSerif = [ sansSerif ];
+        serif = [ serif ];
       };
-
-      programs.ghostty.settings.font-family = monospace;
     };
+
+    programs.ghostty.settings.font-family = monospace;
+  };
 }

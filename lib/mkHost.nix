@@ -6,7 +6,7 @@ let
     let
       collectModules =
         path:
-        builtins.readDir path
+        lib.readDir path
         |> lib.mapAttrsToList (name: _: import "${path}/${name}")
         |> lib.zipAttrs
         |> lib.mapAttrs' (name: lib.nameValuePair "${name}s");
@@ -18,8 +18,8 @@ let
 
   user = "vini";
 
-  specialArgs = {
-    inherit user inputs;
+  specialArgs = hostName: {
+    inherit inputs user hostName;
   };
 in
 {
@@ -38,7 +38,7 @@ in
     in
     {
       darwinConfigurations.${host} = inputs.nix-darwin.lib.darwinSystem {
-        inherit specialArgs;
+        specialArgs = specialArgs host;
 
         modules =
           (modules.common.systemModules or [ ])
@@ -66,7 +66,7 @@ in
     in
     {
       nixosConfigurations.${host} = inputs.nixpkgs.lib.nixosSystem {
-        inherit specialArgs;
+        specialArgs = specialArgs host;
 
         modules =
           (modules.common.systemModules or [ ])

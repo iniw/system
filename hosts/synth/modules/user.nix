@@ -1,19 +1,16 @@
 {
-  systemModule =
-    { user, ... }:
-    {
-      users = {
-        mutableUsers = false;
+  systemModule = { user, ... }: {
+    users = {
+      mutableUsers = false;
 
-        users.${user} = {
-          extraGroups = [
-            "wheel"
-            "orbstack"
-            "audio"
-          ];
+      users.${user} = {
+        extraGroups = [
+          "wheel"
+          "orbstack"
+        ];
 
-          isNormalUser = true;
-        };
+        isNormalUser = true;
       };
     };
+  };
 }

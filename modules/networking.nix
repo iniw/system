@@ -1,4 +1,8 @@
 {
+  systemModule = { hostName, ... }: {
+    networking = { inherit hostName; };
+  };
+
   homeManagerModule =
     let
       signingKey = "~/.ssh/id_ed25519.pub";

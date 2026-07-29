@@ -1,41 +1,39 @@
 {
-  systemModule =
-    { config, modulesPath, ... }:
-    {
-      imports = [
-        (modulesPath + "/installer/scan/not-detected.nix")
+  systemModule = { config, modulesPath, ... }: {
+    imports = [
+      (modulesPath + "/installer/scan/not-detected.nix")
+    ];
+
+    nixpkgs.hostPlatform = "x86_64-linux";
+
+    boot = {
+      initrd.availableKernelModules = [
+        "xhci_pci"
+        "ahci"
+        "usbhid"
+        "sd_mod"
       ];
-
-      nixpkgs.hostPlatform = "x86_64-linux";
-
-      boot = {
-        initrd.availableKernelModules = [
-          "xhci_pci"
-          "ahci"
-          "usbhid"
-          "sd_mod"
-        ];
-        kernelModules = [ "kvm-amd" ];
-      };
-
-      fileSystems = {
-        "/" = {
-          device = "/dev/disk/by-uuid/40c85dd1-0517-4c8b-8633-069b981bbe09";
-          fsType = "ext4";
-        };
-
-        "/boot" = {
-          device = "/dev/disk/by-uuid/265B-0C7C";
-          fsType = "vfat";
-          options = [
-            "fmask=0022"
-            "dmask=0022"
-          ];
-        };
-      };
-
-      networking.useDHCP = true;
-
-      hardware.cpu.amd.updateMicrocode = config.hardware.enableRedistributableFirmware;
+      kernelModules = [ "kvm-amd" ];
     };
+
+    fileSystems = {
+      "/" = {
+        device = "/dev/disk/by-uuid/40c85dd1-0517-4c8b-8633-069b981bbe09";
+        fsType = "ext4";
+      };
+
+      "/boot" = {
+        device = "/dev/disk/by-uuid/265B-0C7C";
+        fsType = "vfat";
+        options = [
+          "fmask=0022"
+          "dmask=0022"
+        ];
+      };
+    };
+
+    networking.useDHCP = true;
+
+    hardware.cpu.amd.updateMicrocode = config.hardware.enableRedistributableFirmware;
+  };
 }

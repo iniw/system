@@ -1,15 +1,14 @@
 {
-  systemModule =
-    { user, ... }:
-    {
-      users = {
-        users.${user} = {
-          home = "/Users/${user}";
-          uid = 501;
-        };
-        knownUsers = [ user ];
-      };
+  systemModule = { user, ... }: {
+    users = {
+      knownUsers = [ user ];
 
-      system.primaryUser = user;
+      users.${user} = {
+        home = "/Users/${user}";
+        uid = 501;
+      };
     };
+
+    system.primaryUser = user;
+  };
 }

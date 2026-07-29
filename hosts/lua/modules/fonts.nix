@@ -1,23 +1,19 @@
 {
-  homeManagerModule =
-    { config, lib, ... }:
-    {
-      programs.ghostty.settings.font-size = 12;
+  homeManagerModule = { config, lib, ... }: {
+    programs.ghostty.settings.font-size = 12;
 
-      dconf.settings =
-        let
-          getDefault = font: lib.head config.fonts.fontconfig.defaultFonts.${font};
+    dconf.settings."org/gnome/desktop/interface" =
+      let
+        defaultFont = style: lib.head config.fonts.fontconfig.defaultFonts.${style};
 
-          monospace = getDefault "monospace";
-          sansSerif = getDefault "sansSerif";
-          serif = getDefault "serif";
-        in
-        {
-          "org/gnome/desktop/interface" = {
-            font-name = "${sansSerif} 11";
-            document-font-name = "${serif} 11";
-            monospace-font-name = "${monospace} 10";
-          };
-        };
-    };
+        monospace = defaultFont "monospace";
+        sansSerif = defaultFont "sansSerif";
+        serif = defaultFont "serif";
+      in
+      {
+        monospace-font-name = "${monospace} 10";
+        font-name = "${sansSerif} 11";
+        document-font-name = "${serif} 11";
+      };
+  };
 }

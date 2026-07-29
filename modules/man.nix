@@ -1,13 +1,11 @@
 {
-  homeManagerModule =
-    { pkgs, ... }:
-    {
-      home.sessionVariables.MANPAGER =
-        let
-          bat = pkgs.lib.getExe pkgs.bat;
-        in
-        pkgs.writeShellScript "manpager" "col -bx | ${bat} --language man --style plain";
-    };
+  homeManagerModule = { pkgs, ... }: {
+    home.sessionVariables.MANPAGER =
+      let
+        bat = pkgs.lib.getExe pkgs.bat;
+      in
+      pkgs.writeShellScript "manpager" "col -bx | ${bat} --language man --style plain";
+  };
 
   darwinHomeManagerModule = {
     # See: https://github.com/NixOS/nixpkgs/issues/456879

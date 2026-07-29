@@ -1,18 +1,16 @@
 {
-  systemModule =
-    { inputs, ... }:
-    {
-      home-manager = {
-        useGlobalPkgs = true;
-        useUserPackages = true;
+  systemModule = { inputs, ... }: {
+    home-manager = {
+      useGlobalPkgs = true;
+      useUserPackages = true;
 
-        extraSpecialArgs = {
-          inherit inputs;
-        };
-
-        backupFileExtension = "hm-backup";
+      extraSpecialArgs = {
+        inherit inputs;
       };
+
+      backupFileExtension = "hm-backup";
     };
+  };
 
   homeManagerModule = {
     xdg.enable = true;

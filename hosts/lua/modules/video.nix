@@ -1,21 +1,19 @@
 {
-  systemModule =
-    { config, ... }:
-    {
-      services.xserver = {
-        enable = true;
-        videoDrivers = [ "nvidia" ];
-      };
+  systemModule = { config, ... }: {
+    services.xserver = {
+      enable = true;
+      videoDrivers = [ "nvidia" ];
+    };
 
-      hardware = {
-        graphics.enable = true;
+    hardware = {
+      graphics.enable = true;
 
-        nvidia = {
-          modesetting.enable = true;
-          nvidiaSettings = true;
-          open = false;
-          package = config.boot.kernelPackages.nvidiaPackages.stable;
-        };
+      nvidia = {
+        modesetting.enable = true;
+        nvidiaSettings = true;
+        open = false;
+        package = config.boot.kernelPackages.nvidiaPackages.stable;
       };
     };
+  };
 }

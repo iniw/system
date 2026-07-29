@@ -1,5 +1,4 @@
-#!/usr/bin/env nix-shell
-#!nix-shell -i nu -p nushell nh
+#!/usr/bin/env nu
 
 const root = path self .
 
