@@ -34,11 +34,11 @@
         "rev": "c2808e3c3753c920500e9a8d25410a7a04e15485",
         "revCount": 10,
         "type": "git",
-        "url": "ssh://git@git.sr.ht/~wini/fonts"
+        "url": "ssh://git@github.com/iniw/fonts"
       },
       "original": {
         "type": "git",
-        "url": "ssh://git@git.sr.ht/~wini/fonts"
+        "url": "ssh://git@github.com/iniw/fonts"
       }
     },
     "helix": {

@@ -16,7 +16,7 @@ def --wrapped "main switch" [...args] {
   }
 
   with-env { NIX_CONFIG: "extra-experimental-features = flakes nix-command pipe-operators" } {
-    nh $host switch $root ...$args
+    nh $host switch $"path:($root)" ...$args
   }
 }
 

@@ -13,7 +13,8 @@
     };
 
     fonts = {
-      url = "git+ssh://git@git.sr.ht/~wini/fonts";
+      # Access is granted by the `secrets/bootstrap.age` deploy key.
+      url = "git+ssh://git@github.com/iniw/fonts";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -40,25 +41,43 @@
         lib.readDir ./hosts
         |> lib.mapAttrsToList (host: _: import ./hosts/${host} mkHost host)
         |> lib.foldr lib.recursiveUpdate { };
+
+      forAllSystems =
+        f: lib.genAttrs lib.systems.flakeExposed (system: f inputs.nixpkgs.legacyPackages.${system});
     in
     {
       inherit (hosts) darwinConfigurations nixosConfigurations;
 
-      devShells = lib.genAttrs lib.systems.flakeExposed (
-        system:
-        let
-          pkgs = inputs.nixpkgs.legacyPackages.${system};
-        in
-        {
-          default = pkgs.mkShell {
-            # Everything needed to bootstrap the config with `./x`
-            packages = with pkgs; [
-              git
-              nh
-              nushell
-            ];
-          };
-        }
-      );
+      devShells = forAllSystems (pkgs: {
+        default = pkgs.mkShell {
+          packages = with pkgs; [
+            nh
+            nushell
+          ];
+        };
+      });
+
+      packages = forAllSystems (pkgs: {
+        bootstrap = pkgs.writeShellApplication {
+          name = "system-bootstrap";
+
+          runtimeInputs = with pkgs; [
+            age
+            git
+            nh
+            nushell
+            openssh
+          ];
+
+          text = ''
+            ssh_key="$(mktemp)"
+            age --decrypt ${inputs.self}/secrets/bootstrap.age > "$ssh_key"
+            chmod 600 "$ssh_key"
+
+            GIT_SSH_COMMAND="ssh -o IdentityAgent=none -i '$ssh_key'" \
+              ${inputs.self}/x switch "$@"
+          '';
+        };
+      });
     };
 }
