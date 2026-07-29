@@ -32,8 +32,6 @@
       };
     };
 
-    networking.useDHCP = true;
-
     hardware.cpu.amd.updateMicrocode = config.hardware.enableRedistributableFirmware;
   };
 }

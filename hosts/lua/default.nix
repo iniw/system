@@ -12,7 +12,7 @@ mkHost.nixosSystem (
     users.users.${user}.extraGroups = [ "networkmanager" ];
     networking.networkmanager.enable = true;
 
-    home-manager.users.${user}.home.stateVersion = "25.05";
-    system.stateVersion = "25.05";
+    home-manager.users.${user}.home.stateVersion = "26.11";
+    system.stateVersion = "26.11";
   }
 )
