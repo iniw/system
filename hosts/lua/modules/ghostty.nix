@@ -1,0 +1,37 @@
+{
+  homeManagerModule = {
+    # Remove some default keybinds that conflict with the config.
+    dconf.settings = {
+      "org/gnome/shell/keybindings" = {
+        # super+s
+        toggle-quick-settings = [ ];
+        # super+v
+        toggle-message-tray = [ ];
+        # super+n
+        focus-active-notification = [ ];
+        # super+alt+up
+        shift-overview-up = [ ];
+        # super+alt+down
+        shift-overview-down = [ ];
+      };
+
+      "org/gnome/desktop/wm/keybindings" = {
+        # super+h
+        minimize = [ ];
+        # super+up
+        maximize = [ ];
+        # super+down
+        unmaximize = [ ];
+        # super+shift+up
+        move-to-monitor-up = [ ];
+        # super+shift+down
+        move-to-monitor-down = [ ];
+      };
+
+      "org/gnome/settings-daemon/plugins/media-keys" = {
+        # super+l
+        screensaver = [ ];
+      };
+    };
+  };
+}
