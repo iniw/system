@@ -52,30 +52,37 @@
         default = pkgs.mkShell {
           packages = with pkgs; [
             nh
-            nushell
           ];
         };
       });
 
       packages = forAllSystems (pkgs: {
         bootstrap = pkgs.writeShellApplication {
-          name = "system-bootstrap";
+          name = "bootstrap";
 
           runtimeInputs = with pkgs; [
             age
             git
-            nh
-            nushell
             openssh
+            nh
           ];
 
           text = ''
-            ssh_key="$(mktemp)"
-            age --decrypt ${inputs.self}/secrets/bootstrap.age > "$ssh_key"
-            chmod 600 "$ssh_key"
+            # Decrypt and tell git to use the bootstrap SSH key
+            bootstrap_key="$(mktemp)"
+            age --decrypt ${inputs.self}/secrets/bootstrap.age > "$bootstrap_key"
+            chmod 600 "$bootstrap_key"
+            export GIT_SSH_COMMAND="ssh -i '$bootstrap_key'"
 
-            GIT_SSH_COMMAND="ssh -o IdentityAgent=none -i '$ssh_key'" \
-              ${inputs.self}/x switch "$@"
+            case "$(uname -s)" in
+              Darwin) host=darwin ;;
+              Linux) host=os ;;
+              *) echo "unsupported host: $(uname -s)" >&2; exit 1 ;;
+            esac
+
+            # We're bootstrapping the configuration so we can't guarantee
+            # that the experimental features are present in the system's nix config
+            nh "$host" switch --option extra-experimental-features "flakes nix-command pipe-operators" "$@"
           '';
         };
       });
