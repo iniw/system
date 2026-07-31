@@ -14,6 +14,7 @@
         cursor-color = "cell-foreground";
         cursor-text = "cell-background";
         mouse-hide-while-typing = true;
+        shell-integration-features = "no-cursor";
 
         # window
         window-padding-x = 0;
@@ -23,9 +24,6 @@
 
         # misc
         confirm-close-surface = false;
-
-        # shell integration
-        shell-integration-features = "no-cursor, ssh-env, ssh-terminfo";
 
         # keybinds
         macos-option-as-alt = "left";
@@ -67,20 +65,12 @@
           "ctrl+shift+v=paste_from_clipboard"
 
           # window
-          "window/"
-          "window/d=close_window"
-          "window/n=new_window"
-          "window/f=toggle_fullscreen"
-          "window/0=reset_font_size"
-          "window/equal=increase_font_size:1"
-          "window/minus=decrease_font_size:1"
-          "window/catch_all=ignore"
-          "window/escape=deactivate_key_table"
-          "super+w=activate_key_table:window"
+          "all:super+0=reset_font_size"
+          "all:super+equal=increase_font_size:1"
+          "all:super+minus=decrease_font_size:1"
 
           # find
           "super+f=start_search"
-          "super+shift+f=search_selection"
           "performable:escape=end_search"
         ];
       };
