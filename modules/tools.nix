@@ -19,8 +19,6 @@
           scc
         ];
 
-      sessionVariables.CARAPACE_LENIENT = "1";
-
       shellAliases.ns = "nix shell --impure -f '<nixpkgs>'";
     };
 
@@ -43,7 +41,19 @@
         };
       };
 
-      carapace.enable = true;
+      carapace = {
+        enable = true;
+
+        extraPackages = with pkgs; [
+          fish
+          inshellisense
+        ];
+
+        settings = {
+          lenient = true;
+          bridges = "fish,inshellisense";
+        };
+      };
 
       fzf =
         let

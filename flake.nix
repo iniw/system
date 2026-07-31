@@ -8,7 +8,7 @@
     };
 
     home-manager = {
-      url = "github:nix-community/home-manager";
+      url = "github:nix-community/home-manager?ref=pull/9753/merge";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -57,6 +57,8 @@
       });
 
       packages = forAllSystems (pkgs: {
+        # Allows easily bootstrapping the config on a fresh system with nothing but nix installed:
+        # nix --extra-experimental-features "flakes nix-command pipe-operators" run github:iniw/system#bootstrap -- -H $host
         bootstrap = pkgs.writeShellApplication {
           name = "bootstrap";
 
@@ -67,22 +69,26 @@
             nh
           ];
 
+          runtimeEnv = {
+            # We're bootstrapping the configuration so we can't guarantee
+            # that the experimental features are present in the system's nix config
+            NIX_CONFIG = "extra-experimental-features = flakes nix-command pipe-operators";
+          };
+
           text = ''
             # Decrypt and tell git to use the bootstrap SSH key
             bootstrap_key="$(mktemp)"
-            age --decrypt ${inputs.self}/secrets/bootstrap.age > "$bootstrap_key"
+            age --decrypt "${inputs.self}/secrets/bootstrap.age" > "$bootstrap_key"
             chmod 600 "$bootstrap_key"
             export GIT_SSH_COMMAND="ssh -i '$bootstrap_key'"
 
             case "$(uname -s)" in
-              Darwin) host=darwin ;;
-              Linux) host=os ;;
-              *) echo "unsupported host: $(uname -s)" >&2; exit 1 ;;
+              Darwin) os=darwin ;;
+              Linux) os=os ;;
+              *) echo "unsupported os: $(uname -s)" >&2; exit 1 ;;
             esac
 
-            # We're bootstrapping the configuration so we can't guarantee
-            # that the experimental features are present in the system's nix config
-            nh "$host" switch --option extra-experimental-features "flakes nix-command pipe-operators" "$@"
+            nh "$os" switch "path:${inputs.self}" "$@"
           '';
         };
       });
