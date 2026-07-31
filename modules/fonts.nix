@@ -13,7 +13,6 @@ in
       berkeley-mono
       inter
       source-serif
-      tx-02
     ];
 
     fonts.fontconfig = {

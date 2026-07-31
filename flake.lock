@@ -28,11 +28,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1785339273,
-        "narHash": "sha256-0wFTTCynimeW085A840+hwHCkEe4sqRPmd8P9aboogE=",
+        "lastModified": 1785469425,
+        "narHash": "sha256-yYBsXZOdosIxZ5zyaEwO4oQ74ssqSpZ/BioloSvfYfk=",
         "ref": "refs/heads/master",
-        "rev": "c2808e3c3753c920500e9a8d25410a7a04e15485",
-        "revCount": 10,
+        "rev": "4c644fbe5d109af5b79a0945a626a18d67714192",
+        "revCount": 11,
         "type": "git",
         "url": "ssh://git@github.com/iniw/fonts"
       },
@@ -69,11 +69,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1785306346,
-        "narHash": "sha256-DScBkW0fOgpGPK2trNoX3ryLTlaC14+gglFo/BhGJ4g=",
+        "lastModified": 1785469032,
+        "narHash": "sha256-aB6tgXxSFT48X0Jc/v5opHUVo/B9sOoojUE6uZ7ymsc=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "e705714e918c3b11affcdd15db2cbe3a070420a0",
+        "rev": "6d25edfbd109bd6c0bb950a2fb6c37141795e3f1",
         "type": "github"
       },
       "original": {
@@ -89,11 +89,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1784500460,
-        "narHash": "sha256-UvORnAxTRHax7RG74W8Z2t4GvIkX6AjJ5kk0QlwZomo=",
+        "lastModified": 1785389976,
+        "narHash": "sha256-0tLW8Ff5yt8AH97jw4ZpFJ0OCJ122zIlgWGDmOfU/VU=",
         "owner": "nix-darwin",
         "repo": "nix-darwin",
-        "rev": "57a3171f94705599a2499248ca5758d5eb47c0e0",
+        "rev": "15abb8c98f336cd8bd840d71059adebabe60bf04",
         "type": "github"
       },
       "original": {
