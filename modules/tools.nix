@@ -1,26 +1,22 @@
 {
   homeManagerModule = { pkgs, inputs, ... }: {
-    home = {
-      packages =
-        let
-          nprt = inputs.nixpkgs-pr-tracker.packages.${pkgs.stdenv.hostPlatform.system}.nprt;
-        in
-        with pkgs;
-        [
-          ast-grep
-          fd
-          ffmpeg
-          hyperfine
-          jq
-          nprt
-          okapi-ed
-          python314
-          ripgrep
-          scc
-        ];
-
-      shellAliases.ns = "nix shell --impure -f '<nixpkgs>'";
-    };
+    home.packages =
+      with pkgs;
+      let
+        inherit (inputs.nixpkgs-pr-tracker.packages.${stdenv.hostPlatform.system}) nprt;
+      in
+      [
+        ast-grep
+        fd
+        ffmpeg
+        hyperfine
+        jq
+        nprt
+        okapi-ed
+        python314
+        ripgrep
+        scc
+      ];
 
     programs = {
       bat = {
@@ -84,6 +80,8 @@
           use-color = true;
         };
       };
+
+      nix-your-shell.enable = true;
 
       zoxide.enable = true;
     };

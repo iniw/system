@@ -1,29 +1,29 @@
 {
   homeManagerModule = { pkgs, ... }: {
-    programs =
-      let
-        nu = pkgs.lib.getExe pkgs.nushell;
-      in
-      {
-        nushell = {
-          enable = true;
+    programs = {
+      nushell = {
+        enable = true;
 
-          configFile.source = ./config.nu;
-        };
-
-        zsh = {
-          enable = true;
-
-          enableCompletion = false;
-
-          initContent = # zsh
-            ''
-              if [[ -z $ZSH_EXECUTION_STRING && $TERM != dumb ]]; then
-                exec ${nu} --experimental-options native-clip
-              fi
-            '';
-        };
+        configFile.source = ./config.nu;
       };
+
+      zsh = {
+        enable = true;
+
+        enableCompletion = false;
+
+        initContent =
+          let
+            nu = pkgs.lib.getExe pkgs.nushell;
+          in
+          # zsh
+          ''
+            if [[ -z $ZSH_EXECUTION_STRING && $TERM != dumb ]]; then
+              exec ${nu} --experimental-options native-clip
+            fi
+          '';
+      };
+    };
 
     home = {
       shell.enableZshIntegration = false;
