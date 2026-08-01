@@ -21,8 +21,11 @@
       nushell.extraConfig = # nu
         ''
           # Like `which`, but it opens the resulting paths with `yazi`.
-          def yich [...applications: string]: nothing -> nothing {
-            y ...(which ...$applications | get path)
+          def yhich [
+          ...applications: string
+          --all (-a) # List all executables.
+          ]: nothing -> nothing {
+            y ...(which --all=$all ...$applications | get path)
           }
         '';
 
