@@ -62,7 +62,7 @@
 
   darwinHomeManagerModule = {
     # See: https://github.com/NixOS/nixpkgs/issues/456879
-    home.shellAliases.man = "env DEVELOPER_DIR= SDKROOT= man";
+    home.shellAliases.man = "env -u DEVELOPER_DIR -u SDKROOT man";
   };
 
   nixosHomeManagerModule = { pkgs, ... }: {
