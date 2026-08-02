@@ -23,7 +23,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nixpkgs-pr-tracker = {
+    nprt = {
       url = "github:thatsneat-dev/nprt";
       inputs.nixpkgs.follows = "nixpkgs";
     };

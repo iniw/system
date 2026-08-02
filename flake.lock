@@ -18,7 +18,7 @@
     "flake-parts": {
       "inputs": {
         "nixpkgs-lib": [
-          "nixpkgs-pr-tracker",
+          "nprt",
           "nixpkgs"
         ]
       },
@@ -176,7 +176,7 @@
         "type": "github"
       }
     },
-    "nixpkgs-pr-tracker": {
+    "nprt": {
       "inputs": {
         "flake-parts": "flake-parts",
         "nixpkgs": [
@@ -205,7 +205,7 @@
         "jj-gh": "jj-gh",
         "nix-darwin": "nix-darwin",
         "nixpkgs": "nixpkgs",
-        "nixpkgs-pr-tracker": "nixpkgs-pr-tracker"
+        "nprt": "nprt"
       }
     },
     "rust-overlay": {

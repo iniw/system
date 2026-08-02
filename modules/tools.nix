@@ -3,7 +3,7 @@
     home.packages =
       with pkgs;
       let
-        inherit (inputs.nixpkgs-pr-tracker.packages.${stdenv.hostPlatform.system}) nprt;
+        inherit (inputs.nprt.packages.${stdenv.hostPlatform.system}) nprt;
       in
       [
         nprt
