@@ -6,37 +6,12 @@
         inherit (inputs.nixpkgs-pr-tracker.packages.${stdenv.hostPlatform.system}) nprt;
       in
       [
-        ast-grep
-        fd
-        ffmpeg
-        hyperfine
-        jq
         nprt
         okapi-ed
-        python314
         ripgrep
-        scc
       ];
 
     programs = {
-      bat = {
-        enable = true;
-
-        config = {
-          style = "numbers";
-          theme = "ansi";
-        };
-      };
-
-      btop = {
-        enable = true;
-
-        settings = {
-          color_theme = "TTY";
-          vim_keys = true;
-        };
-      };
-
       carapace = {
         enable = true;
 
@@ -46,6 +21,7 @@
         ];
 
         settings = {
+          env = false;
           lenient = true;
           bridges = "fish,inshellisense";
         };
@@ -53,7 +29,7 @@
 
       fzf =
         let
-          fd = "${pkgs.lib.getExe pkgs.fd} --hidden --follow --exclude .git --exclude .jj";
+          fd = pkgs.lib.getExe pkgs.fd;
         in
         {
           enable = true;
@@ -61,9 +37,6 @@
           changeDirWidget.command = "${fd} --type directory";
           fileWidget.command = fd;
         };
-
-      # ignored files list used by rg, fd, etc.
-      git.ignores = [ ".ignore" ];
 
       less = {
         enable = true;
@@ -85,6 +58,11 @@
 
       zoxide.enable = true;
     };
+  };
+
+  darwinHomeManagerModule = {
+    # See: https://github.com/NixOS/nixpkgs/issues/456879
+    home.shellAliases.man = "env DEVELOPER_DIR= SDKROOT= man";
   };
 
   nixosHomeManagerModule = { pkgs, ... }: {
