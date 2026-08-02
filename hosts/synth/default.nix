@@ -1,5 +1,5 @@
-mkHost:
-mkHost.nixosSystem (
+sys:
+sys.nixos (
   { user, modulesPath, ... }:
   {
     imports = [ "${modulesPath}/virtualisation/lxc-container.nix" ];

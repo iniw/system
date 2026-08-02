@@ -1,5 +1,5 @@
-mkHost:
-mkHost.darwinSystem (
+sys:
+sys.darwin (
   { user, ... }:
   {
     # Increase the maximum numbers of opened files.

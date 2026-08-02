@@ -41,10 +41,10 @@
 
       hosts =
         let
-          mkHost = import ./lib/mkHost.nix inputs;
+          sys = import ./lib/sys.nix inputs;
         in
         lib.readDir ./hosts
-        |> lib.mapAttrsToList (host: _: import ./hosts/${host} mkHost host)
+        |> lib.mapAttrsToList (host: _: import ./hosts/${host} sys host)
         |> lib.foldr lib.recursiveUpdate { };
 
       forAllSystems =

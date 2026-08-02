@@ -1,5 +1,5 @@
-mkHost:
-mkHost.nixosSystem (
+sys:
+sys.nixos (
   { user, ... }:
   {
     boot.loader = {

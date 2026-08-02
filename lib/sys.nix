@@ -23,7 +23,7 @@ let
   };
 in
 {
-  darwinSystem =
+  darwin =
     mainModule: host:
     let
       hostModules = modules.forHost host;
@@ -51,7 +51,7 @@ in
       };
     };
 
-  nixosSystem =
+  nixos =
     mainModule: host:
     let
       hostModules = modules.forHost host;
