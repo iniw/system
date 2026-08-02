@@ -104,7 +104,7 @@ in
                     | first
 
                   gh repo set-default $trunk.remote
-                  gh repo fork --remote-name $trunk.remote
+                  gh repo fork
 
                   jj config set --repo git.fetch $"['($trunk.remote)', 'upstream']"
                   jj config set --repo git.push $trunk.remote
@@ -112,7 +112,7 @@ in
 
                   jj git fetch
 
-                  jj bookmark track $trunk.bookmark --remote upstream
+                  jj bookmark track $trunk.bookmark
                 }
               '')
             ];
