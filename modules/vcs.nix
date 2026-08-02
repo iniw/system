@@ -3,7 +3,9 @@ let
   email = "git@vini.cat";
 in
 {
-  homeManagerModule = { pkgs, ... }: {
+  homeManagerModule = { pkgs, inputs, ... }: {
+    imports = [ inputs.jj-gh.homeManagerModules.default ];
+
     programs = {
       git = {
         enable = true;
@@ -173,6 +175,12 @@ in
                 )
               '';
           };
+        };
+
+        gh = {
+          enable = true;
+
+          aliases.pr = "pr";
         };
       };
 

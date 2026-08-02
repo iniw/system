@@ -27,6 +27,11 @@
       url = "github:thatsneat-dev/nprt";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    jj-gh = {
+      url = "github:mrjones2014/jj-gh";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
