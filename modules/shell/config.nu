@@ -98,6 +98,9 @@ def musiconv [
 
   let codec = $codec | default $to
 
+  # Avoids needing to have `ffmpeg` in $PATH.
+  let ffmpeg = nix-build '<nixpkgs>' -A ffmpeg.bin --no-out-link | path join bin ffmpeg
+
   ls ($folder | path join $"**/*.($from)" | into glob)
   | get name
   | group-by { |file| $file | path dirname }
@@ -108,7 +111,7 @@ def musiconv [
             let out_file = $file | path parse | update extension $to | path join
 
             try {
-              ffmpeg -y -v error -i $file -codec:a $codec -codec:v copy $out_file
+              ^$ffmpeg -y -v error -i $file -codec:a $codec -codec:v copy $out_file
 
               if not $keep {
                 rm $file
