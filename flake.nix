@@ -84,7 +84,6 @@
             # Decrypt and tell git to use the bootstrap SSH key
             bootstrap_key="$(mktemp)"
             age --decrypt "${inputs.self}/secrets/bootstrap.age" > "$bootstrap_key"
-            chmod 600 "$bootstrap_key"
             export GIT_SSH_COMMAND="ssh -i '$bootstrap_key'"
 
             case "$(uname -s)" in
