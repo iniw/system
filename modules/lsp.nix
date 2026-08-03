@@ -18,26 +18,28 @@
       helm-ls
     ];
 
-    # https://rumdl.dev/global-settings/
-    xdg.configFile."rumdl/rumdl.toml".text = # toml
-      ''
-        [global]
-        line-length = 120
-        cache = false
+    xdg.configFile = {
+      # https://rumdl.dev/global-settings/
+      "rumdl/rumdl.toml".text = # toml
+        ''
+          [global]
+          line-length = 120
+          cache = false
 
-        [per-file-ignores]
-        # Disable annoying lints for ephemeral files
-        "/{var/folders,tmp}/**" = [
-          "MD013", # Line length
-          "MD041", # First line heading
-        ]
-      '';
+          [per-file-ignores]
+          # Disable annoying lints for ephemeral files
+          "/{var/folders,tmp}/**" = [
+            "MD013", # Line length
+            "MD041", # First line heading
+          ]
+        '';
 
-    # https://github.com/google/yamlfmt/blob/main/docs/config-file.md
-    xdg.configFile."yamlfmt/yamlfmt.yaml".text = # yaml
-      ''
-        formatter:
-          retain_line_breaks_single: true
-      '';
+      # https://github.com/google/yamlfmt/blob/main/docs/config-file.md
+      "yamlfmt/yamlfmt.yaml".text = # yaml
+        ''
+          formatter:
+            retain_line_breaks_single: true
+        '';
+    };
   };
 }
