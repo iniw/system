@@ -19,6 +19,8 @@ $env.config.table.mode = "single"
 
 $env.config.error_style = "short"
 
+$env.config.completions.algorithm = "fuzzy"
+
 # A recreation of oh-my-zsh's `take` function.
 #
 # Based on the given `url` parameter, it produces an "output folder" by doing one of the following things:

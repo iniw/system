@@ -8,7 +8,7 @@
     };
 
     home-manager = {
-      url = "github:nix-community/home-manager?ref=pull/9753/merge";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

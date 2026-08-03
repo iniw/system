@@ -12,21 +12,6 @@
       ];
 
     programs = {
-      carapace = {
-        enable = true;
-
-        extraPackages = with pkgs; [
-          fish
-          inshellisense
-        ];
-
-        settings = {
-          env = false;
-          lenient = true;
-          bridges = "fish,inshellisense";
-        };
-      };
-
       fzf =
         let
           fd = pkgs.lib.getExe pkgs.fd;
