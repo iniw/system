@@ -5,6 +5,7 @@
       cmusfm
       discord
       obs-studio
+      wl-clipboard
     ];
   };
 }
