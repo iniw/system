@@ -16,8 +16,21 @@
     };
 
     # amp
-    home.packages = [ pkgs.amp-cli ];
-    xdg.configFile."amp/AGENTS.md".source = ./AGENTS.md;
-    xdg.configFile."amp/skills".source = ./skills;
+    home.packages =
+      let
+        amp = pkgs.writeShellApplication {
+          name = "amp";
+          runtimeInputs = [ pkgs.nodejs ];
+          text = ''
+            exec npm exec --yes --quiet --package @ampcode/cli -- amp "$@"
+          '';
+        };
+      in
+      [ amp ];
+
+    xdg.configFile = {
+      "amp/AGENTS.md".source = ./AGENTS.md;
+      "amp/skills".source = ./skills;
+    };
   };
 }
