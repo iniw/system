@@ -20,15 +20,8 @@
           # Load project-specific .lldbinit files
           settings set target.load-cwd-lldbinit true
 
-          # Disable LLDB 21's statusline
-          settings set show-statusline false
-
           # Limit the number of fields/inner-data is shown when printing a variable
           settings set target.max-children-count 5
-
-          # Alias to save and load the breakpoints into a known (and gitignored) file
-          command alias bs breakpoint write -f .breakpoints
-          command alias bl breakpoint read -f .breakpoints
 
           # Improve printing of Rust-specific types
           command script import "${rust-prettifier-for-lldb}/rust_prettifier_for_lldb.py"
@@ -38,8 +31,9 @@
     programs.git.ignores = [
       # Project-specific lldbinit
       ".lldbinit"
-      # List of breakpoints saved/loaded with the bs/bl aliases
-      ".breakpoints"
+      # Place to throw LLDB-specific data that can be stored for use across sessions:
+      # settings stored with `settings {read,write}`, breakpoints, etc.
+      ".lldb"
     ];
   };
 
