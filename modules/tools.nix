@@ -14,7 +14,7 @@
     programs = {
       fzf =
         let
-          fd = pkgs.lib.getExe pkgs.fd;
+          fd = "${pkgs.lib.getExe pkgs.fd} --hidden --exclude .git --exclude .jj";
         in
         {
           enable = true;
