@@ -101,7 +101,7 @@ def musiconv [
   let codec = $codec | default $to
 
   # Avoids needing to have `ffmpeg` in $PATH.
-  let ffmpeg = nix-build '<nixpkgs>' -A ffmpeg.bin --no-out-link | path join bin ffmpeg
+  let ffmpeg = nix-build '<nixpkgs>' -A ffmpeg.bin --no-out-link --quiet | path join bin ffmpeg
 
   ls ($folder | path join $"**/*.($from)" | into glob)
   | get name
