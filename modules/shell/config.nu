@@ -76,12 +76,6 @@ def --env "grab dir" [path: string]: nothing -> nothing {
   cd $path
 }
 
-# Returns the output of the "builtins.currentSystem" nix expression.
-@example "Build the default package for a flake" { nix build .#packages.(nix-system).default }
-def nix-system []: nothing -> string {
-   nix eval --raw --impure --expr "builtins.currentSystem"
-}
-
 # Converts every file of format `$from` in the given `$folder` to format `$to` using ffmpeg.
 def musiconv [
   folder: path         # The folder in which to recursively look for files.
