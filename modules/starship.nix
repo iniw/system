@@ -7,41 +7,46 @@
         add_newline = false;
 
         format = ''
-          [┌](fg:15)$hostname$time$directory$nix_shell$cmd_duration$status
-          └❯'';
+          [╭](white)$hostname$time$directory$nix_shell$cmd_duration$status$fill[─](white)
+          [╰](white)[❯](blue) '';
+
+        fill = {
+          symbol = "─";
+          style = "white";
+        };
 
         hostname = {
-          format = ''─\[[$hostname]($style)\]'';
-          ssh_only = false;
-          style = "bright-black";
+          format = "[─](white) [$hostname]($style) ";
+          style = "light-white";
         };
 
         time = {
-          format = ''─\[[$time]($style)\]'';
+          format = "[─](white) [$time]($style) ";
           time_format = "%H:%M";
-          style = "cyan";
+          style = "blue";
           disabled = false;
         };
 
         directory = {
-          format = ''─\[[$path]($style)[$read_only]($read_only_style)\]'';
-          style = "blue";
+          format = "[─](white) [$path]($style)[$read_only]($read_only_style) ";
+          style = "cyan";
           truncate_to_repo = false;
+          truncation_length = 0;
           read_only = "*";
         };
 
         nix_shell = {
-          format = ''─\[[$name]($style)\]'';
+          format = "[─](white) [$name]($style) ";
           style = "bright-black";
         };
 
         cmd_duration = {
-          format = ''─\[[$duration]($style)\]'';
+          format = "[─](white) [$duration]($style) ";
           style = "yellow";
         };
 
         status = {
-          format = ''─\[[$status]($style)\]'';
+          format = "[─](white) [$status]($style) ";
           disabled = false;
           map_symbol = true;
         };

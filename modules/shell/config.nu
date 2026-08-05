@@ -15,8 +15,6 @@ $env.config.show_banner = false
 
 $env.config.use_kitty_protocol = true
 
-$env.config.table.mode = "single"
-
 $env.config.error_style = "short"
 
 $env.config.completions.algorithm = "fuzzy"
