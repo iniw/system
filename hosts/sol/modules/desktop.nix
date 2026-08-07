@@ -30,7 +30,7 @@
         tilesize = 48;
         persistent-apps =
           let
-            home = config.users.users.${user}.home;
+            inherit (config.users.users.${user}) home;
           in
           [
             { app = "${home}/Applications/Home Manager Apps/Ghostty.app"; }

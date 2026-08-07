@@ -55,7 +55,7 @@ in
     {
       system.defaults.dock.persistent-apps =
         let
-          home = config.users.users.${user}.home;
+          inherit (config.users.users.${user}) home;
         in
         lib.mkAfter [
           { app = "${home}/Applications/Home Manager Apps/Slack.app"; }
