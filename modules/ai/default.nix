@@ -20,7 +20,12 @@
       let
         amp = pkgs.writeShellApplication {
           name = "amp";
-          runtimeInputs = [ pkgs.nodejs ];
+
+          runtimeInputs = with pkgs; [
+            nodejs
+            ripgrep
+          ];
+
           text = ''
             exec npm exec --yes --quiet --package @ampcode/cli -- amp "$@"
           '';
