@@ -1,5 +1,5 @@
 {
-  systemModule = { config, user, ... }: {
+  systemModule = {
     security.pam.services.sudo_local.touchIdAuth = true;
 
     system.defaults = {
@@ -28,19 +28,14 @@
         orientation = "bottom";
         showhidden = true;
         tilesize = 48;
-        persistent-apps =
-          let
-            inherit (config.users.users.${user}) home;
-          in
-          [
-            { app = "/System/Cryptexes/App/System/Applications/Safari.app"; }
-            { app = "/Applications/Discord.app"; }
-            { app = "/Applications/WhatsApp.app"; }
-            { app = "/System/Applications/Music.app"; }
-            { app = "/System/Applications/Mail.app"; }
-            { app = "/System/Applications/Calendar.app"; }
-            { app = "${home}/Applications/Home Manager Apps/NetNewsWire.app"; }
-          ];
+        persistent-apps = [
+          { app = "/System/Cryptexes/App/System/Applications/Safari.app"; }
+          { app = "/Applications/Discord.app"; }
+          { app = "/Applications/WhatsApp.app"; }
+          { app = "/System/Applications/Music.app"; }
+          { app = "/System/Applications/Mail.app"; }
+          { app = "/System/Applications/Calendar.app"; }
+        ];
       };
 
       finder = {

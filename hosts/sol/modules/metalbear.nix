@@ -57,7 +57,7 @@ in
         let
           inherit (config.users.users.${user}) home;
         in
-        lib.mkAfter [
+        lib.mkOrder 2000 [
           { app = "${home}/Applications/Home Manager Apps/Slack.app"; }
           { app = "${home}/Applications/Home Manager Apps/Linear.app"; }
         ];
