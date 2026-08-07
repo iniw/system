@@ -382,6 +382,10 @@
             ];
           };
 
+          vscode-json-language-server.config = {
+            json.validate.trailingCommas = "ignore";
+          };
+
           vscode-css-language-server.config = {
             # Supresses "Unknown at rule @theme" when using tailwind.
             css.lint.unknownAtRules = "ignore";
