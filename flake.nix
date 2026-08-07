@@ -107,6 +107,7 @@
         #   nix-update <package> --flake
 
         seeleseek = pkgs.callPackage ./pkgs/seeleseek.nix { };
+        space-rabbit = pkgs.callPackage ./pkgs/space-rabbit.nix { };
       });
     };
 }

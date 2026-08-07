@@ -3,7 +3,7 @@
     home.packages =
       with pkgs;
       let
-        inherit (inputs.self.packages.${stdenv.hostPlatform.system}) seeleseek;
+        inherit (inputs.self.packages.${stdenv.hostPlatform.system}) seeleseek space-rabbit;
       in
       [
         caffeine
@@ -12,6 +12,7 @@
         net-news-wire
         reflex-app
         seeleseek
+        space-rabbit
       ];
   };
 
