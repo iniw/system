@@ -1,12 +1,18 @@
 {
-  homeManagerModule = { pkgs, ... }: {
-    home.packages = with pkgs; [
-      caffeine
-      google-chrome
-      mos
-      net-news-wire
-      reflex-app
-    ];
+  homeManagerModule = { pkgs, inputs, ... }: {
+    home.packages =
+      with pkgs;
+      let
+        inherit (inputs.self.packages.${stdenv.hostPlatform.system}) seeleseek;
+      in
+      [
+        caffeine
+        google-chrome
+        mos
+        net-news-wire
+        reflex-app
+        seeleseek
+      ];
   };
 
   systemModule =
@@ -36,6 +42,7 @@
         in
         lib.mkAfter [
           { app = "${home}/Applications/Home Manager Apps/NetNewsWire.app"; }
+          { app = "${home}/Applications/Home Manager Apps/seeleseek.app"; }
         ];
     };
 }

@@ -57,6 +57,7 @@
         default = pkgs.mkShell {
           packages = with pkgs; [
             nh
+            nix-update
           ];
         };
       });
@@ -95,6 +96,17 @@
             nh "$os" switch "path:${inputs.self}" "$@"
           '';
         };
+
+        # Packages maintained locally because they are not available in nixpkgs yet.
+        # I may eventually upstream them.
+        #
+        # Accessing from a module:
+        #   inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.<package>
+        #
+        # Updating:
+        #   nix-update <package> --flake
+
+        seeleseek = pkgs.callPackage ./pkgs/seeleseek.nix { };
       });
     };
 }
