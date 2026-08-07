@@ -33,7 +33,6 @@
             inherit (config.users.users.${user}) home;
           in
           [
-            { app = "${home}/Applications/Home Manager Apps/Ghostty.app"; }
             { app = "/System/Cryptexes/App/System/Applications/Safari.app"; }
             { app = "/Applications/Discord.app"; }
             { app = "/Applications/WhatsApp.app"; }
