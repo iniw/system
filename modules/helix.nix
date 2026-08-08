@@ -1,11 +1,8 @@
 {
-  systemModule = { inputs, ... }: {
-    nixpkgs.overlays = [ inputs.helix.overlays.default ];
-  };
-
-  homeManagerModule = { pkgs, ... }: {
+  homeManagerModule = { inputs, pkgs, ... }: {
     programs.helix = {
       enable = true;
+      package = inputs.helix.packages.${pkgs.stdenv.hostPlatform.system}.helix;
 
       defaultEditor = true;
 
@@ -393,10 +390,6 @@
         };
 
         language = [
-          {
-            name = "sql";
-            formatter.command = "sql-formatter";
-          }
           {
             name = "css";
             language-servers = [

@@ -1,30 +1,33 @@
-let
-  monospace = "Berkeley Mono";
-  sansSerif = "Inter";
-  serif = "Source Serif 4";
-in
 {
-  systemModule = { inputs, ... }: {
-    nixpkgs.overlays = [ inputs.fonts.overlays.default ];
-  };
+  homeManagerModule =
+    { inputs, pkgs, ... }:
+    let
+      monospace = "Berkeley Mono";
+      sansSerif = "Inter";
+      serif = "Source Serif 4";
+    in
+    {
+      home.packages =
+        with pkgs;
+        let
+          inherit (inputs.fonts.packages.${stdenv.hostPlatform.system}) berkeley-mono;
+        in
+        [
+          berkeley-mono
+          inter
+          source-serif
+        ];
 
-  homeManagerModule = { pkgs, ... }: {
-    home.packages = with pkgs; [
-      berkeley-mono
-      inter
-      source-serif
-    ];
+      fonts.fontconfig = {
+        enable = true;
 
-    fonts.fontconfig = {
-      enable = true;
-
-      defaultFonts = {
-        monospace = [ monospace ];
-        sansSerif = [ sansSerif ];
-        serif = [ serif ];
+        defaultFonts = {
+          monospace = [ monospace ];
+          sansSerif = [ sansSerif ];
+          serif = [ serif ];
+        };
       };
-    };
 
-    programs.ghostty.settings.font-family = monospace;
-  };
+      programs.ghostty.settings.font-family = monospace;
+    };
 }
