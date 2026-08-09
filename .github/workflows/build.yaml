@@ -1,0 +1,61 @@
+name: Build system configurations
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build ${{ matrix.host }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - host: sol
+            os: macos-latest
+            attribute: darwinConfigurations.sol.system
+          - host: lua
+            os: ubuntu-latest
+            attribute: nixosConfigurations.lua.config.system.build.toplevel
+          - host: synth
+            os: ubuntu-24.04-arm
+            attribute: nixosConfigurations.synth.config.system.build.toplevel
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Install Nix
+        uses: NixOS/nix-installer-action@v1
+        with:
+          extra-conf: |
+            extra-experimental-features = pipe-operators
+
+      - name: Configure bootstrap SSH key
+        env:
+          AGE_PASSPHRASE: ${{ secrets.BOOTSTRAP_PASSPHRASE }}
+        run: |
+          mkdir -p ~/.ssh
+          nix-shell -p age --run 'age --decrypt -j batchpass --output ~/.ssh/bootstrap secrets/bootstrap.age'
+          chmod 600 ~/.ssh/bootstrap
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+          cat >> ~/.ssh/config <<'EOF'
+          Host github.com
+            IdentityFile ~/.ssh/bootstrap
+            IdentitiesOnly yes
+          EOF
+
+      - uses: cachix/cachix-action@v17
+        with:
+          name: wini
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+
+      - name: Build configuration
+        run: nix build ".#${{ matrix.attribute }}" --no-link --print-build-logs

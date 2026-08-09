@@ -1,4 +1,11 @@
 {
+  nixConfig = {
+    extra-substituters = [ "https://wini.cachix.org" ];
+    extra-trusted-public-keys = [
+      "wini.cachix.org-1:ChRUS92QploZXAgKujhfAWsZSI6eeCsoNdAP9v8hBow="
+    ];
+  };
+
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
