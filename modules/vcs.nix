@@ -198,21 +198,19 @@ in
       };
     };
 
-    home = {
-      packages = with pkgs; [
-        hut
+    home.packages = with pkgs; [
+      hut
 
-        # Used by jj to track changes to the working copy in large repositories
-        # See: https://docs.jj-vcs.dev/latest/config/#watchman
-        watchman
+      # Used by jj to track changes to the working copy in large repositories
+      # See: https://docs.jj-vcs.dev/latest/config/#watchman
+      watchman
 
-        # Merge resolution tools
-        meld
-        mergiraf
+      # Merge resolution tools
+      meld
+      mergiraf
 
-        # Diff viewers
-        lumen
-      ];
-    };
+      # Diff viewers
+      lumen
+    ];
   };
 }
