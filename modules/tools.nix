@@ -12,6 +12,8 @@
       ];
 
     programs = {
+      dircolors.enable = true;
+
       fzf =
         let
           fd = "${pkgs.lib.getExe pkgs.fd} --hidden --exclude .git --exclude .jj";
