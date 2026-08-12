@@ -25,11 +25,10 @@
     nix.gc.interval = {
       Hour = 0;
       Minute = 0;
-      Weekday = 7;
     };
   };
 
   nixosSystemModule = {
-    nix.gc.dates = "weekly";
+    nix.gc.dates = "daily";
   };
 }
