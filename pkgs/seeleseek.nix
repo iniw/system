@@ -9,11 +9,11 @@
 
 stdenvNoCC.mkDerivation (finalAttrs: {
   pname = "seeleseek";
-  version = "1.2.0";
+  version = "1.3.0";
 
   src = fetchurl {
     url = "https://github.com/bretth18/seeleseek/releases/download/v${finalAttrs.version}/seeleseek.pkg";
-    hash = "sha256-pJO7hTCNPmVJHzIsCL4tT0B3JkhFgAN0wXFBpMj80jE=";
+    hash = "sha256-FlDCtc3ys0KfwRz6TPkA27oMbNI0hQ66m01KvJDaG3c=";
   };
 
   nativeBuildInputs = [
