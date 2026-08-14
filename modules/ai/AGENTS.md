@@ -53,7 +53,7 @@ fn function() {
         // ...
     };
 
-    let bob  = {
+    let bob = {
         // ...
     };
 
@@ -62,3 +62,13 @@ fn function() {
     // ...
 }
 ```
+
+## Language
+
+When writing something that will be read by a human, including me, use *SIMPLE LANGUAGE*. More specifically, use the
+ASD-STE100 Simplified Technical English standard.
+
+The more condensed, buzzwordy, jargon-heavy something is, the harder it is to read. Do not write like that.
+
+This applies to essentially everything apart from the code itself: comments, variable/function/module names, PR
+titles/bodies, commit messages, replies to my prompts, etc.
