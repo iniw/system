@@ -90,7 +90,7 @@
                     # Copy current buffer to system clipboard
                     y =
                       let
-                        clipboard = if pkgs.stdenv.isDarwin then "pbcopy" else "wl-copy";
+                        clipboard = if pkgs.stdenv.hostPlatform.isDarwin then "pbcopy" else "wl-copy";
                       in
                       [ ":! echo -n %{buffer_name} | ${clipboard}" ];
                   };

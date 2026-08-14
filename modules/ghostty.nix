@@ -2,7 +2,7 @@
   homeManagerModule = { pkgs, ... }: {
     programs.ghostty = {
       enable = true;
-      package = with pkgs; if stdenv.isDarwin then ghostty-bin else ghostty;
+      package = with pkgs; if stdenv.hostPlatform.isDarwin then ghostty-bin else ghostty;
 
       settings = {
         auto-update = "off";
