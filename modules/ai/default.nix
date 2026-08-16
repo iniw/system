@@ -5,7 +5,6 @@
         enable = true;
 
         context = ./AGENTS.md;
-        skills = ./skills;
       };
 
       git.ignores = [
@@ -33,9 +32,6 @@
       in
       [ amp ];
 
-    xdg.configFile = {
-      "amp/AGENTS.md".source = ./AGENTS.md;
-      "amp/skills".source = ./skills;
-    };
+    xdg.configFile."amp/AGENTS.md".source = ./AGENTS.md;
   };
 }
