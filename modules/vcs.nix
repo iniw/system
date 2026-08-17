@@ -1,6 +1,9 @@
 let
-  name = "Vinicius Deolindo";
-  email = "git@vini.cat";
+  user = {
+    name = "Vinicius Deolindo";
+    email = "git@vini.cat";
+  };
+  signingKey = "~/.ssh/id_ed25519.pub";
 in
 {
   homeManagerModule = { pkgs, inputs, ... }: {
@@ -10,10 +13,14 @@ in
       git = {
         enable = true;
 
+        signing = {
+          format = "ssh";
+          key = signingKey;
+          signByDefault = true;
+        };
+
         settings = {
-          user = {
-            inherit name email;
-          };
+          inherit user;
         };
 
         ignores = [
@@ -27,33 +34,6 @@ in
         enable = true;
 
         settings = {
-          ui = {
-            default-command = "log";
-            movement.edit = true;
-            merge-editor = "meld";
-          };
-
-          user = {
-            inherit name email;
-          };
-
-          revsets = {
-            bookmark-advance-from = # jujutsu
-              ''
-                coalesce(
-                  heads(::to & bookmarks() & ~immutable()),
-                  heads(::to & bookmarks()),
-                )
-              '';
-
-            bookmark-advance-to =
-              # From: https://github.com/jj-vcs/jj/issues/9055#issuecomment-4024269740
-              # jujutsu
-              ''
-                heads(::@ & mutable() & ~description(exact:"") & (~empty() | merges()))
-              '';
-          };
-
           aliases = {
             # "Long log", shows all revisions
             ll = [
@@ -61,12 +41,14 @@ in
               "-r"
               "::"
             ];
+
             # "Log trunk", shows all revisions in `trunk()`
             lt = [
               "log"
               "-r"
               "::trunk()"
             ];
+
             pusha = [
               "util"
               "exec"
@@ -92,6 +74,7 @@ in
                 }
               '')
             ];
+
             fork = [
               "util"
               "exec"
@@ -118,6 +101,7 @@ in
                 }
               '')
             ];
+
             squash-branch = [
               "util"
               "exec"
@@ -142,6 +126,7 @@ in
                 }
               '')
             ];
+
             merge-trunk = [
               "util"
               "exec"
@@ -159,6 +144,37 @@ in
                 }
               '')
             ];
+          };
+
+          ui = {
+            default-command = "log";
+            movement.edit = true;
+            merge-editor = "meld";
+          };
+
+          inherit user;
+
+          revsets = {
+            bookmark-advance-from = # jujutsu
+              ''
+                coalesce(
+                  heads(::to & bookmarks() & ~immutable()),
+                  heads(::to & bookmarks()),
+                )
+              '';
+
+            bookmark-advance-to =
+              # From: https://github.com/jj-vcs/jj/issues/9055#issuecomment-4024269740
+              # jujutsu
+              ''
+                heads(::@ & mutable() & ~description(exact:"") & (~empty() | merges()))
+              '';
+          };
+
+          signing = {
+            backend = "ssh";
+            behavior = "own";
+            key = signingKey;
           };
 
           templates = {
@@ -184,7 +200,11 @@ in
         };
       };
 
-      gh.enable = true;
+      gh = {
+        enable = true;
+
+        settings.git_protocol = "ssh";
+      };
 
       difftastic = {
         enable = true;
