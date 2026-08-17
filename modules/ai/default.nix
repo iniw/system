@@ -1,5 +1,5 @@
 {
-  homeManagerModule = { pkgs, ... }: {
+  homeManagerModule = { pkgs, inputs, ... }: {
     programs = {
       codex = {
         enable = true;
@@ -17,18 +17,7 @@
     # amp
     home.packages =
       let
-        amp = pkgs.writeShellApplication {
-          name = "amp";
-
-          runtimeInputs = with pkgs; [
-            nodejs
-            ripgrep
-          ];
-
-          text = ''
-            exec npm exec --yes --quiet --package @ampcode/cli -- amp "$@"
-          '';
-        };
+        inherit (inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}) amp;
       in
       [ amp ];
 
