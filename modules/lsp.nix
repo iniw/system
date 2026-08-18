@@ -26,6 +26,10 @@
           line-length = 120
           cache = false
 
+          [MD013]
+          code_blocks = false
+          reflow = true
+
           [per-file-ignores]
           # Disable annoying lints for ephemeral files
           "/{var/folders,tmp}/**" = [

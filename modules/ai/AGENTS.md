@@ -2,8 +2,8 @@
 
 ## Tool Availability
 
-Most projects being worked on will have a nix development shell - make sure to use it by prefixing commands
-with `nix develop -c`, this ensures the project's dependencies and build tools are available.
+Most projects being worked on will have a nix development shell - make sure to use it by prefixing commands with
+`nix develop -c`, this ensures the project's dependencies and build tools are available.
 
 Note that system-level tools (e.g `rg`, `find`, `jj`, `git`, `kubectl`, ...) don't need to go through `nix develop -c`,
 only toolchain and project-specific tools (e.g: `cargo`, `uv`, `node`, `cmake`, ...).
