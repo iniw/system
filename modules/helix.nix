@@ -392,6 +392,10 @@
 
         language = [
           {
+            name = "python";
+            code-actions-on-save = [ "source.fixAll" ];
+          }
+          {
             name = "css";
             language-servers = [
               "oxfmt-language-server"
