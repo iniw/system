@@ -12,7 +12,7 @@
           "pipe-operators"
         ];
 
-        sandbox = true;
+        sandbox = "relaxed";
 
         trusted-users = [ user ];
 
