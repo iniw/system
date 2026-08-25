@@ -398,6 +398,7 @@
           {
             name = "css";
             language-servers = [
+              "deno"
               "oxfmt-language-server"
               "vscode-css-language-server"
               "tailwindcss-ls"
@@ -406,6 +407,7 @@
           {
             name = "json";
             language-servers = [
+              "deno"
               "oxfmt-language-server"
               "vscode-json-language-server"
             ];
@@ -413,6 +415,7 @@
           {
             name = "jsonc";
             language-servers = [
+              "deno"
               "oxfmt-language-server"
               "vscode-json-language-server"
             ];
@@ -420,6 +423,7 @@
           {
             name = "json-ld";
             language-servers = [
+              "deno"
               "oxfmt-language-server"
               "vscode-json-language-server"
             ];
@@ -427,6 +431,7 @@
           {
             name = "html";
             language-servers = [
+              "deno"
               "oxfmt-language-server"
               "vscode-html-language-server"
               "tailwindcss-ls"
@@ -435,6 +440,7 @@
           {
             name = "javascript";
             language-servers = [
+              "deno"
               "oxlint-language-server"
               "oxfmt-language-server"
               "vtsls"
@@ -444,6 +450,7 @@
           {
             name = "jsx";
             language-servers = [
+              "deno"
               "oxlint-language-server"
               "oxfmt-language-server"
               "vtsls"
@@ -454,6 +461,7 @@
           {
             name = "typescript";
             language-servers = [
+              "deno"
               "oxlint-language-server"
               "oxfmt-language-server"
               "vtsls"
@@ -463,12 +471,20 @@
           {
             name = "tsx";
             language-servers = [
+              "deno"
               "oxlint-language-server"
               "oxfmt-language-server"
               "vtsls"
               "tailwindcss-ls"
             ];
             code-actions-on-save = [ "source.fixAll.oxc" ];
+          }
+          {
+            name = "svelte";
+            language-servers = [
+              "deno"
+              "svelteserver"
+            ];
           }
         ];
       };
