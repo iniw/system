@@ -23,6 +23,10 @@
           # Limit the number of fields/inner-data is shown when printing a variable
           settings set target.max-children-count 5
 
+          # Disable the statusline because it clears the screen when resizing, which is very annoying
+          # FIXME: Remove once https://github.com/llvm/llvm-project/pull/202691 lands in a release
+          settings set show-statusline false
+
           # Improve printing of Rust-specific types
           command script import "${rust-prettifier-for-lldb}/rust_prettifier_for_lldb.py"
         '';
