@@ -30,9 +30,13 @@
           code_blocks = false
           reflow = true
 
-          [per-file-ignores]
           # Disable annoying lints for ephemeral files
+          [per-file-ignores]
           "/{var/folders,tmp}/**" = [
+            "MD013", # Line length
+            "MD041", # First line heading
+          ]
+          "~/.config/codex/editor/**" = [
             "MD013", # Line length
             "MD041", # First line heading
           ]
