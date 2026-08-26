@@ -2,16 +2,7 @@
   homeManagerModule = { pkgs, ... }: {
     home = {
       packages = [ pkgs.lldb ];
-
       file.".lldbinit".text =
-        let
-          rust-prettifier-for-lldb = pkgs.fetchFromGitHub {
-            owner = "cmrschwarz";
-            repo = "rust-prettifier-for-lldb";
-            tag = "v0.5.1";
-            hash = "sha256-6EIR901c6PVOQApKVbpLf1DPHMwef3LUxFJji2PiduI=";
-          };
-        in
         # sh
         ''
           # Show more lines when printing source code
@@ -26,9 +17,6 @@
           # Disable the statusline because it clears the screen when resizing, which is very annoying
           # FIXME: Remove once https://github.com/llvm/llvm-project/pull/202691 lands in a release
           settings set show-statusline false
-
-          # Improve printing of Rust-specific types
-          command script import "${rust-prettifier-for-lldb}/rust_prettifier_for_lldb.py"
         '';
     };
 
