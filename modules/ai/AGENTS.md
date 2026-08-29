@@ -21,6 +21,8 @@ user may have configured.
 
 ## Functions
 
+### Tiny functions
+
 Avoid extracting trivial, self-contained logic into micro-functions that are only used once. When the code is simple
 (which it most often is), prefer inlining it at the callsite instead of introducing a helper that achieves nothing but
 add indirection, hurting readability.
@@ -29,6 +31,8 @@ Functions make sense when they:
 
 - Hide details that would distract from the callsite's flow;
 - Are used in multiple places.
+
+### Function bodies
 
 If the language supports it, use block expressions to keep temporary variables scoped to the part of the procedure that
 needs them. This reduces cognitive load by limiting the number of names in scope at a given point.
@@ -66,9 +70,11 @@ fn function() {
 ## Language
 
 When writing something that will be read by a human, including me, use *SIMPLE LANGUAGE*. More specifically, use the
-ASD-STE100 Simplified Technical English standard.
+ASD-STE100 Simplified Technical English (STE) standard.
 
 The more condensed, buzzwordy, jargon-heavy something is, the harder it is to read. Do not write like that.
 
 This applies to essentially everything apart from the code itself: comments, variable/function/module names, PR
 titles/bodies, commit messages, replies to my prompts, etc.
+
+This is the most important rule of all. Follow it religiously.
