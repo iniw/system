@@ -28,7 +28,7 @@
         enable = true;
 
         packages = {
-          Neptunes = 1006739057;
+          FastScrobbler = 6759501541;
           WhatsApp = 310633997;
           Xcode = 497799835;
           wBlock = 6746388723;
