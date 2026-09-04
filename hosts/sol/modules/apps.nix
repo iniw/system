@@ -28,6 +28,7 @@
         enable = true;
 
         packages = {
+          "1Password for Safari" = 1569813296;
           FastScrobbler = 6759501541;
           WhatsApp = 310633997;
           Xcode = 497799835;

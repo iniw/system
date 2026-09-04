@@ -3,7 +3,6 @@ let
     name = "Vinicius Deolindo";
     email = "git@vini.cat";
   };
-  signingKey = "~/.ssh/id_ed25519.pub";
 in
 {
   homeManagerModule = { pkgs, inputs, ... }: {
@@ -12,12 +11,6 @@ in
     programs = {
       git = {
         enable = true;
-
-        signing = {
-          format = "ssh";
-          key = signingKey;
-          signByDefault = true;
-        };
 
         settings = {
           inherit user;
@@ -169,12 +162,6 @@ in
               ''
                 heads(::@ & mutable() & ~description(exact:"") & (~empty() | merges()))
               '';
-          };
-
-          signing = {
-            backend = "ssh";
-            behavior = "own";
-            key = signingKey;
           };
 
           templates = {
