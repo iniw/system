@@ -4,6 +4,7 @@
       cmus
       cmusfm
       discord
+      firefox
       obs-studio
       wl-clipboard
     ];

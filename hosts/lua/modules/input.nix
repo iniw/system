@@ -1,34 +1,28 @@
 {
   systemModule = {
+    time.timeZone = "America/Sao_Paulo";
+
     i18n = {
       defaultLocale = "en_US.UTF-8";
+
+      extraLocaleSettings = {
+        LC_ADDRESS = "pt_BR.UTF-8";
+        LC_IDENTIFICATION = "pt_BR.UTF-8";
+        LC_MEASUREMENT = "pt_BR.UTF-8";
+        LC_MONETARY = "pt_BR.UTF-8";
+        LC_NAME = "pt_BR.UTF-8";
+        LC_NUMERIC = "pt_BR.UTF-8";
+        LC_PAPER = "pt_BR.UTF-8";
+        LC_TELEPHONE = "pt_BR.UTF-8";
+        LC_TIME = "pt_BR.UTF-8";
+      };
+
       inputMethod = {
         enable = true;
         type = "ibus";
       };
     };
-  };
 
-  homeManagerModule = { lib, ... }: {
-    dconf.settings = {
-      "org/gnome/desktop/input-sources" = {
-        xkb-options = [ "caps:escape" ];
-        sources = [
-          (lib.hm.gvariant.mkTuple [
-            "xkb"
-            "br"
-          ])
-        ];
-      };
-
-      "org/gnome/desktop/peripherals/keyboard" = {
-        delay = lib.hm.gvariant.mkUint32 200;
-        repeat = lib.hm.gvariant.mkUint32 20;
-      };
-
-      "org/gnome/desktop/peripherals/mouse" = {
-        speed = -0.20;
-      };
-    };
+    console.keyMap = "br-abnt2";
   };
 }
