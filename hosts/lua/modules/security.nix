@@ -9,6 +9,6 @@
       sudo.enable = false;
     };
 
-    users.${user}.extraGroups = [ "wheel" ];
+    users.users.${user}.extraGroups = [ "wheel" ];
   };
 }
