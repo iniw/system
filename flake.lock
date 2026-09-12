@@ -285,7 +285,8 @@
         "llm-agents": "llm-agents",
         "nix-darwin": "nix-darwin",
         "nixpkgs": "nixpkgs",
-        "nprt": "nprt"
+        "nprt": "nprt",
+        "sidra": "sidra"
       }
     },
     "rust-overlay": {
@@ -327,6 +328,26 @@
       "original": {
         "owner": "oxalica",
         "repo": "rust-overlay",
+        "type": "github"
+      }
+    },
+    "sidra": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1789160807,
+        "narHash": "sha256-/ZtmocXdg21L6zEbUrsHdjqYEFKi3hK0vQXvEou3zts=",
+        "owner": "wimpysworld",
+        "repo": "sidra",
+        "rev": "f703605a8eef9c12734197f3d8658ede8a8cf368",
+        "type": "github"
+      },
+      "original": {
+        "owner": "wimpysworld",
+        "repo": "sidra",
         "type": "github"
       }
     },
