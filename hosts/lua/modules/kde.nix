@@ -17,7 +17,9 @@
     home.packages = with pkgs.kdePackages; [
       kcontacts
       kolourpaint
-      merkuro
+      kmail
+      kmail-account-wizard
+      kcalc
     ];
   };
 }
