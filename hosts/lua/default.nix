@@ -9,10 +9,7 @@ sys.nixos (
 
     boot.kernelPackages = pkgs.linuxPackages_latest;
 
-    home-manager.users.${user} = {
-      dconf.enable = false;
-      home.stateVersion = "26.11";
-    };
+    home-manager.users.${user}.home.stateVersion = "26.11";
 
     system.stateVersion = "26.11";
   }
