@@ -19,8 +19,11 @@
       "org/gnome/shell" = {
         favorite-apps = [
           "com.mitchellh.ghostty.desktop"
+          "1password.desktop"
           "firefox.desktop"
           "discord.desktop"
+          "thunderbird.desktop"
+          "steam.desktop"
         ];
       };
     };
