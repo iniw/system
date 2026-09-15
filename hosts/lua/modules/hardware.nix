@@ -13,14 +13,14 @@
 
       boot = {
         initrd.availableKernelModules = [
-          "nvme"
-          "xhci_pci_prom21"
           "ahci"
-          "xhci_pci"
-          "thunderbolt"
-          "usbhid"
-          "usb_storage"
+          "nvme"
           "sd_mod"
+          "thunderbolt"
+          "usb_storage"
+          "usbhid"
+          "xhci_pci"
+          "xhci_pci_prom21"
         ];
         kernelModules = [ "kvm-amd" ];
       };
