@@ -17,6 +17,7 @@
       };
 
       "org/gnome/shell" = {
+        always-show-log-out = true;
         favorite-apps = [
           "com.mitchellh.ghostty.desktop"
           "1password.desktop"
