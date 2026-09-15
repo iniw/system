@@ -37,11 +37,6 @@
       url = "github:numtide/llm-agents.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    sidra = {
-      url = "github:wimpysworld/sidra";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs =
