@@ -8,11 +8,11 @@
 
 stdenvNoCC.mkDerivation (finalAttrs: {
   pname = "space-rabbit";
-  version = "2.4.2";
+  version = "2.5.0";
 
   src = fetchurl {
     url = "https://github.com/Tahul/space-rabbit/releases/download/v${finalAttrs.version}/Space-Rabbit.dmg";
-    hash = "sha256-SnkJ/Mia7RzxbjeaTH8XwIXwr9ezbAJTfRpqIpIY3Gc=";
+    hash = "sha256-vKop8Z7j7YEYMTYPDh96i5H6sPsofEZBmTmN/21892o=";
   };
 
   nativeBuildInputs = [ undmg ];
