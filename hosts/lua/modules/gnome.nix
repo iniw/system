@@ -1,5 +1,5 @@
 {
-  systemModule = {
+  systemModule = { pkgs, ... }: {
     services = {
       displayManager.gdm.enable = true;
       desktopManager.gnome.enable = true;
@@ -8,6 +8,10 @@
         core-developer-tools.enable = false;
       };
     };
+
+    environment.systemPackages = with pkgs; [
+      gnomeExtensions.astra-monitor
+    ];
   };
 
   homeManagerModule = {
