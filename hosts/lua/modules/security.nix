@@ -1,11 +1,7 @@
 {
   systemModule = { user, ... }: {
     security = {
-      run0 = {
-        enable = true;
-        sudo-shim.enable = true;
-      };
-
+      run0.enable = true;
       sudo.enable = false;
     };
 
