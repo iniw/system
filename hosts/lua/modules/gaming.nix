@@ -7,7 +7,7 @@
         enable = true;
 
         settings = {
-          general.renice = 11;
+          general.renice = 10;
         };
       };
     };
