@@ -30,47 +30,46 @@
           "clear"
 
           # global
-          "super+q=quit"
-          "super+u=undo"
-          "super+shift+p=toggle_command_palette"
+          "ctrl+g>u=undo"
+          "ctrl+g>p=toggle_command_palette"
           "global:super+shift+;=toggle_quick_terminal"
 
           # tab
-          "super+n=new_tab"
-          "super+d=close_surface"
-          "super+shift+d=close_tab"
-          "super+shift+h=previous_tab"
-          "super+shift+l=next_tab"
+          "ctrl+g>n=new_tab"
+          "ctrl+g>d=close_surface"
+          "ctrl+g>shift+d=close_tab"
+          "ctrl+g>shift+h=previous_tab"
+          "ctrl+g>shift+l=next_tab"
 
           # split
-          "super+s=new_split:down"
-          "super+v=new_split:right"
-          "super+h=goto_split:left"
-          "super+j=goto_split:down"
-          "super+k=goto_split:up"
-          "super+l=goto_split:right"
-          "super+z=toggle_split_zoom"
+          "ctrl+g>s=new_split:down"
+          "ctrl+g>v=new_split:right"
+          "ctrl+g>h=goto_split:left"
+          "ctrl+g>j=goto_split:down"
+          "ctrl+g>k=goto_split:up"
+          "ctrl+g>l=goto_split:right"
+          "ctrl+g>z=toggle_split_zoom"
 
           # scroll
-          "super+up=scroll_page_lines:-1"
-          "super+down=scroll_page_lines:1"
-          "super+shift+up=scroll_page_up"
-          "super+shift+down=scroll_page_down"
-          "super+alt+up=scroll_to_top"
-          "super+alt+down=scroll_to_bottom"
+          "ctrl+g>up=scroll_page_lines:-1"
+          "ctrl+g>down=scroll_page_lines:1"
+          "ctrl+g>shift+up=scroll_page_up"
+          "ctrl+g>shift+down=scroll_page_down"
+          "ctrl+g>alt+up=scroll_to_top"
+          "ctrl+g>alt+down=scroll_to_bottom"
+
+          # window
+          "all:super+shift+0=reset_font_size"
+          "all:super+shift+equal=increase_font_size:1"
+          "all:super+shift+minus=decrease_font_size:1"
+
+          # find
+          "ctrl+g>f=start_search"
+          "performable:escape=end_search"
 
           # clipboard
           "ctrl+shift+c=copy_to_clipboard"
           "ctrl+shift+v=paste_from_clipboard"
-
-          # window
-          "all:super+0=reset_font_size"
-          "all:super+equal=increase_font_size:1"
-          "all:super+minus=decrease_font_size:1"
-
-          # find
-          "super+f=start_search"
-          "performable:escape=end_search"
         ];
       };
 
