@@ -4,7 +4,6 @@ in
 {
   homeManagerModule =
     {
-      lib,
       pkgs,
       ...
     }:
@@ -48,6 +47,6 @@ in
           gcloud
         ];
 
-      dconf.settings."org/gnome/shell".favorite-apps = lib.mkAfter [ "slack.desktop" ];
+      xdg.autostart.entries = [ "${pkgs.slack}/share/applications/slack.desktop" ];
     };
 }

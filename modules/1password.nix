@@ -7,8 +7,10 @@
   };
 
   homeManagerModule =
-    { pkgs, ... }:
+    { osConfig, pkgs, ... }:
     let
+      gui = osConfig.programs._1password-gui.package;
+
       ssh-agent-socket =
         if pkgs.stdenv.hostPlatform.isDarwin then
           ''~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock''
@@ -19,9 +21,9 @@
         key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMNGcLtjqxIbJpTB1fT8ou1XRu4K9kPTneAIE23eF5z8";
         program =
           if pkgs.stdenv.hostPlatform.isDarwin then
-            "${pkgs._1password-gui}/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+            "${gui}/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
           else
-            "${pkgs._1password-gui}/bin/op-ssh-sign";
+            "${gui}/bin/op-ssh-sign";
       };
     in
     {

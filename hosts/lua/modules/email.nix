@@ -1,5 +1,5 @@
 {
-  homeManagerModule = { lib, ... }: {
+  homeManagerModule = { config, lib, ... }: {
     programs.thunderbird = {
       enable = true;
 
@@ -162,5 +162,9 @@
           })
           |> lib.mergeAttrsList;
       };
+
+    xdg.autostart.entries = [
+      "${config.programs.thunderbird.package}/share/applications/thunderbird.desktop"
+    ];
   };
 }
