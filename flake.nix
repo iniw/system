@@ -67,52 +67,56 @@
         };
       });
 
-      packages = forAllSystems (pkgs: {
-        # Allows easily bootstrapping the config on a fresh system with nothing but nix installed:
-        # nix --extra-experimental-features "flakes nix-command pipe-operators" run github:iniw/system#bootstrap -- -H $host
-        bootstrap = pkgs.writeShellApplication {
-          name = "bootstrap";
+      packages = forAllSystems (
+        pkgs:
+        {
+          # Allows easily bootstrapping the config on a fresh system with nothing but nix installed:
+          # nix --extra-experimental-features "flakes nix-command pipe-operators" run github:iniw/system#bootstrap -- -H $host
+          bootstrap = pkgs.writeShellApplication {
+            name = "bootstrap";
 
-          runtimeInputs = with pkgs; [
-            age
-            git
-            openssh
-            nh
-          ];
+            runtimeInputs = with pkgs; [
+              age
+              git
+              openssh
+              nh
+            ];
 
-          runtimeEnv = {
-            # We're bootstrapping the configuration so we can't guarantee
-            # that the experimental features are present in the system's nix config
-            NIX_CONFIG = "extra-experimental-features = flakes nix-command pipe-operators";
+            runtimeEnv = {
+              # We're bootstrapping the configuration so we can't guarantee
+              # that the experimental features are present in the system's nix config
+              NIX_CONFIG = "extra-experimental-features = flakes nix-command pipe-operators";
+            };
+
+            text = ''
+              # Decrypt and tell git to use the bootstrap SSH key
+              bootstrap_key="$(mktemp)"
+              age --decrypt "${inputs.self}/secrets/bootstrap.age" > "$bootstrap_key"
+              export GIT_SSH_COMMAND="ssh -i '$bootstrap_key'"
+
+              case "$(uname -s)" in
+                Darwin) os=darwin ;;
+                Linux) os=os ;;
+                *) echo "unsupported os: $(uname -s)" >&2; exit 1 ;;
+              esac
+
+              nh "$os" switch "path:${inputs.self}" "$@"
+            '';
           };
+        }
+        // lib.optionalAttrs (pkgs.stdenv.hostPlatform.isDarwin) {
+          # Packages maintained locally because they are not available in nixpkgs yet.
+          # I may eventually upstream them.
+          #
+          # Accessing from a module:
+          #   inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.<package>
+          #
+          # Updating:
+          #   nix-update <package> --flake
 
-          text = ''
-            # Decrypt and tell git to use the bootstrap SSH key
-            bootstrap_key="$(mktemp)"
-            age --decrypt "${inputs.self}/secrets/bootstrap.age" > "$bootstrap_key"
-            export GIT_SSH_COMMAND="ssh -i '$bootstrap_key'"
-
-            case "$(uname -s)" in
-              Darwin) os=darwin ;;
-              Linux) os=os ;;
-              *) echo "unsupported os: $(uname -s)" >&2; exit 1 ;;
-            esac
-
-            nh "$os" switch "path:${inputs.self}" "$@"
-          '';
-        };
-
-        # Packages maintained locally because they are not available in nixpkgs yet.
-        # I may eventually upstream them.
-        #
-        # Accessing from a module:
-        #   inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.<package>
-        #
-        # Updating:
-        #   nix-update <package> --flake
-
-        seeleseek = pkgs.callPackage ./pkgs/seeleseek.nix { };
-        space-rabbit = pkgs.callPackage ./pkgs/space-rabbit.nix { };
-      });
+          seeleseek = pkgs.callPackage ./pkgs/seeleseek.nix { };
+          space-rabbit = pkgs.callPackage ./pkgs/space-rabbit.nix { };
+        }
+      );
     };
 }
