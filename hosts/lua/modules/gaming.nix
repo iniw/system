@@ -1,7 +1,10 @@
 {
-  systemModule = { user, ... }: {
+  systemModule = { pkgs, user, ... }: {
     programs = {
-      steam.enable = true;
+      steam = {
+        enable = true;
+        extraPackages = [ pkgs.kdePackages.breeze ];
+      };
 
       gamemode = {
         enable = true;
