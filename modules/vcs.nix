@@ -143,6 +143,15 @@ in
             default-command = "log";
             movement.edit = true;
             merge-editor = "meld";
+            diff-formatter = [
+              "difft"
+              "--color=always"
+              "--sort-paths"
+              "--syntax-highlight=off"
+              "--width=$width"
+              "$left"
+              "$right"
+            ];
           };
 
           inherit user;
@@ -196,7 +205,7 @@ in
       difftastic = {
         enable = true;
 
-        jujutsu.enable = true;
+        jujutsu.enable = false;
         git.enable = true;
 
         options = {
