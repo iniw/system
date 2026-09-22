@@ -26,41 +26,51 @@
 
     accounts =
       let
-        domain = "vini.cat";
         accounts = [
           {
+            name = "metalbear";
+            address = "viniciusd@metalbear.com";
+            flavor = "gmail.com";
+
+            calendar = true;
+          }
+          {
             name = "social";
+            address = "social@vini.cat";
             flavor = "purelymail";
-            webdavId = "280603";
-            color = "#6045f7";
+
             calendar = true;
             contacts = true;
+
+            webdavId = "280603";
+            color = "#6045f7";
           }
           {
             name = "work";
+            address = "work@vini.cat";
             flavor = "purelymail";
-            webdavId = "280601";
-            color = "#f7455d";
+
             calendar = true;
             contacts = true;
+
+            webdavId = "280601";
+            color = "#f7455d";
           }
           {
             name = "dev";
+            address = "dev@vini.cat";
             flavor = "purelymail";
+
             webdavId = "276495";
             color = "#45a7f7";
           }
           {
             name = "contact";
+            address = "contact@vini.cat";
             flavor = "purelymail";
+
             webdavId = "280620";
             color = "#45f786";
-          }
-          {
-            name = "metalbear";
-            address = "viniciusd@metalbear.com";
-            flavor = "gmail.com";
-            calendar = true;
           }
         ];
       in
@@ -68,47 +78,44 @@
         email.accounts =
           accounts
           |> lib.map (account: {
-            ${account.name} =
-              let
-                address = account.address or "${account.name}@${domain}";
-                isPurelyMail = account.flavor == "purelymail";
-              in
-              lib.mergeAttrsList [
-                {
-                  inherit address;
-                  realName = "Vinicius Deolindo";
+            ${account.name} = lib.mergeAttrsList [
+              {
+                inherit (account) address;
+                realName = "Vinicius Deolindo";
 
-                  thunderbird = {
-                    enable = true;
-                    perIdentitySettings = id: {
-                      "mail.identity.id_${id}.reply_on_top" = 1;
-                      "mail.identity.id_${id}.sig_bottom" = false;
+                primary = account.name == "social";
 
-                      # See: https://github.com/nix-community/home-manager/issues/7959
-                      "calendar.registry.calendar_${id}.imip.identity.key" = "id_${id}";
-                    };
+                thunderbird = {
+                  enable = true;
+
+                  perIdentitySettings = id: {
+                    "mail.identity.id_${id}.reply_on_top" = 1;
+                    "mail.identity.id_${id}.sig_bottom" = false;
+
+                    # See: https://github.com/nix-community/home-manager/issues/7959
+                    "calendar.registry.calendar_${id}.imip.identity.key" = "id_${id}";
                   };
-                }
-                (
-                  if isPurelyMail then
-                    {
-                      userName = address;
-                      primary = account.name == "social";
+                };
+              }
+              (
+                if account.flavor == "purelymail" then
+                  {
+                    userName = account.address;
 
-                      smtp = {
-                        host = "smtp.purelymail.com";
-                        port = 465;
-                      };
+                    smtp = {
+                      host = "smtp.purelymail.com";
+                      port = 465;
+                    };
 
-                      imap = {
-                        host = "imap.purelymail.com";
-                        port = 993;
-                      };
-                    }
-                  else
-                    { inherit (account) flavor; }
-                )
-              ];
+                    imap = {
+                      host = "imap.purelymail.com";
+                      port = 993;
+                    };
+                  }
+                else
+                  { inherit (account) flavor; }
+              )
+            ];
           })
           |> lib.mergeAttrsList;
 
@@ -117,15 +124,12 @@
           |> lib.filter (account: account.calendar or false)
           |> lib.map (account: {
             ${account.name} =
-              let
-                address = account.address or "${account.name}@${domain}";
-              in
               if account.flavor == "purelymail" then
                 {
                   remote = {
                     type = "caldav";
                     url = "https://purelymail.com/webdav/${account.webdavId}/caldav/default/";
-                    userName = address;
+                    userName = account.address;
                   };
 
                   thunderbird = {
@@ -137,8 +141,8 @@
                 {
                   remote = {
                     type = "caldav";
-                    url = "https://apidata.googleusercontent.com/caldav/v2/${address}/events";
-                    userName = address;
+                    url = "https://apidata.googleusercontent.com/caldav/v2/${account.address}/events";
+                    userName = account.address;
                   };
 
                   thunderbird.enable = true;
@@ -154,7 +158,7 @@
               remote = {
                 type = "carddav";
                 url = "https://purelymail.com/webdav/${account.webdavId}/carddav/default/";
-                userName = "${account.name}@${domain}";
+                userName = account.address;
               };
 
               thunderbird.enable = true;
