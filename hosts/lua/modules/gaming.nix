@@ -24,7 +24,6 @@
 
   homeManagerModule = { osConfig, ... }: {
     xdg.autostart.entries = [
-      "${osConfig.programs.steam.package}/share/applications/steam.desktop"
       "${osConfig.programs.gpu-screen-recorder.ui.package}/share/applications/gpu-screen-recorder.desktop"
     ];
   };
