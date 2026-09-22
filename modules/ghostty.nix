@@ -40,6 +40,8 @@
           "ctrl+g>shift+d=close_tab"
           "ctrl+g>shift+h=previous_tab"
           "ctrl+g>shift+l=next_tab"
+          "ctrl+tab=next_tab"
+          "ctrl+shift+tab=previous_tab"
 
           # split
           "ctrl+g>s=new_split:down"
