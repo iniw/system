@@ -37,7 +37,7 @@
           {
             name = "social";
             address = "social@vini.cat";
-            flavor = "purelymail";
+            flavor = "purelymail.com";
 
             calendar = true;
             contacts = true;
@@ -46,9 +46,17 @@
             color = "#6045f7";
           }
           {
+            name = "dev";
+            address = "dev@vini.cat";
+            flavor = "purelymail.com";
+
+            webdavId = "276495";
+            color = "#45a7f7";
+          }
+          {
             name = "work";
             address = "work@vini.cat";
-            flavor = "purelymail";
+            flavor = "purelymail.com";
 
             calendar = true;
             contacts = true;
@@ -57,17 +65,9 @@
             color = "#f7455d";
           }
           {
-            name = "dev";
-            address = "dev@vini.cat";
-            flavor = "purelymail";
-
-            webdavId = "276495";
-            color = "#45a7f7";
-          }
-          {
             name = "contact";
             address = "contact@vini.cat";
-            flavor = "purelymail";
+            flavor = "purelymail.com";
 
             webdavId = "280620";
             color = "#45f786";
@@ -98,7 +98,7 @@
                 };
               }
               (
-                if account.flavor == "purelymail" then
+                if account.flavor == "purelymail.com" then
                   {
                     userName = account.address;
 
@@ -124,7 +124,7 @@
           |> lib.filter (account: account.calendar or false)
           |> lib.map (account: {
             ${account.name} =
-              if account.flavor == "purelymail" then
+              if account.flavor == "purelymail.com" then
                 {
                   remote = {
                     type = "caldav";
