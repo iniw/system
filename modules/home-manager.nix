@@ -11,9 +11,4 @@
       backupFileExtension = "hm-backup";
     };
   };
-
-  homeManagerModule = {
-    xdg.enable = true;
-    home.preferXdgDirectories = true;
-  };
 }
