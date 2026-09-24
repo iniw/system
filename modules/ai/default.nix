@@ -7,6 +7,12 @@
         context = ./AGENTS.md;
       };
 
+      claude-code = {
+        enable = true;
+
+        context = ./AGENTS.md;
+      };
+
       git.ignores = [
         ".agents"
         ".claude"
