@@ -36,10 +36,12 @@
             "contact"
           ];
 
+          unifiedFolders.enable = true;
+
           calendarAccountsOrder = [
             "metalbear"
-            "work"
             "social"
+            "work"
           ];
 
           feedAccounts.feed = { };

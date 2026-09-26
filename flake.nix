@@ -8,7 +8,8 @@
     };
 
     home-manager = {
-      url = "github:nix-community/home-manager";
+      # FIXME: Go back to master once https://github.com/nix-community/home-manager/pull/9997 is merged
+      url = "github:nix-community/home-manager/refs/pull/9997/merge";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
