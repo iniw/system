@@ -1,42 +1,97 @@
 {
-  homeManagerModule = { pkgs, ... }: {
-    home.packages = [ pkgs.haruna ];
+  homeManagerModule =
+    { lib, pkgs, ... }:
+    {
+      home.packages = [ pkgs.haruna ];
 
-    xdg.configFile."haruna/custom-commands.conf".text =
-      let
-        # Plays all audio tracks at the same time when a file has more than one.
-        mixAudioTracks = pkgs.writeText "mix-audio-tracks.lua" ''
-          mp.add_hook("on_preloaded", 50, function()
-              local inputs = {}
-              for _, track in ipairs(mp.get_property_native("track-list")) do
-                  if track.type == "audio" then
-                      inputs[#inputs + 1] = "[aid" .. track.id .. "]"
-                  end
-              end
+      xdg.configFile =
+        let
+          # Plays all audio tracks at the same time when a file has more than one.
+          mix-audio-tracks = pkgs.writeText "mix-audio-tracks.lua" ''
+            mp.add_hook("on_preloaded", 50, function()
+                local inputs = {}
+                for _, track in ipairs(mp.get_property_native("track-list")) do
+                    if track.type == "audio" then
+                        inputs[#inputs + 1] = "[aid" .. track.id .. "]"
+                    end
+                end
 
-              -- With zero or one audio track there is nothing to mix. Clear the filter
-              -- so that a value from the previous file does not break this one.
-              if #inputs < 2 then
-                  mp.set_property("lavfi-complex", "")
-                  return
-              end
+                -- With zero or one audio track there is nothing to mix. Clear the filter
+                -- so that a value from the previous file does not break this one.
+                if #inputs < 2 then
+                    mp.set_property("lavfi-complex", "")
+                    return
+                end
 
-              mp.set_property(
-                  "lavfi-complex",
-                  string.format("%s amix=inputs=%d:normalize=0 [ao]", table.concat(inputs, " "), #inputs)
+                mp.set_property(
+                    "lavfi-complex",
+                    string.format("%s amix=inputs=%d:normalize=0 [ao]", table.concat(inputs, " "), #inputs)
+                )
+            end)
+          '';
+
+          # Cuts videos with ffmpeg, without re-encoding them. The script runs "ffmpeg" from PATH, so we change it to
+          # the full store path.
+          mpv-lossless-cut =
+            let
+              src = pkgs.fetchFromGitHub {
+                owner = "f0e";
+                repo = "mpv-lossless-cut";
+                rev = "v0.2.3";
+                hash = "sha256-9kEel3BHIu6B91KvmeKrwbCNBRDlFn49/7MOgUJQONk=";
+              };
+            in
+            pkgs.runCommand "mpv-lossless-cut.lua" { } ''
+              substitute ${src}/mpv-lossless-cut.lua $out --replace-fail '"ffmpeg",' '"${lib.getExe pkgs.ffmpeg}",'
+            '';
+
+          # Haruna does not load scripts from the mpv config directory, and it does not send key presses to mpv. Thus,
+          # we load each script with a "startup" command, and give each script binding a Haruna shortcut.
+          /*nixfmt:disable*/
+          commands = [
+            { type = "startup"; command = "load-script ${mix-audio-tracks}"; }
+            { type = "startup"; command = "load-script ${mpv-lossless-cut}"; }
+            # The keys are not the script's defaults (g, h, r, ...), because Haruna already uses some of those. When
+            # two actions use the same key, Qt runs a different one on each press. Instead, we use the "in" and "out"
+            # point keys from video editors.
+            { type = "shortcut"; command = "script-binding cut_set_start"; key = "I"; }
+            { type = "shortcut"; command = "script-binding cut_set_end"; key = "O"; }
+            { type = "shortcut"; command = "script-binding cut_set_start_sof"; key = "Shift+I"; }
+            { type = "shortcut"; command = "script-binding cut_set_end_eof"; key = "Shift+O"; }
+            { type = "shortcut"; command = "script-binding cut_render"; key = "E"; }
+            { type = "shortcut"; command = "script-binding cut_toggle_mode"; key = "Shift+E"; }
+            { type = "shortcut"; command = "script-binding cut_clear"; key = "Delete"; }
+          ];
+          /*nixfmt:enable*/
+
+          groupName = index: "Command_${toString index}";
+        in
+        {
+          "haruna/custom-commands.conf".text = lib.generators.toINIWithGlobalSection { } {
+            globalSection.Counter = lib.length commands;
+            sections =
+              commands
+              |> lib.imap0 (
+                index: command:
+                lib.nameValuePair (groupName index) {
+                  Command = command.command;
+                  Order = index;
+                  OsdMessage = "";
+                  Type = command.type;
+                }
               )
-          end)
-        '';
-      in
-      # conf
-      ''
-        Counter=1
+              |> lib.listToAttrs;
+          };
 
-        [Command_0]
-        Command=load-script ${mixAudioTracks}
-        Order=0
-        OsdMessage=
-        Type=startup
-      '';
-  };
+          "haruna/shortcuts.conf".text = lib.generators.toINI { } {
+            Shortcuts =
+              commands
+              |> lib.imap0 (
+                index: command: lib.optional (command ? key) (lib.nameValuePair (groupName index) command.key)
+              )
+              |> lib.concatLists
+              |> lib.listToAttrs;
+          };
+        };
+    };
 }
