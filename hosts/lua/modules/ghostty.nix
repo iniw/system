@@ -6,7 +6,7 @@
       window-decoration = "none";
     };
 
-    qt.kde.settings.kdeglobals.General = {
+    programs.plasma.configFile.kdeglobals.General = {
       TerminalApplication = "ghostty";
       TerminalService = "com.mitchellh.ghostty.desktop";
     };

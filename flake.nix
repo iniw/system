@@ -13,6 +13,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    plasma-manager = {
+      url = "github:nix-community/plasma-manager";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        home-manager.follows = "home-manager";
+      };
+    };
+
     fonts = {
       # Access is granted by the `secrets/bootstrap.age` deploy key.
       url = "git+ssh://git@github.com/iniw/fonts";

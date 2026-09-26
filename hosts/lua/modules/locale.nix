@@ -16,14 +16,6 @@
         LC_TELEPHONE = "pt_BR.UTF-8";
         LC_TIME = "pt_BR.UTF-8";
       };
-
-      inputMethod = {
-        enable = true;
-        type = "fcitx5";
-        fcitx5.waylandFrontend = true;
-      };
     };
-
-    console.keyMap = "br-abnt2";
   };
 }

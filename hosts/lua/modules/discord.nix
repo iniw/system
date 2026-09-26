@@ -1,9 +1,6 @@
 {
-  homeManagerModule = { config, ... }: {
-    programs.discord.enable = true;
-
-    xdg.autostart.entries = [
-      "${config.programs.discord.package}/share/applications/discord.desktop"
-    ];
+  homeManagerModule = { pkgs, ... }: {
+    home.packages = [ pkgs.discord ];
+    xdg.autostart.entries = [ "${pkgs.discord}/share/applications/discord.desktop" ];
   };
 }
