@@ -32,7 +32,7 @@
           # global
           "ctrl+g>u=undo"
           "ctrl+g>p=toggle_command_palette"
-          "global:super+k=toggle_quick_terminal"
+          "global:ctrl+alt+;=toggle_quick_terminal"
 
           # tab
           "ctrl+g>n=new_tab"
