@@ -9,10 +9,15 @@
     # See: https://github.com/NixOS/nixpkgs/issues/437281
     programs.steam.extraPackages = [ pkgs.kdePackages.breeze ];
 
-    # Since GTK 4.20, GTK apps on Wayland expect the compositor to handle compose keys. KWin only does that when an
-    # input method is running, but IMEs are annoying to configure declaratively on plasma so I don't run one. This makes
-    # GTK handle them itself again.
-    environment.sessionVariables.GTK_IM_MODULE = "simple";
+    environment.sessionVariables = {
+      # Since GTK 4.20, GTK apps on Wayland expect the compositor to handle compose keys. KWin only does that when an
+      # input method is running, but IMEs are annoying to configure declaratively on plasma so I don't run one. This makes
+      # GTK handle them itself again.
+      GTK_IM_MODULE = "simple";
+
+      # See https://wiki.nixos.org/wiki/Wayland#Electron_and_Chromium
+      NIXOS_OZONE_WL = 1;
+    };
   };
 
   homeManagerModule = { inputs, pkgs, ... }: {
