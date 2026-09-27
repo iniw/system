@@ -2,7 +2,17 @@
   homeManagerModule =
     { lib, pkgs, ... }:
     {
-      home.packages = [ pkgs.haruna ];
+      home.packages =
+        let
+          # mpv-lossless-cut needs ffmpeg in $PATH
+          harunaWithFfmpeg = pkgs.symlinkJoin {
+            name = "haruna";
+            paths = [ pkgs.haruna ];
+            nativeBuildInputs = [ pkgs.makeWrapper ];
+            postBuild = "wrapProgram $out/bin/haruna --prefix PATH : ${lib.makeBinPath [ pkgs.ffmpeg ]}";
+          };
+        in
+        [ harunaWithFfmpeg ];
 
       xdg.configFile =
         let
@@ -30,30 +40,22 @@
             end)
           '';
 
-          # Cuts videos with ffmpeg, without re-encoding them. The script runs "ffmpeg" from PATH, so we change it to
-          # the full store path.
-          mpv-lossless-cut =
-            let
-              src = pkgs.fetchFromGitHub {
-                owner = "f0e";
-                repo = "mpv-lossless-cut";
-                rev = "v0.2.3";
-                hash = "sha256-9kEel3BHIu6B91KvmeKrwbCNBRDlFn49/7MOgUJQONk=";
-              };
-            in
-            pkgs.runCommand "mpv-lossless-cut.lua" { } ''
-              substitute ${src}/mpv-lossless-cut.lua $out --replace-fail '"ffmpeg",' '"${lib.getExe pkgs.ffmpeg}",'
-            '';
+          # Cuts videos with ffmpeg, without re-encoding them.
+          mpv-lossless-cut = pkgs.fetchFromGitHub {
+            owner = "f0e";
+            repo = "mpv-lossless-cut";
+            rev = "v0.2.3";
+            hash = "sha256-9kEel3BHIu6B91KvmeKrwbCNBRDlFn49/7MOgUJQONk=";
+          };
 
           # Haruna does not load scripts from the mpv config directory, and it does not send key presses to mpv. Thus,
           # we load each script with a "startup" command, and give each script binding a Haruna shortcut.
+
           /*nixfmt:disable*/
           commands = [
             { type = "startup"; command = "load-script ${mix-audio-tracks}"; }
-            { type = "startup"; command = "load-script ${mpv-lossless-cut}"; }
-            # The keys are not the script's defaults (g, h, r, ...), because Haruna already uses some of those. When
-            # two actions use the same key, Qt runs a different one on each press. Instead, we use the "in" and "out"
-            # point keys from video editors.
+            { type = "startup"; command = "load-script ${mpv-lossless-cut}/mpv-lossless-cut.lua"; }
+            # The keys are not the script's defaults (g, h, r, ...), because Haruna already uses some of those.
             { type = "shortcut"; command = "script-binding cut_set_start"; key = "I"; }
             { type = "shortcut"; command = "script-binding cut_set_end"; key = "O"; }
             { type = "shortcut"; command = "script-binding cut_set_start_sof"; key = "Shift+I"; }
