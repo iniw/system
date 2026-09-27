@@ -10,7 +10,8 @@
     programs.steam.extraPackages = [ pkgs.kdePackages.breeze ];
 
     # Since GTK 4.20, GTK apps on Wayland expect the compositor to handle compose keys. KWin only does that when an
-    # input method (e.g. fcitx5) is running. This makes GTK handle them itself again.
+    # input method is running, but IMEs are annoying to configure declaratively on plasma so I don't run one. This makes
+    # GTK handle them itself again.
     environment.sessionVariables.GTK_IM_MODULE = "simple";
   };
 
@@ -97,6 +98,11 @@
       };
 
       configFile = {
+        kdeglobals.General = {
+          TerminalApplication = "ghostty";
+          TerminalService = "com.mitchellh.ghostty.desktop";
+        };
+
         plasmanotifyrc.Notifications.PopupPosition = "TopRight";
 
         spectaclerc = {
