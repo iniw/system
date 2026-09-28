@@ -30,11 +30,11 @@
         tilesize = 48;
         persistent-apps = [
           { app = "/System/Cryptexes/App/System/Applications/Safari.app"; }
-          { app = "/Applications/Discord.app"; }
-          { app = "/Applications/WhatsApp.app"; }
-          { app = "/System/Applications/Music.app"; }
           { app = "/System/Applications/Mail.app"; }
           { app = "/System/Applications/Calendar.app"; }
+          { app = "/System/Applications/Music.app"; }
+          { app = "/Applications/Discord.app"; }
+          { app = "/Applications/WhatsApp.app"; }
         ];
       };
 

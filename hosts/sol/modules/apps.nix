@@ -13,6 +13,7 @@
         reflex-app
         seeleseek
         space-rabbit
+        spotify
       ];
   };
 
