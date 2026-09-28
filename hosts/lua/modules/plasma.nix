@@ -23,13 +23,15 @@
   homeManagerModule = { inputs, pkgs, ... }: {
     imports = [ inputs.plasma-manager.homeModules.plasma-manager ];
 
-    home.packages = with pkgs; [
-      kdePackages.kcalc
-      kdePackages.kolourpaint
-      wl-clipboard
+    home.packages = with pkgs.kdePackages; [
+      kcalc
+      kolourpaint
     ];
 
-    xdg.autostart.enable = true;
+    xdg = {
+      autostart.enable = true;
+      mimeApps.enable = true;
+    };
 
     programs.plasma = {
       enable = true;
@@ -59,11 +61,11 @@
             {
               iconTasks.launchers = [
                 "preferred://filemanager"
-                "applications:com.mitchellh.ghostty.desktop"
-                "applications:firefox.desktop"
-                "applications:discord.desktop"
-                "applications:thunderbird.desktop"
+                "preferred://terminal"
+                "preferred://browser"
+                "preferred://mailer"
                 "applications:spotify.desktop"
+                "applications:discord.desktop"
                 "applications:slack.desktop"
               ];
             }
@@ -103,11 +105,6 @@
       };
 
       configFile = {
-        kdeglobals.General = {
-          TerminalApplication = "ghostty";
-          TerminalService = "com.mitchellh.ghostty.desktop";
-        };
-
         plasmanotifyrc.Notifications.PopupPosition = "TopRight";
 
         spectaclerc = {

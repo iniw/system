@@ -1,8 +1,6 @@
 {
   systemModule = { user, ... }: {
     users = {
-      mutableUsers = false;
-
       users.${user} = {
         description = "Vinicius Deolindo";
 
@@ -10,6 +8,8 @@
 
         isNormalUser = true;
       };
+
+      mutableUsers = false;
     };
 
     services.userborn.enable = true;

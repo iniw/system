@@ -205,8 +205,40 @@
             |> lib.mergeAttrsList;
         };
 
-      xdg.autostart.entries = [
-        "${config.programs.thunderbird.finalPackage}/share/applications/thunderbird.desktop"
-      ];
+      # Plasma does not use the `x-scheme-handler/mailto` mime type to find the preferred mail client.
+      # FIXME: Remove once we are on Plasma 6.8, which uses the mime type.
+      # See: https://invent.kde.org/plasma/plasma-workspace/-/commit/ec95bb36703472be8829ca1069d38aa5bf0a8b67
+      programs.plasma.configFile.emaildefaults = {
+        Defaults.Profile = "Default";
+        PROFILE_Default = {
+          EmailClient = "thunderbird.desktop";
+          TerminalClient = false;
+        };
+      };
+
+      xdg = {
+        mimeApps.defaultApplications =
+          [
+            # Mail
+            "message/rfc822"
+            "x-scheme-handler/mailto"
+            "x-scheme-handler/mid"
+
+            # Calendars
+            "text/calendar"
+            "x-scheme-handler/webcal"
+            "x-scheme-handler/webcals"
+
+            # Feeds
+            "application/rss+xml"
+            "x-scheme-handler/feed"
+          ]
+          |> lib.map (type: lib.nameValuePair type "thunderbird.desktop")
+          |> lib.listToAttrs;
+
+        autostart.entries = [
+          "${config.programs.thunderbird.finalPackage}/share/applications/thunderbird.desktop"
+        ];
+      };
     };
 }
