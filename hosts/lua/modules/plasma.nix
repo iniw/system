@@ -73,21 +73,34 @@
         }
       ];
 
-      input.keyboard = {
-        layouts = [
+      input = {
+        keyboard = {
+          layouts = [
+            {
+              layout = "br";
+              variant = "nodeadkeys";
+            }
+          ];
+
+          options = [
+            "caps:escape"
+            "compose:ralt"
+          ];
+
+          repeatDelay = 250;
+          repeatRate = 30;
+        };
+
+        mice = [
           {
-            layout = "br";
-            variant = "nodeadkeys";
+            name = "Logitech G403 HERO Gaming Mouse";
+            vendorId = "046d";
+            productId = "c08f";
+            naturalScroll = true;
+            acceleration = -0.2;
+            accelerationProfile = "none";
           }
         ];
-
-        options = [
-          "caps:escape"
-          "compose:ralt"
-        ];
-
-        repeatDelay = 250;
-        repeatRate = 30;
       };
 
       kwin.effects.shakeCursor.enable = false;
@@ -105,6 +118,14 @@
       };
 
       configFile = {
+        # Alt+Tab settings
+        kwinrc.TabBox = {
+          # Show one entry per app instead of one per window.
+          ApplicationsMode = 1;
+          # Put minimized windows last.
+          OrderMinimizedMode = 1;
+        };
+
         plasmanotifyrc.Notifications.PopupPosition = "TopRight";
 
         spectaclerc = {
