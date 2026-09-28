@@ -16,6 +16,7 @@
       policies.Preferences = {
         "widget.gtk.global-menu.enabled" = true;
         "widget.gtk.global-menu.wayland.enabled" = true;
+        "browser.urlbar.showSearchSuggestionsFirst" = false;
       };
     };
 
