@@ -1,5 +1,5 @@
 {
-  systemModule = {
+  systemModule = { config, user, ... }: {
     security.pam.services.sudo_local.touchIdAuth = true;
 
     system.defaults = {
@@ -28,14 +28,23 @@
         orientation = "bottom";
         showhidden = true;
         tilesize = 48;
-        persistent-apps = [
-          { app = "/System/Cryptexes/App/System/Applications/Safari.app"; }
-          { app = "/System/Applications/Mail.app"; }
-          { app = "/System/Applications/Calendar.app"; }
-          { app = "/System/Applications/Music.app"; }
-          { app = "/Applications/Discord.app"; }
-          { app = "/Applications/WhatsApp.app"; }
-        ];
+        persistent-apps =
+          let
+            hmApps = "${config.users.users.${user}.home}/Applications/Home Manager Apps";
+          in
+          [
+            { app = "${hmApps}/Ghostty.app"; }
+            { app = "/System/Cryptexes/App/System/Applications/Safari.app"; }
+            { app = "/System/Applications/Mail.app"; }
+            { app = "/System/Applications/Calendar.app"; }
+            { app = "${hmApps}/NetNewsWire.app"; }
+            { app = "${hmApps}/Spotify.app"; }
+            { app = "/Applications/Discord.app"; }
+            { app = "${hmApps}/Slack.app"; }
+            { app = "/Applications/WhatsApp.app"; }
+            { app = "${hmApps}/seeleseek.app"; }
+            { app = "${hmApps}/Linear.app"; }
+          ];
       };
 
       finder = {
