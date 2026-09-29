@@ -12,8 +12,6 @@
           "pipe-operators"
         ];
 
-        sandbox = "relaxed";
-
         trusted-users = [ user ];
 
         use-xdg-base-directories = true;
