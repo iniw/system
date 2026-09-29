@@ -7,23 +7,32 @@
   };
 
   homeManagerModule =
-    { osConfig, pkgs, ... }:
+    {
+      config,
+      osConfig,
+      pkgs,
+      ...
+    }:
     let
-      gui = osConfig.programs._1password-gui.package;
-
       ssh-agent-socket =
+        let
+          home = config.home.homeDirectory;
+        in
         if pkgs.stdenv.hostPlatform.isDarwin then
-          ''~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock''
+          "${home}/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
         else
-          "~/.1password/agent.sock";
+          "${home}/.1password/agent.sock";
 
       commit-signing = {
         key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMNGcLtjqxIbJpTB1fT8ou1XRu4K9kPTneAIE23eF5z8";
         program =
+          let
+            pkg = osConfig.programs._1password-gui.package;
+          in
           if pkgs.stdenv.hostPlatform.isDarwin then
-            "${gui}/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+            "${pkg}/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
           else
-            "${gui}/bin/op-ssh-sign";
+            "${pkg}/bin/op-ssh-sign";
       };
     in
     {
@@ -54,7 +63,7 @@
           vault = "Dev"
         '';
 
-      programs.ssh.settings."*".IdentityAgent = ssh-agent-socket;
+      programs.ssh.settings."*".IdentityAgent = ''"${ssh-agent-socket}"''; # Quoted because the macos path has a space.
       home.sessionVariables.SSH_AUTH_SOCK = ssh-agent-socket;
     };
 }
