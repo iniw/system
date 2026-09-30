@@ -25,7 +25,25 @@ in
 
       jujutsu = {
         enable = true;
-        package = inputs.jj.packages.${pkgs.stdenv.hostPlatform.system}.jujutsu;
+        # FIXME: Go back to the nixpkgs source once a release has colocated workspaces.
+        package = pkgs.jujutsu.overrideAttrs (
+          finalAttrs: prevAttrs: {
+            version = "trunk";
+            src = prevAttrs.src.override {
+              tag = null;
+              rev = "92d238769cf81778be897e008519cd7b46192568";
+              hash = "sha256-/IhZoSIy/r01+F1sC5d20k/64WSBRzp/UM2zp01Vst4=";
+            };
+            # FIXME: Set `cargoHash` instead once this is merged: https://github.com/NixOS/nixpkgs/pull/514218
+            # Until then, overriding `cargoHash` has no effect, so the vendored dependencies are set directly.
+            cargoDeps = pkgs.rustPlatform.fetchCargoVendor {
+              inherit (finalAttrs) pname version src;
+              hash = "sha256-Hv/cHlbpo41uhVHDxkI7tURfDjjBnxbjx7hzsnESCSw=";
+            };
+            # The version check expects a release version.
+            doInstallCheck = false;
+          }
+        );
 
         settings = {
           aliases = {
