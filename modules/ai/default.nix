@@ -19,18 +19,6 @@
 
           context = ./AGENTS.md;
           skills = ./skills;
-
-          settings = {
-            # Stop it from writing its own URL handler on startup, it is set below.
-            disableDeepLinkRegistration = "disable";
-
-            pluginConfigs."agents-md@builtin".options.instructionFiles = "claude-md-and-agents-md";
-
-            attribution = {
-              commit = "";
-              pr = "";
-            };
-          };
         };
 
         git.ignores = [

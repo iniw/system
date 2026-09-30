@@ -37,6 +37,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # FIXME: Go back to nixpkgs once a release has colocated workspaces (`jj workspace add` creating a `.git`).
+    jj = {
+      url = "github:jj-vcs/jj";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     jj-gh = {
       url = "github:mrjones2014/jj-gh/jj-gh-v0.3.1";
       inputs.nixpkgs.follows = "nixpkgs";

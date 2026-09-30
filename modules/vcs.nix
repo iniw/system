@@ -25,6 +25,7 @@ in
 
       jujutsu = {
         enable = true;
+        package = inputs.jj.packages.${pkgs.stdenv.hostPlatform.system}.jujutsu;
 
         settings = {
           aliases = {
