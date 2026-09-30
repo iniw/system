@@ -50,8 +50,8 @@ Known problems:
   `MIRRORD_OPERATOR_ENABLE`, `MIRRORD_AGENT_NAMESPACE`). To find which field reads a variable, search for the
   name of the variable in `mirrord/config/src` of the `mirrord` repository.
 - `KUBECONFIG` and the current kube context: `down` and `mirrord` use the current context. It is possibly not the
-  staging cluster. Do not change the global current context. Write a separate kubeconfig for staging, and export it
-  in the shell that runs `down`, `mirrord` and `kubectl`:
+  staging cluster. Do not change the global current context. Write a separate kubeconfig for staging, and export it in
+  the shell that runs `down`, `mirrord` and `kubectl`:
 
   ```sh
   kubectl config view --raw --minify --context=gke_metalbear-staging_us-central1_metalbear-staging > <scratch-dir>/kubeconfig

@@ -47,13 +47,13 @@ not say that the change is tested if you did not test it.
 
 ## 4. Review with subagents
 
-1. Start subagents in parallel to review all the commits of the change. Use the most capable model, with a high reasoning
-   effort. Make the subagents adversarial: tell them to examine the change critically, not to assume that it is
-   correct. Give them the revision range (for example, `trunk()..@`) and the request.
+1. Start subagents in parallel to review all the commits of the change. Use the most capable model, with a high
+   reasoning effort. Make the subagents adversarial: tell them to examine the change critically, not to assume that it
+   is correct. Give them the revision range (for example, `trunk()..@`) and the request.
 
    Give each subagent one of the categories below. Tell it to look only for problems in its category, and to ignore all
-   other problems. The examples in each category are not a full list. The subagent must also look for other problems
-   of the same type.
+   other problems. The examples in each category are not a full list. The subagent must also look for other problems of
+   the same type.
    - Bugs. Some examples: incorrect behavior, missing error handling, race conditions and edge cases.
    - Simplifications. Some examples: code that can be shorter or clearer, duplicate code and code that is not
      necessary.
@@ -64,9 +64,6 @@ not say that the change is tested if you did not test it.
        Rust: `clone()`, `collect()`, `RefCell` and `Mutex`). Examine each smell in the change.
      - Concurrent code that relies heavily on synchronization when a different design does not need it.
      - Work that is done serially when it can be done in parallel.
-
-     In this category, a problem is almost never too minor to fix. For example, each `clone()` that is not necessary
-     is work that the code must not do. Fix these problems, and do not use them as a reason to stop the review loop.
    - Commit structure. Some examples: commits that are not atomic, and changes that are in the wrong commit.
 2. Read each finding and make sure that it is real. Do not fix findings that are wrong. Tell the user about them at the
    end.
@@ -76,8 +73,7 @@ not say that the change is tested if you did not test it.
 4. For each bug that you fix, add a regression test in the same commit as the fix. The test must fail without the fix
    and pass with it.
 5. If a fix changes behavior, do the tests from step 3 again.
-6. Start new subagents and do this step again. Stop when the subagents find no problems, or only find minor problems
-   (but see the performance category above).
+6. Start new subagents and do this step again. Stop when the subagents find no problems, or only find minor problems.
 
 If the reviews do not stop finding important problems after some rounds, stop and ask the user what to do.
 
@@ -99,7 +95,7 @@ jj run --ignore-changes -r 'trunk()..@' -- <command>
 - Read `jj run --help` for the other options.
 
 If a commit fails, fix it in that commit, as step 2 tells you. If the fix changes behavior, do the tests from step 3
-again. Then do `jj run` again, but only on the fixed commit and the commits after it (for example, `-r '<revision>::@'`).
+again. Then do `jj run` again, but only on the fixed commit and the commits after it (for example `-r '<revision>::@'`).
 
 ## 6. Report
 
