@@ -43,32 +43,6 @@ in
               "::trunk()"
             ];
 
-            pusha = [
-              "util"
-              "exec"
-              "--"
-              (pkgs.writers.writeNu "jj-pusha" ''
-
-                # Pushes to every remote in the current repo.
-                def --wrapped main [
-                  ...arguments: string # Arguments to forward to each `jj git push` invocation.
-                ] {
-                  if ('--help' in $arguments) or ('-h' in $arguments) {
-                    return (help main)
-                  }
-
-                  let remotes = jj git remote list
-                    | lines
-                    | parse '{remote} {url}'
-                    | get remote
-
-                  for remote in $remotes {
-                    jj git push --remote $remote ...$arguments
-                  }
-                }
-              '')
-            ];
-
             fork = [
               "util"
               "exec"
