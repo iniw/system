@@ -22,19 +22,10 @@ GitHub tools. If they are not available, use the `gh` CLI.
 
 ## 2. Create the pull request
 
-1. Find the pull request template of the repository. Look in these locations:
-   - `.github/pull_request_template.md`
-   - `.github/PULL_REQUEST_TEMPLATE.md`
-   - `.github/PULL_REQUEST_TEMPLATE/`
-   - `docs/` and the repository root, with the same file names.
-2. Write the title. Use the same format as the commit subject lines. If the pull request has only one commit, use its
-   subject line.
-3. Write the body. Fill in each section of the template. Do not remove sections of the template, and do not add
-   sections that it does not have. If there is no template, explain the problem, and how the change fixes it. Follow the
-   rules of the repository, for example about linked issues and changelog entries.
-4. Push the change with `jj git push`. Use the bookmark of the change if it has one. If not, use `jj git push -c <head
+1. Write the title and the description.
+2. Push the change with `jj git push`. Use the bookmark of the change if it has one. If not, use `jj git push -c <head
    revision>` to make one.
-5. Create the pull request. Use the default branch of the repository as the base.
+3. Create the pull request. Use the default branch of the repository as the base.
 
 ## 3. Make sure that CI passes
 
