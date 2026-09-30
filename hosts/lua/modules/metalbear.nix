@@ -29,6 +29,15 @@
         # Let members of the docker group read the kubeconfig.
         "--write-kubeconfig-group=docker"
         "--write-kubeconfig-mode=0640"
+
+        # Give all pods together about 4 cores and 4 GiB. Kubernetes keeps the rest of the machine (32 cores, 30.75 GiB
+        # of memory) for the desktop and enforces the limit. The eviction threshold below also takes some memory, so
+        # pods get 30.75 - 26.25 - 0.5 = 4 GiB.
+        "--kubelet-arg=system-reserved=cpu=28,memory=26880Mi"
+        # Stop pods early, before the machine runs out of memory or disk.
+        "--kubelet-arg=eviction-hard=memory.available<500Mi,nodefs.available<10%,imagefs.available<10%"
+        # The default is 110, which is more than local work needs.
+        "--kubelet-arg=max-pods=50"
       ];
     };
   };
