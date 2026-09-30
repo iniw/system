@@ -52,19 +52,20 @@ not say that the change is tested if you did not test it.
    is correct. Give them the revision range (for example, `trunk()..@`) and the request.
 
    Give each subagent one of the categories below. Tell it to look only for problems in its category, and to ignore all
-   other problems. The examples in each category are not a full list. The subagent must also look for other problems of
-   the same type.
-   - Bugs. Some examples: incorrect behavior, missing error handling, race conditions and edge cases.
-   - Simplifications. Some examples: code that can be shorter or clearer, duplicate code and code that is not
-     necessary.
+   other problems.
+   - Bugs: incorrect behavior, missing error handling, race conditions and edge cases.
+   - Simplifications: code that can be shorter or clearer, duplicate code and code that is not necessary.
    - Performance and idiomatic code: code that is slow, does work that is not necessary, or is not idiomatic for its
-     language. The code must use the features of the language and follow its purpose, not work against them. Some
-     examples:
+     language. The code must use the features of the language and follow its purpose, not work against them. For
+     example:
      - Smells: constructs that the code sometimes needs, but that a better design can often remove (for example, in
        Rust: `clone()`, `collect()`, `RefCell` and `Mutex`). Examine each smell in the change.
      - Concurrent code that relies heavily on synchronization when a different design does not need it.
      - Work that is done serially when it can be done in parallel.
-   - Commit structure. Some examples: commits that are not atomic, and changes that are in the wrong commit.
+   - Commit structure: commits that are not atomic, and changes that are in the wrong commit.
+
+   The problems in each category are examples. They are not a full list. The subagent must also look for other problems
+   of the same type.
 2. Read each finding and make sure that it is real. Do not fix findings that are wrong. Tell the user about them at the
    end.
 3. Fix the real findings. Rewrite the history: put each fix in the commit where the problem is, with `jj absorb`, `jj

@@ -5,11 +5,24 @@
 Most projects being worked on will have a nix development shell - make sure to use it by prefixing commands with
 `nix develop -c`, this ensures the project's dependencies and build tools are available.
 
-Note that system-level tools (e.g `rg`, `find`, `jj`, `git`, `kubectl`, ...) don't need to go through `nix develop -c`,
-only toolchain and project-specific tools (e.g: `cargo`, `uv`, `node`, `cmake`, ...).
+### Missing Programs
 
-If a package useful for troubleshooting or one-off tasks is not installed globally and not available in the devshell,
-use `nix-shell -p "${package}" --quiet --command "${command}"` to run it ephemerally.
+If you need a program that is not installed and is not in the devshell, run it with `nix shell`:
+
+```sh
+nix shell nixpkgs#$package -c $program $args
+```
+
+Do not use a different program in its place, and do not write a script that does the same work. For example, if `jq` is
+not available, run `nix shell nixpkgs#jq -c jq '.foo'`. Do not parse the JSON with `python`.
+
+The package name can be different from the program name. For example, `dig` is in the `dnsutils` package.
+
+To use more than one package in a pipeline, give all of them and run the pipeline with `sh -c`:
+
+```sh
+nix shell nixpkgs#curl nixpkgs#jq -c sh -c 'curl -s https://example.com/data.json | jq .foo'
+```
 
 ## Version Control
 

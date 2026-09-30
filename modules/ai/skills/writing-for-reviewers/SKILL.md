@@ -1,6 +1,6 @@
 ---
 name: writing-for-reviewers
-description: Explains what to write in text that other people read about a code change, for example commit messages, pull request titles and descriptions, replies to review comments, and comments on issues that summarize the change. Use each time you write or change any of these.
+description: Explains what to write in text that other people read about a code change, for example commit messages, pull request titles and descriptions, review comments and replies to them, and comments on issues that summarize the change. Use each time you write or change any of these.
 ---
 
 # Writing for Reviewers
