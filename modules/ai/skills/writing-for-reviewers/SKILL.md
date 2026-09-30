@@ -14,9 +14,6 @@ that understanding. Do not narrate the edit file by file.
 
 ## Explanation
 
-The text should read like an explanation from one engineer to another - not like release notes and not like a
-checklist. The sentences and paragraphs should flow smoothly and naturally from beginning to end.
-
 Before you write, answer these questions from all the available context:
 
 1. What's currently wrong?
@@ -35,6 +32,16 @@ If the change is straightforward, a compact explanation is preferred. Don't writ
 something that can be explained in one or two sentences. Focus on intent and reasoning more than on mechanics that are
 already obvious in the code.
 
+## Structure
+
+The text must read well, and it must also have enough structure to guide the reader. Use the features of markdown, like
+lists, tables and code blocks, to give the text structure where it helps the reader. Do not use them to narrate the edit
+file by file.
+
+With this structure, the text must still read as one explanation from beginning to end. Each part must follow from what
+comes before it. Connect each structured part to the text around it, for example with a sentence before a list that
+tells the reader what the list contains and why it is there.
+
 ## Titles
 
 A title, like a commit subject or a pull request title, should be specific enough to orient the reader, but not so
@@ -51,6 +58,26 @@ Some changes do not achieve the final desired behavior by themselves. Instead, t
 the puzzle, and are a building block for the final solution. In that case, start with the final architectural or
 behavioral requirement that makes this change necessary. Keep the description grounded in the state of the system at
 that point in history, before the follow-up changes are in place.
+
+## Voice
+
+The user is the author of the text. Write it from the point of view of the user.
+
+- For actions that the author took during the work, use "I", "me" and "my". For example, how the change was tested:
+  "I tested this with 100 clients."
+- For the goals and decisions of the project, use "we", "us" and "our". Here, "we" is the team of the project. For
+  example, the motivation for the change: "We are migrating from A to B, so this moves the parser to B."
+- Never use "we" for you and the user together. The reader does not know about you, so the reader thinks that "we" is
+  the team of the project
+- Do not mention yourself, for example as "the agent", "the AI" or "Claude"
+
+Do not write sentences like these:
+
+- "We tested this with 100 clients."
+- "After our discussion, the parser now returns an error."
+- "Claude found this bug during testing."
+
+It is also fine to write without a person, for example: "This change keeps the cache per request."
 
 ## Private Context
 

@@ -40,16 +40,21 @@ First find the pull request template of the repository. Look in these locations:
 - `docs/` and the repository root, with the same file names
 
 Fill in each section of the template. Do not remove sections of the template, and do not add sections that it does not
-have. If there is no template, use the same structure as the body of a commit message. Follow the rules of the
-repository, for example about linked issues and changelog entries.
+have. Follow the rules of the repository, for example about linked issues and changelog entries.
+
+If the description is longer than a few short paragraphs, split it into sections with markdown headers. Do not write one
+long, continuous block of text. If there is a template, use its sections, and add lower-level headers inside a long
+section if it helps. If there is no template, use sections like "Problem", "Solution" and "Testing". A short
+description does not need headers.
 
 The description has no line length limit. Do not wrap its lines at 72 characters or at any other length. Use markdown
 formatting if necessary.
 
 #### Testing
 
-Explain how you made sure that the change is correct. If the template has a section about testing, put it there.
-Otherwise, put it after the explanation of the change.
+Explain how you made sure that the change is correct. If the template has a section about testing, put it there. If
+there is no template, put it in its own section, or in its own paragraph if the description has no headers. If the
+template has no section about testing, put it in the section that explains the change.
 
 Describe the overall _process_ that you used to validate the change, and _why_ that process shows that the change is
 correct.
