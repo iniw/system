@@ -19,21 +19,6 @@ with git metadata, so git commands will work, but jujutsu commands are the more 
 When looking at diffs specify the `--git` flag, like so: `jj diff --git`, to avoid using non-standard diff viewers the
 user may have configured.
 
-## Splitting Work Into Commits
-
-When you implement a feature or a user request, always split the work into small, ordered steps. Make each step one
-commit. Each commit must be:
-
-- **Atomic**: it does one thing. It builds and its tests pass on their own.
-- **Reviewable**: a person can read and understand it alone, without the commits that come after it.
-- **Reversible**: a person can revert it without breaking the commits before it.
-- **Mergeable**: it can be merged alone, without the commits that come after it.
-
-Put preparation work (for example, refactors, renames and new helpers) in commits before the commit that uses it. Do
-not mix unrelated changes, such as formatting and behavior changes, in the same commit.
-
-This makes the review easier for me, and for the person who reviews the pull request made from these changes.
-
 ## Functions
 
 ### Tiny functions
