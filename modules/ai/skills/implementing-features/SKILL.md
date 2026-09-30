@@ -20,7 +20,7 @@ ask.
 
 ## 2. Write the code
 
-Split the work into ordered commits. Write each commit one at a time, with `jj`:
+Split the work into self-contained, atomic commits. Write each commit one at a time, with `jj`:
 
 1. Start a new commit with `jj new`.
 2. Write the change for that commit only.

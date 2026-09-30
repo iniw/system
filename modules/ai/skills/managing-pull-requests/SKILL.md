@@ -9,7 +9,7 @@ Do all the steps below, in order.
 
 You can change the history of the change only until you create the pull request. After you create it, do not rewrite,
 reorder or squash the commits that you pushed. Put each fix in a new commit, with one commit for each fix. Before you
-push, move the bookmark of the pull request to the new commit with `jj bookmark advance`.
+push, move the bookmark of the pull request to the new commit with `jj bookmark advance` or `jj bookmark move`.
 
 For all work on GitHub (for example, to create the pull request, or to read CI checks, logs and comments), use your
 GitHub tools. If they are not available, use the `gh` CLI.
@@ -55,6 +55,11 @@ Then:
 1. Tell the user about the comment and the result of the subagent.
 2. If the comment is correct and asks for a change, make the change in a new commit. Do not put fixes for different
    comments in the same commit. Push again with `jj git push` and do step 3 again.
-3. Do not reply to comments, and do not resolve them, unless the user asks you to.
+3. Reply to the comment in its thread.
+   - If you made a change, say which commit has the change. Reply only after you push that commit.
+   - If the comment is incorrect, say why, with references to the code.
+   - If the result is not certain, do not guess. Ask the user what to do, and do not reply until they answer.
+4. Resolve the thread after you reply, if you made the change or if the comment is incorrect. Do not resolve a thread
+   when the result is not certain, or when the comment asks a question for a person to answer.
 
 Continue to watch until the pull request is merged or closed, or until the user tells you to stop.
