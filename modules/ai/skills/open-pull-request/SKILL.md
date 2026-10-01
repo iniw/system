@@ -1,5 +1,5 @@
 ---
-name: managing-pull-requests
+name: open-pull-request
 description: Creates a pull request from the current change, makes sure that CI passes, then watches the pull request for comments and checks each new comment against the code with a subagent. Use when asked to open, create, maintain or watch a pull request.
 ---
 
@@ -14,18 +14,36 @@ push, move the bookmark of the pull request to the new commit with `jj bookmark 
 For all work on GitHub (for example, to create the pull request, or to read CI checks, logs and comments), use your
 GitHub tools. If they are not available, use the `gh` CLI.
 
+When you write or change a commit message, or the title or the description of the pull request, follow the
+`format-commit-and-pull-request` skill.
+
 ## 1. Prepare the commits
 
 1. Find the commits of the change, for example with `jj log -r 'trunk()..@'`.
-2. Make sure that each commit message follows the commit conventions of the user and of the repository. If a message
-   does not, fix it with `jj describe <revision>`.
+2. Make sure that each commit message follows the `format-commit-and-pull-request` skill. If a message does not, fix
+   it with `jj describe <revision>`.
 
 ## 2. Create the pull request
 
-1. Write the title and the description.
-2. Push the change with `jj git push`. Use the bookmark of the change if it has one. If not, use `jj git push -c <head
-   revision>` to make one.
-3. Create the pull request. Use the default branch of the repository as the base.
+1. Write the title and the description with the `format-commit-and-pull-request` skill. Write the description to a file
+   in your scratchpad directory.
+2. Create the pull request with `jj-gh pr create`. It pushes the change for you, so you do not have to push it before. If
+   the change does not have a bookmark, it makes one. It also picks the base for you: the closest ancestor bookmark, or
+   `trunk()` if there is none.
+
+   ```sh
+   jj-gh pr create <head revision> --no-edit --template-file <description file> --title-template '"<title>"'
+   ```
+
+   The value of `--title-template` is a jj template, so put the title in double quotes, and escape each `"` and `\` in
+   the title with a `\`.
+
+   If the user asks for stacked pull requests, make one pull request for each part of the stack, one at a time, from
+   the bottom of the stack to the top. Write a title and a description for each one. Because each part has the
+   bookmark of the part below it as its closest ancestor bookmark, `jj-gh pr create` uses that bookmark as the base, and
+   links the pull requests into a GitHub stack. Do the next steps for each pull request of the stack.
+3. If the change is for a Linear issue, link the pull request to the issue with the Linear tools. Use the URL of the
+   pull request that `jj-gh pr create` shows.
 
 ## 3. Make sure that CI passes
 

@@ -1,5 +1,5 @@
 ---
-name: implementing-features
+name: implement-feature
 description: Implements a feature or an issue (for example, a Linear issue) end to end. Finds how to implement it, writes it as atomic commits, tests it against a live environment and repeats subagent reviews until they find no important problems. Use when asked to implement, build or do a feature or issue end to end.
 ---
 
@@ -13,6 +13,9 @@ ask.
 1. Get the full request.
    - If the user gives an issue ID (for example, `COR-1314`), read the issue with the Linear tools. Also read its
      comments, its attachments, its linked issues and its parent issue.
+   - If the issue links to external resources (for example, Slack threads), read each one fully with the most relevant
+     tool. Look for links in the attachments, in the description and in the comments. These resources often contain
+     decisions and details that are not in the issue.
    - If the user gives a plain request, use it as it is.
 2. Read the code that the change touches. Find how the code does similar things now, and do the same.
 3. If the request is not clear, or if there is more than one good way to do it and the choice has an important effect,
@@ -27,6 +30,9 @@ Split the work into self-contained, atomic commits. Write each commit one at a t
 3. Make sure that the project builds, and that the linters and tests pass for that commit.
 4. Write the commit message with `jj describe -m "..."`.
 
+When you write or change a commit message, in this step or in a later step, follow the
+`format-commit-and-pull-request` skill.
+
 If you must change an earlier commit, put the change in the commit where it belongs, not in the last commit. To do
 this, use `jj absorb`, `jj squash --into <revision>` or `jj edit <revision>`.
 
@@ -35,7 +41,8 @@ this, use `jj absorb`, `jj squash --into <revision>` or `jj edit <revision>`.
 Unit tests are not sufficient. Run the changed code in a live environment where it really runs, and make sure that it
 does what the request asks for.
 
-- If a skill tells you how to test this project, use it.
+- To test MetalBear-related services, use the `test-metalbear-services` skill. If a different skill tells you how to
+  test this project, use that skill.
 - Test the main case of the request. Also test the error cases and the edge cases that the change can affect.
 - If a test finds a bug:
   1. Fix it in the commit that caused it.
@@ -47,25 +54,17 @@ not say that the change is tested if you did not test it.
 
 ## 4. Review with subagents
 
-1. Start subagents in parallel to review all the commits of the change. Use the most capable model, with a high
-   reasoning effort. Make the subagents adversarial: tell them to examine the change critically, not to assume that it
-   is correct. Give them the revision range (for example, `trunk()..@`) and the request.
-
-   Give each subagent one of the categories below. Tell it to look only for problems in its category, and to ignore all
-   other problems.
-   - Bugs: incorrect behavior, missing error handling, race conditions and edge cases.
-   - Simplifications: code that can be shorter or clearer, duplicate code and code that is not necessary.
-   - Performance and idiomatic code: code that is slow, does work that is not necessary, or is not idiomatic for its
-     language. The code must use the features of the language and follow its purpose, not work against them. For
-     example:
-     - Smells: constructs that the code sometimes needs, but that a better design can often remove (for example, in
-       Rust: `clone()`, `collect()`, `RefCell` and `Mutex`). Examine each smell in the change.
-     - Concurrent code that relies heavily on synchronization when a different design does not need it.
-     - Work that is done serially when it can be done in parallel.
-   - Commit structure: commits that are not atomic, and changes that are in the wrong commit.
-
-   The problems in each category are examples. They are not a full list. The subagent must also look for other problems
-   of the same type.
+1. Start the reviewers as the "Start the reviewers" step of the `review-pull-request` skill tells you. There is no pull
+   request, so change that step like this:
+   - The revision range is `trunk()..@`. Where the step uses the bookmark of the pull request, use the commit ID of
+     `@`.
+   - The request from step 1 tells what the change must do. Where the step or its categories tell about the pull
+     request, its description or its linked issues, use the change and the request.
+   - There are no comments, so ignore the parts about the comments on the pull request.
+   - The review workspace is your workspace. The subagents read the code in it. As that step says, they can make their
+     own temporary workspaces to write tests or other code, but they must not change yours.
+   - Also start one more subagent, for the category in [Commit structure](#commit-structure). Give it the full text of
+     that section, just like the other categories.
 2. Read each finding and make sure that it is real. Do not fix findings that are wrong. Tell the user about them at the
    end.
 3. Fix the real findings. Rewrite the history: put each fix in the commit where the problem is, with `jj absorb`, `jj
@@ -77,6 +76,25 @@ not say that the change is tested if you did not test it.
 6. Start new subagents and do this step again. Stop when the subagents find no problems, or only find minor problems.
 
 If the reviews do not stop finding important problems after some rounds, stop and ask the user what to do.
+
+### Commit structure
+
+Make sure that each commit is one logical change that a reviewer can read and understand alone. A good history lets a
+reviewer read the change one step at a time, and lets a person who finds a commit later (for example, with `jj bisect`)
+understand why it exists.
+
+Look for:
+
+- Commits that do more than one thing. For example, a refactor and a change of behavior in the same commit, or two fixes
+  that are not related.
+- Changes that are in the wrong commit. For example, a fix for a bug that an earlier commit adds, or a test for the code
+  of a different commit.
+- Commits in the wrong order. For example, a commit that uses code that a later commit adds, or a refactor that comes
+  after the change that needs it.
+- Commits that only make sense together, and that must be one commit.
+- Commit messages that do not agree with what the commit does.
+
+Do not build or test each commit. A different step does this later.
 
 ## 5. Check that each commit is atomic
 
@@ -100,7 +118,8 @@ again. Then do `jj run` again, but only on the fixed commit and the commits afte
 
 ## 6. Report
 
-Do not push the changes or open a pull request, unless the user asks you to.
+Do not push the changes or open a pull request, unless the user asks you to. If the user asks you to, use the
+`open-pull-request` skill.
 
 Tell the user:
 
