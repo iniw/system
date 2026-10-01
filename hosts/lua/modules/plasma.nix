@@ -130,10 +130,7 @@
 
         spectaclerc = {
           General.clipboardGroup = "PostScreenshotCopyImage";
-          GuiConfig = {
-            includePointer = true;
-            quitAfterSaveCopyExport = true;
-          };
+          GuiConfig.quitAfterSaveCopyExport = true;
         };
       };
     };
