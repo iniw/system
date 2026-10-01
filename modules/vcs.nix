@@ -216,7 +216,13 @@ in
 
       # Merge resolution tools
       meld
-      mergiraf
+      # FIXME: Remove the override once this is merged into nixpkgs-unstable: https://github.com/NixOS/nixpkgs/pull/568226
+      # With gcc 16, the tests fail with "corrupted size vs. prev_size". See https://codeberg.org/mergiraf/mergiraf/issues/761
+      (mergiraf.overrideAttrs (prevAttrs: {
+        env = (prevAttrs.env or { }) // {
+          NIX_CFLAGS_COMPILE = "-fno-strict-aliasing";
+        };
+      }))
 
       # Diff viewers
       lumen
