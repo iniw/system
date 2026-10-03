@@ -55,48 +55,46 @@
               name = "metalbear";
               address = "viniciusd@metalbear.com";
               flavor = "gmail.com";
+              color = "#deddda";
 
               calendar = true;
-
-              color = "#e6bf73";
             }
             {
               name = "social";
               address = "social@vini.cat";
               flavor = "purelymail.com";
+              color = "#73b6e6";
 
               calendar = true;
               contacts = true;
 
               webdavId = "280603";
-              color = "#73b6e6";
             }
             {
               name = "dev";
               address = "dev@vini.cat";
               flavor = "purelymail.com";
+              color = "#b6e673";
 
               webdavId = "276495";
-              color = "#b6e673";
             }
             {
               name = "work";
               address = "work@vini.cat";
               flavor = "purelymail.com";
+              color = "#bf73e6";
 
               calendar = true;
-              contacts = true;
 
               webdavId = "280601";
-              color = "#bf73e6";
             }
             {
               name = "contact";
               address = "contact@vini.cat";
               flavor = "purelymail.com";
+              color = "#e67373";
 
               webdavId = "280620";
-              color = "#e67373";
             }
           ];
         in
