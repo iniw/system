@@ -37,7 +37,6 @@
             { app = "/System/Cryptexes/App/System/Applications/Safari.app"; }
             { app = "/System/Applications/Mail.app"; }
             { app = "/System/Applications/Calendar.app"; }
-            { app = "${hmApps}/NetNewsWire.app"; }
             { app = "${hmApps}/Spotify.app"; }
             { app = "/Applications/Discord.app"; }
             { app = "${hmApps}/Slack.app"; }
