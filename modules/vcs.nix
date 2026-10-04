@@ -66,7 +66,6 @@ in
               "exec"
               "--"
               (pkgs.writers.writeNu "jj-fork" ''
-
                 # Forks the current repo and configures jj for multi-remote workflow.
                 # See: https://docs.jj-vcs.dev/latest/guides/multiple-remotes/#contributing-upstream-with-a-github-style-fork
                 def main [] {
@@ -93,7 +92,6 @@ in
               "exec"
               "--"
               (pkgs.writers.writeNu "jj-squash-branch" ''
-
                 # Squash-merges a branch into a new change on top of `trunk()`.
                 def main [
                   bookmark: string # Bookmark whose changes should be squash-merged.
@@ -118,7 +116,6 @@ in
               "exec"
               "--"
               (pkgs.writers.writeNu "jj-merge-trunk" ''
-
                 # Merges the given bookmark into `trunk()` then advances the bookmark.
                 def main [
                   bookmark: string                            # Bookmark that should be merged.
