@@ -47,7 +47,7 @@
         jujutsu.settings = {
           signing = {
             backend = "ssh";
-            behavior = "own";
+            behavior = "drop";
             key = commit-signing.key;
             backends.ssh.program = commit-signing.program;
           };
