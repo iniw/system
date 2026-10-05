@@ -6,11 +6,37 @@
     in
     {
       programs = {
+        mcp = {
+          enable = true;
+
+          servers = {
+            linear.url = "https://mcp.linear.app/mcp";
+            # Slack does not let clients register themselves for OAuth. So we use the client ID of Slack's official
+            # Claude Code plugin. Only Claude Code reads these keys.
+            # See: https://github.com/slackapi/slack-mcp-plugin/blob/main/.mcp.json
+            slack = {
+              url = "https://mcp.slack.com/mcp";
+              oauth = {
+                clientId = "1601185624273.8899143856786";
+                callbackPort = 3118;
+              };
+            };
+          };
+        };
+
         codex = {
           enable = true;
 
           context = ./AGENTS.md;
           skills = ./skills;
+
+          enableMcpIntegration = true;
+
+          settings = {
+            sandbox_mode = "danger-full-access";
+          };
+
+          mutableSettings = true;
         };
 
         claude-code = {
@@ -19,6 +45,25 @@
 
           context = ./AGENTS.md;
           skills = ./skills;
+
+          enableMcpIntegration = true;
+
+          settings = {
+            attribution = {
+              commit = "";
+              pr = "";
+            };
+
+            pluginConfigs."agents-md@builtin".options.instructionFiles = "claude-md-and-agents-md";
+
+            autoMemoryEnabled = false;
+
+            disableDeepLinkRegistration = "disable";
+
+            env.CARGO_BUILD_JOBS = "8";
+          };
+
+          mutableSettings = true;
         };
 
         git.ignores = [

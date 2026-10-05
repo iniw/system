@@ -27,9 +27,9 @@ When you write or change a commit message, or the title or the description of th
 
 1. Write the title and the description with the `format-commit-and-pull-request` skill. Write the description to a file
    in your scratchpad directory.
-2. Create the pull request with `jj-gh pr create`. It pushes the change for you, so you do not have to push it before. If
-   the change does not have a bookmark, it makes one. It also picks the base for you: the closest ancestor bookmark, or
-   `trunk()` if there is none.
+2. Create the pull request with `jj-gh pr create`. It pushes the change for you, so you do not have to push it before.
+   If the change does not have a bookmark, it makes one. It also picks the base for you: the closest ancestor bookmark,
+   or `trunk()` if there is none.
 
    ```sh
    jj-gh pr create <head revision> --no-edit --template-file <description file> --title-template '"<title>"'
@@ -38,10 +38,10 @@ When you write or change a commit message, or the title or the description of th
    The value of `--title-template` is a jj template, so put the title in double quotes, and escape each `"` and `\` in
    the title with a `\`.
 
-   If the user asks for stacked pull requests, make one pull request for each part of the stack, one at a time, from
-   the bottom of the stack to the top. Write a title and a description for each one. Because each part has the
-   bookmark of the part below it as its closest ancestor bookmark, `jj-gh pr create` uses that bookmark as the base, and
-   links the pull requests into a GitHub stack. Do the next steps for each pull request of the stack.
+   If the user asks for stacked pull requests, make one pull request for each part of the stack, one at a time, from the
+   bottom of the stack to the top. Write a title and a description for each one. Because each part has the bookmark of
+   the part below it as its closest ancestor bookmark, `jj-gh pr create` uses that bookmark as the base, and links the
+   pull requests into a GitHub stack. Do the next steps for each pull request of the stack.
 3. If the change is for a Linear issue, link the pull request to the issue with the Linear tools. Use the URL of the
    pull request that `jj-gh pr create` shows.
 
@@ -77,6 +77,7 @@ Then:
    - If you made a change, say which commit has the change. Reply only after you push that commit.
    - If the comment is incorrect, say why, with references to the code.
    - If the result is not certain, do not guess. Ask the user what to do, and do not reply until they answer.
+   - Never attribute the reply to yourself.
 4. Resolve the thread after you reply, if you made the change or if the comment is incorrect. Do not resolve a thread
    when the result is not certain, or when the comment asks a question for a person to answer.
 
