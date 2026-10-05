@@ -198,24 +198,21 @@
     };
 
     xdg = {
-      mimeApps.defaultApplications =
-        [
-          # Mail
-          "message/rfc822"
-          "x-scheme-handler/mailto"
-          "x-scheme-handler/mid"
+      mimeApps.defaultApplications = lib.genAttrs [
+        # Mail
+        "message/rfc822"
+        "x-scheme-handler/mailto"
+        "x-scheme-handler/mid"
 
-          # Calendars
-          "text/calendar"
-          "x-scheme-handler/webcal"
-          "x-scheme-handler/webcals"
+        # Calendars
+        "text/calendar"
+        "x-scheme-handler/webcal"
+        "x-scheme-handler/webcals"
 
-          # Feeds
-          "application/rss+xml"
-          "x-scheme-handler/feed"
-        ]
-        |> lib.map (type: lib.nameValuePair type "thunderbird.desktop")
-        |> lib.listToAttrs;
+        # Feeds
+        "application/rss+xml"
+        "x-scheme-handler/feed"
+      ] (_: "thunderbird.desktop");
 
       autostart.entries = [
         "${config.programs.thunderbird.finalPackage}/share/applications/thunderbird.desktop"

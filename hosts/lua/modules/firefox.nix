@@ -11,15 +11,12 @@
     };
 
     xdg = {
-      mimeApps.defaultApplications =
-        [
-          "application/xhtml+xml"
-          "text/html"
-          "x-scheme-handler/http"
-          "x-scheme-handler/https"
-        ]
-        |> lib.map (type: lib.nameValuePair type "firefox.desktop")
-        |> lib.listToAttrs;
+      mimeApps.defaultApplications = lib.genAttrs [
+        "application/xhtml+xml"
+        "text/html"
+        "x-scheme-handler/http"
+        "x-scheme-handler/https"
+      ] (_: "firefox.desktop");
 
       autostart.entries = [
         "${config.programs.firefox.finalPackage}/share/applications/firefox.desktop"
