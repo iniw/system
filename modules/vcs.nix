@@ -28,7 +28,7 @@ in
         # FIXME: Go back to the nixpkgs source once a release has colocated workspaces.
         package = pkgs.jujutsu.overrideAttrs (
           finalAttrs: prevAttrs: {
-            version = "trunk";
+            version = "0.46.0";
             src = prevAttrs.src.override {
               tag = null;
               rev = "92d238769cf81778be897e008519cd7b46192568";
@@ -133,15 +133,6 @@ in
             default-command = "log";
             movement.edit = true;
             merge-editor = "meld";
-            diff-formatter = [
-              "difft"
-              "--color=always"
-              "--sort-paths"
-              "--syntax-highlight=off"
-              "--width=$width"
-              "$left"
-              "$right"
-            ];
           };
 
           inherit user;
@@ -195,7 +186,7 @@ in
       difftastic = {
         enable = true;
 
-        jujutsu.enable = false;
+        jujutsu.enable = true;
         git.enable = true;
 
         options = {
@@ -213,13 +204,7 @@ in
 
       # Merge resolution tools
       meld
-      # FIXME: Remove the override once this is merged into nixpkgs-unstable: https://github.com/NixOS/nixpkgs/pull/568226
-      # With gcc 16, the tests fail with "corrupted size vs. prev_size". See https://codeberg.org/mergiraf/mergiraf/issues/761
-      (mergiraf.overrideAttrs (prevAttrs: {
-        env = (prevAttrs.env or { }) // {
-          NIX_CFLAGS_COMPILE = "-fno-strict-aliasing";
-        };
-      }))
+      mergiraf
 
       # Diff viewers
       lumen
