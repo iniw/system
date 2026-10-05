@@ -46,6 +46,11 @@
       url = "github:numtide/llm-agents.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    kache = {
+      url = "github:kunobi-ninja/kache/stable";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
