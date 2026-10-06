@@ -96,7 +96,7 @@
       };
 
       mimeApps.defaultApplications = {
-        "x-scheme-handler/claude" = "claude-desktop.desktop";
+        "x-scheme-handler/claude" = "com.anthropic.Claude.desktop";
         "x-scheme-handler/claude-cli" = "claude-code-url-handler.desktop";
         "x-scheme-handler/codex" = "chatgpt.desktop";
       };
