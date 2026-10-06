@@ -71,9 +71,8 @@ Tell each subagent to:
    When it no longer needs the workspace, it must remove it, and all the commits that it made in it:
 
    ```sh
-   jj abandon "$bookmark..$name@"
-   jj workspace forget $name
-   rm -rf $directory
+   jj --repository $directory abandon "$bookmark..$name@"
+   jj workspace remove $name
    ```
 
 4. Look only for problems in its category, and ignore all other problems. The problems that you give it are examples.
@@ -226,17 +225,30 @@ Tell the user:
 
 Do this step only if the user asks you to post the review.
 
-1. Write one comment for each finding that the user wants to post.
-2. Put the [evidence](#evidence) of each finding in its comment, so that the author can see the problem and do the check
-   again. For example, if a small program shows a crash, give the program, the commands to run it and the crash
-   message. If a test shows the problem, give the test, so that the author can add it to the pull request. Put long code
-   and long output in a `<details>` block, so that the comment stays easy to read.
-3. In the text of the review, tell about the important checks that found no problem, with their evidence. For example:
-   "On a cluster with this version of the operator, I made 50 sessions at the same time. All of them connected." This
-   tells the author what is already tested.
-4. Choose the type of the review:
-   - Approve, if there are no findings, or if all the findings are minor, or if they can be fixed in a different pull
-     request.
-   - Request changes, if there are important findings that the pull request must fix before it is merged.
-   - Comment, if you are not certain which one to choose.
-5. Post all the comments as one review, with each comment on the line of its finding.
+1. Write the [comments](#comments).
+2. Choose the [type of the review](#type-of-the-review).
+3. Post all the comments as one review, with each comment on it's relevant lines.
+
+### Comments
+
+Write one comment for each finding that the user wants to post.
+
+- One thing: each comment must be about one thing only. If a finding contains more than one problem or idea, split it
+  into more comments.
+- Content: in a few words or sentences, give the finding, the case that shows it and a possible fix. Do not repeat what
+  the code or a different comment already shows.
+- Evidence: give the [evidence](#evidence), so that the author can see the problem and do the check again. If a test
+  shows the problem, give the test, so that the author can add it to the pull request. Put long code and long output in
+  a `<details>` block.
+- Links: link each file, function or other code that the comment mentions to its location on GitHub with a permalink, so
+  that the author can read it easily. Use the name of the code as the text of the link, for example
+  `` [`ci.yaml`](https://github.com/metalbear-co/mirrord/blob/9f10a12343d76cf585cd0d1c3205609ff0ad2984/.github/workflows/ci.yaml#L56) ``. <!-- rumdl-disable-line line-length -->
+  For code that the pull request does not change, use the base commit of the pull request. For code that the pull
+  request adds or changes, use its head commit.
+
+### Type of the review
+
+- Approve, if there are no findings, or if all the findings are minor, or if they can be fixed in a different pull
+  request.
+- Request changes, if there are important findings that the pull request must fix before it is merged.
+- Comment, if you are not certain which one to choose.

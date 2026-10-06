@@ -3,7 +3,7 @@ name: open-pull-request
 description: Creates a pull request from the current change, makes sure that CI passes, then watches the pull request for comments and checks each new comment against the code with a subagent. Use when asked to open, create, maintain or watch a pull request.
 ---
 
-# Managing Pull Requests
+# Opening and Managing Pull Requests
 
 Do all the steps below, in order.
 
@@ -73,7 +73,8 @@ Then:
 1. Tell the user about the comment and the result of the subagent.
 2. If the comment is correct and asks for a change, make the change in a new commit. Do not put fixes for different
    comments in the same commit. Push again with `jj git push` and do step 3 again.
-3. Reply to the comment in its thread.
+3. Reply to the comment in its thread. Keep the reply short, usually one to three sentences. Do not repeat the comment,
+   and do not thank the reviewer.
    - If you made a change, say which commit has the change. Reply only after you push that commit.
    - If the comment is incorrect, say why, with references to the code.
    - If the result is not certain, do not guess. Ask the user what to do, and do not reply until they answer.
