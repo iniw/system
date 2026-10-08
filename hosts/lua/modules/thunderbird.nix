@@ -19,13 +19,13 @@
           "contact"
         ];
 
-        unifiedFolders.enable = true;
-
         calendarAccountsOrder = [
           "metalbear"
           "social"
           "work"
         ];
+
+        unifiedFolders.enable = true;
 
         feedAccounts.feed = { };
       };
