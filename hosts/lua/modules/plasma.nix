@@ -36,7 +36,9 @@
     programs.plasma = {
       enable = true;
 
-      workspace.lookAndFeel = "org.kde.breezedark.desktop";
+      workspace = {
+        lookAndFeel = "org.kde.breezedark.desktop";
+      };
 
       panels = [
         {
@@ -75,19 +77,12 @@
 
       input = {
         keyboard = {
-          layouts = [
-            {
-              layout = "br";
-              variant = "nodeadkeys";
-            }
-          ];
-
           options = [
             "caps:escape"
             "compose:ralt"
           ];
 
-          repeatDelay = 250;
+          repeatDelay = 180;
           repeatRate = 30;
         };
 
@@ -103,30 +98,30 @@
         ];
       };
 
-      kwin.effects.shakeCursor.enable = false;
+      kwin = {
+        effects.shakeCursor.enable = false;
+      };
 
-      shortcuts.kwin = {
-        "Window Move Center" = "Meta+Shift+C";
-        "Walk Through Windows of Current Application" = [
-          "Alt+'"
-          "Meta+'"
-        ];
-        "Walk Through Windows of Current Application (Reverse)" = [
-          ''Alt+"''
-          ''Meta+"''
-        ];
+      shortcuts = {
+        kwin = {
+          "Window Move Center" = "Meta+Shift+C";
+        };
       };
 
       configFile = {
         # Alt+Tab settings
-        kwinrc.TabBox = {
-          # Show one entry per app instead of one per window.
-          ApplicationsMode = 1;
-          # Put minimized windows last.
-          OrderMinimizedMode = 1;
+        kwinrc = {
+          TabBox = {
+            # Show one entry per app instead of one per window.
+            ApplicationsMode = 1;
+            # Put minimized windows last.
+            OrderMinimizedMode = 1;
+          };
         };
 
-        plasmanotifyrc.Notifications.PopupPosition = "TopRight";
+        plasmanotifyrc = {
+          Notifications.PopupPosition = "TopRight";
+        };
 
         spectaclerc = {
           General.clipboardGroup = "PostScreenshotCopyImage";
