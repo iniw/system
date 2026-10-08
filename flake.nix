@@ -74,7 +74,7 @@
       devShells = forAllSystems (pkgs: {
         default = pkgs.mkShell {
           packages = with pkgs; [
-            nh
+            dix
             nix-update
           ];
         };
