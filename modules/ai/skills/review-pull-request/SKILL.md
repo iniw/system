@@ -101,8 +101,6 @@ subagent runs something to confirm a problem or to check the change, it must giv
 - The full code of each test, script or small program that it wrote, and where it put it (for example, the file of the
   test). It removes its workspace at the end, so the report must contain the code.
 - The commands that it ran, in order, and the changes that it made to the environment before it ran them.
-- The type of environment, for example "a Kubernetes cluster with the operator installed" or "Linux, with no network
-  access". Do not give the name of a local environment, because the author does not have it.
 - The part of the output that shows the result, for example the panic message and its stack trace. Do not give all of
   the output if most of it is not important.
 
@@ -226,8 +224,24 @@ Tell the user:
 Do this step only if the user asks you to post the review.
 
 1. Write the [comments](#comments).
-2. Choose the [type of the review](#type-of-the-review).
-3. Post all the comments as one review, with each comment on it's relevant lines.
+2. Write the [body of the review](#body-of-the-review).
+3. Choose the [type of the review](#type-of-the-review).
+4. Post all the comments as one review, with each comment on it's relevant lines.
+
+### Style
+
+This applies to the comments and to the body of the review. Write only the facts that the author needs. Each sentence
+must give information about the code.
+
+- Start with the problem. For example, "The `None` branch cannot occur.", and not "Nice work! One small thing: the
+  `None` branch cannot occur."
+- The review can be wrong. When a finding comes from your reading of the code, and you did not confirm it, say so in
+  your own words. For example, "As far as I can tell, nothing waits on the child before this line." When the evidence
+  confirms the finding, write it directly.
+- Be direct. Do not thank the author, praise the change or greet the author.
+- Do not tell the author what the pull request does. The author knows it.
+- Do not make a problem seem smaller or larger than it is. Do not use words such as "just", "small" or
+  "critical" to do this. Tell the effect of the problem, and the author can judge how important it is.
 
 ### Comments
 
@@ -245,6 +259,12 @@ Write one comment for each finding that the user wants to post.
   `` [`ci.yaml`](https://github.com/metalbear-co/mirrord/blob/9f10a12343d76cf585cd0d1c3205609ff0ad2984/.github/workflows/ci.yaml#L56) ``. <!-- rumdl-disable-line line-length -->
   For code that the pull request does not change, use the base commit of the pull request. For code that the pull
   request adds or changes, use its head commit.
+
+### Body of the review
+
+Put in the body only the findings that are not about specific lines of the code. Do not repeat or summarize the
+comments, and do not tell the author what they already know, for example the CI checks that fail or the checks that
+found no problem. If there are no such findings, leave the body empty.
 
 ### Type of the review
 
