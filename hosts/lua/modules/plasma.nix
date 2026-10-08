@@ -9,125 +9,134 @@
     # See: https://github.com/NixOS/nixpkgs/issues/437281
     programs.steam.extraPackages = [ pkgs.kdePackages.breeze ];
 
-    environment.sessionVariables = {
-      # Since GTK 4.20, GTK apps on Wayland expect the compositor to handle compose keys. KWin only does that when an
-      # input method is running, but IMEs are annoying to configure declaratively on plasma so I don't run one. This makes
-      # GTK handle them itself again.
-      GTK_IM_MODULE = "simple";
-
-      # See https://wiki.nixos.org/wiki/Wayland#Electron_and_Chromium
-      NIXOS_OZONE_WL = 1;
+    i18n.inputMethod = {
+      enable = true;
+      type = "fcitx5";
+      fcitx5.waylandFrontend = true;
     };
+
+    # See https://wiki.nixos.org/wiki/Wayland#Electron_and_Chromium
+    environment.sessionVariables.NIXOS_OZONE_WL = 1;
   };
 
-  homeManagerModule = { inputs, pkgs, ... }: {
-    imports = [ inputs.plasma-manager.homeModules.plasma-manager ];
+  homeManagerModule =
+    {
+      inputs,
+      osConfig,
+      pkgs,
+      ...
+    }:
+    {
+      imports = [ inputs.plasma-manager.homeModules.plasma-manager ];
 
-    home.packages = with pkgs.kdePackages; [
-      kcalc
-      kolourpaint
-    ];
-
-    xdg = {
-      autostart.enable = true;
-      mimeApps.enable = true;
-    };
-
-    programs.plasma = {
-      enable = true;
-
-      workspace = {
-        lookAndFeel = "org.kde.breezedark.desktop";
-      };
-
-      panels = [
-        {
-          location = "top";
-          height = 27;
-          floating = true;
-          widgets = [
-            "org.kde.plasma.kickoff"
-            "org.kde.plasma.appmenu"
-            "org.kde.plasma.panelspacer"
-            "org.kde.plasma.systemtray"
-            "org.kde.plasma.digitalclock"
-          ];
-        }
-        {
-          location = "bottom";
-          height = 50;
-          floating = true;
-          hiding = "autohide";
-          lengthMode = "fit";
-          widgets = [
-            {
-              iconTasks.launchers = [
-                "preferred://filemanager"
-                "preferred://terminal"
-                "preferred://browser"
-                "preferred://mailer"
-                "applications:spotify.desktop"
-                "applications:discord.desktop"
-                "applications:slack.desktop"
-              ];
-            }
-          ];
-        }
+      home.packages = with pkgs.kdePackages; [
+        kcalc
+        kolourpaint
       ];
 
-      input = {
-        keyboard = {
-          options = [
-            "caps:escape"
-            "compose:ralt"
-          ];
+      xdg = {
+        autostart.enable = true;
+        mimeApps.enable = true;
+      };
 
-          repeatDelay = 180;
-          repeatRate = 30;
+      programs.plasma = {
+        enable = true;
+
+        workspace = {
+          lookAndFeel = "org.kde.breezedark.desktop";
         };
 
-        mice = [
+        panels = [
           {
-            name = "Logitech G403 HERO Gaming Mouse";
-            vendorId = "046d";
-            productId = "c08f";
-            naturalScroll = true;
-            acceleration = -0.2;
-            accelerationProfile = "none";
+            location = "top";
+            height = 27;
+            floating = true;
+            widgets = [
+              "org.kde.plasma.kickoff"
+              "org.kde.plasma.appmenu"
+              "org.kde.plasma.panelspacer"
+              "org.kde.plasma.systemtray"
+              "org.kde.plasma.digitalclock"
+            ];
+          }
+          {
+            location = "bottom";
+            height = 50;
+            floating = true;
+            hiding = "autohide";
+            lengthMode = "fit";
+            widgets = [
+              {
+                iconTasks.launchers = [
+                  "preferred://filemanager"
+                  "preferred://terminal"
+                  "preferred://browser"
+                  "preferred://mailer"
+                  "applications:spotify.desktop"
+                  "applications:discord.desktop"
+                  "applications:slack.desktop"
+                ];
+              }
+            ];
           }
         ];
-      };
 
-      kwin = {
-        effects.shakeCursor.enable = false;
-      };
+        input = {
+          keyboard = {
+            options = [
+              "caps:escape"
+              "compose:ralt"
+            ];
 
-      shortcuts = {
-        kwin = {
-          "Window Move Center" = "Meta+Shift+C";
+            repeatDelay = 180;
+            repeatRate = 30;
+          };
+
+          mice = [
+            {
+              name = "Logitech G403 HERO Gaming Mouse";
+              vendorId = "046d";
+              productId = "c08f";
+              naturalScroll = true;
+              acceleration = -0.2;
+              accelerationProfile = "none";
+            }
+          ];
         };
-      };
 
-      configFile = {
-        # Alt+Tab settings
-        kwinrc = {
-          TabBox = {
-            # Show one entry per app instead of one per window.
-            ApplicationsMode = 1;
-            # Put minimized windows last.
-            OrderMinimizedMode = 1;
+        kwin = {
+          effects.shakeCursor.enable = false;
+        };
+
+        shortcuts = {
+          kwin = {
+            "Window Move Center" = "Meta+Shift+C";
           };
         };
 
-        plasmanotifyrc = {
-          Notifications.PopupPosition = "TopRight";
-        };
+        configFile = {
+          kwinrc = {
+            # Alt+Tab settings
+            TabBox = {
+              # Show one entry per app instead of one per window.
+              ApplicationsMode = 1;
+              # Put minimized windows last.
+              OrderMinimizedMode = 1;
+            };
 
-        spectaclerc = {
-          General.clipboardGroup = "PostScreenshotCopyImage";
-          GuiConfig.quitAfterSaveCopyExport = true;
+            # Makes KWin start fcitx5 as the input method ("Virtual Keyboard" in System Settings).
+            Wayland.InputMethod = "${osConfig.i18n.inputMethod.package}/share/applications/org.fcitx.Fcitx5.desktop";
+          };
+
+          plasmanotifyrc = {
+            Notifications.PopupPosition = "TopRight";
+          };
+
+          spectaclerc = {
+            General.clipboardGroup = "PostScreenshotCopyImage";
+            GuiConfig.quitAfterSaveCopyExport = true;
+          };
         };
       };
     };
-  };
 }
