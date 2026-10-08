@@ -29,19 +29,17 @@ in
         package = pkgs.jujutsu.overrideAttrs (
           finalAttrs: prevAttrs: {
             version = "0.46.0";
+
             src = prevAttrs.src.override {
-              tag = null;
-              rev = "92d238769cf81778be897e008519cd7b46192568";
-              hash = "sha256-/IhZoSIy/r01+F1sC5d20k/64WSBRzp/UM2zp01Vst4=";
+              hash = "sha256-5A443Cjlbu3+46F1Ynfu8FSOOy1yjZSgFnCbg6dMzzk=";
             };
+
             # FIXME: Set `cargoHash` instead once this is merged: https://github.com/NixOS/nixpkgs/pull/514218
             # Until then, overriding `cargoHash` has no effect, so the vendored dependencies are set directly.
             cargoDeps = pkgs.rustPlatform.fetchCargoVendor {
               inherit (finalAttrs) pname version src;
-              hash = "sha256-Hv/cHlbpo41uhVHDxkI7tURfDjjBnxbjx7hzsnESCSw=";
+              hash = "sha256-ugqvdijwIUrvq0gEQSzAxqSnF6Ui3qBmMvk1L2TXWEE=";
             };
-            # The version check expects a release version.
-            doInstallCheck = false;
           }
         );
 
