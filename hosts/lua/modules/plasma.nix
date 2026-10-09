@@ -108,6 +108,10 @@
           effects.shakeCursor.enable = false;
         };
 
+        krunner = {
+          position = "center";
+        };
+
         shortcuts = {
           kwin = {
             "Window Move Center" = "Meta+Shift+C";
