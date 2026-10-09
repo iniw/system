@@ -36,11 +36,11 @@
     },
     "crane": {
       "locked": {
-        "lastModified": 1788310914,
-        "narHash": "sha256-B2vIgrwKQd2hFdSgzF2fvqqkzIkJtBlUGc85cKZh0e4=",
+        "lastModified": 1789760033,
+        "narHash": "sha256-jtT4yxZpR8seYnlCMMWSSPlFN92zO6ICuZ8pJrmi86k=",
         "owner": "ipetkov",
         "repo": "crane",
-        "rev": "d852f62f060ef43937a78d409f63625c82b25af3",
+        "rev": "73b980519cefc727a5f6cc8e5c0947a2f9be6edd",
         "type": "github"
       },
       "original": {
@@ -181,16 +181,16 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1789678820,
-        "narHash": "sha256-j7jRbYgeCOEtvecu52Bb4GnGqm8CI+ejn8PhmpdsdMY=",
+        "lastModified": 1791552401,
+        "narHash": "sha256-ZZGjcK2Y8aGQT3gyMjBYjSnlA5J1l9tjoXr5wXj34O4=",
         "owner": "mrjones2014",
         "repo": "jj-gh",
-        "rev": "bdab07968548e7095142c9502d0cd6f30718cfe1",
+        "rev": "99c196dd1bf9c7fed3a50fec7da881628dfad54c",
         "type": "github"
       },
       "original": {
         "owner": "mrjones2014",
-        "ref": "jj-gh-v0.3.1",
+        "ref": "stable",
         "repo": "jj-gh",
         "type": "github"
       }
@@ -341,11 +341,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1788456718,
-        "narHash": "sha256-TxHC0sBjV2pmsBLKAX02JTXlye/EOLt6Do+WNtGofGw=",
+        "lastModified": 1789715798,
+        "narHash": "sha256-hWw9vlrsFm9kOw8MT5k6IX/7xCzgROuJ6ZvQOrkq66Q=",
         "owner": "oxalica",
         "repo": "rust-overlay",
-        "rev": "0b20a18e84d9164464739189c2b2a1b00f6f0e4b",
+        "rev": "fbdb2de9e7619d660ae7e8f752f38b261020b701",
         "type": "github"
       },
       "original": {
