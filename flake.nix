@@ -111,8 +111,7 @@
               nh "$os" switch "path:${inputs.self}" "$@"
             '';
           };
-        }
-        // lib.optionalAttrs (pkgs.stdenv.hostPlatform.isDarwin) {
+
           # Packages maintained locally because they are not available in nixpkgs yet.
           # I may eventually upstream them.
           #
@@ -122,6 +121,10 @@
           # Updating:
           #   nix-update <package> --flake
 
+          linear-cli = pkgs.callPackage ./pkgs/linear-cli.nix { };
+          slackcli = pkgs.callPackage ./pkgs/slackcli.nix { };
+        }
+        // lib.optionalAttrs (pkgs.stdenv.hostPlatform.isDarwin) {
           seeleseek = pkgs.callPackage ./pkgs/seeleseek.nix { };
           space-rabbit = pkgs.callPackage ./pkgs/space-rabbit.nix { };
         }

@@ -11,6 +11,9 @@ stdenvNoCC.mkDerivation (finalAttrs: {
   pname = "seeleseek";
   version = "1.7.0";
 
+  __structuredAttrs = true;
+  strictDeps = true;
+
   src = fetchurl {
     url = "https://github.com/bretth18/seeleseek/releases/download/v${finalAttrs.version}/seeleseek.pkg";
     hash = "sha256-YeBA4ZvYrqzOP3XGyZmdF+zfGd+tZXs001ya5vu2EwY=";

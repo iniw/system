@@ -2,35 +2,26 @@
   homeManagerModule =
     { pkgs, inputs, ... }:
     let
-      llm-agents = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system};
+      inherit (pkgs.stdenv.hostPlatform) system;
+      inherit (inputs.self.packages.${system}) linear-cli slackcli;
+      llm-agents = inputs.llm-agents.packages.${system};
+
+      skills = pkgs.symlinkJoin {
+        name = "agent-skills";
+        paths = [
+          ./skills
+          "${linear-cli}/share/skills/linear-cli"
+          "${slackcli}/share/skills/slackcli"
+        ];
+      };
     in
     {
       programs = {
-        mcp = {
-          enable = true;
-
-          servers = {
-            linear.url = "https://mcp.linear.app/mcp";
-            # Slack does not let clients register themselves for OAuth. So we use the client ID of Slack's official
-            # Claude Code plugin. Only Claude Code reads these keys.
-            # See: https://github.com/slackapi/slack-mcp-plugin/blob/main/.mcp.json
-            slack = {
-              url = "https://mcp.slack.com/mcp";
-              oauth = {
-                clientId = "1601185624273.8899143856786";
-                callbackPort = 3118;
-              };
-            };
-          };
-        };
-
         codex = {
           enable = true;
 
           context = ./AGENTS.md;
-          skills = ./skills;
-
-          enableMcpIntegration = true;
+          inherit skills;
 
           settings = {
             sandbox_mode = "danger-full-access";
@@ -44,9 +35,7 @@
           package = llm-agents.claude-code;
 
           context = ./AGENTS.md;
-          skills = ./skills;
-
-          enableMcpIntegration = true;
+          inherit skills;
 
           settings = {
             attribution = {
@@ -81,6 +70,8 @@
           amp
           chatgpt
           claude-desktop
+          linear-cli
+          slackcli
         ];
 
       xdg.configFile."amp/AGENTS.md".source = ./AGENTS.md;
