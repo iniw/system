@@ -74,7 +74,10 @@
           slackcli
         ];
 
-      xdg.configFile."amp/AGENTS.md".source = ./AGENTS.md;
+      xdg.configFile = {
+        "amp/AGENTS.md".source = ./AGENTS.md;
+        "amp/skills".source = skills;
+      };
     };
 
   nixosHomeManagerModule = { config, lib, ... }: {
