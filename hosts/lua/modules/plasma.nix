@@ -137,7 +137,10 @@
           };
 
           spectaclerc = {
-            General.clipboardGroup = "PostScreenshotCopyImage";
+            General = {
+              clipboardGroup = "PostScreenshotCopyImage";
+              rememberSelectionRect = "Always";
+            };
             GuiConfig.quitAfterSaveCopyExport = true;
           };
         };
