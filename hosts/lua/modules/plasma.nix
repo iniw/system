@@ -31,6 +31,8 @@
 
       home.packages = with pkgs.kdePackages; [
         kcalc
+        kclock
+        kdenlive
         kolourpaint
       ];
 
