@@ -64,20 +64,14 @@
 
       home.packages =
         let
-          inherit (llm-agents) amp chatgpt claude-desktop;
+          inherit (llm-agents) chatgpt claude-desktop;
         in
         [
-          amp
           chatgpt
           claude-desktop
           linear-cli
           slackcli
         ];
-
-      xdg.configFile = {
-        "amp/AGENTS.md".source = ./AGENTS.md;
-        "amp/skills".source = skills;
-      };
     };
 
   nixosHomeManagerModule = { config, lib, ... }: {
