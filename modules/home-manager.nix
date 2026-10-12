@@ -9,6 +9,7 @@
       };
 
       backupFileExtension = "hm-backup";
+      overwriteBackup = true;
     };
   };
 }
