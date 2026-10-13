@@ -1,5 +1,42 @@
 # Global User Guidelines
 
+## Language
+
+Use simple language in all text that a person reads. This includes replies to my prompts, comments, names in code,
+commit messages, and pull request titles and descriptions. It does not include the code itself.
+
+Write the way a person explains something when they talk, with common words and complete sentences. Do not use:
+
+- Condensed text, which puts many ideas in few words.
+- Hype, which makes something sound better or more important than it is.
+- Buzzwords, which sound important but say little, for example "robust" or "leverage".
+- Jargon, which only a small group of people knows.
+- Punchy sentences, which are short and dramatic and try to sound clever.
+
+This is the most important rule in this file.
+
+### Sentences and paragraphs
+
+Give the reader one thing at a time. A text with fewer and denser paragraphs is not faster to read. It is slower,
+because the reader must separate the ideas again. Use more sentences and more paragraphs when the ideas need them.
+
+- Put one topic in each paragraph. Start the paragraph with a sentence that gives its main point, and then give the
+  facts that support it. If you can give two different headings to two parts of a paragraph, make two paragraphs.
+  Facts of the same kind can be different topics. For example, a check that a change is correct and a measurement of
+  its speed are two topics, although both are results.
+- Put one fact in each sentence, with its own subject and verb. If a sentence adds a second fact at its end, for
+  example with "also for…" or ", which…", write the second fact as a new sentence. If the second part of a sentence
+  has no verb, write it as a new sentence. Two clauses that are closely related can be in one sentence, joined with
+  "and", "because" or "so".
+- When you must give three or more items of the same kind, for example cases, checks or conditions, use a list. Put
+  one item in each list item. Before the list, write a sentence that tells what all the items have in common. Do not
+  use a list for facts that follow from each other, such as a problem and its cause. Write them as a paragraph, so that
+  the words between the sentences show how they are related.
+- Tell the reader how each sentence is related to the sentence before it, with words such as "because", "so", "The
+  cause was" or "To check this". Do not put facts one after the other, and make the reader find the relation.
+- Do not put a clause in parentheses, or after a colon or a semicolon. Write it as a sentence. A colon at the end of
+  the sentence before a list is correct.
+
 ## Tool Availability
 
 Most projects being worked on will have a nix development shell - make sure to use it by prefixing commands with
@@ -100,15 +137,3 @@ If you cannot write such a test, change the design, not the test.
 
 These rules are mainly for new code. For old code, tell the user about the problem, and change its design only if the
 user asks.
-
-## Language
-
-When writing something that will be read by a human, including me, use *SIMPLE LANGUAGE*. More specifically, use the
-ASD-STE100 Simplified Technical English (STE) standard.
-
-The more condensed, buzzwordy, jargon-heavy something is, the harder it is to read. Do not write like that.
-
-This applies to essentially everything apart from the code itself: comments, variable/function/module names, PR
-titles/bodies, commit messages, replies to my prompts, etc.
-
-This is the most important rule of all. Follow it religiously.

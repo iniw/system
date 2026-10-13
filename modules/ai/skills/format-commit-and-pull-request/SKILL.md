@@ -44,15 +44,17 @@ Usually, the explanation has this order:
 4. Why this is the correct approach. Write this only if the change does not make it clear. If an external document
    (for example a standard or the documentation of a dependency) or an earlier commit is the reason, name it.
 
-Also tell the reader what the change does not do, if they can expect it to do that. For example: "This adds the option
-to the CLI, but not to the configuration file." If the change moves or renames code and does not change behavior, write
-"No behavior change."
+If the reader can expect the change to do something that it does not do, say so. For example: "This adds the option to
+the CLI, but not to the configuration file."
+
+If the change only moves or renames code, write "No behavior change." Then the reader knows that they do not have to
+look for one.
 
 ### References
 
-When a different commit, an issue or an external document is part of the reason for the change, name it. Use the hash
-of a public commit, not a change ID from your local history. For example: "Since 7e01ddbe41d, the agent retries…", or
-"This reverts most of 1b46a52, which was a workaround for…".
+When a different commit, an issue or an external document is part of the reason for the change, name it. For example:
+"Since 7e01ddbe41d, the agent retries…", or "This reverts most of 1b46a52, which was a workaround for…". Use the hash of
+a public commit, because the reader cannot find a change ID from your local history.
 
 ### Structure
 
@@ -91,7 +93,8 @@ check does, so that the reader understands the result.
   requests to the cache shows a 2x speedup."
 
 Give the result as numbers before and after the change, for example "the request now takes 3 ms, and took 70 ms
-before". If you added a test, say so in one sentence, and say that it fails without the change.
+before". When the evidence is a new test, say that the test fails without the change, because this shows that the test
+checks the problem.
 
 Describe the overall _process_ that you used to check the change, and _why_ that process shows that the change is
 correct. Do not mention obvious, mechanical checks, for example that the code compiles, that the linters pass or that
