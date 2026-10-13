@@ -20,6 +20,8 @@ Short text is easier to read and to review. Agents usually write too much, so wr
 - Do not repeat what the title, the diff or a different part of the text already tells.
 - Do not list each file, function or test that changes.
 - A small change needs only a few sentences.
+- If the subject line tells all that the reader needs, do not write a body. For example,
+  `` cli: add a `--version` flag ``.
 
 When you finish, read the text again. Remove each sentence, list item and word that the reader does not need.
 
@@ -35,9 +37,22 @@ Before you write, use all the context that you have to answer these questions:
 
 Usually, the explanation has this order:
 
-1. The problem, or the behavior that is confusing.
-2. How the change fixes it.
-3. Why this is the correct approach. Write this only if the change does not make it clear.
+1. The problem. Use the past tense for the old behavior ("Previously, the cache kept…"). Give one concrete case that a
+   reader can try: an input and its wrong output, or a command that failed.
+2. The cause: why the old code did the wrong thing. A symptom alone is not sufficient.
+3. The fix. Use the present tense for the new behavior ("The cache now removes…").
+4. Why this is the correct approach. Write this only if the change does not make it clear. If an external document
+   (for example a standard or the documentation of a dependency) or an earlier commit is the reason, name it.
+
+Also tell the reader what the change does not do, if they can expect it to do that. For example: "This adds the option
+to the CLI, but not to the configuration file." If the change moves or renames code and does not change behavior, write
+"No behavior change."
+
+### References
+
+When a different commit, an issue or an external document is part of the reason for the change, name it. Use the hash
+of a public commit, not a change ID from your local history. For example: "Since 7e01ddbe41d, the agent retries…", or
+"This reverts most of 1b46a52, which was a workaround for…".
 
 ### Structure
 
@@ -75,6 +90,9 @@ check does, so that the reader understands the result.
 - Do not write "The benchmark in the scratch directory shows a 2x speedup." Write "A local benchmark that sends 10,000
   requests to the cache shows a 2x speedup."
 
+Give the result as numbers before and after the change, for example "the request now takes 3 ms, and took 70 ms
+before". If you added a test, say so in one sentence, and say that it fails without the change.
+
 Describe the overall _process_ that you used to check the change, and _why_ that process shows that the change is
 correct. Do not mention obvious, mechanical checks, for example that the code compiles, that the linters pass or that
 the existing tests pass. The reader expects that they do.
@@ -108,11 +126,17 @@ uses a channel."
 The subject line must tell the reader which part of the code changes and how. It must not try to summarize all of the
 change.
 
+- Make one specific claim about the new behavior. Do not use vague verbs that hide what changes, like "fix",
+  "refactor", "improve" or "update". Write `cache: only store responses whose transfer succeeded`, not
+  `cache: fix response storage`.
 - Stay at 72 characters or fewer
 - Use the format `category: brief description of what's being changed`
-  - Use a category that names the relevant library, application, service, utility, or similar unit
+  - Use a category that names the relevant library, application, service, utility, or similar unit. Do not use the
+    name of a type or a function as the category. Put that name in the description.
+  - Do not use a very wide category, like `src`, unless the change affects most of it
   - Combine categories with `+` when the patch genuinely spans multiple areas, for example `foo+bar`
 - Use the imperative mood, like `foo: change the way dates work`
+- Do not end the subject line with a period
 - Use markdown formatting if necessary, for example `Foo::bar` for code
 
 ### Body
