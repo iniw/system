@@ -25,16 +25,19 @@ ask.
 
 Split the work into self-contained, atomic commits. Write each commit one at a time, with `jj`:
 
-1. Start a new commit with `jj new`.
+1. Use the fresh, empty working copy for the next commit. If the working copy is not empty, start a new commit with
+   `jj new`.
 2. Write the change for that commit only.
 3. Make sure that the project builds, and that the linters and tests pass for that commit.
-4. Write the commit message with `jj describe -m "..."`.
+4. Finish the commit with `jj commit -m "..."`. This saves the commit message and creates a fresh, empty working copy
+   for the next change. Always leave the working copy on this new commit after finishing a commit.
 
 When you write or change a commit message, in this step or in a later step, follow the
 `format-commit-and-pull-request` skill.
 
 If you must change an earlier commit, put the change in the commit where it belongs, not in the last commit. To do
-this, use `jj absorb`, `jj squash --into <revision>` or `jj edit <revision>`.
+this, use `jj absorb`, `jj squash --into <revision>` or `jj edit <revision>`. If you use `jj edit`, return to a fresh,
+empty working copy on top of the completed changes when you finish.
 
 ## 3. Test against a live environment
 

@@ -6,14 +6,14 @@
       inherit (inputs.self.packages.${system}) linear-cli slackcli;
       llm-agents = inputs.llm-agents.packages.${system};
 
-      skills = pkgs.symlinkJoin {
-        name = "agent-skills";
-        paths = [
-          ./skills
-          "${linear-cli}/share/skills/linear-cli"
-          "${slackcli}/share/skills/slackcli"
-        ];
-      };
+      # Codex skips symlinked SKILL.md files, so keep regular files inside the linked folder.
+      skills = pkgs.runCommand "agent-skills" { } ''
+        mkdir -p "$out"
+        cp -RL ${./skills}/. \
+          ${linear-cli}/share/skills/linear-cli/. \
+          ${slackcli}/share/skills/slackcli/. \
+          "$out"
+      '';
     in
     {
       programs = {
@@ -21,11 +21,6 @@
           enable = true;
 
           context = ./AGENTS.md;
-          inherit skills;
-
-          settings = {
-            sandbox_mode = "danger-full-access";
-          };
 
           mutableSettings = true;
         };
@@ -62,16 +57,20 @@
         ];
       };
 
-      home.packages =
-        let
-          inherit (llm-agents) chatgpt claude-desktop;
-        in
-        [
-          chatgpt
-          claude-desktop
-          linear-cli
-          slackcli
-        ];
+      home = {
+        file.".agents/skills".source = skills;
+
+        packages =
+          let
+            inherit (llm-agents) chatgpt claude-desktop;
+          in
+          [
+            chatgpt
+            claude-desktop
+            linear-cli
+            slackcli
+          ];
+      };
     };
 
   nixosHomeManagerModule = { config, lib, ... }: {
