@@ -32,7 +32,7 @@
       # See the comment on `TerminalApplication` above.
       home.packages = [
         (pkgs.writeShellScriptBin "com.mitchellh.ghostty.desktop" ''
-          exec ${lib.getExe config.programs.ghostty.package} "$@"
+          exec ${lib.getExe config.programs.ghostty.package} +new-window "$@"
         '')
       ];
 
