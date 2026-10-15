@@ -29,29 +29,12 @@
     {
       imports = [ inputs.plasma-manager.homeModules.plasma-manager ];
 
-      home.packages =
-        with pkgs.kdePackages;
-        let
-          # See https://github.com/mltframework/mlt/pull/1343
-          kdenlive = pkgs.kdePackages.kdenlive.override {
-            mlt = mlt.overrideAttrs {
-              version = "7.43.0-dissolve-performance";
-              src = pkgs.fetchFromGitHub {
-                owner = "iniw";
-                repo = "mlt";
-                rev = "25a34c4713842023e3e185ecd3108c56c76c707c";
-                hash = "sha256-GEuyCbrXmSLrHg5sxy90s1sCm/6zVt08Qk9Jkg83CZI=";
-                fetchSubmodules = true;
-              };
-            };
-          };
-        in
-        [
-          kcalc
-          kclock
-          kdenlive
-          kolourpaint
-        ];
+      home.packages = with pkgs.kdePackages; [
+        kcalc
+        kclock
+        kdenlive
+        kolourpaint
+      ];
 
       xdg = {
         autostart.enable = true;
