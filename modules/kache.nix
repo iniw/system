@@ -8,13 +8,7 @@
       home = {
         packages = [ kache ];
         sessionPath = [ "${kache.shims}/bin" ];
-        sessionVariables = lib.genAttrs [
-          "RUSTC_WRAPPER"
-          # The CMake launchers make CMake builds in Cargo build scripts (such as rdkafka) use kache.
-          # The `cmake` crate gives CMake the full compiler path, so the shims do not apply there.
-          "CMAKE_C_COMPILER_LAUNCHER"
-          "CMAKE_CXX_COMPILER_LAUNCHER"
-        ] (_: lib.getExe kache);
+        sessionVariables.RUSTC_WRAPPER = lib.getExe kache;
       };
 
       systemd.user.services.kache = lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
@@ -42,5 +36,15 @@
           EnvironmentVariables.KACHE_LOG = "kache=info";
         };
       };
+
+      # A devshell puts its compiler before the shims in PATH, so add the shims again after `use flake` and `use nix`.
+      # direnv loads this after nix-direnv (in `lib/`), so these wrap the nix-direnv functions.
+      programs.direnv.stdlib = # sh
+        ''
+          eval "_kache_orig_$(declare -f use_flake)"
+          use_flake() { _kache_orig_use_flake "$@" && PATH_add ${kache.shims}/bin; }
+          eval "_kache_orig_$(declare -f use_nix)"
+          use_nix() { _kache_orig_use_nix "$@" && PATH_add ${kache.shims}/bin; }
+        '';
     };
 }
