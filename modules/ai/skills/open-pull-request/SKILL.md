@@ -72,14 +72,11 @@ Then:
 
 1. Tell the user about the comment and the result of the subagent.
 2. If the comment is correct and asks for a change, make the change in a new commit. Do not put fixes for different
-   comments in the same commit. Push again with `jj git push` and do step 3 again.
-3. Reply to the comment in its thread. Keep the reply short, usually one to three sentences. Do not repeat the comment,
-   and do not thank the reviewer.
-   - If you made a change, say which commit has the change. Reply only after you push that commit.
-   - If the comment is incorrect, say why, with references to the code.
-   - If the result is not certain, do not guess. Ask the user what to do, and do not reply until they answer.
-   - Never attribute the reply to yourself.
-4. Resolve the thread after you reply, if you made the change or if the comment is incorrect. Do not resolve a thread
-   when the result is not certain, or when the comment asks a question for a person to answer.
+   comments in the same commit. Check the fix locally, then present it to the user for approval. Do not push the fix
+   until the user approves it. After approval, push with `jj git push` and do step 3 again.
+3. Present a suggested reply to the user. Do not post it to GitHub or resolve the thread automatically.
+   - If you made a change, present the suggested reply with the fix for approval. Say which commit has the change.
+   - If the comment is incorrect, explain why, with references to the code.
+   - If the result is not certain, explain what is uncertain and ask the user what to do. Do not guess.
 
 Continue to watch until the pull request is merged or closed, or until the user tells you to stop.
