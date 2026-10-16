@@ -38,13 +38,7 @@
               pr = "";
             };
 
-            pluginConfigs."agents-md@builtin".options.instructionFiles = "claude-md-and-agents-md";
-
             autoMemoryEnabled = false;
-
-            disableDeepLinkRegistration = "disable";
-
-            env.CARGO_BUILD_JOBS = "8";
           };
 
           mutableSettings = true;
