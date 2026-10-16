@@ -1,26 +1,35 @@
 {
-  homeManagerModule = { config, lib, ... }: {
-    programs.firefox = {
-      enable = true;
+  homeManagerModule =
+    {
+      config,
+      pkgs,
+      lib,
+      ...
+    }:
+    {
+      programs.firefox = {
+        enable = true;
 
-      policies.Preferences = {
-        "widget.gtk.global-menu.enabled" = true;
-        "widget.gtk.global-menu.wayland.enabled" = true;
-        "browser.urlbar.showSearchSuggestionsFirst" = false;
+        nativeMessagingHosts = [ pkgs.kdePackages.plasma-browser-integration ];
+
+        policies.Preferences = {
+          "widget.gtk.global-menu.enabled" = true;
+          "widget.gtk.global-menu.wayland.enabled" = true;
+          "browser.urlbar.showSearchSuggestionsFirst" = false;
+        };
+      };
+
+      xdg = {
+        mimeApps.defaultApplications = lib.genAttrs [
+          "application/xhtml+xml"
+          "text/html"
+          "x-scheme-handler/http"
+          "x-scheme-handler/https"
+        ] (_: "firefox.desktop");
+
+        autostart.entries = [
+          "${config.programs.firefox.finalPackage}/share/applications/firefox.desktop"
+        ];
       };
     };
-
-    xdg = {
-      mimeApps.defaultApplications = lib.genAttrs [
-        "application/xhtml+xml"
-        "text/html"
-        "x-scheme-handler/http"
-        "x-scheme-handler/https"
-      ] (_: "firefox.desktop");
-
-      autostart.entries = [
-        "${config.programs.firefox.finalPackage}/share/applications/firefox.desktop"
-      ];
-    };
-  };
 }
