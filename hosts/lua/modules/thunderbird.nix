@@ -186,17 +186,6 @@
           |> lib.mergeAttrsList;
       };
 
-    # Plasma does not use the `x-scheme-handler/mailto` mime type to find the preferred mail client.
-    # FIXME: Remove once we are on Plasma 6.8, which uses the mime type.
-    # See: https://invent.kde.org/plasma/plasma-workspace/-/commit/ec95bb36703472be8829ca1069d38aa5bf0a8b67
-    programs.plasma.configFile.emaildefaults = {
-      Defaults.Profile = "Default";
-      PROFILE_Default = {
-        EmailClient = "thunderbird.desktop";
-        TerminalClient = false;
-      };
-    };
-
     xdg = {
       mimeApps.defaultApplications = lib.genAttrs [
         # Mail
