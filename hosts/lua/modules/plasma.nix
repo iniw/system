@@ -121,6 +121,11 @@
         };
 
         configFile = {
+          # Turn off file indexing. It keeps the disk busy and I don't use it at all.
+          baloofilerc = {
+            "Basic Settings".Indexing-Enabled = false;
+          };
+
           kwinrc = {
             # Alt+Tab settings
             TabBox = {
