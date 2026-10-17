@@ -17,6 +17,23 @@
 
     # See https://wiki.nixos.org/wiki/Wayland#Electron_and_Chromium
     environment.sessionVariables.NIXOS_OZONE_WL = 1;
+
+    # Chromium-based apps (Discord, Slack, ...) clear the `gtk-modules` setting at startup, so GTK unloads
+    # `colorreload-gtk-module`. The module's file monitor on `~/.config/gtk-3.0/colors.css` stays active, and when
+    # Plasma writes that file (at login, or when the color scheme changes), the app jumps into the unloaded code and
+    # crashes. With `-z nodelete`, the GTK modules stay in memory after GTK unloads them.
+    # See: https://github.com/imputnet/helium-linux/issues/423
+    nixpkgs.overlays = [
+      (final: prev: {
+        kdePackages = prev.kdePackages.overrideScope (
+          kfinal: kprev: {
+            kde-gtk-config = kprev.kde-gtk-config.overrideAttrs (old: {
+              cmakeFlags = old.cmakeFlags ++ [ "-DCMAKE_MODULE_LINKER_FLAGS=-Wl,-z,nodelete" ];
+            });
+          }
+        );
+      })
+    ];
   };
 
   homeManagerModule =
