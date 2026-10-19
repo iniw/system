@@ -1,5 +1,4 @@
-# The local Docker and Kubernetes engine is different on each OS,
-# so each host sets it up in its own `hosts/<host>/modules/metalbear.nix`.
+# The local Docker and Kubernetes engine is different on each OS, so each host sets it up in its own modules.
 {
   homeManagerModule = { pkgs, ... }: {
     programs =
