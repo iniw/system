@@ -1,6 +1,8 @@
 {
   systemModule = { hostName, ... }: {
     networking = { inherit hostName; };
+
+    services.tailscale.enable = true;
   };
 
   homeManagerModule = {
