@@ -159,7 +159,7 @@
                   {
                     remote = {
                       type = "caldav";
-                      url = "https://purelymail.com/webdav/${account.webdavId}/caldav/default/";
+                      url = "https://purelymail.com/webdav/${account.webdavId}/caldav/${account.name}/";
                       userName = account.address;
                     };
                   }
