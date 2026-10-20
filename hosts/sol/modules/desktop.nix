@@ -38,7 +38,7 @@
             { app = "/System/Applications/Mail.app"; }
             { app = "/System/Applications/Calendar.app"; }
             { app = "${hmApps}/Spotify.app"; }
-            { app = "/Applications/Discord.app"; }
+            { app = "${hmApps}/Discord.app"; }
             { app = "${hmApps}/Slack.app"; }
             { app = "/Applications/WhatsApp.app"; }
             { app = "${hmApps}/seeleseek.app"; }

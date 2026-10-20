@@ -7,6 +7,7 @@
       in
       [
         caffeine
+        discord
         google-chrome
         mos
         reflex-app
