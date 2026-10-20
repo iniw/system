@@ -1,37 +1,55 @@
 {
-  homeManagerModule = { pkgs, ... }: {
-    programs = {
-      nushell = {
-        enable = true;
+  homeManagerModule = {
+    programs.nushell = {
+      enable = true;
 
-        configFile.source = ./config.nu;
-      };
-
-      zsh = {
-        enable = true;
-
-        enableCompletion = false;
-
-        initContent =
-          let
-            nu = pkgs.lib.getExe pkgs.nushell;
-          in
-          # zsh
-          ''
-            if [[ -z $ZSH_EXECUTION_STRING && $TERM != dumb ]]; then
-              exec ${nu} --experimental-options native-clip
-            fi
-          '';
-      };
+      configFile.source = ./config.nu;
     };
 
-    home = {
-      shell.enableZshIntegration = false;
-      file.".hushlogin".text = "";
-    };
+    home.file.".hushlogin".text = "";
   };
 
-  systemModule = { pkgs, user, ... }: {
+  darwinHomeManagerModule = {
+    programs.zsh = {
+      enable = true;
+
+      enableCompletion = false;
+
+      initContent =
+        # zsh
+        ''
+          if [[ -z $ZSH_EXECUTION_STRING && $TERM != dumb ]]; then
+            exec nu --experimental-options native-clip
+          fi
+        '';
+    };
+
+    home.shell.enableZshIntegration = false;
+  };
+
+  nixosHomeManagerModule = {
+    programs.bash = {
+      enable = true;
+
+      enableCompletion = false;
+
+      initExtra =
+        # bash
+        ''
+          if [[ -z $BASH_EXECUTION_STRING && $TERM != dumb ]]; then
+            exec nu --experimental-options native-clip
+          fi
+        '';
+    };
+
+    home.shell.enableBashIntegration = false;
+  };
+
+  systemModule = {
+    environment.pathsToLink = [ "/share/nushell" ];
+  };
+
+  darwinSystemModule = { pkgs, user, ... }: {
     programs.zsh = {
       enable = true;
 
@@ -41,7 +59,16 @@
 
     environment.shells = [ pkgs.zsh ];
     users.users.${user}.shell = pkgs.zsh;
+  };
 
-    environment.pathsToLink = [ "/share/nushell" ];
+  nixosSystemModule = { pkgs, user, ... }: {
+    programs.bash = {
+      enable = true;
+
+      completion.enable = false;
+    };
+
+    environment.shells = [ pkgs.bashInteractive ];
+    users.users.${user}.shell = pkgs.bashInteractive;
   };
 }
