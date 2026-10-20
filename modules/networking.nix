@@ -23,6 +23,11 @@
     };
   };
 
+  # See https://github.com/numtide/llm-agents.nix/issues/11069
+  nixosSystemModule = {
+    programs.ssh.systemd-ssh-proxy.enable = false;
+  };
+
   # ssh rejects ~/.ssh/config if its owner is not the user or root. Apps wrapped with `buildFHSEnv` (e.g. Claude
   # Desktop) run in a bwrap user namespace that maps only the user's uid, so there root-owned /nix/store files show as
   # owned by `nobody`, and a symlink into the store fails. Install a copy that the user owns instead.
