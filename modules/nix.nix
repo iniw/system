@@ -1,5 +1,5 @@
 {
-  systemModule = { user, ... }: {
+  systemModule = {
     nix = {
       gc.automatic = true;
 
@@ -11,8 +11,6 @@
           "nix-command"
           "pipe-operators"
         ];
-
-        trusted-users = [ user ];
 
         use-xdg-base-directories = true;
       };
