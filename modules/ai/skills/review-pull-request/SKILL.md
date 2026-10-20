@@ -40,8 +40,13 @@ separate jj workspace for the review instead:
 
 ## 3. Start the reviewers
 
-Start one subagent per category in [Categories](#categories), all in parallel. Use the most capable model with a high
-reasoning effort, and never a model that is less capable than you.
+Start one subagent per category in [Categories](#categories), all in parallel. Each subagent needs the most capable
+model with a high reasoning effort, so set the model explicitly rather than relying on the default:
+
+- In Claude Code, use `fable`.
+- In Codex, use `astra`.
+
+If neither applies, use the most capable model available, and never a model that is less capable than you.
 
 Pass each subagent:
 

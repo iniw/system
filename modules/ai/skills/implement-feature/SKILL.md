@@ -74,7 +74,9 @@ that the change is tested if you didn't test it.
    - The review workspace is your own workspace, and the subagents read the code in it. As that step says, they can
      create their own temporary workspaces to write tests or other code, but they must not change yours.
    - Start one more subagent for the category in [Commit structure](#commit-structure), and pass it the full text of
-     that section and of [Atomic commits](#atomic-commits), just like the other categories.
+     that section and of [Atomic commits](#atomic-commits), just like the other categories. Start it with the default
+     model and reasoning effort rather than the model that the step asks for, because problems in the commit structure
+     matter less than the problems that the other categories find.
 2. Read each finding and check that it is real. Don't fix findings that are wrong, but tell the user about them at the
    end.
 3. Fix the real findings by rewriting the history, so that each fix lands in the commit that has the problem. Use

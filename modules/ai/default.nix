@@ -4,7 +4,6 @@
     let
       inherit (pkgs.stdenv.hostPlatform) system;
       inherit (inputs.self.packages.${system}) linear-cli slackcli;
-      llm-agents = inputs.llm-agents.packages.${system};
 
       context = ./AGENTS.md;
       # Codex skips symlinked SKILL.md files, so keep regular files inside the linked folder.
@@ -21,7 +20,7 @@
         codex = {
           enable = true;
 
-          inherit context;
+          inherit context skills;
         };
 
         claude-code = {
@@ -49,11 +48,14 @@
       };
 
       home = {
-        file.".agents/skills".source = skills;
+        file = {
+          ".agents/AGENTS.md".source = context;
+          ".agents/skills".source = skills;
+        };
 
         packages =
           let
-            inherit (llm-agents) claude-desktop;
+            inherit (inputs.llm-agents.packages.${system}) claude-desktop;
           in
           [
             claude-desktop

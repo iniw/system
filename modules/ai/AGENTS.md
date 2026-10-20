@@ -44,6 +44,10 @@ Write the way a fluent speaker explains something to a colleague. In practice, t
 - Giving each sentence one idea, together with its reason or result, and splitting a sentence that holds two.
 - Using "would" for something that the text considers but that doesn't happen, such as a rejected alternative.
 - Phrasing things the way people naturally would, rather than in a robotic or overly literal way.
+- Prefer a word with one meaning. If a phrase can mean two things, like “at once” (“immediately” or “together”), use the
+  word for the one you mean.
+- Describe what happens literally. Avoiding using "images", like “sunk into” or “calm”, except for when that's an
+  established term in the project.
 
 ## Tool availability
 
@@ -68,6 +72,21 @@ To use several packages in a pipeline, list all of them and run the pipeline thr
 ```sh
 nix shell nixpkgs#curl nixpkgs#jq -c sh -c 'curl -s https://example.com/data.json | jq .foo'
 ```
+
+## Build cache
+
+This machine has `kache`, a build cache like `sccache` that caches the output of the Rust, C, C++ and CUDA compilers.
+All workspaces on the machine share the cache. So when you or a subagent build a project in another workspace, for
+example a temporary jj workspace to test something, the build reuses the cached results rather than building the whole
+project from scratch.
+
+Because `kache` already shares the build results, don't set up another way to share or cache them, and don't tell
+subagents to do it. In particular, don't:
+
+- Point the build in one workspace at the build directory of another, for example with `CARGO_TARGET_DIR` for Cargo or
+  `-B` for CMake. Builds in the two workspaces would then block or overwrite each other.
+- Add a compiler wrapper such as `sccache` or `ccache`, for example with `RUSTC_WRAPPER` or
+  `CMAKE_<LANG>_COMPILER_LAUNCHER`. It would replace `kache`, or cache the same work a second time.
 
 ## Version control
 
