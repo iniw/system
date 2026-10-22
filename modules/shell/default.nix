@@ -1,74 +1,45 @@
 {
-  homeManagerModule = {
-    programs.nushell = {
-      enable = true;
+  homeManagerModule =
+    {
+      config,
+      lib,
+      pkgs,
+      ...
+    }:
+    {
+      programs.nushell = {
+        enable = true;
 
-      configFile.source = ./config.nu;
+        configFile.source = ./config.nu;
+      };
+
+      programs.zsh.enable = pkgs.stdenv.hostPlatform.isDarwin;
+      programs.bash.enable = pkgs.stdenv.hostPlatform.isLinux;
+
+      # Ghostty starts without `XDG_CONFIG_HOME` on macOS, where nushell would then look for its config in
+      # `~/Library/Application Support/nushell`, so pass the config directory explicitly.
+      programs.ghostty.settings = {
+        command = lib.escapeShellArgs [
+          (lib.getExe config.programs.nushell.package)
+          "--config-home"
+          config.programs.nushell.configDir
+          "--experimental-options"
+          "native-clip"
+        ];
+
+        # Nushell reads `XDG_DATA_DIRS` once at launch to find the completions that packages install, before `env.nu`
+        # loads the session variables. On macOS Ghostty starts without the nix profiles in it, and setting
+        # `XDG_DATA_DIRS` here would remove the directory that Ghostty adds for its shell integration, so pass the
+        # profile's directory instead.
+        env = lib.mkIf pkgs.stdenv.hostPlatform.isDarwin [
+          "NU_VENDOR_AUTOLOAD_DIR=${config.home.profileDirectory}/share/nushell/vendor/autoload"
+        ];
+      };
+
+      home.file.".hushlogin".text = "";
     };
-
-    home.file.".hushlogin".text = "";
-  };
-
-  darwinHomeManagerModule = {
-    programs.zsh = {
-      enable = true;
-
-      enableCompletion = false;
-
-      initContent =
-        # zsh
-        ''
-          if [[ -z $ZSH_EXECUTION_STRING && $TERM != dumb ]]; then
-            exec nu --experimental-options native-clip
-          fi
-        '';
-    };
-
-    home.shell.enableZshIntegration = false;
-  };
-
-  nixosHomeManagerModule = {
-    programs.bash = {
-      enable = true;
-
-      enableCompletion = false;
-
-      initExtra =
-        # bash
-        ''
-          if [[ -z $BASH_EXECUTION_STRING && $TERM != dumb ]]; then
-            exec nu --experimental-options native-clip
-          fi
-        '';
-    };
-
-    home.shell.enableBashIntegration = false;
-  };
 
   systemModule = {
     environment.pathsToLink = [ "/share/nushell" ];
-  };
-
-  darwinSystemModule = { pkgs, user, ... }: {
-    programs.zsh = {
-      enable = true;
-
-      enableCompletion = false;
-      enableBashCompletion = false;
-    };
-
-    environment.shells = [ pkgs.zsh ];
-    users.users.${user}.shell = pkgs.zsh;
-  };
-
-  nixosSystemModule = { pkgs, user, ... }: {
-    programs.bash = {
-      enable = true;
-
-      completion.enable = false;
-    };
-
-    environment.shells = [ pkgs.bashInteractive ];
-    users.users.${user}.shell = pkgs.bashInteractive;
   };
 }
