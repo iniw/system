@@ -26,7 +26,7 @@ change shared staging resources by hand.
 
 ## Find information about mirrord
 
-The local `docs` and `mirrord` repositories have what you need:
+The local `docs` and `mirrord` repositories document mirrord:
 
 - For an overview of how to use a mirrord feature, read the documentation in the `docs/` folder of the `docs`
   repository, starting with `SUMMARY.md` to find the right page.
@@ -69,7 +69,7 @@ These variables are known to cause problems:
 2. Identify every locally changed service in the request path.
 3. Start `down` from the root of the operator repository, passing the selected service names. Leave them out only when
    the test needs every configured service.
-4. Keep `down` running while you send test traffic, and wait for its configured readiness output before you start.
+4. Keep `down` running while you send test traffic, and wait for its configured readiness output before you send any.
 5. Send requests through the external staging endpoint with this header:
 
    ```text

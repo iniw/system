@@ -15,16 +15,16 @@ These rules apply to commit messages and to pull request descriptions.
 
 Short text is easier to read and to review. Agents usually write too much, so write less than you think you need.
 
-- Write only what the reader needs to understand and review the change. If removing a sentence loses the reader no
-  information, remove it.
+- Write only what the reader needs to understand and review the change. If the reader loses no information when you
+  remove a sentence, remove it.
 - Don't repeat what the title, the diff or another part of the text already says.
 - Don't list every file, function or test that changes.
 - If the subject line already tells the reader everything they need, skip the body. For example,
-  `` cli: add a `--version` flag ``.
+  `` cli: add a `--version` flag `` needs no body.
 
 The length of the body depends on how much the reader can't work out from the diff, not on the size of the diff. A
-change whose reason is a single fact gets a single sentence, such as `deps: drop the patch for openssl-sys` with the
-body "The fix was released upstream in 0.9.104", while a subtle bug in a few lines can need several paragraphs.
+change whose reason is a single fact should get a single sentence, such as `deps: drop the patch for openssl-sys` with
+the body "The fix was released upstream in 0.9.104", while a subtle bug in a few lines can need several paragraphs.
 
 ### Explanation
 
@@ -36,7 +36,7 @@ Before you write, use all the context you have to answer these questions:
 1. What is wrong now?
 2. Does the change fix that problem directly, or does it only prepare for a later change that fixes it?
 
-The explanation usually follows this order:
+The explanation should usually follow this order:
 
 1. The problem and its cause, in one paragraph. Use the past tense for the old behavior ("The cache kept…"). Trace
    the cause from the code to the symptom, joining each step to the one before it with words such as "so", "then" or
@@ -71,7 +71,7 @@ the reader can't look up a change ID from your local history. These forms are co
 
 - "Regressed in 7e01ddbe41d, which made every lookup…", when an earlier commit caused the problem.
 - "This reverts most of 1b46a52, which was a workaround for…".
-- "Found by fuzzing the parser." or "Reported in #123.", which tells the reader how the problem came to light.
+- "Found by fuzzing the parser." or "Reported in #123.", which tells the reader how the problem was found.
 
 When you link to something, say what it shows, rather than leaving a bare link for the reader to open and interpret.
 
@@ -80,7 +80,7 @@ When you link to something, say what it shows, rather than leaving a bare link f
 The text must be easy to read and have enough structure to guide the reader, but it must still read as one
 explanation from start to finish, with each part following from the one before it.
 
-A commit body is prose. Use markdown in it only for content that prose can't carry well:
+A commit body is prose. Use markdown in it only for content that prose can't show well:
 
 - A table for numbers, such as measurements before and after the change.
 - A list for items that are truly parallel, such as the options that a change removes.
@@ -134,7 +134,7 @@ In a pull request description, also include what the reader needs to repeat the 
 - The part of the output that shows the result.
 
 Wrap these in a `<details>` block so that the description stays easy to read. A commit message can't have one, so it
-only gets the short description of the check.
+should only have the short description of the check.
 
 #### Reasons from your session
 
@@ -161,22 +161,22 @@ The subject line must tell the reader which part of the code changes and how. It
 change.
 
 - Make one specific claim about the new behavior. Don't use vague verbs that hide what changes, like "fix",
-  "refactor", "improve" or "update". Write `cache: only store responses whose transfer succeeded`, not
-  `cache: fix response storage`.
-- Stay at 72 characters or fewer
-- Use the format `category: brief description of what's being changed`
+  "refactor", "improve" or "update". Instead of `cache: fix response storage`, write
+  `cache: only store responses whose transfer succeeded`.
+- Stay at 72 characters or fewer.
+- Use the format `category: brief description of what's being changed`.
   - Use a category that names the relevant library, application, service, utility, or similar unit. Don't use the
     name of a type or a function as the category, and mention that name in the description instead.
-  - Don't use a very wide category, like `treewide`, unless the change affects most of it
-  - Combine categories with `+` when the patch genuinely spans multiple areas, for example `foo+bar`
-- Use the imperative mood, like `foo: change the way dates work`
-- Don't end the subject line with a period
-- Use markdown formatting if necessary, for example `Foo::bar` for code
+  - Don't use a very wide category, like `treewide`, unless the change affects most of the code that it covers.
+  - Combine categories with `+` when the patch genuinely spans multiple areas, for example `foo+bar`.
+- Use the imperative mood, like `foo: change the way dates work`.
+- Don't end the subject line with a period.
+- Use markdown formatting if necessary, for example `Foo::bar` for code.
 
 ### Body
 
-- Wrap at 72 characters
-- Use markdown formatting only as [Structure](#structure) allows
+- Wrap at 72 characters.
+- Use markdown formatting only as [Structure](#structure) allows.
 
 ### Example
 
@@ -211,8 +211,8 @@ Use the same format as the commit subject line. If the pull request has only one
 ### Describe the change as a whole
 
 When the pull request has many commits, explain the idea that ties them together, rather than describing each commit in
-turn. Each commit explains itself in its own message, so the description doesn't list the commits or summarize them one
-by one.
+turn. Each commit explains itself in its own message, so the description shouldn't list the commits or summarize them
+one by one.
 
 ### Description
 
@@ -221,7 +221,7 @@ template or add sections that it doesn't have, and follow the repository's rules
 changelog entries.
 
 If the pull request adds or changes an interface that other code calls, such as a library API, a CLI or a
-configuration option, show a short example of how a user uses it near the top of the description. The example
+configuration option, show near the top of the description a short example of how a user uses it. The example
 explains what the change offers faster than prose can, and the explanation that follows can then refer to it.
 
 If the description is longer than a few short paragraphs, split it into sections with markdown headers rather than

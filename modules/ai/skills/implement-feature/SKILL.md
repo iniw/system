@@ -30,7 +30,7 @@ Split the work into [atomic commits](#atomic-commits), and write them one at a t
 2. Write the change for that commit only.
 3. Check that the project builds and that the linters and tests pass for that commit.
 4. Finish the commit with `jj commit -m "..."`. This saves the commit message and creates a fresh, empty working copy
-   for the next change, and the working copy should always be left on that new commit.
+   for the next change. Always leave the working copy on that new commit.
 
 Whenever you write or change a commit message, in this step or a later one, follow the `format-commit-and-pull-request`
 skill.
@@ -73,10 +73,9 @@ that the change is tested if you didn't test it.
    - There are no comments, so skip the parts about comments on the pull request.
    - The review workspace is your own workspace, and the subagents read the code in it. As that step says, they can
      create their own temporary workspaces to write tests or other code, but they must not change yours.
-   - Start one more subagent for the category in [Commit structure](#commit-structure), and pass it the full text of
-     that section and of [Atomic commits](#atomic-commits), just like the other categories. Start it with the default
-     model and reasoning effort rather than the model that the step asks for, because problems in the commit structure
-     matter less than the problems that the other categories find.
+   - Start one more subagent for the category in [Presentation](#presentation), just like the other categories. In
+     Claude Code, start it with `opus` rather than `fable`, because this subagent mostly judges text, and Opus writes
+     clearer prose than Fable. Elsewhere, use the model that the step asks for.
 2. Read each finding and check that it is real. Don't fix findings that are wrong, but tell the user about them at the
    end.
 3. Fix the real findings by rewriting the history, so that each fix lands in the commit that has the problem. Use
@@ -85,25 +84,41 @@ that the change is tested if you didn't test it.
 4. For each bug you fix, add a regression test in the same commit as the fix. The test must fail without the fix and
    pass with it.
 5. If a fix changes behavior, repeat the tests from step 3.
-6. Start new subagents and repeat this step, until the subagents find no problems or only minor ones.
+6. Start new subagents and repeat this step, until the subagents find no problems or only minor ones. Tell the new
+   Presentation subagent which of its earlier findings you fixed, so that it doesn't reverse them.
 
 If the reviews keep finding important problems after a few rounds, stop and ask the user what to do.
 
-### Commit structure
+### Presentation
 
-Check that each commit is [atomic](#atomic-commits). Look for these problems:
+Check that the change presents itself clearly and simply to a reader, through its text and through the commits that
+split it into steps. "Text" here means everything that the change adds or changes for a person or an agent to read,
+such as the names of functions, types, variables and other symbols, comments and doc comments, commit messages, log
+and error messages, help text and documentation. Whatever kind of text it is, it should be simple to read and describe
+accurately what it refers to. The other categories judge what the code does and how it is built. This one, on the
+other hand, only judges how easily a reader can follow the change.
 
-- Commits that do more than one thing, such as a refactor and a behavior change in the same commit, or two unrelated
-  fixes.
-- Changes in the wrong commit, such as a fix for a bug that an earlier commit introduces, or a test for code from a
-  different commit.
-- Commits in the wrong order, such as a commit that uses code that a later commit adds, or a refactor that comes after
-  the change that needs it.
-- Commits that only make sense together and should be one commit.
-- Commit messages that don't match what the commit does, or that break the rules of the
-  `format-commit-and-pull-request` skill.
+Look for:
 
-Don't build or test each commit, because that is checked separately.
+- Text that breaks the rules of the "Writing" section of the global instructions, and commit messages that break the
+  rules of the `format-commit-and-pull-request` skill.
+- Text that doesn't describe accurately what it refers to, such as a name that no longer fits what its function does,
+  or a comment that a later commit makes wrong.
+- Comments that only repeat the code, and non-obvious code with no comment that explains why it is that way.
+- Code that is commented out, and TODO comments that don't say enough to act on.
+- Commits that aren't [atomic](#atomic-commits), such as a refactor and a behavior change in one commit, a fix that
+  lands after the commit with the bug, a commit that uses code from a later one, or two commits that only make sense
+  together.
+- Lines that a commit reformats or reorders without otherwise changing them, which make its diff harder to read.
+
+Judge how important a finding is by what it costs a reader, not by whether it changes what the code does. A finding
+is important whenever it makes the reader do work that clearer text or commits would save them, such as working out
+what a sentence means, checking whether two texts that say the same thing differ, or correcting a wrong idea, because
+these are the problems that this category exists to find. You can also report a preference whose cost to the reader
+you can't name, but mark it as minor and say why it is better. Show the rewritten text or the new split of the commits
+for each finding.
+
+Don't build or test each commit, because the author checks that separately.
 
 ## 5. Report
 

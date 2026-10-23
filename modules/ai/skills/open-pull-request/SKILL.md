@@ -27,7 +27,12 @@ Whenever you write or change a commit message, or the title or description of th
 
 1. Write the title and the description with the `format-commit-and-pull-request` skill, and save the description to a
    file in your scratchpad directory.
-2. Create the pull request with `jj-gh pr create`. It pushes the change for you, so there is no need to push first. If
+2. If the change is for a Linear issue, name the branch of the pull request after the issue. Get the branch name that
+   Linear suggests for the issue from the `branchName` field of `linear issue view <issue> --json`. Then put a bookmark
+   with that name on the head revision with `jj bookmark create <branch name> -r <head revision>`. If the change
+   already has a bookmark, rename it with `jj bookmark rename` instead. `jj-gh pr create` then uses that bookmark
+   rather than creating one.
+3. Create the pull request with `jj-gh pr create`. It pushes the change for you, so there is no need to push first. If
    the change has no bookmark, it creates one. It also picks the base for you, which is the closest ancestor bookmark,
    or `trunk()` if there is none.
 
@@ -42,8 +47,6 @@ Whenever you write or change a commit message, or the title or description of th
    bottom of the stack to the top, each with its own title and description. Each part has the bookmark of the part
    below it as its closest ancestor bookmark, so `jj-gh pr create` uses that bookmark as the base and links the pull
    requests into a GitHub stack. Follow the remaining steps for every pull request in the stack.
-3. If the change is for a Linear issue, link the pull request to the issue with the Linear tools, using the pull request
-   URL that `jj-gh pr create` prints.
 
 ## 3. Make sure that CI passes
 
@@ -70,9 +73,9 @@ Then:
 
 1. Tell the user about the comment and what the subagent found.
 2. If the comment is correct and asks for a change, make the change in a new commit, and keep fixes for different
-   comments in separate commits. If the fix changes something that the pull request description says, update the
+   comments in separate commits. If the fix changes something that the pull request description says, write a new
    description as well. Check the fix locally, then show it to the user for approval, together with the new
-   description if there is one, and don't push it or change the description on GitHub until the user approves. After
+   description if there is one. Don't push the fix or change the description on GitHub until the user approves. After
    approval, push with `jj git push`, update the description, and go back to step 3.
 3. Suggest a reply to the user, and write it with the rules in the "Style" section of the `review-pull-request` skill.
    Don't post it to GitHub or resolve the thread yourself.

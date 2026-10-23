@@ -23,7 +23,7 @@ If you aren't sure, offer the possible principles rather than making one up.
 
 ## 2. Present it
 
-Cover the following, in this order, and skip any item that has nothing important to say:
+Cover the following, in this order, and skip any item for which you have nothing important to say:
 
 1. The principle, and how each of the user's points fits it.
 2. The problems it reveals in the current state.

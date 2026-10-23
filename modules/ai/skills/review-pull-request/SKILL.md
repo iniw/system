@@ -65,14 +65,14 @@ Tell each subagent to:
    database or cluster.
 3. Change code only when that is needed to find or confirm a specific problem, and only in its own temporary jj
    workspace, never in the review workspace. For example, it can write a test that checks whether the change handles an
-   edge case. It creates the workspace in a temporary directory outside the repository, with a name that no other
-   subagent uses:
+   edge case. It should create the workspace in a temporary directory outside the repository, with a name that no
+   other subagent uses:
 
    ```sh
    jj workspace add --name $name -r $bookmark $directory
    ```
 
-   When it no longer needs the workspace, it removes the workspace and every commit it made there:
+   When it no longer needs the workspace, it should remove the workspace and every commit it made there:
 
    ```sh
    jj --repository $directory abandon "$bookmark..$name@"
@@ -123,8 +123,8 @@ Look for:
   that the code doesn't handle.
 - Edge cases, such as empty values, zero, negative or very large numbers, missing optional values, the first and last
   items of a list, duplicate items, and non-ASCII text.
-- Errors that the code ignores, or turns into a value that looks valid. Panics or crashes on values that can be
-  missing. Errors that lose the information that the user needs to find the cause.
+- Errors that the code ignores or turns into a value that looks valid, errors that lose the information that the user
+  needs to find the cause, and panics or crashes on values that can be missing.
 - Operations that can fail halfway and leave the state wrong, for example because there is no rollback or cleanup.
 - Concurrency problems, such as race conditions, deadlocks, wrong assumptions about the order of events, tasks that are
   cancelled halfway, and retries of operations that must only happen once.
@@ -139,8 +139,8 @@ Look for:
 #### Design, readability and simplicity
 
 Check that the code is easy to read, understand and change. A reader should be able to follow the code without effort,
-and someone who changes it later shouldn't have to fight it. Code that is simple and well designed also has fewer
-places for bugs to hide.
+and someone who changes it later shouldn't have to work around it. Code that is simple and well designed also has
+fewer places where a bug can go unnoticed.
 
 The topics below are closely related. Code that isn't idiomatic is often more complex than it needs to be, and a smell
 often points to a problem in the design. When you find a problem, look for its cause in the design, and suggest a fix
@@ -236,8 +236,8 @@ Only do this step if the user asks you to post the review.
 These rules apply to the comments and to the body of the review. Write only the facts that the author needs, so that
 every sentence says something about the code.
 
-- Start with the problem. For example, write "The `None` branch can't occur." rather than "Nice work! One small thing:
-  the `None` branch can't occur."
+- Start with the problem. Instead of "Nice work! One small thing: the `None` branch can't occur.", write "The `None`
+  branch can't occur."
 - The review can be wrong. When a finding comes from your reading of the code and you didn't confirm it, say so in
   your own words, for example "As far as I can tell, nothing waits on the child before this line." When the evidence
   confirms the finding, state it directly.
@@ -250,7 +250,8 @@ every sentence says something about the code.
 
 Write one comment for each finding that the user wants to post.
 
-- Each comment covers one thing only. If a finding holds more than one problem or idea, split it into several comments.
+- Make each comment about one thing only. If a finding contains more than one problem or idea, split it into several
+  comments.
 - In a few words or sentences, state the finding, the case that shows it and a possible fix, without repeating what the
   code or another comment already shows.
 - Include the [evidence](#evidence), so that the author can see the problem and repeat the check. If a test shows the
@@ -264,7 +265,7 @@ Write one comment for each finding that the user wants to post.
 
 ### Body of the review
 
-The body holds only the findings that aren't about specific lines of code. Don't repeat or summarize the comments,
+Put only the findings that aren't about specific lines of code in the body. Don't repeat or summarize the comments,
 and don't tell the author what they already know, such as the CI checks that fail or the checks that found no problem.
 If there are no such findings, leave the body empty.
 
