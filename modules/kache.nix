@@ -30,6 +30,7 @@
             "daemon"
             "run"
           ];
+          Label = "ninja.kunobi.kache";
           RunAtLoad = true;
           KeepAlive.SuccessfulExit = false;
           ThrottleInterval = 5;
