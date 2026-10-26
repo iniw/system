@@ -32,5 +32,8 @@
           "${config.programs.firefox.finalPackage}/share/applications/firefox.desktop"
         ];
       };
+
+      # Google meet doesn't work properly in firefox so I need this stupid thing
+      home.packages = [ pkgs.google-chrome ];
     };
 }
