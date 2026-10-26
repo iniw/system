@@ -37,7 +37,7 @@
     };
 
     jj-gh = {
-      url = "github:mrjones2014/jj-gh";
+      url = "github:mrjones2014/jj-gh/stable";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
