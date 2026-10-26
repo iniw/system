@@ -80,15 +80,15 @@ If you need a program that is neither installed nor in the devshell, run it thro
 nix shell nixpkgs#$package -c $program $args
 ```
 
-Don't use a different program instead, or write a script that does the same job. For example, if `python3` is missing,
-don't rewrite the script in `node` or `perl`. Run `nix shell nixpkgs#python3 -c python3 script.py` instead.
+Don't use a different program instead, or write a script that does the same job. For example, if `yq` is missing,
+don't parse the YAML file with a Python script. Run `nix shell nixpkgs#yq-go -c yq .foo config.yaml` instead.
 
 The package name can differ from the program name. For example, `dig` comes from the `dnsutils` package.
 
 To use several packages in a pipeline, list all of them and run the pipeline through `sh -c`:
 
 ```sh
-nix shell nixpkgs#curl nixpkgs#jq -c sh -c 'curl -s https://example.com/data.json | jq .foo'
+nix shell nixpkgs#curl nixpkgs#htmlq -c sh -c 'curl -s https://example.com | htmlq --text title'
 ```
 
 ## Build cache

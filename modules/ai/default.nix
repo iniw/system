@@ -61,7 +61,15 @@
             claude-desktop
             linear-cli
             slackcli
-          ];
+
+          ]
+          # Programs that AIs use all the time
+          ++ (with pkgs; [
+            jq
+            python3
+            file
+            binutils
+          ]);
       };
     };
 
