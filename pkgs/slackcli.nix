@@ -12,7 +12,7 @@
 
 stdenvNoCC.mkDerivation (finalAttrs: {
   pname = "slackcli";
-  version = "0.16.0";
+  version = "0.17.0";
 
   __structuredAttrs = true;
   strictDeps = true;
@@ -21,7 +21,7 @@ stdenvNoCC.mkDerivation (finalAttrs: {
     owner = "shaharia-lab";
     repo = "slackcli";
     tag = "v${finalAttrs.version}";
-    hash = "sha256-wM8iFLn+xBW+SAUHWPEjkCqoxLwAvPEEi0WIxliSxRY=";
+    hash = "sha256-EPvs4bjq+mbaLy0Pd/YZHXvPMTFvLJQsf8DsJh4w7x8=";
   };
 
   node_modules = stdenvNoCC.mkDerivation {
