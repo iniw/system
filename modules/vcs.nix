@@ -186,9 +186,6 @@ in
       # Merge resolution tools
       meld
       mergiraf
-
-      # Diff viewers
-      lumen
     ];
   };
 }
