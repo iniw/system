@@ -2,7 +2,16 @@
   homeManagerModule = { pkgs, ... }: {
     programs.ghostty = {
       enable = true;
-      package = with pkgs; if stdenv.hostPlatform.isDarwin then ghostty-bin else ghostty;
+      package =
+        if pkgs.stdenv.hostPlatform.isDarwin then
+          pkgs.ghostty-bin
+        else
+          pkgs.ghostty.overrideAttrs {
+            # Text is blurry under fractional scaling because the OpenGL renderer flips the texture, which also
+            # reverses the vertical pixel-snapping offset. Remove this once Ghostty negates the offset itself.
+            # https://github.com/ghostty-org/ghostty/discussions/13911#discussioncomment-18728986
+            patches = [ ./fractional-scaling-blur.patch ];
+          };
 
       settings = {
         auto-update = "off";
