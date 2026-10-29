@@ -47,5 +47,7 @@
       enable = true;
       interval = "weekly";
     };
+
+    system.etc.overlay.enable = true;
   };
 }
