@@ -23,37 +23,22 @@
         else
           "${home}/.1password/agent.sock";
 
-      commit-signing = {
-        key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMNGcLtjqxIbJpTB1fT8ou1XRu4K9kPTneAIE23eF5z8";
-        program =
-          let
-            pkg = osConfig.programs._1password-gui.package;
-          in
-          if pkgs.stdenv.hostPlatform.isDarwin then
-            "${pkg}/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
-          else
-            "${pkg}/bin/op-ssh-sign";
-      };
+      op-ssh-sign =
+        let
+          _1password-gui = osConfig.programs._1password-gui.package;
+        in
+        if pkgs.stdenv.hostPlatform.isDarwin then
+          "${_1password-gui}/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+        else
+          "${_1password-gui}/bin/op-ssh-sign";
     in
     {
+      programs.ssh.settings."*".IdentityAgent = ''"${ssh-agent-socket}"''; # Quoted because the macos path has a space.
+      home.sessionVariables.SSH_AUTH_SOCK = ssh-agent-socket;
+
       programs = {
-        git.signing = {
-          format = "ssh";
-          key = commit-signing.key;
-          signer = commit-signing.program;
-          signByDefault = true;
-        };
-
-        jujutsu.settings = {
-          signing = {
-            backend = "ssh";
-            behavior = "drop";
-            key = commit-signing.key;
-            backends.ssh.program = commit-signing.program;
-          };
-
-          git.sign-on-push = true;
-        };
+        git.signing.signer = op-ssh-sign;
+        jujutsu.settings.signing.backends.ssh.program = op-ssh-sign;
       };
 
       # https://developer.1password.com/docs/ssh/agent/config/
@@ -62,8 +47,5 @@
           [[ssh-keys]]
           vault = "Dev"
         '';
-
-      programs.ssh.settings."*".IdentityAgent = ''"${ssh-agent-socket}"''; # Quoted because the macos path has a space.
-      home.sessionVariables.SSH_AUTH_SOCK = ssh-agent-socket;
     };
 }
