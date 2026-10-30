@@ -91,12 +91,12 @@ If the reviews keep finding important problems after a few rounds, stop and ask 
 
 ### Presentation
 
-Check that the change presents itself clearly and simply to a reader, through its text and through the commits that
-split it into steps. "Text" here means everything that the change adds or changes for a person or an agent to read,
-such as the names of functions, types, variables and other symbols, comments and doc comments, commit messages, log
-and error messages, help text and documentation. Whatever kind of text it is, it should be simple to read and describe
-accurately what it refers to. The other categories judge what the code does and how it is built. This one, on the
-other hand, only judges how easily a reader can follow the change.
+Check that the change presents itself clearly and simply to a reader, through its text, through the layout of its code
+and through the commits that split it into steps. "Text" here means everything that the change adds or changes for a
+person or an agent to read, such as the names of functions, types, variables and other symbols, comments and doc
+comments, commit messages, log and error messages, help text and documentation. Whatever kind of text it is, it should
+be simple to read and describe accurately what it refers to. The other categories judge what the code does and how it
+is built. This one, on the other hand, only judges how easily a reader can follow the change.
 
 Look for:
 
@@ -106,6 +106,11 @@ Look for:
   or a comment that a later commit makes wrong.
 - Comments that only repeat the code, and non-obvious code with no comment that explains why it is that way.
 - Code that is commented out, and TODO comments that don't say enough to act on.
+- Code that the change adds or rewrites without empty lines between its parts, which leaves the reader to find where
+  each part ends. Agents often write code this way. Put an empty line between the items of a module, between the
+  members of a struct, enum, trait or `impl` block when they have doc comments, attributes or more than one line, and
+  between the steps of a function body, such as reading the input, checking it and building the result. Short
+  members without doc comments, such as the fields of a `Point { x: f64, y: f64 }`, can stay together.
 - Commits that aren't [atomic](#atomic-commits), such as a refactor and a behavior change in one commit, a fix that
   lands after the commit with the bug, a commit that uses code from a later one, or two commits that only make sense
   together.
