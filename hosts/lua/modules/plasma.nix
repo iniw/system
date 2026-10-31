@@ -63,6 +63,7 @@
 
         workspace = {
           lookAndFeel = "org.kde.breezedark.desktop";
+          widgetStyle = "Union";
         };
 
         panels = [
