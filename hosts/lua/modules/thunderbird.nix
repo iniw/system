@@ -2,17 +2,16 @@
   homeManagerModule =
     { config, lib, ... }:
     let
-      accounts = [
-        {
-          name = "metalbear";
+      accounts = {
+        metalbear = {
           address = "viniciusd@metalbear.com";
           flavor = "gmail.com";
           color = "#deddda";
 
           calendar = true;
-        }
-        {
-          name = "social";
+        };
+
+        social = {
           address = "social@vini.cat";
           flavor = "purelymail.com";
           color = "#73b6e6";
@@ -21,17 +20,17 @@
           contacts = true;
 
           webdavId = "280603";
-        }
-        {
-          name = "dev";
+        };
+
+        dev = {
           address = "dev@vini.cat";
           flavor = "purelymail.com";
           color = "#b6e673";
 
           webdavId = "276495";
-        }
-        {
-          name = "work";
+        };
+
+        work = {
           address = "work@vini.cat";
           flavor = "purelymail.com";
           color = "#bf73e6";
@@ -39,16 +38,16 @@
           calendar = true;
 
           webdavId = "280601";
-        }
-        {
-          name = "contact";
+        };
+
+        contact = {
           address = "contact@vini.cat";
           flavor = "purelymail.com";
           color = "#e67373";
 
           webdavId = "280620";
-        }
-      ];
+        };
+      };
     in
     {
       programs.thunderbird = {
@@ -71,8 +70,8 @@
             :root {
             ${
               accounts
-              |> lib.map (
-                account: "  --server-server_${builtins.hashString "sha256" account.name}-color: ${account.color};"
+              |> lib.mapAttrsToList (
+                name: account: "  --server-server_${builtins.hashString "sha256" name}-color: ${account.color};"
               )
               |> lib.concatLines
             }}
@@ -101,106 +100,70 @@
       accounts = {
         email.accounts =
           accounts
-          |> lib.map (account: {
-            ${account.name} = lib.mergeAttrsList [
-              {
-                inherit (account) address;
-                realName = "Vinicius Deolindo";
+          |> lib.mapAttrs (
+            name: account: {
+              inherit (account) address flavor;
 
-                primary = account.name == "social";
+              realName = "Vinicius Deolindo";
 
-                thunderbird = {
-                  enable = true;
+              primary = name == "social";
 
-                  perIdentitySettings = id: {
-                    "mail.identity.id_${id}.reply_on_top" = 1;
-                    "mail.identity.id_${id}.sig_bottom" = false;
+              thunderbird = {
+                enable = true;
 
-                    # See: https://github.com/nix-community/home-manager/issues/7959
-                    "calendar.registry.calendar_${id}.imip.identity.key" = "id_${id}";
-                  };
+                perIdentitySettings = id: {
+                  "mail.identity.id_${id}.reply_on_top" = 1;
+                  "mail.identity.id_${id}.sig_bottom" = false;
+
+                  # See: https://github.com/nix-community/home-manager/issues/7959
+                  "calendar.registry.calendar_${id}.imip.identity.key" = "id_${id}";
                 };
-              }
-              (
-                if account.flavor == "purelymail.com" then
-                  {
-                    userName = account.address;
-
-                    smtp = {
-                      host = "smtp.purelymail.com";
-                      port = 465;
-                    };
-
-                    imap = {
-                      host = "imap.purelymail.com";
-                      port = 993;
-                    };
-                  }
-                else
-                  { inherit (account) flavor; }
-              )
-            ];
-          })
-          |> lib.mergeAttrsList;
+              };
+            }
+          );
 
         calendar.accounts =
           accounts
-          |> lib.filter (account: account.calendar or false)
-          |> lib.map (account: {
-            ${account.name} = lib.mergeAttrsList [
-              {
-                thunderbird = {
-                  enable = true;
-                  color = account.color or "";
-                };
-              }
-              (
-                if account.flavor == "purelymail.com" then
-                  {
-                    remote = {
-                      type = "caldav";
-                      url = "https://purelymail.com/webdav/${account.webdavId}/caldav/${account.name}/";
-                      userName = account.address;
-                    };
-                  }
-                else if account.flavor == "gmail.com" then
-                  {
-                    remote = {
-                      type = "caldav";
-                      url = "https://apidata.googleusercontent.com/caldav/v2/${account.address}/events";
-                      userName = account.address;
-                    };
-                  }
-                else
-                  throw "Unsupported account flavor"
-              )
-            ];
-          })
-          |> lib.mergeAttrsList;
+          |> lib.filterAttrs (_: account: account.calendar or false)
+          |> lib.mapAttrs (
+            name: account: {
+              thunderbird = {
+                enable = true;
+                color = account.color or "";
+              };
+
+              remote = {
+                type = "caldav";
+                url =
+                  if account.flavor == "purelymail.com" then
+                    "https://purelymail.com/webdav/${account.webdavId}/caldav/${name}/"
+                  else if account.flavor == "gmail.com" then
+                    "https://apidata.googleusercontent.com/caldav/v2/${account.address}/events"
+                  else
+                    throw "Unsupported account flavor";
+                userName = account.address;
+              };
+            }
+          );
 
         contact.accounts =
           accounts
-          |> lib.filter (account: account.contacts or false)
-          |> lib.map (account: {
-            ${account.name} = lib.mergeAttrsList [
-              {
-                thunderbird.enable = true;
-              }
-              (
-                if account.flavor == "purelymail.com" then
-                  {
-                    remote = {
-                      type = "carddav";
-                      url = "https://purelymail.com/webdav/${account.webdavId}/carddav/default/";
-                      userName = account.address;
-                    };
-                  }
-                else
-                  throw "Unsupported account flavor"
-              )
-            ];
-          })
-          |> lib.mergeAttrsList;
+          |> lib.filterAttrs (_: account: account.contacts or false)
+          |> lib.mapAttrs (
+            _: account: {
+              thunderbird.enable = true;
+
+              remote = {
+                type = "carddav";
+                url =
+                  if account.flavor == "purelymail.com" then
+                    "https://purelymail.com/webdav/${account.webdavId}/carddav/default/"
+                  else
+                    throw "Unsupported account flavor";
+                userName = account.address;
+              };
+            }
+          );
       };
 
       xdg = {
