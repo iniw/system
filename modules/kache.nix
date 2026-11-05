@@ -7,7 +7,6 @@
     {
       home = {
         packages = [ kache ];
-        sessionPath = [ "${kache.shims}/bin" ];
         sessionVariables.RUSTC_WRAPPER = lib.getExe kache;
       };
 
