@@ -5,8 +5,8 @@ description: What to write in commit messages and in pull request titles and des
 
 # Writing commits and pull requests
 
-This skill describes what to write in commit messages and pull requests, and how to format them. Follow the
-[`technical-writing`](../technical-writing/SKILL.md) skill for the prose.
+This skill describes what to write in commit messages and pull requests, and how to format them. For the prose, follow
+the rules in the Writing section of the global user guidelines.
 
 ## Content
 

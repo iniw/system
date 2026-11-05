@@ -147,8 +147,7 @@ that the change is tested if you didn't test it, and never claim that it works b
    - Start one more reviewer for the category in [Presentation](#presentation), as for the other categories. This
      reviewer mostly judges text, so use the model that writes the clearest prose, even if it is less capable than you.
      This overrides the rule about the model in that step. Pass this reviewer the
-     [`technical-writing`](../technical-writing/SKILL.md) and
-     [`writing-commits-and-pull-requests`](../writing-commits-and-pull-requests/SKILL.md) skills by name and path, as
+     [`writing-commits-and-pull-requests`](../writing-commits-and-pull-requests/SKILL.md) skill by name and path, as
      that step does for the other skills.
 2. Read each finding and check that it is real. Then report all the findings to the user, with your verdict on each
    one: real, possibly real or wrong, and why. Wait for the user to say which findings to fix, because the user may
@@ -175,9 +174,8 @@ easily a reader can follow the change.
 
 Look for:
 
-- Text that breaks the rules of the [`technical-writing`](../technical-writing/SKILL.md) skill, and commit messages
-  that break the rules of the [`writing-commits-and-pull-requests`](../writing-commits-and-pull-requests/SKILL.md)
-  skill.
+- Text that breaks the rules in the Writing section of the global user guidelines, and commit messages that break the
+  rules of the [`writing-commits-and-pull-requests`](../writing-commits-and-pull-requests/SKILL.md) skill.
 - Text that doesn't describe accurately what it refers to, such as a name that no longer fits what its function does,
   or a comment that a later commit makes wrong.
 - Comments that only repeat the code, and non-obvious code with no comment that explains why it is that way.
