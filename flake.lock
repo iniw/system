@@ -91,26 +91,6 @@
         "type": "github"
       }
     },
-    "fonts": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1785469425,
-        "narHash": "sha256-yYBsXZOdosIxZ5zyaEwO4oQ74ssqSpZ/BioloSvfYfk=",
-        "ref": "refs/heads/master",
-        "rev": "4c644fbe5d109af5b79a0945a626a18d67714192",
-        "revCount": 11,
-        "type": "git",
-        "url": "ssh://git@github.com/iniw/fonts"
-      },
-      "original": {
-        "type": "git",
-        "url": "ssh://git@github.com/iniw/fonts"
-      }
-    },
     "helix": {
       "inputs": {
         "nixpkgs": [
@@ -280,7 +260,6 @@
     },
     "root": {
       "inputs": {
-        "fonts": "fonts",
         "helix": "helix",
         "home-manager": "home-manager",
         "jj-gh": "jj-gh",

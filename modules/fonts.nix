@@ -1,22 +1,17 @@
 {
   homeManagerModule =
-    { inputs, pkgs, ... }:
+    { pkgs, ... }:
     let
+      # Berkeley Mono must be installed manually.
       monospace = "Berkeley Mono";
       sansSerif = "Inter";
       serif = "Source Serif 4";
     in
     {
-      home.packages =
-        with pkgs;
-        let
-          inherit (inputs.fonts.packages.${stdenv.hostPlatform.system}) berkeley-mono;
-        in
-        [
-          berkeley-mono
-          inter
-          source-serif
-        ];
+      home.packages = with pkgs; [
+        inter
+        source-serif
+      ];
 
       fonts.fontconfig = {
         enable = true;
