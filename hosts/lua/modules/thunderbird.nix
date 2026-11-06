@@ -127,11 +127,6 @@
           |> lib.filterAttrs (_: account: account.calendar or false)
           |> lib.mapAttrs (
             name: account: {
-              thunderbird = {
-                enable = true;
-                color = account.color or "";
-              };
-
               remote = {
                 type = "caldav";
                 url =
@@ -143,6 +138,11 @@
                     throw "Unsupported account flavor";
                 userName = account.address;
               };
+
+              thunderbird = {
+                enable = true;
+                color = account.color or "";
+              };
             }
           );
 
@@ -151,8 +151,6 @@
           |> lib.filterAttrs (_: account: account.contacts or false)
           |> lib.mapAttrs (
             _: account: {
-              thunderbird.enable = true;
-
               remote = {
                 type = "carddav";
                 url =
@@ -162,6 +160,8 @@
                     throw "Unsupported account flavor";
                 userName = account.address;
               };
+
+              thunderbird.enable = true;
             }
           );
       };
