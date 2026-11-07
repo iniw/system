@@ -50,7 +50,7 @@ in
           key = keys.commit-signing;
         };
 
-        git.sign-on-push = true;
+        revsets.git-sign-on-push = "~signed() & mine()";
       };
     };
   };
