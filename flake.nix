@@ -20,18 +20,18 @@
       };
     };
 
-    helix = {
-      url = "github:iniw/helix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    nprt = {
-      url = "github:thatsneat-dev/nprt";
+    mitos = {
+      url = "github:mitos-editor/mitos/stable";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     jj-gh = {
       url = "github:mrjones2014/jj-gh/stable";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nprt = {
+      url = "github:thatsneat-dev/nprt";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

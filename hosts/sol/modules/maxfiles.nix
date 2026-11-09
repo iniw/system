@@ -1,7 +1,7 @@
 {
   systemModule = {
     # Increase the maximum numbers of open files.
-    # Helps when building all the grammar derivations in helix.
+    # Helps when building all the grammar derivations in mitos.
     environment.launchDaemons."limit.maxfiles.plist".text = # xml
       ''
         <?xml version="1.0" encoding="UTF-8"?>

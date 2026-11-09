@@ -14,7 +14,7 @@
 
       # Yaml
       yaml-language-server
-      yamlfmt # FIXME: Remove once https://github.com/helix-editor/helix/issues/15576 is fixed
+      yamlfmt # Mitos's default formatter for YAML.
       helm-ls
     ];
 
