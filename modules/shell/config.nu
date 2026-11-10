@@ -129,3 +129,8 @@ def musiconv [
   }
   | ignore
 }
+
+# See https://github.com/nushell/nushell/issues/13381
+def --wrapped bazel [...rest: string] {
+  ^bazel ...$rest
+}
