@@ -123,4 +123,9 @@
       recenter-after-panels-launchEnabled = true;
     };
   };
+
+  systemModule = { config, user, ... }: {
+    # Otherwise claude-desktop doesn't see this stupid thing.
+    environment.systemPackages = [ config.home-manager.users.${user}.programs.firefox.finalPackage ];
+  };
 }
