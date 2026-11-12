@@ -21,7 +21,7 @@
     };
 
     mitos = {
-      url = "github:mitos-editor/mitos/stable";
+      url = "github:mitos-editor/mitos";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
